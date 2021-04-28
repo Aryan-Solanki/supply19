@@ -14,7 +14,9 @@ class splash extends StatelessWidget {
           backgroundColor: Color(0xFFEDEDED),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(width: double.infinity,),
               Expanded(
                 flex: 4,
                 child: Container(

@@ -18,17 +18,62 @@ class _HomePageState extends State<HomePage> {
   final items = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
       icon: Image.asset(
-        'images/trophy.png',
-        height: 20,
+        'images/city.png',
+        height: 30,
       ),
-      activeIcon: Icon(Icons.home),
-      title: Text("Home"),
+      activeIcon: Image.asset(
+        'images/city2.png',
+        height: 30,
+      ),
+      title: Text("City"),
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.settings),
-      title: Text("Settings"),
+      icon: Image.asset(
+        'images/ques.png',
+        height: 30,
+      ),
+      activeIcon: Image.asset(
+        'images/ques2.png',
+        height: 30,
+      ),
+      title: Text("Query"),
     ),
+    BottomNavigationBarItem(
+      icon: Image.asset(
+        'images/map.png',
+        height: 30,
+      ),
+      activeIcon: Image.asset(
+        'images/map2.png',
+        height: 30,
+      ),
+      title: Text("State"),
+    ),
+    BottomNavigationBarItem(
+      icon: Image.asset(
+        'images/trophy.png',
+        height: 30,
+      ),
+      activeIcon: Image.asset(
+        'images/trophy2.png',
+        height: 30,
+      ),
+      title: Text("Top Volunteer"),
+    ),
+    BottomNavigationBarItem(
+      icon: Image.asset(
+        'images/info.png',
+        height: 30,
+      ),
+      activeIcon: Image.asset(
+        'images/info2.png',
+        height: 30,
+      ),
+      title: Text("About Us"),
+    ),
+
   ];
+
 
   _makingPhoneCall(callString) async {
     var url = 'tel:' + callString;
@@ -81,80 +126,86 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Color(0xFFEDEDED),
-        toolbarHeight: 80,
-        automaticallyImplyLeading: false,
-        title: Container(
-          margin: EdgeInsets.only(top: 0.0),
-          padding: EdgeInsets.only(left: 20.0),
-          color: Color(0xFFBDD4EB),
-          child: DropdownButton(
-            hint: Text("All Supplies"),
-            dropdownColor: Color(0xFFBDD4EB),
-            icon: Icon(
-              Icons.keyboard_arrow_down,
-              color: Color(0xFF09427D),
-              size: 50.0,
-            ),
-            isExpanded: true,
-            value: valueChoose,
-            underline: SizedBox(),
-            style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
-            onChanged: (newValue) {
-              setState(() {
-                valueChoose = newValue;
-              });
-            },
-            items: listItem.map((valueItem) {
-              return DropdownMenuItem(value: valueItem, child: Text(valueItem));
-            }).toList(),
-          ),
-        ),
-        actions: [
-          Row(
-            children: [
-              Container(
-                child: Icon(
-                  Icons.dehaze_outlined,
-                  size: 40.0,
-                  color: Color(0xFF2F3437),
-                ),
-                margin: EdgeInsets.only(top: 0.0),
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor:Color(0xFFEDEDED),
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Color(0xFFEDEDED),
+          toolbarHeight: 80,
+          automaticallyImplyLeading: false,
+          title: Container(
+            margin: EdgeInsets.only(top: 0.0),
+            padding: EdgeInsets.only(left: 20.0),
+            color: Color(0xFFBDD4EB),
+            child: DropdownButton(
+              hint: Text("All Supplies"),
+              dropdownColor: Color(0xFFBDD4EB),
+              icon: Icon(
+                Icons.keyboard_arrow_down,
+                color: Color(0xFF09427D),
+                size: 50.0,
               ),
-              SizedBox(
-                width: 10.0,
-              )
-            ],
+              isExpanded: true,
+              value: valueChoose,
+              underline: SizedBox(),
+              style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
+              onChanged: (newValue) {
+                setState(() {
+                  valueChoose = newValue;
+                });
+              },
+              items: listItem.map((valueItem) {
+                return DropdownMenuItem(value: valueItem, child: Text(valueItem));
+              }).toList(),
+            ),
           ),
-        ],
-      ),
-      body: Scaffold(
-        backgroundColor: Color(0xFFEDEDED),
-        body: postList.length == 0
-            ? Text("No information available")
-            : ListView.builder(
-                itemCount: postList.length,
-                itemBuilder: (_, index) {
-                  return PostsUI(
-                    postList[index].image,
-                    postList[index].description,
-                    postList[index].date,
-                    postList[index].time,
-                    postList[index].phnum,
-                    postList[index].volname,
-                  );
-                }),
-      ),
+          actions: [
+            Row(
+              children: [
+                Container(
+                  child: Icon(
+                    Icons.dehaze_outlined,
+                    size: 40.0,
+                    color: Color(0xFF2F3437),
+                  ),
+                  margin: EdgeInsets.only(top: 0.0),
+                ),
+                SizedBox(
+                  width: 10.0,
+                )
+              ],
+            ),
+          ],
+        ),
+        body: ValueListenableBuilder<int>(
+          valueListenable: controller.bottomNavigationBar.tabNotifier,
+          builder: (context, tabIndex, child) => postList.length == 0 ? Text("No information available") : ListView.builder(
+              itemCount: postList.length,
+            controller: controller,
+            itemBuilder: (_, index) {
+              return PostsUI(
+                postList[index].image,
+                postList[index].description,
+                postList[index].date,
+                postList[index].time,
+                postList[index].phnum,
+                postList[index].volname,
+              );
+            }),
+          ),
+        bottomNavigationBar: ScrollBottomNavigationBar(
+          fixedColor: Colors.black,
+          selectedFontSize: 12,
+          unselectedFontSize: 12,
+          // backgroundColor: Color(0xffededed),
+            controller: controller,
+            items: items
+        ),
 
-      bottomNavigationBar: ScrollBottomNavigationBar(
-        controller: controller,
-        items: items,
-      ),
-      // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        )
+        // This trailing comma makes auto-formatting nicer for build methods.
+      );
   }
 
   Widget PostsUI(String image, String description, String date, String time,
