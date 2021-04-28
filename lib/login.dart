@@ -22,7 +22,7 @@ class  _loginState extends State<login> {
               children: [
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 30),
-                  child: Text("\nLogin",style: TextStyle(fontFamily: "LatoBold",fontSize: 45,color: Color(0xFF09427D)),),
+                  child: Text("\nSign In",style: TextStyle(fontFamily: "LatoBold",fontSize: 45,color: Color(0xFF09427D)),),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 30),
@@ -47,6 +47,9 @@ class  _loginState extends State<login> {
                                   color: Color(0xffafc9e5)
                               ),
                               child: TextField(
+                                decoration: InputDecoration(
+                                    hintText: " Enter your email"
+                                ),
                                 keyboardType: TextInputType.emailAddress,
                                 onChanged: (value){
                                   setState(() {
@@ -63,6 +66,9 @@ class  _loginState extends State<login> {
                                   color: Color(0xffafc9e5)
                               ),
                               child: TextField(
+                                decoration: InputDecoration(
+                                  hintText: " Enter your password"
+                                ),
                                 obscureText: true,
                                 onChanged: (value){
                                   setState(() {
@@ -85,7 +91,7 @@ class  _loginState extends State<login> {
                             Center(
                               child: Container(
                                 margin: EdgeInsets.all(12),
-                                width: 150,
+                                width: 170,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: Color(0xFF4686c8),
@@ -113,7 +119,7 @@ class  _loginState extends State<login> {
                                       }
                                     }
                                   },
-                                  child: Text("Login",style: TextStyle(fontFamily: "OpenSans",fontSize: 25,color: Colors.white),),
+                                  child: Text("Continue",style: TextStyle(fontFamily: "OpenSans",fontSize: 25,color: Colors.white),),
                                 ),
                               ),
                             ),
