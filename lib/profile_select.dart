@@ -6,8 +6,8 @@ class profile_select extends StatefulWidget {
 }
 
 class _profile_selectState extends State<profile_select> {
-  int gv1=0;
-  int gv2=0;
+  int gv1 = 0;
+  int gv2 = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +19,15 @@ class _profile_selectState extends State<profile_select> {
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(flex:2,child: Text("\nSelect Profile",style: TextStyle(fontSize: 37,fontFamily: "LatoBold",color: Color(0xFF4686C8)),)),
+              Expanded(
+                  flex: 2,
+                  child: Text(
+                    "\nSelect Profile",
+                    style: TextStyle(
+                        fontSize: 37,
+                        fontFamily: "LatoBold",
+                        color: Color(0xFF4686C8)),
+                  )),
               Expanded(
                 flex: 4,
                 child: Container(
@@ -30,42 +38,66 @@ class _profile_selectState extends State<profile_select> {
                           Transform.scale(
                             scale: 1.3,
                             child: Radio(
-
-                                value: 1, groupValue: gv1, onChanged: (val){
-                              setState(() {
-                                gv1=1;
-                                gv2=0;
-                              });
-                            }),
+                                value: 1,
+                                groupValue: gv1,
+                                onChanged: (val) {
+                                  setState(() {
+                                    gv1 = 1;
+                                    gv2 = 0;
+                                  });
+                                }),
                           ),
-                          Text("Volunteer",style: TextStyle(fontSize: 28,fontFamily: "OpenSans"),)
+                          Text(
+                            "Volunteer",
+                            style:
+                                TextStyle(fontSize: 24, fontFamily: "OpenSans"),
+                          )
                         ],
                       ),
-                      SizedBox(height: 5,),
+                      SizedBox(
+                        height: 5,
+                      ),
                       Container(
                           margin: EdgeInsets.only(left: 50),
-                          child: Text("You want to help other people during this pandemic, by providing verified sources of medical suppliers, life-saving drugs, injections etc.",style: TextStyle(fontFamily: "OpenSans",fontSize: 15),)),
-                      SizedBox(height: 50,),
+                          child: Text(
+                            "You want to help other people during this pandemic, by providing verified sources of medical suppliers, life-saving drugs, injections etc.",
+                            style:
+                                TextStyle(fontFamily: "OpenSans", fontSize: 15),
+                          )),
+                      SizedBox(
+                        height: 50,
+                      ),
                       Row(
                         children: [
                           Transform.scale(
                             scale: 1.3,
                             child: Radio(
-
-                                value: 1, groupValue: gv2, onChanged: (val){
-                              setState(() {
-                                gv2=1;
-                                gv1=0;
-                              });
-                            }),
+                                value: 1,
+                                groupValue: gv2,
+                                onChanged: (val) {
+                                  setState(() {
+                                    gv2 = 1;
+                                    gv1 = 0;
+                                  });
+                                }),
                           ),
-                          Text("Beneficiary",style: TextStyle(fontSize: 28,fontFamily: "OpenSans"),)
+                          Text(
+                            "Beneficiary",
+                            style:
+                                TextStyle(fontSize: 24, fontFamily: "OpenSans"),
+                          )
                         ],
                       ),
-                      SizedBox(height: 5,),
+                      SizedBox(
+                        height: 5,
+                      ),
                       Container(
                           margin: EdgeInsets.only(left: 50),
-                          child: Text("You are facing difficulties, in finding medical supplies for yourself, or for your loved ones.You will be able to see the latest medical supply updates in your area.",style: TextStyle(fontFamily: "OpenSans",fontSize: 15),)),
+                          child: Text(
+                            "You are facing difficulties, in finding medical supplies for yourself, or for your loved ones.You will be able to see the latest medical supply updates in your area.",
+                            style:
+                                TextStyle(fontFamily: "OpenSans", fontSize: 15),
+                          )),
                     ],
                   ),
                 ),
@@ -78,22 +110,25 @@ class _profile_selectState extends State<profile_select> {
                     height: 70,
                     minWidth: double.infinity,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)
-                    ),
+                        borderRadius: BorderRadius.circular(10)),
                     color: Color(0xFF4686C8),
-                    onPressed: (){
-                      if (gv1==1){
+                    onPressed: () {
+                      if (gv1 == 1) {
                         Navigator.pushNamed(context, "/login");
+                      } else if (gv2 == 1) {
+                        Navigator.pushNamed(context, "/homepage");
                       }
-                      else if(gv2==1){
-                        print("Beneficiary");
-                      }
-                      },
-                      child: Text("Continue",style: TextStyle(fontSize: 20,color: Colors.white,fontFamily: "OpenSans"),),
+                    },
+                    child: Text(
+                      "Continue",
+                      style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontFamily: "OpenSans"),
+                    ),
                   ),
                 ),
               )
-
             ],
           ),
         ),
