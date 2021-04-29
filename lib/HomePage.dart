@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:scroll_bottom_navigation_bar/scroll_bottom_navigation_bar.dart';
+import 'postui.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,6 +15,8 @@ class _HomePageState extends State<HomePage> {
   List<Posts> postList = [];
   final controller = ScrollController();
   int _selectedItemPosition = 2;
+  List tab = [];
+
   final items = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
       icon: Image.asset(
@@ -72,18 +73,7 @@ class _HomePageState extends State<HomePage> {
       ),
       title: Text("About Us"),
     ),
-
   ];
-
-
-  _makingPhoneCall(callString) async {
-    var url = 'tel:' + callString;
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
 
   @override
   void initState() {
@@ -110,39 +100,39 @@ class _HomePageState extends State<HomePage> {
 
       setState(() {
         print('Length: $postList.length');
+        tab = [
+          Container(
+            child: Text("This is cityyy"),
+          ),
+          Container(
+            child: Text("This is queryy"),
+          ),
+          Container(
+            child: postList.length == 0
+                ? Text("No information available")
+                : ListView.builder(
+                    itemCount: postList.length,
+                    itemBuilder: (_, index) {
+                      return PostsUI(
+                        postList[index].image,
+                        postList[index].description,
+                        postList[index].date,
+                        postList[index].time,
+                        postList[index].phnum,
+                        postList[index].volname,
+                      );
+                    }),
+          ),
+          Container(
+            child: Text("This is victory"),
+          ),
+          Container(
+            child: Text("This is info"),
+          ),
+        ];
       });
     });
   }
-  final tab=[
-    Container(
-      child: Text("This is cityyy"),
-    ),
-    Container(
-      child: Text("This is queryy"),
-    ),
-    Container(
-      child: postList.length == 0
-          ? Text("No information available")
-          : ListView.builder(
-          itemCount: postList.length,
-          itemBuilder: (_, index) {
-            return PostsUI(
-              postList[index].image,
-              postList[index].description,
-              postList[index].date,
-              postList[index].time,
-              postList[index].phnum,
-              postList[index].volname,
-            );
-          }),
-    ),
-    Container(
-      child: Text("This is victory"),
-    ),
-    Container(
-      child: Text("This is info"),
-    ),
-  ];
 
   int _counter = 0;
 
@@ -158,166 +148,69 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        backgroundColor:Color(0xFFEDEDED),
-        appBar: AppBar(
-          elevation: 0.0,
-          backgroundColor: Color(0xFFEDEDED),
-          toolbarHeight: 80,
-          automaticallyImplyLeading: false,
-          title: Container(
-            margin: EdgeInsets.only(top: 0.0),
-            padding: EdgeInsets.only(left: 20.0),
-            color: Color(0xFFBDD4EB),
-            child: DropdownButton(
-              hint: Text("All Supplies"),
-              dropdownColor: Color(0xFFBDD4EB),
-              icon: Icon(
-                Icons.keyboard_arrow_down,
-                color: Color(0xFF09427D),
-                size: 50.0,
-              ),
-              isExpanded: true,
-              value: valueChoose,
-              underline: SizedBox(),
-              style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
-              onChanged: (newValue) {
-                setState(() {
-                  valueChoose = newValue;
-                });
-              },
-              items: listItem.map((valueItem) {
-                return DropdownMenuItem(value: valueItem, child: Text(valueItem));
-              }).toList(),
-            ),
-          ),
-          actions: [
-            Row(
-              children: [
-                Container(
-                  child: Icon(
-                    Icons.dehaze_outlined,
-                    size: 40.0,
-                    color: Color(0xFF2F3437),
+        home: Scaffold(
+            backgroundColor: Color(0xFFEDEDED),
+            appBar: AppBar(
+              elevation: 0.0,
+              backgroundColor: Color(0xFFEDEDED),
+              toolbarHeight: 80,
+              automaticallyImplyLeading: false,
+              title: Container(
+                margin: EdgeInsets.only(top: 0.0),
+                padding: EdgeInsets.only(left: 20.0),
+                color: Color(0xFFBDD4EB),
+                child: DropdownButton(
+                  hint: Text("All Supplies"),
+                  dropdownColor: Color(0xFFBDD4EB),
+                  icon: Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Color(0xFF09427D),
+                    size: 50.0,
                   ),
-                  margin: EdgeInsets.only(top: 0.0),
+                  isExpanded: true,
+                  value: valueChoose,
+                  underline: SizedBox(),
+                  style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
+                  onChanged: (newValue) {
+                    setState(() {
+                      valueChoose = newValue;
+                    });
+                  },
+                  items: listItem.map((valueItem) {
+                    return DropdownMenuItem(
+                        value: valueItem, child: Text(valueItem));
+                  }).toList(),
                 ),
-                SizedBox(
-                  width: 10.0,
-                )
-              ],
-            ),
-          ],
-        ),
-        body:tab[_selectedItemPosition],
-        bottomNavigationBar: SnakeNavigationBar.color(
-          behaviour: SnakeBarBehaviour.floating,
-          snakeShape: SnakeShape.circle,
-          // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
-          padding: EdgeInsets.all(12),
-          currentIndex: _selectedItemPosition,
-          onTap: (index) => setState(() => _selectedItemPosition = index),
-          items: items,
-          
-        )
-
-        )
-        // This trailing comma makes auto-formatting nicer for build methods.
-      );
-  }
-
-  Widget PostsUI(String image, String description, String date, String time,
-      String phnum, String volname) {
-    return Column(
-      children: [
-        Card(
-          elevation: 5.0,
-          margin:
-              EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0, bottom: 0.0),
-          child: Container(
-            padding: EdgeInsets.all(14.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
+              ),
+              actions: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      date,
-                      // style: Theme.of(context).textTheme.subtitle,
-                      textAlign: TextAlign.center,
+                    Container(
+                      child: Icon(
+                        Icons.dehaze_outlined,
+                        size: 40.0,
+                        color: Color(0xFF2F3437),
+                      ),
+                      margin: EdgeInsets.only(top: 0.0),
                     ),
-                    Text(
-                      time,
-                      // style: Theme.of(context).textTheme.subtitle,
-                      textAlign: TextAlign.center,
+                    SizedBox(
+                      width: 10.0,
                     )
                   ],
                 ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                (image != null || image == "")
-                    ? new Image.network(image, fit: BoxFit.cover)
-                    : SizedBox(
-                        height: 1.0,
-                      ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  description,
-                  // style: Theme.of(context).textTheme.subhead,
-                  textAlign: TextAlign.center,
-                ),
               ],
             ),
-          ),
-        ),
-        Card(
-          elevation: 5.0,
-          margin:
-              EdgeInsets.only(top: 0.0, left: 15.0, right: 15.0, bottom: 15.0),
-          color: Colors.black,
-          child: Container(
-            color: Colors.black,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Text(
-                    "Volunteer :  "+volname,
-                    style: TextStyle(fontSize: 15.0, color: Colors.white),
-                  ),
-                ),
-
-                Container(
-                  padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                  child: RaisedButton(
-                    color: Colors.black,
-                    elevation: 0.0,
-                    onPressed: () {
-                      _makingPhoneCall(phnum);
-                    },
-                    child: Text(
-                      "+91-" + phnum,
-                      style: TextStyle(fontSize: 15.0, color: Colors.white),
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-        Divider(
-          color: Color(0xFF607d8b),
-          height: 7.0,
-          thickness: 2.0,
-          indent: 75,
-          endIndent: 75,
-        )
-      ],
-    );
+            body: postList.length == 0 ? null : tab[_selectedItemPosition],
+            bottomNavigationBar: SnakeNavigationBar.color(
+              behaviour: SnakeBarBehaviour.floating,
+              snakeShape: SnakeShape.circle,
+              // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
+              padding: EdgeInsets.all(12),
+              currentIndex: _selectedItemPosition,
+              onTap: (index) => setState(() => _selectedItemPosition = index),
+              items: items,
+            ))
+        // This trailing comma makes auto-formatting nicer for build methods.
+        );
   }
 }
