@@ -11,7 +11,7 @@ import 'HomePage.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(my());
+  runApp(HomePage());
 }
 
 class my extends StatelessWidget {

@@ -6,6 +6,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'postui.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:loading_hud/loading_hud.dart';
+import 'appbarslide.dart';
 
 class HomePage extends StatefulWidget {
   final String title = "HomePage Timeline";
@@ -13,12 +14,14 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
   bool allsupplies=false;
   List<Posts> postList = [];
   final controller = ScrollController();
   int _selectedItemPosition = 2;
   List tab = [];
+  AnimationController _controller;
+  bool _visible = true;
 
   final items = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
@@ -61,6 +64,10 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 400),
+    );
     DatabaseReference postsRef =
         FirebaseDatabase.instance.reference().child("Posts");
     postsRef.once().then((DataSnapshot snap) {
@@ -145,61 +152,61 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
         home: Scaffold(
             backgroundColor: Color(0xFFEDEDED),
-            appBar:
-            // allsupplies==true?
-            PreferredSize(
-              preferredSize: Size(0.0, 0.0),
-              child: AppBar(
-                elevation: 0.0,
-                backgroundColor: Color(0xFFEDEDED),
-                toolbarHeight: 80,
-                automaticallyImplyLeading: false,
-                title: Container(
-                  margin: EdgeInsets.only(top: 0.0),
-                  padding: EdgeInsets.only(left: 20.0),
-                  color: Color(0xFFBDD4EB),
-                  child: DropdownButton(
-                    hint: Text("All Supplies"),
-                    dropdownColor: Color(0xFFBDD4EB),
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Color(0xFF09427D),
-                      size: 50.0,
-                    ),
-                    isExpanded: true,
-                    value: valueChoose,
-                    underline: SizedBox(),
-                    style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
-                    onChanged: (newValue) {
-                      setState(() {
-                        valueChoose = newValue;
-                      });
-                    },
-                    items: listItem.map((valueItem) {
-                      return DropdownMenuItem(
-                          value: valueItem, child: Text(valueItem));
-                    }).toList(),
-                  ),
-                ),
-                actions: [
-                  Row(
-                    children: [
-                      Container(
-                        child: Icon(
-                          Icons.dehaze_outlined,
-                          size: 40.0,
-                          color: Color(0xFF2F3437),
-                        ),
-                        margin: EdgeInsets.only(top: 0.0),
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      )
-                    ],
-                  ),
-                ],
-              ),
+            appBar:SlidingAppBar(
+              controller: _controller,
+              visible: allsupplies,
+              child: AppBar(title: Text('AppBar')),
             ),
+            // AppBar(
+            //   elevation: 0.0,
+            //   backgroundColor: Color(0xFFEDEDED),
+            //   toolbarHeight: 80,
+            //   automaticallyImplyLeading: false,
+            //   title: Container(
+            //     margin: EdgeInsets.only(top: 0.0),
+            //     padding: EdgeInsets.only(left: 20.0),
+            //     color: Color(0xFFBDD4EB),
+            //     child: DropdownButton(
+            //       hint: Text("All Supplies"),
+            //       dropdownColor: Color(0xFFBDD4EB),
+            //       icon: Icon(
+            //         Icons.keyboard_arrow_down,
+            //         color: Color(0xFF09427D),
+            //         size: 50.0,
+            //       ),
+            //       isExpanded: true,
+            //       value: valueChoose,
+            //       underline: SizedBox(),
+            //       style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
+            //       onChanged: (newValue) {
+            //         setState(() {
+            //           valueChoose = newValue;
+            //         });
+            //       },
+            //       items: listItem.map((valueItem) {
+            //         return DropdownMenuItem(
+            //             value: valueItem, child: Text(valueItem));
+            //       }).toList(),
+            //     ),
+            //   ),
+            //   actions: [
+            //     Row(
+            //       children: [
+            //         Container(
+            //           child: Icon(
+            //             Icons.dehaze_outlined,
+            //             size: 40.0,
+            //             color: Color(0xFF2F3437),
+            //           ),
+            //           margin: EdgeInsets.only(top: 0.0),
+            //         ),
+            //         SizedBox(
+            //           width: 10.0,
+            //         )
+            //       ],
+            //     ),
+            //   ],
+            // ),
             body: postList.length == 0 ? null : tab[_selectedItemPosition],
             bottomNavigationBar: SnakeNavigationBar.color(
               // backgroundColor: Colors.blue,
