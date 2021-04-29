@@ -5,6 +5,7 @@ import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'postui.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+import 'package:loading_hud/loading_hud.dart';
 
 class HomePage extends StatefulWidget {
   final String title = "HomePage Timeline";
@@ -67,6 +68,7 @@ class _HomePageState extends State<HomePage> {
       var DATA = snap.value;
 
       postList.cast();
+      bool verified = false;
 
       for (var indivisualKey in KEYS) {
         Posts posts = new Posts(
@@ -76,8 +78,11 @@ class _HomePageState extends State<HomePage> {
           DATA[indivisualKey]['time'],
           DATA[indivisualKey]['phnum'],
           DATA[indivisualKey]['volname'],
+          DATA[indivisualKey]['status'],
         );
-        postList.add(posts);
+        if (posts.status != "fake") {
+          postList.add(posts);
+        }
       }
 
       setState(() {
@@ -97,7 +102,11 @@ class _HomePageState extends State<HomePage> {
           ),
           Container(
             child: postList.length == 0
-                ? Text("No information available")
+                ? LoadingHud(
+                    context,
+                    cancelable: false,
+                    canceledOnTouchOutside: false,
+                  )
                 : ListView.builder(
                     itemCount: postList.length,
                     itemBuilder: (_, index) {
