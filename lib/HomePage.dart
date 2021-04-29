@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:medicalapp/chooselocation.dart';
 import 'package:medicalapp/meet_team.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -95,34 +96,38 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       setState(() {
         print('Length: $postList.length');
         tab = [
-          Container(
-            child: Text("This is cityyy"),
+          chooselocation(),
+          SafeArea(
+            child: Container(
+              child: Text("queryy"),
+            ),
           ),
-          Container(
-            child: Text("This is queryy"),
+          SafeArea(
+            child: Container(
+              child: postList.length == 0
+                  ? LoadingHud(
+                      context,
+                      cancelable: false,
+                      canceledOnTouchOutside: false,
+                    )
+                  : ListView.builder(
+                      itemCount: postList.length,
+                      itemBuilder: (_, index) {
+                        return PostsUI(
+                          postList[index].image,
+                          postList[index].description,
+                          postList[index].date,
+                          postList[index].time,
+                          postList[index].phnum,
+                          postList[index].volname,
+                        );
+                      }),
+            ),
           ),
-          Container(
-            child: postList.length == 0
-                ? LoadingHud(
-                    context,
-                    cancelable: false,
-                    canceledOnTouchOutside: false,
-                  )
-                : ListView.builder(
-                    itemCount: postList.length,
-                    itemBuilder: (_, index) {
-                      return PostsUI(
-                        postList[index].image,
-                        postList[index].description,
-                        postList[index].date,
-                        postList[index].time,
-                        postList[index].phnum,
-                        postList[index].volname,
-                      );
-                    }),
-          ),
-          Container(
-            child: Text("This is victory"),
+          SafeArea( 
+            child: Container(
+              child: Text("This is victory"),
+            ),
           ),
           meet_team()
         ];

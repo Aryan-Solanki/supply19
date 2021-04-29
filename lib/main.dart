@@ -17,7 +17,6 @@ void main() async {
   await Firebase.initializeApp();
   await UserSimplePreferences.init();
   runApp(my());
-  runApp(chooselocation());
 }
 
 class my extends StatelessWidget {

@@ -131,15 +131,17 @@ class meet_team extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: LiquidSwipe(
-          pages: pages,
-          enableLoop: false,
-          // enableSideReveal: true,
-          slideIconWidget: Icon(Icons.arrow_back_ios,color: Colors.white,size: 25,),
-          waveType: WaveType.liquidReveal,
-          fullTransitionValue: 800,
-          positionSlideIcon: 0.6,
+      home: SafeArea(
+        child: Scaffold(
+          body: LiquidSwipe(
+            pages: pages,
+            enableLoop: false,
+            // enableSideReveal: true,
+            slideIconWidget: Icon(Icons.arrow_back_ios,color: Colors.white,size: 25,),
+            waveType: WaveType.liquidReveal,
+            fullTransitionValue: 800,
+            positionSlideIcon: 0.6,
+          ),
         ),
       ),
     );;;
