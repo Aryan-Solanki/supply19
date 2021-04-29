@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medicalapp/HomePage.dart';
+import 'package:medicalapp/chooselocation.dart';
+import 'package:medicalapp/citypage.dart';
 import 'package:medicalapp/meet_team.dart';
 import 'login.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -15,6 +17,7 @@ void main() async {
   await Firebase.initializeApp();
   await UserSimplePreferences.init();
   runApp(my());
+  runApp(chooselocation());
 }
 
 class my extends StatelessWidget {
@@ -29,6 +32,7 @@ class my extends StatelessWidget {
         '/homepage': (context) => HomePage(),
         '/homepage2': (context) => modHomePage(),
         '/signup': (context) => signup(),
+        '/citypage': (context) => citypage(),
       },
     );
   }
