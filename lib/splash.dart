@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:swipe_up/swipe_up.dart';
 import 'package:medicalapp/login.dart';
-
+//weer
 class splash extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
