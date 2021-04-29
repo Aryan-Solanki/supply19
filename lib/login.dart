@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'user_simple_preferences.dart';
 
 class login extends StatefulWidget {
   @override
@@ -10,6 +11,13 @@ class _loginState extends State<login> {
   final auth = FirebaseAuth.instance;
   String _email, _password;
   String warning = "";
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _email = UserSimplePreferences.getEmail() ?? '';
+  // }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -130,7 +138,9 @@ class _loginState extends State<login> {
                                       email: _email,
                                       password: _password,
                                     );
-                                    Navigator.pushNamed(context, "/homepage");
+                                    await UserSimplePreferences.setEmail(
+                                        _email);
+                                    Navigator.pushNamed(context, "/homepage2");
                                   } on FirebaseAuthException catch (e) {
                                     if (e.code == 'user-not-found') {
                                       setState(() {
@@ -173,6 +183,5 @@ class _loginState extends State<login> {
             ],
           ))),
     );
-    ;
   }
 }

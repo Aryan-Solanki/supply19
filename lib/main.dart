@@ -7,11 +7,14 @@ import 'splash.dart';
 import 'profile_select.dart';
 import 'package:medicalapp/signup.dart';
 import 'HomePage.dart';
+import 'modHomePage.dart';
+import 'user_simple_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(HomePage());
+  await UserSimplePreferences.init();
+  runApp(my());
 }
 
 class my extends StatelessWidget {
@@ -24,6 +27,7 @@ class my extends StatelessWidget {
         '/profile_select': (context) => profile_select(),
         '/login': (context) => login(),
         '/homepage': (context) => HomePage(),
+        '/homepage2': (context) => modHomePage(),
         '/signup': (context) => signup(),
       },
     );
