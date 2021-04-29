@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:medicalapp/meet_team.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'postui.dart';
@@ -12,6 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool allsupplies=false;
   List<Posts> postList = [];
   final controller = ScrollController();
   int _selectedItemPosition = 2;
@@ -21,57 +23,37 @@ class _HomePageState extends State<HomePage> {
     BottomNavigationBarItem(
       icon: Image.asset(
         'images/city.png',
-        height: 30,
+        height: 28,
       ),
-      activeIcon: Image.asset(
-        'images/city2.png',
-        height: 30,
-      ),
-      title: Text("City"),
+      label: "City",
     ),
     BottomNavigationBarItem(
       icon: Image.asset(
         'images/ques.png',
-        height: 30,
+        height: 28,
       ),
-      activeIcon: Image.asset(
-        'images/ques2.png',
-        height: 30,
-      ),
-      title: Text("Query"),
+      label: "Query",
     ),
     BottomNavigationBarItem(
       icon: Image.asset(
         'images/map.png',
-        height: 30,
+        height: 28,
       ),
-      activeIcon: Image.asset(
-        'images/map2.png',
-        height: 30,
-      ),
-      title: Text("State"),
+      label: "India",
     ),
     BottomNavigationBarItem(
       icon: Image.asset(
         'images/trophy.png',
-        height: 30,
+        height: 28,
       ),
-      activeIcon: Image.asset(
-        'images/trophy2.png',
-        height: 30,
-      ),
-      title: Text("Top Volunteer"),
+      label: "Rank",
     ),
     BottomNavigationBarItem(
       icon: Image.asset(
         'images/info.png',
-        height: 30,
+        height: 28,
       ),
-      activeIcon: Image.asset(
-        'images/info2.png',
-        height: 30,
-      ),
-      title: Text("About Us"),
+      label: "About Us",
     ),
   ];
 
@@ -99,10 +81,16 @@ class _HomePageState extends State<HomePage> {
       }
 
       setState(() {
+        if(_selectedItemPosition==2){
+          allsupplies=true;
+        }
+        else{
+          allsupplies=false;
+        }
         print('Length: $postList.length');
         tab = [
           Container(
-            child: Text("This is cityyy"),
+            child:Text("This is cityyy"),
           ),
           Container(
             child: Text("This is queryy"),
@@ -126,9 +114,7 @@ class _HomePageState extends State<HomePage> {
           Container(
             child: Text("This is victory"),
           ),
-          Container(
-            child: Text("This is info"),
-          ),
+          meet_team()
         ];
       });
     });
@@ -150,60 +136,72 @@ class _HomePageState extends State<HomePage> {
     return MaterialApp(
         home: Scaffold(
             backgroundColor: Color(0xFFEDEDED),
-            appBar: AppBar(
-              elevation: 0.0,
-              backgroundColor: Color(0xFFEDEDED),
-              toolbarHeight: 80,
-              automaticallyImplyLeading: false,
-              title: Container(
-                margin: EdgeInsets.only(top: 0.0),
-                padding: EdgeInsets.only(left: 20.0),
-                color: Color(0xFFBDD4EB),
-                child: DropdownButton(
-                  hint: Text("All Supplies"),
-                  dropdownColor: Color(0xFFBDD4EB),
-                  icon: Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Color(0xFF09427D),
-                    size: 50.0,
-                  ),
-                  isExpanded: true,
-                  value: valueChoose,
-                  underline: SizedBox(),
-                  style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
-                  onChanged: (newValue) {
-                    setState(() {
-                      valueChoose = newValue;
-                    });
-                  },
-                  items: listItem.map((valueItem) {
-                    return DropdownMenuItem(
-                        value: valueItem, child: Text(valueItem));
-                  }).toList(),
-                ),
-              ),
-              actions: [
-                Row(
-                  children: [
-                    Container(
-                      child: Icon(
-                        Icons.dehaze_outlined,
-                        size: 40.0,
-                        color: Color(0xFF2F3437),
-                      ),
-                      margin: EdgeInsets.only(top: 0.0),
+            appBar:
+            // allsupplies==true?
+            PreferredSize(
+              preferredSize: Size(0.0, 0.0),
+              child: AppBar(
+                elevation: 0.0,
+                backgroundColor: Color(0xFFEDEDED),
+                toolbarHeight: 80,
+                automaticallyImplyLeading: false,
+                title: Container(
+                  margin: EdgeInsets.only(top: 0.0),
+                  padding: EdgeInsets.only(left: 20.0),
+                  color: Color(0xFFBDD4EB),
+                  child: DropdownButton(
+                    hint: Text("All Supplies"),
+                    dropdownColor: Color(0xFFBDD4EB),
+                    icon: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Color(0xFF09427D),
+                      size: 50.0,
                     ),
-                    SizedBox(
-                      width: 10.0,
-                    )
-                  ],
+                    isExpanded: true,
+                    value: valueChoose,
+                    underline: SizedBox(),
+                    style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
+                    onChanged: (newValue) {
+                      setState(() {
+                        valueChoose = newValue;
+                      });
+                    },
+                    items: listItem.map((valueItem) {
+                      return DropdownMenuItem(
+                          value: valueItem, child: Text(valueItem));
+                    }).toList(),
+                  ),
                 ),
-              ],
+                actions: [
+                  Row(
+                    children: [
+                      Container(
+                        child: Icon(
+                          Icons.dehaze_outlined,
+                          size: 40.0,
+                          color: Color(0xFF2F3437),
+                        ),
+                        margin: EdgeInsets.only(top: 0.0),
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
             body: postList.length == 0 ? null : tab[_selectedItemPosition],
             bottomNavigationBar: SnakeNavigationBar.color(
+              // backgroundColor: Colors.blue,
               behaviour: SnakeBarBehaviour.floating,
-              snakeShape: SnakeShape.circle,
+              selectedItemColor: Colors.black,
+              // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
+              // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+              // shape: ,
+              snakeShape: SnakeShape.indicator,
+              showSelectedLabels: true,
               // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
               padding: EdgeInsets.all(12),
               currentIndex: _selectedItemPosition,
