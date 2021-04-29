@@ -4,6 +4,7 @@ import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:scroll_bottom_navigation_bar/scroll_bottom_navigation_bar.dart';
+import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 
 class HomePage extends StatefulWidget {
   final String title = "HomePage Timeline";
@@ -14,7 +15,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List<Posts> postList = [];
   final controller = ScrollController();
-
+  int _selectedItemPosition = 2;
   final items = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
       icon: Image.asset(
@@ -112,6 +113,36 @@ class _HomePageState extends State<HomePage> {
       });
     });
   }
+  final tab=[
+    Container(
+      child: Text("This is cityyy"),
+    ),
+    Container(
+      child: Text("This is queryy"),
+    ),
+    Container(
+      child: postList.length == 0
+          ? Text("No information available")
+          : ListView.builder(
+          itemCount: postList.length,
+          itemBuilder: (_, index) {
+            return PostsUI(
+              postList[index].image,
+              postList[index].description,
+              postList[index].date,
+              postList[index].time,
+              postList[index].phnum,
+              postList[index].volname,
+            );
+          }),
+    ),
+    Container(
+      child: Text("This is victory"),
+    ),
+    Container(
+      child: Text("This is info"),
+    ),
+  ];
 
   int _counter = 0;
 
@@ -178,30 +209,17 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        body: ValueListenableBuilder<int>(
-          valueListenable: controller.bottomNavigationBar.tabNotifier,
-          builder: (context, tabIndex, child) => postList.length == 0 ? Text("No information available") : ListView.builder(
-              itemCount: postList.length,
-            controller: controller,
-            itemBuilder: (_, index) {
-              return PostsUI(
-                postList[index].image,
-                postList[index].description,
-                postList[index].date,
-                postList[index].time,
-                postList[index].phnum,
-                postList[index].volname,
-              );
-            }),
-          ),
-        bottomNavigationBar: ScrollBottomNavigationBar(
-          fixedColor: Colors.black,
-          selectedFontSize: 12,
-          unselectedFontSize: 12,
-          // backgroundColor: Color(0xffededed),
-            controller: controller,
-            items: items
-        ),
+        body:tab[_selectedItemPosition],
+        bottomNavigationBar: SnakeNavigationBar.color(
+          behaviour: SnakeBarBehaviour.floating,
+          snakeShape: SnakeShape.circle,
+          // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
+          padding: EdgeInsets.all(12),
+          currentIndex: _selectedItemPosition,
+          onTap: (index) => setState(() => _selectedItemPosition = index),
+          items: items,
+          
+        )
 
         )
         // This trailing comma makes auto-formatting nicer for build methods.
@@ -226,12 +244,12 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Text(
                       date,
-                      style: Theme.of(context).textTheme.subtitle,
+                      // style: Theme.of(context).textTheme.subtitle,
                       textAlign: TextAlign.center,
                     ),
                     Text(
                       time,
-                      style: Theme.of(context).textTheme.subtitle,
+                      // style: Theme.of(context).textTheme.subtitle,
                       textAlign: TextAlign.center,
                     )
                   ],
@@ -249,7 +267,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Text(
                   description,
-                  style: Theme.of(context).textTheme.subhead,
+                  // style: Theme.of(context).textTheme.subhead,
                   textAlign: TextAlign.center,
                 ),
               ],
