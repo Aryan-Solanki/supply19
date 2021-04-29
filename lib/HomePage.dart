@@ -14,8 +14,8 @@ class HomePage extends StatefulWidget {
   _HomePageState createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
-  bool allsupplies=false;
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  bool allsupplies = true;
   List<Posts> postList = [];
   final controller = ScrollController();
   int _selectedItemPosition = 2;
@@ -93,16 +93,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
       }
 
       setState(() {
-        if(_selectedItemPosition==2){
-          allsupplies=true;
-        }
-        else{
-          allsupplies=false;
-        }
         print('Length: $postList.length');
         tab = [
           Container(
-            child:Text("This is cityyy"),
+            child: Text("This is cityyy"),
           ),
           Container(
             child: Text("This is queryy"),
@@ -147,66 +141,75 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
   String valueChoose;
   List listItem = ["Item 1", "Item 2", "Item 3"];
 
+  void checkboollol() {
+    setState(() {
+      if (_selectedItemPosition == 2) {
+        allsupplies = true;
+      } else {
+        allsupplies = false;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
             backgroundColor: Color(0xFFEDEDED),
-            appBar:SlidingAppBar(
+            appBar: SlidingAppBar(
               controller: _controller,
               visible: allsupplies,
-              child: AppBar(title: Text('AppBar')),
+              child: AppBar(
+                elevation: 0.0,
+                backgroundColor: Color(0xFFEDEDED),
+                toolbarHeight: 80,
+                automaticallyImplyLeading: false,
+                title: Container(
+                  margin: EdgeInsets.only(top: 0.0),
+                  padding: EdgeInsets.only(left: 20.0),
+                  color: Color(0xFFBDD4EB),
+                  child: DropdownButton(
+                    hint: Text("All Supplies"),
+                    dropdownColor: Color(0xFFBDD4EB),
+                    icon: Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Color(0xFF09427D),
+                      size: 50.0,
+                    ),
+                    isExpanded: true,
+                    value: valueChoose,
+                    underline: SizedBox(),
+                    style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
+                    onChanged: (newValue) {
+                      setState(() {
+                        valueChoose = newValue;
+                      });
+                    },
+                    items: listItem.map((valueItem) {
+                      return DropdownMenuItem(
+                          value: valueItem, child: Text(valueItem));
+                    }).toList(),
+                  ),
+                ),
+                actions: [
+                  Row(
+                    children: [
+                      Container(
+                        child: Icon(
+                          Icons.dehaze_outlined,
+                          size: 40.0,
+                          color: Color(0xFF2F3437),
+                        ),
+                        margin: EdgeInsets.only(top: 0.0),
+                      ),
+                      SizedBox(
+                        width: 10.0,
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
-            // AppBar(
-            //   elevation: 0.0,
-            //   backgroundColor: Color(0xFFEDEDED),
-            //   toolbarHeight: 80,
-            //   automaticallyImplyLeading: false,
-            //   title: Container(
-            //     margin: EdgeInsets.only(top: 0.0),
-            //     padding: EdgeInsets.only(left: 20.0),
-            //     color: Color(0xFFBDD4EB),
-            //     child: DropdownButton(
-            //       hint: Text("All Supplies"),
-            //       dropdownColor: Color(0xFFBDD4EB),
-            //       icon: Icon(
-            //         Icons.keyboard_arrow_down,
-            //         color: Color(0xFF09427D),
-            //         size: 50.0,
-            //       ),
-            //       isExpanded: true,
-            //       value: valueChoose,
-            //       underline: SizedBox(),
-            //       style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
-            //       onChanged: (newValue) {
-            //         setState(() {
-            //           valueChoose = newValue;
-            //         });
-            //       },
-            //       items: listItem.map((valueItem) {
-            //         return DropdownMenuItem(
-            //             value: valueItem, child: Text(valueItem));
-            //       }).toList(),
-            //     ),
-            //   ),
-            //   actions: [
-            //     Row(
-            //       children: [
-            //         Container(
-            //           child: Icon(
-            //             Icons.dehaze_outlined,
-            //             size: 40.0,
-            //             color: Color(0xFF2F3437),
-            //           ),
-            //           margin: EdgeInsets.only(top: 0.0),
-            //         ),
-            //         SizedBox(
-            //           width: 10.0,
-            //         )
-            //       ],
-            //     ),
-            //   ],
-            // ),
             body: postList.length == 0 ? null : tab[_selectedItemPosition],
             bottomNavigationBar: SnakeNavigationBar.color(
               // backgroundColor: Colors.blue,
@@ -214,14 +217,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin{
               selectedItemColor: Colors.black,
               // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
               // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25)),
               // shape: ,
               snakeShape: SnakeShape.indicator,
               showSelectedLabels: true,
               // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
               padding: EdgeInsets.all(12),
               currentIndex: _selectedItemPosition,
-              onTap: (index) => setState(() => _selectedItemPosition = index),
+              onTap: (index) {
+                setState(() {
+                  _selectedItemPosition = index;
+                  checkboollol();
+                });
+              },
               items: items,
             ))
         // This trailing comma makes auto-formatting nicer for build methods.

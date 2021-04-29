@@ -23,7 +23,7 @@ class SlidingAppBar extends PreferredSize {
       position: Tween<Offset>(begin: Offset.zero, end: Offset(0, -1)).animate(
         CurvedAnimation(parent: controller, curve: Curves.fastOutSlowIn),
       ),
-      child: child,
+      child: visible ? child : null,
     );
   }
 }
