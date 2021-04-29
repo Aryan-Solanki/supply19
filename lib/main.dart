@@ -16,7 +16,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await UserSimplePreferences.init();
-  runApp(my());
   runApp(chooselocation());
 }
 

@@ -4,23 +4,29 @@ import 'package:medicalapp/citypage.dart';
 import 'city.dart';
 import 'package:search_choices/search_choices.dart';
 
-
 class chooselocation extends StatefulWidget {
   @override
   _chooselocationState createState() => _chooselocationState();
 }
 
-String selected_city="";
-Color btn1color=Color(0xffc6ced2);
-Color btn2color=Color(0xffc6ced2);
-Color btn3color=Color(0xffc6ced2);
-Color btn4color=Color(0xffc6ced2);
-Color btn5color=Color(0xffc6ced2);
-Color btn6color=Color(0xffc6ced2);
-Color btn7color=Color(0xffc6ced2);
-Color btn8color=Color(0xffc6ced2);
-String selectedValueSingleDialog="";
+String selected_city = "";
+Color btn1color = Color(0xffc6ced2);
+Color btn2color = Color(0xffc6ced2);
+Color btn3color = Color(0xffc6ced2);
+Color btn4color = Color(0xffc6ced2);
+Color btn5color = Color(0xffc6ced2);
+Color btn6color = Color(0xffc6ced2);
+Color btn7color = Color(0xffc6ced2);
+Color btn8color = Color(0xffc6ced2);
+String selectedValueSingleDialog = "";
+
 class _chooselocationState extends State<chooselocation> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,21 +39,30 @@ class _chooselocationState extends State<chooselocation> {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.location_on, size: 35, color: Colors.blue,),
-                    Text(" Choose Your City",
-                      style: TextStyle(fontSize: 30, fontFamily: "OpenSans"),)
+                    Icon(
+                      Icons.location_on,
+                      size: 35,
+                      color: Colors.blue,
+                    ),
+                    Text(
+                      " Choose Your City",
+                      style: TextStyle(fontSize: 30, fontFamily: "OpenSans"),
+                    )
                   ],
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
-                  color: Colors.white ,
+                  color: Colors.white,
                   child: SearchChoices.single(
                     items: city(),
                     value: selectedValueSingleDialog,
                     hint: "Search for your city",
                     onChanged: (value) {
-                      if(value!=null){
-                        selected_city=value.data;
+                      if (value != null) {
+                        selected_city = value.data;
+                        // Navigator.pushNamed(context, '/citypage');
                         // print(selected_city);
                       }
 
@@ -60,62 +75,66 @@ class _chooselocationState extends State<chooselocation> {
                   children: [
                     Expanded(
                       child: FlatButton(
-                        color: btn1color,
-                          onPressed: (){
-                          selected_city="Delhi";
-                          setState(() {
-                            btn1color=Color(0xff607d8b);
-                            btn2color=Color(0xffc6ced2);
-                            btn3color=Color(0xffc6ced2);
-                            btn4color=Color(0xffc6ced2);
-                            btn5color=Color(0xffc6ced2);
-                            btn6color=Color(0xffc6ced2);
-                            btn7color=Color(0xffc6ced2);
-                            btn8color=Color(0xffc6ced2);
-                          });
+                          color: btn1color,
+                          onPressed: () {
+                            selected_city = "Delhi";
+                            setState(() {
+                              btn1color = Color(0xff607d8b);
+                              btn2color = Color(0xffc6ced2);
+                              btn3color = Color(0xffc6ced2);
+                              btn4color = Color(0xffc6ced2);
+                              btn5color = Color(0xffc6ced2);
+                              btn6color = Color(0xffc6ced2);
+                              btn7color = Color(0xffc6ced2);
+                              btn8color = Color(0xffc6ced2);
+                              Navigator.pushNamed(context, '/citypage');
+                            });
                           },
-                          child: Text("Delhi")
-                      ),
+                          child: Text("Delhi")),
                     ),
-                    SizedBox(width: 7,),
+                    SizedBox(
+                      width: 7,
+                    ),
                     Expanded(
                       child: FlatButton(
                           color: btn2color,
-                          onPressed: (){
-                            selected_city="Bangalore";
+                          onPressed: () {
+                            selected_city = "Bangalore";
                             setState(() {
-                              btn1color=Color(0xffc6ced2);
-                              btn2color=Color(0xff607d8b);
-                              btn3color=Color(0xffc6ced2);
-                              btn4color=Color(0xffc6ced2);
-                              btn5color=Color(0xffc6ced2);
-                              btn6color=Color(0xffc6ced2);
-                              btn7color=Color(0xffc6ced2);
-                              btn8color=Color(0xffc6ced2);
+                              btn1color = Color(0xffc6ced2);
+                              btn2color = Color(0xff607d8b);
+                              btn3color = Color(0xffc6ced2);
+                              btn4color = Color(0xffc6ced2);
+                              btn5color = Color(0xffc6ced2);
+                              btn6color = Color(0xffc6ced2);
+                              btn7color = Color(0xffc6ced2);
+                              btn8color = Color(0xffc6ced2);
+                              Navigator.pushNamed(context, '/citypage');
                             });
                           },
-                          child: Text("Bangalore")
-                      ),
+                          child: Text("Bangalore")),
                     ),
-                    SizedBox(width: 7,),
+                    SizedBox(
+                      width: 7,
+                    ),
                     Expanded(
                       child: FlatButton(
                           color: btn3color,
-                          onPressed: (){
-                            selected_city="Chennai";
+                          onPressed: () {
+                            selected_city = "Chennai";
                             setState(() {
-                              btn1color=Color(0xffc6ced2);
-                              btn2color=Color(0xffc6ced2);
-                              btn3color=Color(0xff607d8b);
-                              btn4color=Color(0xffc6ced2);
-                              btn5color=Color(0xffc6ced2);
-                              btn6color=Color(0xffc6ced2);
-                              btn7color=Color(0xffc6ced2);
-                              btn8color=Color(0xffc6ced2);
+                              btn1color = Color(0xffc6ced2);
+                              btn2color = Color(0xffc6ced2);
+                              btn3color = Color(0xff607d8b);
+                              btn4color = Color(0xffc6ced2);
+                              btn5color = Color(0xffc6ced2);
+                              btn6color = Color(0xffc6ced2);
+                              btn7color = Color(0xffc6ced2);
+                              btn8color = Color(0xffc6ced2);
+                              Navigator.pushNamed(context, '/citypage');
                             });
                           },
-                          child: Text("Chennai")
-                      ),
+                          child: Text("Chennai")),
                     ),
                   ],
                 ),
@@ -126,42 +145,43 @@ class _chooselocationState extends State<chooselocation> {
                       Expanded(
                         child: FlatButton(
                             color: btn4color,
-                            onPressed: (){
-                              selected_city="Mumbai";
-                                setState(() {
-                                  btn1color=Color(0xffc6ced2);
-                                  btn2color=Color(0xffc6ced2);
-                                  btn4color=Color(0xff607d8b);
-                                  btn3color=Color(0xffc6ced2);
-                                  btn5color=Color(0xffc6ced2);
-                                  btn6color=Color(0xffc6ced2);
-                                  btn7color=Color(0xffc6ced2);
-                                  btn8color=Color(0xffc6ced2);
-                                });
+                            onPressed: () {
+                              selected_city = "Mumbai";
+                              setState(() {
+                                btn1color = Color(0xffc6ced2);
+                                btn2color = Color(0xffc6ced2);
+                                btn4color = Color(0xff607d8b);
+                                btn3color = Color(0xffc6ced2);
+                                btn5color = Color(0xffc6ced2);
+                                btn6color = Color(0xffc6ced2);
+                                btn7color = Color(0xffc6ced2);
+                                btn8color = Color(0xffc6ced2);
+                                Navigator.pushNamed(context, '/citypage');
+                              });
                             },
-                            child: Text("Mumbai")
-                        ),
+                            child: Text("Mumbai")),
                       ),
-                      SizedBox(width: 7,),
+                      SizedBox(
+                        width: 7,
+                      ),
                       Expanded(
                         child: FlatButton(
                             color: btn5color,
-                            onPressed: (){
-                              selected_city="Kolkata";
+                            onPressed: () {
+                              selected_city = "Kolkata";
                               setState(() {
-                                btn1color=Color(0xffc6ced2);
-                                btn2color=Color(0xffc6ced2);
-                                btn5color=Color(0xff607d8b);
-                                btn3color=Color(0xffc6ced2);
-                                btn4color=Color(0xffc6ced2);
-                                btn6color=Color(0xffc6ced2);
-                                btn7color=Color(0xffc6ced2);
-                                btn8color=Color(0xffc6ced2);
+                                btn1color = Color(0xffc6ced2);
+                                btn2color = Color(0xffc6ced2);
+                                btn5color = Color(0xff607d8b);
+                                btn3color = Color(0xffc6ced2);
+                                btn4color = Color(0xffc6ced2);
+                                btn6color = Color(0xffc6ced2);
+                                btn7color = Color(0xffc6ced2);
+                                btn8color = Color(0xffc6ced2);
+                                Navigator.pushNamed(context, '/citypage');
                               });
-
                             },
-                            child: Text("Kolkata")
-                        ),
+                            child: Text("Kolkata")),
                       ),
                     ],
                   ),
@@ -171,72 +191,73 @@ class _chooselocationState extends State<chooselocation> {
                     Expanded(
                       child: FlatButton(
                           color: btn6color,
-                          onPressed: (){
-                            selected_city="Lucknow";
-                              setState(() {
-                                btn1color=Color(0xffc6ced2);
-                                btn2color=Color(0xffc6ced2);
-                                btn6color=Color(0xff607d8b);
-                                btn3color=Color(0xffc6ced2);
-                                btn4color=Color(0xffc6ced2);
-                                btn5color=Color(0xffc6ced2);
-                                btn7color=Color(0xffc6ced2);
-                                btn8color=Color(0xffc6ced2);
-                              });
+                          onPressed: () {
+                            selected_city = "Lucknow";
+                            setState(() {
+                              btn1color = Color(0xffc6ced2);
+                              btn2color = Color(0xffc6ced2);
+                              btn6color = Color(0xff607d8b);
+                              btn3color = Color(0xffc6ced2);
+                              btn4color = Color(0xffc6ced2);
+                              btn5color = Color(0xffc6ced2);
+                              btn7color = Color(0xffc6ced2);
+                              btn8color = Color(0xffc6ced2);
+                              Navigator.pushNamed(context, '/citypage');
+                            });
                           },
-                          child: Text("Lucknow")
-                      ),
+                          child: Text("Lucknow")),
                     ),
-                    SizedBox(width: 7,),
+                    SizedBox(
+                      width: 7,
+                    ),
                     Expanded(
                       child: FlatButton(
                           color: btn7color,
-                          onPressed: (){
-                            selected_city="Noida";
-                              setState(() {
-                                btn1color=Color(0xffc6ced2);
-                                btn2color=Color(0xffc6ced2);
-                                btn7color=Color(0xff607d8b);
-                                btn3color=Color(0xffc6ced2);
-                                btn4color=Color(0xffc6ced2);
-                                btn5color=Color(0xffc6ced2);
-                                btn6color=Color(0xffc6ced2);
-                                btn8color=Color(0xffc6ced2);
-                              });
+                          onPressed: () {
+                            selected_city = "Noida";
+                            setState(() {
+                              btn1color = Color(0xffc6ced2);
+                              btn2color = Color(0xffc6ced2);
+                              btn7color = Color(0xff607d8b);
+                              btn3color = Color(0xffc6ced2);
+                              btn4color = Color(0xffc6ced2);
+                              btn5color = Color(0xffc6ced2);
+                              btn6color = Color(0xffc6ced2);
+                              btn8color = Color(0xffc6ced2);
+                              Navigator.pushNamed(context, '/citypage');
+                            });
                           },
-                          child: Text("Noida")
-                      ),
+                          child: Text("Noida")),
                     ),
-                    SizedBox(width: 7,),
+                    SizedBox(
+                      width: 7,
+                    ),
                     Expanded(
                       child: FlatButton(
                           color: btn8color,
-                          onPressed: (){
-                            selected_city="Gurgaon";
+                          onPressed: () {
+                            selected_city = "Gurgaon";
                             setState(() {
-                              btn1color=Color(0xffc6ced2);
-                              btn2color=Color(0xffc6ced2);
-                              btn8color=Color(0xff607d8b);
-                              btn3color=Color(0xffc6ced2);
-                              btn4color=Color(0xffc6ced2);
-                              btn5color=Color(0xffc6ced2);
-                              btn6color=Color(0xffc6ced2);
-                              btn7color=Color(0xffc6ced2);
+                              btn1color = Color(0xffc6ced2);
+                              btn2color = Color(0xffc6ced2);
+                              btn8color = Color(0xff607d8b);
+                              btn3color = Color(0xffc6ced2);
+                              btn4color = Color(0xffc6ced2);
+                              btn5color = Color(0xffc6ced2);
+                              btn6color = Color(0xffc6ced2);
+                              btn7color = Color(0xffc6ced2);
+                              Navigator.pushNamed(context, '/citypage');
                             });
-
                           },
-                          child: Text("Gurgaon")
-                      ),
+                          child: Text("Gurgaon")),
                     ),
                   ],
                 ),
                 FlatButton(
-                    onPressed:(){
+                    onPressed: () {
                       print(selected_city);
                     },
-                    child:Text("SUBMIT")
-                )
-
+                    child: Text("SUBMIT"))
               ],
             ),
           ),
@@ -244,5 +265,4 @@ class _chooselocationState extends State<chooselocation> {
       ),
     );
   }
-
 }
