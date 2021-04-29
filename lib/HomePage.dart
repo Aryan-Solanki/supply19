@@ -154,85 +154,87 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-            backgroundColor: Color(0xFFEDEDED),
-            appBar: SlidingAppBar(
-              controller: _controller,
-              visible: allsupplies,
-              child: AppBar(
-                elevation: 0.0,
-                backgroundColor: Color(0xFFEDEDED),
-                toolbarHeight: 80,
-                automaticallyImplyLeading: false,
-                title: Container(
-                  margin: EdgeInsets.only(top: 0.0),
-                  padding: EdgeInsets.only(left: 20.0),
-                  color: Color(0xFFBDD4EB),
-                  child: DropdownButton(
-                    hint: Text("All Supplies"),
-                    dropdownColor: Color(0xFFBDD4EB),
-                    icon: Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Color(0xFF09427D),
-                      size: 50.0,
-                    ),
-                    isExpanded: true,
-                    value: valueChoose,
-                    underline: SizedBox(),
-                    style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
-                    onChanged: (newValue) {
-                      setState(() {
-                        valueChoose = newValue;
-                      });
-                    },
-                    items: listItem.map((valueItem) {
-                      return DropdownMenuItem(
-                          value: valueItem, child: Text(valueItem));
-                    }).toList(),
-                  ),
-                ),
-                actions: [
-                  Row(
-                    children: [
-                      Container(
-                        child: Icon(
-                          Icons.dehaze_outlined,
-                          size: 40.0,
-                          color: Color(0xFF2F3437),
-                        ),
-                        margin: EdgeInsets.only(top: 0.0),
+        home: SafeArea(
+          child: Scaffold(
+              backgroundColor: Color(0xFFEDEDED),
+              appBar: SlidingAppBar(
+                controller: _controller,
+                visible: allsupplies,
+                child: AppBar(
+                  elevation: 0.0,
+                  backgroundColor: Color(0xFFEDEDED),
+                  toolbarHeight: 80,
+                  automaticallyImplyLeading: false,
+                  title: Container(
+                    margin: EdgeInsets.only(top: 0.0),
+                    padding: EdgeInsets.only(left: 20.0),
+                    color: Color(0xFFBDD4EB),
+                    child: DropdownButton(
+                      hint: Text("All Supplies"),
+                      dropdownColor: Color(0xFFBDD4EB),
+                      icon: Icon(
+                        Icons.keyboard_arrow_down,
+                        color: Color(0xFF09427D),
+                        size: 50.0,
                       ),
-                      SizedBox(
-                        width: 10.0,
-                      )
-                    ],
+                      isExpanded: true,
+                      value: valueChoose,
+                      underline: SizedBox(),
+                      style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
+                      onChanged: (newValue) {
+                        setState(() {
+                          valueChoose = newValue;
+                        });
+                      },
+                      items: listItem.map((valueItem) {
+                        return DropdownMenuItem(
+                            value: valueItem, child: Text(valueItem));
+                      }).toList(),
+                    ),
                   ),
-                ],
+                  actions: [
+                    Row(
+                      children: [
+                        Container(
+                          child: Icon(
+                            Icons.dehaze_outlined,
+                            size: 40.0,
+                            color: Color(0xFF2F3437),
+                          ),
+                          margin: EdgeInsets.only(top: 0.0),
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        )
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-            body: postList.length == 0 ? null : tab[_selectedItemPosition],
-            bottomNavigationBar: SnakeNavigationBar.color(
-              // backgroundColor: Colors.blue,
-              behaviour: SnakeBarBehaviour.floating,
-              selectedItemColor: Colors.black,
-              // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
-              // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25)),
-              // shape: ,
-              snakeShape: SnakeShape.indicator,
-              showSelectedLabels: true,
-              // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
-              padding: EdgeInsets.all(12),
-              currentIndex: _selectedItemPosition,
-              onTap: (index) {
-                setState(() {
-                  _selectedItemPosition = index;
-                  checkboollol();
-                });
-              },
-              items: items,
-            ))
+              body: postList.length == 0 ? null : tab[_selectedItemPosition],
+              bottomNavigationBar: SnakeNavigationBar.color(
+                // backgroundColor: Colors.blue,
+                behaviour: SnakeBarBehaviour.floating,
+                selectedItemColor: Colors.black,
+                // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
+                // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(25)),
+                // shape: ,
+                snakeShape: SnakeShape.indicator,
+                showSelectedLabels: true,
+                // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
+                padding: EdgeInsets.all(12),
+                currentIndex: _selectedItemPosition,
+                onTap: (index) {
+                  setState(() {
+                    _selectedItemPosition = index;
+                    checkboollol();
+                  });
+                },
+                items: items,
+              )),
+        )
         // This trailing comma makes auto-formatting nicer for build methods.
         );
   }
