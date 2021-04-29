@@ -219,7 +219,7 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             padding: EdgeInsets.all(14.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -269,17 +269,11 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   padding: EdgeInsets.only(left: 10.0),
                   child: Text(
-                    "Volunteer : ",
+                    "Volunteer :  "+volname,
                     style: TextStyle(fontSize: 15.0, color: Colors.white),
                   ),
                 ),
-                Container(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Text(
-                    volname,
-                    style: TextStyle(fontSize: 15.0, color: Colors.white),
-                  ),
-                ),
+
                 Container(
                   padding: EdgeInsets.only(left: 10.0, right: 10.0),
                   child: RaisedButton(
