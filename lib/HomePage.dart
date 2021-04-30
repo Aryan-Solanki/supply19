@@ -9,6 +9,7 @@ import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:loading_hud/loading_hud.dart';
 import 'appbarslide.dart';
 import 'user_simple_preferences.dart';
+import 'main.dart';
 
 class HomePage extends StatefulWidget {
   final String title = "HomePage Timeline";
@@ -23,6 +24,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   int _selectedItemPosition = 2;
   String city_name;
   List tab = [];
+  String categorySelector = '';
   AnimationController _controller;
   bool _visible = true;
 
@@ -58,6 +60,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     city_name = UserSimplePreferences.getCity() ?? '';
+    categorySelector = UserSimplePreferences.getCategory() ?? '';
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 400),
@@ -80,9 +83,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           DATA[indivisualKey]['phnum'],
           DATA[indivisualKey]['volname'],
           DATA[indivisualKey]['status'],
+          DATA[indivisualKey]['location'],
+          DATA[indivisualKey]['category'],
         );
         if (posts.status != "fake") {
-          postList.add(posts);
+          if (city_name == '' && categorySelector == '') {
+            postList.add(posts);
+          } else if (city_name == '' && categorySelector != '') {
+            if (categorySelector == posts.categpry) {
+              postList.add(posts);
+            }
+          } else if (city_name != '' && categorySelector == '') {
+            if (city_name == posts.location) {
+              postList.add(posts);
+            }
+          } else {
+            if (city_name == posts.location &&
+                categorySelector == posts.categpry) {
+              postList.add(posts);
+            }
+          }
         }
       }
 
@@ -136,8 +156,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     });
   }
 
-  String valueChoose;
-  List listItem = ["Item 1", "Item 2", "Item 3"];
+  String categoryChoose;
+  List listItem = ["Oxygen", "Remdesivir", "Plasma"];
 
   void checkboollol() {
     setState(() {
@@ -176,13 +196,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     size: 50.0,
                   ),
                   isExpanded: true,
-                  value: valueChoose,
+                  value: categoryChoose,
                   underline: SizedBox(),
                   style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
                   onChanged: (newValue) {
+                    UserSimplePreferences.setCategory(newValue);
+                    print(UserSimplePreferences.getCategory());
                     setState(() {
-                      valueChoose = newValue;
+                      categoryChoose = newValue;
+                      categorySelector = categoryChoose;
                     });
+                    Navigator.pushNamed(context, '/homepage');
                   },
                   items: listItem.map((valueItem) {
                     return DropdownMenuItem(

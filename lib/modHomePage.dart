@@ -82,6 +82,8 @@ class _modHomePageState extends State<modHomePage>
           DATA[indivisualKey]['phnum'],
           DATA[indivisualKey]['volname'],
           DATA[indivisualKey]['status'],
+          DATA[indivisualKey]['location'],
+          DATA[indivisualKey]['category'],
         );
         if (posts.status != "fake") {
           postList.add(posts);
