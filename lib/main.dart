@@ -16,7 +16,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await UserSimplePreferences.init();
-  runApp(chooselocation());
+  runApp(my());
 }
 
 class my extends StatelessWidget {

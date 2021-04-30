@@ -9,18 +9,20 @@ class chooselocation extends StatefulWidget {
   _chooselocationState createState() => _chooselocationState();
 }
 
-String selected_city = "";
-Color btn1color = Color(0xffc6ced2);
-Color btn2color = Color(0xffc6ced2);
-Color btn3color = Color(0xffc6ced2);
-Color btn4color = Color(0xffc6ced2);
-Color btn5color = Color(0xffc6ced2);
-Color btn6color = Color(0xffc6ced2);
-Color btn7color = Color(0xffc6ced2);
-Color btn8color = Color(0xffc6ced2);
-String selectedValueSingleDialog = "";
-
 class _chooselocationState extends State<chooselocation> {
+  final _navKey = GlobalKey<NavigatorState>();
+
+  String selected_city = "";
+  Color btn1color = Color(0xffc6ced2);
+  Color btn2color = Color(0xffc6ced2);
+  Color btn3color = Color(0xffc6ced2);
+  Color btn4color = Color(0xffc6ced2);
+  Color btn5color = Color(0xffc6ced2);
+  Color btn6color = Color(0xffc6ced2);
+  Color btn7color = Color(0xffc6ced2);
+  Color btn8color = Color(0xffc6ced2);
+  String selectedValueSingleDialog = "";
+
   @override
   void initState() {
     // TODO: implement initState
@@ -62,6 +64,7 @@ class _chooselocationState extends State<chooselocation> {
                     onChanged: (value) {
                       if (value != null) {
                         selected_city = value.data;
+                        Navigator.of(context).pushNamed('/citypage');
                         // Navigator.pushNamed(context, '/citypage');
                         // print(selected_city);
                       }
@@ -87,7 +90,7 @@ class _chooselocationState extends State<chooselocation> {
                               btn6color = Color(0xffc6ced2);
                               btn7color = Color(0xffc6ced2);
                               btn8color = Color(0xffc6ced2);
-                              Navigator.pushNamed(context, '/citypage');
+                              Navigator.of(context).pushNamed('/citypage');
                             });
                           },
                           child: Text("Delhi")),
@@ -109,7 +112,7 @@ class _chooselocationState extends State<chooselocation> {
                               btn6color = Color(0xffc6ced2);
                               btn7color = Color(0xffc6ced2);
                               btn8color = Color(0xffc6ced2);
-                              Navigator.pushNamed(context, '/citypage');
+                              Navigator.of(context).pushNamed('/citypage');
                             });
                           },
                           child: Text("Bangalore")),
@@ -131,7 +134,7 @@ class _chooselocationState extends State<chooselocation> {
                               btn6color = Color(0xffc6ced2);
                               btn7color = Color(0xffc6ced2);
                               btn8color = Color(0xffc6ced2);
-                              Navigator.pushNamed(context, '/citypage');
+                              Navigator.of(context).pushNamed('/citypage');
                             });
                           },
                           child: Text("Chennai")),
@@ -156,7 +159,7 @@ class _chooselocationState extends State<chooselocation> {
                                 btn6color = Color(0xffc6ced2);
                                 btn7color = Color(0xffc6ced2);
                                 btn8color = Color(0xffc6ced2);
-                                Navigator.pushNamed(context, '/citypage');
+                                Navigator.of(context).pushNamed('/citypage');
                               });
                             },
                             child: Text("Mumbai")),
@@ -178,7 +181,7 @@ class _chooselocationState extends State<chooselocation> {
                                 btn6color = Color(0xffc6ced2);
                                 btn7color = Color(0xffc6ced2);
                                 btn8color = Color(0xffc6ced2);
-                                Navigator.pushNamed(context, '/citypage');
+                                Navigator.of(context).pushNamed('/citypage');
                               });
                             },
                             child: Text("Kolkata")),
@@ -202,7 +205,7 @@ class _chooselocationState extends State<chooselocation> {
                               btn5color = Color(0xffc6ced2);
                               btn7color = Color(0xffc6ced2);
                               btn8color = Color(0xffc6ced2);
-                              Navigator.pushNamed(context, '/citypage');
+                              Navigator.of(context).pushNamed('/citypage');
                             });
                           },
                           child: Text("Lucknow")),
@@ -224,7 +227,7 @@ class _chooselocationState extends State<chooselocation> {
                               btn5color = Color(0xffc6ced2);
                               btn6color = Color(0xffc6ced2);
                               btn8color = Color(0xffc6ced2);
-                              Navigator.pushNamed(context, '/citypage');
+                              Navigator.of(context).pushNamed('/citypage');
                             });
                           },
                           child: Text("Noida")),
@@ -246,7 +249,7 @@ class _chooselocationState extends State<chooselocation> {
                               btn5color = Color(0xffc6ced2);
                               btn6color = Color(0xffc6ced2);
                               btn7color = Color(0xffc6ced2);
-                              Navigator.pushNamed(context, '/citypage');
+                              Navigator.of(context).pushNamed('/citypage');
                             });
                           },
                           child: Text("Gurgaon")),
