@@ -30,17 +30,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   final items = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
-      icon: Image.asset(
-        'images/city.png',
-        height: 28,
-      ),
+      icon: Icon(Icons.location_city_outlined,size: 28,color: Color(0xff09427d),),
       label: "City",
     ),
     BottomNavigationBarItem(
-      icon: Image.asset(
-        'images/ques.png',
-        height: 28,
-      ),
+      icon: Icon(Icons.question_answer_outlined,size: 28,color: Color(0xff09427d),),
       label: "Query",
     ),
     BottomNavigationBarItem(
@@ -51,16 +45,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       label: "India",
     ),
     BottomNavigationBarItem(
-      icon: Image.asset(
-        'images/trophy.png',
-        height: 28,
+      icon: Icon(Icons.star_border,size: 28,color: Color(0xff09427d),
       ),
       label: "Rank",
     ),
     BottomNavigationBarItem(
-      icon: Image.asset(
-        'images/info.png',
-        height: 28,
+      icon: Icon(Icons.info_outline,size: 28,color: Color(0xff09427d),
       ),
       label: "About Us",
     ),

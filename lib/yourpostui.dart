@@ -11,7 +11,7 @@ _makingPhoneCall(callString) async {
   }
 }
 
-Widget PostsUI(String image, String description, String date, String time,
+Widget yourPostsUI(String image, String description, String date, String time,
     String phnum, String volname) {
   return Column(
     children: [
@@ -43,8 +43,8 @@ Widget PostsUI(String image, String description, String date, String time,
               (image != null || image == "")
                   ? new Image.network(image, fit: BoxFit.cover)
                   : SizedBox(
-                      height: 1.0,
-                    ),
+                height: 1.0,
+              ),
               SizedBox(
                 height: 10.0,
               ),
@@ -57,51 +57,9 @@ Widget PostsUI(String image, String description, String date, String time,
           ),
         ),
       ),
-      Card(
-        // margin: EdgeInsets.only(top: 0),
-        elevation: 5.0,
-        color: Colors.black,
-        child: Container(
-          color: Colors.black,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Container(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      "Volunteer :  " + volname,
-                      style: TextStyle(fontSize:15,color: Colors.white),
-                      ),
-                    ),
-                  ),
-              ),
-              Expanded(
-                child: Container(
-                  child: TextButton(
-                    // padding: EdgeInsets.all(0),
-                    onPressed: () {
-                      _makingPhoneCall(phnum);
-                    },
-                    child: FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        "+91-" + phnum,
-                        style: TextStyle(fontSize:15,color: Colors.white),
-                      ),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
       Divider(
         color: Color(0xFF607d8b),
-        height: 10.0,
+        height: 7.0,
         thickness: 2.0,
         indent: 75,
         endIndent: 75,

@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medicalapp/meet_team.dart';
+import 'package:medicalapp/profile_select.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'postui.dart';
@@ -8,6 +10,7 @@ import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:loading_hud/loading_hud.dart';
 import 'appbarslide.dart';
 import 'user_simple_preferences.dart';
+import 'yourpostui.dart';
 
 class modHomePage extends StatefulWidget {
   final String title = "modHomePage Timeline";
@@ -21,45 +24,34 @@ class _modHomePageState extends State<modHomePage>
   String name;
   List<Posts> postList = [];
   final controller = ScrollController();
-  int _selectedItemPosition = 2;
+  int _selectedItemPosition = 1;
   List tab = [];
   AnimationController _controller;
   bool _visible = true;
 
   final items = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
-      icon: Image.asset(
-        'images/city.png',
-        height: 28,
-      ),
-      label: "City",
+      icon: FaIcon(FontAwesomeIcons.user,color: Color(0xff09427d),),
+      label: "Profile",
     ),
     BottomNavigationBarItem(
-      icon: Image.asset(
-        'images/ques.png',
-        height: 28,
+      icon: Icon(Icons.contact_page_outlined,size: 28,color: Color(0xff09427d),
+
       ),
-      label: "Query",
+      label: "Your Post",
     ),
     BottomNavigationBarItem(
-      icon: Image.asset(
-        'images/map.png',
-        height: 28,
-      ),
-      label: "India",
+      icon: Icon(Icons.add_a_photo_outlined,color: Color(0xff09427d),size: 28,),
+      label: "Add Post",
     ),
     BottomNavigationBarItem(
-      icon: Image.asset(
-        'images/trophy.png',
-        height: 28,
+      icon: Icon(Icons.timeline_outlined,size: 28,color: Color(0xff09427d),
+
       ),
-      label: "Rank",
+      label: "TimeLine",
     ),
     BottomNavigationBarItem(
-      icon: Image.asset(
-        'images/info.png',
-        height: 28,
-      ),
+      icon: Icon(Icons.info_outline,size: 28,color: Color(0xff09427d),),
       label: "About Us",
     ),
   ];
@@ -105,30 +97,50 @@ class _modHomePageState extends State<modHomePage>
             child: Text("This is cityyy"),
           ),
           Container(
-            child: Text("This is queryy"),
-          ),
-          Container(
             child: postList.length == 0
                 ? LoadingHud(
-                    context,
-                    cancelable: false,
-                    canceledOnTouchOutside: false,
-                  )
+              context,
+              cancelable: false,
+              canceledOnTouchOutside: false,
+            )
                 : ListView.builder(
-                    itemCount: postList.length,
-                    itemBuilder: (_, index) {
-                      return PostsUI(
-                        postList[index].image,
-                        postList[index].description,
-                        postList[index].date,
-                        postList[index].time,
-                        postList[index].phnum,
-                        postList[index].volname,
-                      );
-                    }),
+                itemCount: postList.length,
+                itemBuilder: (_, index) {
+                  return yourPostsUI(
+                    postList[index].image,
+                    postList[index].description,
+                    postList[index].date,
+                    postList[index].time,
+                    postList[index].phnum,
+                    postList[index].volname,
+                  );
+                }),
           ),
           Container(
-            child: Text("This is victory"),
+            child: Text("This is queryy"),
+          ),
+
+          SafeArea(
+            child: Container(
+              child: postList.length == 0
+                  ? LoadingHud(
+                context,
+                cancelable: false,
+                canceledOnTouchOutside: false,
+              )
+                  : ListView.builder(
+                  itemCount: postList.length,
+                  itemBuilder: (_, index) {
+                    return PostsUI(
+                      postList[index].image,
+                      postList[index].description,
+                      postList[index].date,
+                      postList[index].time,
+                      postList[index].phnum,
+                      postList[index].volname,
+                    );
+                  }),
+            ),
           ),
           meet_team()
         ];
@@ -146,10 +158,9 @@ class _modHomePageState extends State<modHomePage>
 
   String valueChoose;
   List listItem = ["Item 1", "Item 2", "Item 3"];
-
   void checkboollol() {
     setState(() {
-      if (_selectedItemPosition == 2) {
+      if ((_selectedItemPosition == 1) || (_selectedItemPosition == 3) ) {
         allsupplies = true;
       } else {
         allsupplies = false;
@@ -177,8 +188,7 @@ class _modHomePageState extends State<modHomePage>
                   width: double.infinity,
                   color: Color(0xFFBDD4EB),
                   child: Center(
-                    child: Text(
-                      name,
+                    child: Text(_selectedItemPosition==1?name:"TimeLine",
                       style: TextStyle(
                           color: Color(0xFF09427d),
                           fontSize: 20.0,
