@@ -3,6 +3,7 @@ import 'package:medicalapp/HomePage.dart';
 import 'package:medicalapp/chooselocation.dart';
 import 'package:medicalapp/citypage.dart';
 import 'package:medicalapp/meet_team.dart';
+import 'package:medicalapp/privacypolicy.dart';
 import 'login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'splash.dart';
@@ -11,12 +12,13 @@ import 'package:medicalapp/signup.dart';
 import 'HomePage.dart';
 import 'modHomePage.dart';
 import 'user_simple_preferences.dart';
+import 'termandcondition.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await UserSimplePreferences.init();
-  runApp(my());
+  runApp(privacypolicy());
 }
 
 class my extends StatelessWidget {
