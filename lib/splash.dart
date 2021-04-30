@@ -28,7 +28,7 @@ class splash extends StatelessWidget {
               Expanded(flex:2,child: SizedBox(height: 1,)),
             ],
           )
-        ),
+      ),
       child:Material(
         color: Colors.transparent,
         child: Text('Swipe Up', style: TextStyle(color: Colors.black)),

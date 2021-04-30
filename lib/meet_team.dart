@@ -4,12 +4,12 @@ import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 final pages=[
   Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("images/meet.png"),
-              fit: BoxFit.cover
-          )
-      ),
+    decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("images/meet.png"),
+            fit: BoxFit.cover
+        )
+    ),
   ),
   Container(
     padding: EdgeInsets.only(left: 30,top: 30),
@@ -131,17 +131,15 @@ class meet_team extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SafeArea(
-        child: Scaffold(
-          body: LiquidSwipe(
-            pages: pages,
-            enableLoop: false,
-            // enableSideReveal: true,
-            slideIconWidget: Icon(Icons.arrow_back_ios,color: Colors.white,size: 25,),
-            waveType: WaveType.liquidReveal,
-            fullTransitionValue: 800,
-            positionSlideIcon: 0.6,
-          ),
+      home: Scaffold(
+        body: LiquidSwipe(
+          pages: pages,
+          enableLoop: false,
+          // enableSideReveal: true,
+          slideIconWidget: Icon(Icons.arrow_back_ios,color: Colors.white,size: 25,),
+          waveType: WaveType.liquidReveal,
+          fullTransitionValue: 800,
+          positionSlideIcon: 0.6,
         ),
       ),
     );;;

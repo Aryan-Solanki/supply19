@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
 _makingPhoneCall(callString) async {
   var url = 'tel:' + callString;
   if (await canLaunch(url)) {
@@ -16,8 +17,6 @@ Widget PostsUI(String image, String description, String date, String time,
     children: [
       Card(
         elevation: 5.0,
-        margin:
-            EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0, bottom: 0.0),
         child: Container(
           padding: EdgeInsets.all(14.0),
           child: Column(
@@ -60,32 +59,38 @@ Widget PostsUI(String image, String description, String date, String time,
       ),
       Card(
         elevation: 5.0,
-        margin:
-            EdgeInsets.only(top: 0.0, left: 15.0, right: 15.0, bottom: 15.0),
         color: Colors.black,
         child: Container(
           color: Colors.black,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                padding: EdgeInsets.only(left: 10.0),
-                child: Text(
-                  "Volunteer :  " + volname,
-                  style: TextStyle(fontSize: 15.0, color: Colors.white),
-                ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      "Volunteer :  " + volname,
+                      style: TextStyle(fontSize:15,color: Colors.white),
+                      ),
+                    ),
+                  ),
               ),
-              Container(
-                padding: EdgeInsets.only(left: 10.0, right: 10.0),
-                child: RaisedButton(
-                  color: Colors.black,
-                  elevation: 0.0,
-                  onPressed: () {
-                    _makingPhoneCall(phnum);
-                  },
-                  child: Text(
-                    "+91-" + phnum,
-                    style: TextStyle(fontSize: 15.0, color: Colors.white),
+              Expanded(
+                child: Container(
+                  child: TextButton(
+                    // padding: EdgeInsets.all(0),
+                    onPressed: () {
+                      _makingPhoneCall(phnum);
+                    },
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        "+91-" + phnum,
+                        style: TextStyle(fontSize:15,color: Colors.white),
+                      ),
+                    ),
                   ),
                 ),
               )

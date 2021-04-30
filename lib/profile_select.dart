@@ -50,7 +50,7 @@ class _profile_selectState extends State<profile_select> {
                           Text(
                             "Volunteer",
                             style:
-                                TextStyle(fontSize: 24, fontFamily: "OpenSans"),
+                            TextStyle(fontSize: 24, fontFamily: "OpenSans"),
                           )
                         ],
                       ),
@@ -62,7 +62,7 @@ class _profile_selectState extends State<profile_select> {
                           child: Text(
                             "You want to help other people during this pandemic, by providing verified sources of medical suppliers, life-saving drugs, injections etc.",
                             style:
-                                TextStyle(fontFamily: "OpenSans", fontSize: 15),
+                            TextStyle(fontFamily: "OpenSans", fontSize: 15),
                           )),
                       SizedBox(
                         height: 50,
@@ -84,7 +84,7 @@ class _profile_selectState extends State<profile_select> {
                           Text(
                             "Beneficiary",
                             style:
-                                TextStyle(fontSize: 24, fontFamily: "OpenSans"),
+                            TextStyle(fontSize: 24, fontFamily: "OpenSans"),
                           )
                         ],
                       ),
@@ -96,7 +96,7 @@ class _profile_selectState extends State<profile_select> {
                           child: Text(
                             "You are facing difficulties, in finding medical supplies for yourself, or for your loved ones.You will be able to see the latest medical supply updates in your area.",
                             style:
-                                TextStyle(fontFamily: "OpenSans", fontSize: 15),
+                            TextStyle(fontFamily: "OpenSans", fontSize: 15),
                           )),
                     ],
                   ),
