@@ -4,6 +4,7 @@ class UserSimplePreferences {
   static SharedPreferences _preferences;
 
   static const _keyEmail = 'email_user';
+  static const _keyCity = 'city_filter';
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
@@ -12,4 +13,9 @@ class UserSimplePreferences {
       await _preferences.setString(_keyEmail, email);
 
   static String getEmail() => _preferences.getString(_keyEmail);
+
+  static Future setCity(String city) async =>
+      await _preferences.setString(_keyCity, city);
+
+  static String getCity() => _preferences.getString(_keyCity);
 }
