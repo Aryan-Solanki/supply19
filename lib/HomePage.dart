@@ -30,11 +30,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   final items = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
-      icon: Icon(Icons.location_city_outlined,size: 28,color: Color(0xff09427d),),
+      icon: Icon(
+        Icons.location_city_outlined,
+        size: 28,
+        color: Color(0xff09427d),
+      ),
       label: "City",
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.question_answer_outlined,size: 28,color: Color(0xff09427d),),
+      icon: Icon(
+        Icons.question_answer_outlined,
+        size: 28,
+        color: Color(0xff09427d),
+      ),
       label: "Query",
     ),
     BottomNavigationBarItem(
@@ -45,12 +53,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       label: "India",
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.star_border,size: 28,color: Color(0xff09427d),
+      icon: Icon(
+        Icons.star_border,
+        size: 28,
+        color: Color(0xff09427d),
       ),
       label: "Rank",
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.info_outline,size: 28,color: Color(0xff09427d),
+      icon: Icon(
+        Icons.info_outline,
+        size: 28,
+        color: Color(0xff09427d),
       ),
       label: "About Us",
     ),
@@ -87,7 +101,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           DATA[indivisualKey]['category'],
         );
         if (posts.status != "fake") {
-          if (city_name == '' && categorySelector == '') {
+          if (city_name == '' &&
+              (categorySelector == '' || categorySelector == 'All Supplies')) {
             postList.add(posts);
           } else if (city_name == '' && categorySelector != '') {
             if (categorySelector == posts.categpry) {
@@ -117,25 +132,34 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
           SafeArea(
             child: Container(
-              child: postList.length == 0
-                  ? LoadingHud(
-                      context,
-                      cancelable: false,
-                      canceledOnTouchOutside: false,
-                    )
-                  : ListView.builder(
-                      itemCount: postList.length,
-                      itemBuilder: (_, index) {
-                        return PostsUI(
-                          postList[index].image,
-                          postList[index].description,
-                          postList[index].date,
-                          postList[index].time,
-                          postList[index].phnum,
-                          postList[index].volname,
-                        );
-                      }),
-            ),
+                child: postList.length == 0
+                    ? LoadingHud(
+                        context,
+                        cancelable: false,
+                        canceledOnTouchOutside: false,
+                      )
+                    : Column(
+                        children: [
+                          Text("data"),
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          SingleChildScrollView(
+                            child: ListView.builder(
+                                itemCount: postList.length,
+                                itemBuilder: (_, index) {
+                                  return PostsUI(
+                                    postList[index].image,
+                                    postList[index].description,
+                                    postList[index].date,
+                                    postList[index].time,
+                                    postList[index].phnum,
+                                    postList[index].volname,
+                                  );
+                                }),
+                          ),
+                        ],
+                      )),
           ),
           SafeArea(
             child: Container(
@@ -157,7 +181,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   }
 
   String categoryChoose;
-  List listItem = ["Oxygen", "Remdesivir", "Plasma"];
+  List listItem = ["All Supplies", "Oxygen", "Remdesivir", "Plasma"];
 
   void checkboollol() {
     setState(() {
@@ -206,7 +230,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       categoryChoose = newValue;
                       categorySelector = categoryChoose;
                     });
-                    Navigator.pushNamed(context, '/homepage');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
                   },
                   items: listItem.map((valueItem) {
                     return DropdownMenuItem(

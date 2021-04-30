@@ -73,10 +73,9 @@ class _chooselocationState extends State<chooselocation> {
                           Expanded(
                             child: FlatButton(
                                 color: btncolor,
-                                onPressed: () async {
+                                onPressed: () {
                                   selected_city = "Delhi";
-                                  await UserSimplePreferences.setEmail(
-                                      selected_city);
+                                  UserSimplePreferences.setCity(selected_city);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -91,10 +90,9 @@ class _chooselocationState extends State<chooselocation> {
                           Expanded(
                             child: FlatButton(
                                 color: btncolor,
-                                onPressed: () async {
+                                onPressed: () {
                                   selected_city = "Bangalore";
-                                  await UserSimplePreferences.setEmail(
-                                      selected_city);
+                                  UserSimplePreferences.setCity(selected_city);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -109,10 +107,9 @@ class _chooselocationState extends State<chooselocation> {
                           Expanded(
                             child: FlatButton(
                                 color: btncolor,
-                                onPressed: () async {
+                                onPressed: () {
                                   selected_city = "Chennai";
-                                  await UserSimplePreferences.setEmail(
-                                      selected_city);
+                                  UserSimplePreferences.setCity(selected_city);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -130,9 +127,9 @@ class _chooselocationState extends State<chooselocation> {
                             Expanded(
                               child: FlatButton(
                                   color: btncolor,
-                                  onPressed: () async {
+                                  onPressed: () {
                                     selected_city = "Mumbai";
-                                    await UserSimplePreferences.setEmail(
+                                    UserSimplePreferences.setCity(
                                         selected_city);
                                     Navigator.push(
                                       context,
@@ -148,9 +145,9 @@ class _chooselocationState extends State<chooselocation> {
                             Expanded(
                               child: FlatButton(
                                   color: btncolor,
-                                  onPressed: () async {
+                                  onPressed: () {
                                     selected_city = "Kolkata";
-                                    await UserSimplePreferences.setEmail(
+                                    UserSimplePreferences.setCity(
                                         selected_city);
                                     Navigator.push(
                                       context,
@@ -168,10 +165,9 @@ class _chooselocationState extends State<chooselocation> {
                           Expanded(
                             child: FlatButton(
                                 color: btncolor,
-                                onPressed: () async {
+                                onPressed: () {
                                   selected_city = "Lucknow";
-                                  await UserSimplePreferences.setEmail(
-                                      selected_city);
+                                  UserSimplePreferences.setCity(selected_city);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -188,7 +184,7 @@ class _chooselocationState extends State<chooselocation> {
                                 color: btncolor,
                                 onPressed: () async {
                                   selected_city = "Noida";
-                                  await UserSimplePreferences.setEmail(
+                                  await UserSimplePreferences.setCity(
                                       selected_city);
                                   Navigator.push(
                                     context,
@@ -204,10 +200,9 @@ class _chooselocationState extends State<chooselocation> {
                           Expanded(
                             child: FlatButton(
                                 color: btncolor,
-                                onPressed: () async {
+                                onPressed: () {
                                   selected_city = "Gurgaon";
-                                  await UserSimplePreferences.setEmail(
-                                      selected_city);
+                                  UserSimplePreferences.setCity(selected_city);
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
