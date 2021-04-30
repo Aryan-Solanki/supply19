@@ -58,6 +58,7 @@ Widget PostsUI(String image, String description, String date, String time,
         ),
       ),
       Card(
+        // margin: EdgeInsets.only(top: 0),
         elevation: 5.0,
         color: Colors.black,
         child: Container(
@@ -100,7 +101,7 @@ Widget PostsUI(String image, String description, String date, String time,
       ),
       Divider(
         color: Color(0xFF607d8b),
-        height: 7.0,
+        height: 10.0,
         thickness: 2.0,
         indent: 75,
         endIndent: 75,

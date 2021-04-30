@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medicalapp/meet_team.dart';
+import 'package:medicalapp/profile_select.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'postui.dart';
@@ -155,7 +156,6 @@ class _modHomePageState extends State<modHomePage>
 
   String valueChoose;
   List listItem = ["Item 1", "Item 2", "Item 3"];
-
   void checkboollol() {
     setState(() {
       if ((_selectedItemPosition == 1) || (_selectedItemPosition == 3) ) {
@@ -186,8 +186,7 @@ class _modHomePageState extends State<modHomePage>
                   width: double.infinity,
                   color: Color(0xFFBDD4EB),
                   child: Center(
-                    child: Text(
-                      name,
+                    child: Text(_selectedItemPosition==1?name:"TimeLine",
                       style: TextStyle(
                           color: Color(0xFF09427d),
                           fontSize: 20.0,
