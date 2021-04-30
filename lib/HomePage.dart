@@ -132,34 +132,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
           SafeArea(
             child: Container(
-                child: postList.length == 0
-                    ? LoadingHud(
-                        context,
-                        cancelable: false,
-                        canceledOnTouchOutside: false,
-                      )
-                    : Column(
-                        children: [
-                          Text("data"),
-                          SizedBox(
-                            height: 20.0,
-                          ),
-                          SingleChildScrollView(
-                            child: ListView.builder(
-                                itemCount: postList.length,
-                                itemBuilder: (_, index) {
-                                  return PostsUI(
-                                    postList[index].image,
-                                    postList[index].description,
-                                    postList[index].date,
-                                    postList[index].time,
-                                    postList[index].phnum,
-                                    postList[index].volname,
-                                  );
-                                }),
-                          ),
-                        ],
-                      )),
+              child: postList.length == 0
+                  ? LoadingHud(
+                      context,
+                      cancelable: false,
+                      canceledOnTouchOutside: false,
+                    )
+                  : ListView.builder(
+                      itemCount: postList.length,
+                      itemBuilder: (_, index) {
+                        return PostsUI(
+                          postList[index].image,
+                          postList[index].description,
+                          postList[index].date,
+                          postList[index].time,
+                          postList[index].phnum,
+                          postList[index].volname,
+                        );
+                      }),
+            ),
           ),
           SafeArea(
             child: Container(
