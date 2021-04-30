@@ -8,6 +8,7 @@ import 'postui.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:loading_hud/loading_hud.dart';
 import 'appbarslide.dart';
+import 'user_simple_preferences.dart';
 
 class HomePage extends StatefulWidget {
   final String title = "HomePage Timeline";
@@ -20,6 +21,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   List<Posts> postList = [];
   final controller = ScrollController();
   int _selectedItemPosition = 2;
+  String city_name;
   List tab = [];
   AnimationController _controller;
   bool _visible = true;
@@ -55,6 +57,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    city_name = UserSimplePreferences.getCity() ?? '';
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 400),
@@ -114,7 +117,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       }),
             ),
           ),
-          SafeArea( 
+          SafeArea(
             child: Container(
               child: Text("This is victory"),
             ),
@@ -150,86 +153,86 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: SafeArea(
-          child: Scaffold(
+      child: Scaffold(
+          backgroundColor: Color(0xFFEDEDED),
+          appBar: SlidingAppBar(
+            controller: _controller,
+            visible: allsupplies,
+            child: AppBar(
+              elevation: 0.0,
               backgroundColor: Color(0xFFEDEDED),
-              appBar: SlidingAppBar(
-                controller: _controller,
-                visible: allsupplies,
-                child: AppBar(
-                  elevation: 0.0,
-                  backgroundColor: Color(0xFFEDEDED),
-                  toolbarHeight: 80,
-                  automaticallyImplyLeading: false,
-                  title: Container(
-                    margin: EdgeInsets.only(top: 0.0),
-                    padding: EdgeInsets.only(left: 20.0),
-                    color: Color(0xFFBDD4EB),
-                    child: DropdownButton(
-                      hint: Text("All Supplies"),
-                      dropdownColor: Color(0xFFBDD4EB),
-                      icon: Icon(
-                        Icons.keyboard_arrow_down,
-                        color: Color(0xFF09427D),
-                        size: 50.0,
-                      ),
-                      isExpanded: true,
-                      value: valueChoose,
-                      underline: SizedBox(),
-                      style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
-                      onChanged: (newValue) {
-                        setState(() {
-                          valueChoose = newValue;
-                        });
-                      },
-                      items: listItem.map((valueItem) {
-                        return DropdownMenuItem(
-                            value: valueItem, child: Text(valueItem));
-                      }).toList(),
-                    ),
+              toolbarHeight: 80,
+              automaticallyImplyLeading: false,
+              title: Container(
+                margin: EdgeInsets.only(top: 0.0),
+                padding: EdgeInsets.only(left: 20.0),
+                color: Color(0xFFBDD4EB),
+                child: DropdownButton(
+                  hint: Text("All Supplies"),
+                  dropdownColor: Color(0xFFBDD4EB),
+                  icon: Icon(
+                    Icons.keyboard_arrow_down,
+                    color: Color(0xFF09427D),
+                    size: 50.0,
                   ),
-                  actions: [
-                    Row(
-                      children: [
-                        Container(
-                          child: Icon(
-                            Icons.dehaze_outlined,
-                            size: 40.0,
-                            color: Color(0xFF2F3437),
-                          ),
-                          margin: EdgeInsets.only(top: 0.0),
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        )
-                      ],
-                    ),
-                  ],
+                  isExpanded: true,
+                  value: valueChoose,
+                  underline: SizedBox(),
+                  style: TextStyle(color: Color(0xFF09427d), fontSize: 20.0),
+                  onChanged: (newValue) {
+                    setState(() {
+                      valueChoose = newValue;
+                    });
+                  },
+                  items: listItem.map((valueItem) {
+                    return DropdownMenuItem(
+                        value: valueItem, child: Text(valueItem));
+                  }).toList(),
                 ),
               ),
-              body: postList.length == 0 ? null : tab[_selectedItemPosition],
-              bottomNavigationBar: SnakeNavigationBar.color(
-                // backgroundColor: Colors.blue,
-                behaviour: SnakeBarBehaviour.floating,
-                selectedItemColor: Colors.black,
-                // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
-                // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25)),
-                // shape: ,
-                snakeShape: SnakeShape.indicator,
-                showSelectedLabels: true,
-                // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
-                padding: EdgeInsets.all(12),
-                currentIndex: _selectedItemPosition,
-                onTap: (index) {
-                  setState(() {
-                    _selectedItemPosition = index;
-                    checkboollol();
-                  });
-                },
-                items: items,
-              )),
-        )
+              actions: [
+                Row(
+                  children: [
+                    Container(
+                      child: Icon(
+                        Icons.dehaze_outlined,
+                        size: 40.0,
+                        color: Color(0xFF2F3437),
+                      ),
+                      margin: EdgeInsets.only(top: 0.0),
+                    ),
+                    SizedBox(
+                      width: 10.0,
+                    )
+                  ],
+                ),
+              ],
+            ),
+          ),
+          body: postList.length == 0 ? null : tab[_selectedItemPosition],
+          bottomNavigationBar: SnakeNavigationBar.color(
+            // backgroundColor: Colors.blue,
+            behaviour: SnakeBarBehaviour.floating,
+            selectedItemColor: Colors.black,
+            // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
+            // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+            // shape: ,
+            snakeShape: SnakeShape.indicator,
+            showSelectedLabels: true,
+            // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
+            padding: EdgeInsets.all(12),
+            currentIndex: _selectedItemPosition,
+            onTap: (index) {
+              setState(() {
+                _selectedItemPosition = index;
+                checkboollol();
+              });
+            },
+            items: items,
+          )),
+    )
         // This trailing comma makes auto-formatting nicer for build methods.
         );
   }

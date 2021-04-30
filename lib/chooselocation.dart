@@ -4,16 +4,17 @@ import 'package:medicalapp/HomePage.dart';
 import 'package:medicalapp/citypage.dart';
 import 'city.dart';
 import 'package:search_choices/search_choices.dart';
-
+import 'user_simple_preferences.dart';
 
 class chooselocation extends StatefulWidget {
   @override
   _chooselocationState createState() => _chooselocationState();
 }
 
-String selected_city="";
-Color btncolor=Color(0xffc6ced2);
-String selectedValueSingleDialog="";
+String selected_city = "";
+Color btncolor = Color(0xffc6ced2);
+String selectedValueSingleDialog = "";
+
 class _chooselocationState extends State<chooselocation> {
   @override
   Widget build(BuildContext context) {
@@ -27,21 +28,29 @@ class _chooselocationState extends State<chooselocation> {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.location_on, size: 35, color: Colors.blue,),
-                    Text(" Choose Your City",
-                      style: TextStyle(fontSize: 30, fontFamily: "OpenSans"),)
+                    Icon(
+                      Icons.location_on,
+                      size: 35,
+                      color: Colors.blue,
+                    ),
+                    Text(
+                      " Choose Your City",
+                      style: TextStyle(fontSize: 30, fontFamily: "OpenSans"),
+                    )
                   ],
                 ),
-                SizedBox(height: 70,),
+                SizedBox(
+                  height: 70,
+                ),
                 Container(
-                  color: Colors.white ,
+                  color: Colors.white,
                   child: SearchChoices.single(
                     items: city(),
                     value: selectedValueSingleDialog,
                     hint: "Search for your city",
                     onChanged: (value) {
-                      if(value!=null){
-                        selected_city=value.data;
+                      if (value != null) {
+                        selected_city = value.data;
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => HomePage()),
@@ -53,7 +62,9 @@ class _chooselocationState extends State<chooselocation> {
                     isExpanded: true,
                   ),
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Container(
                   child: Column(
                     children: [
@@ -62,43 +73,53 @@ class _chooselocationState extends State<chooselocation> {
                           Expanded(
                             child: FlatButton(
                                 color: btncolor,
-                                onPressed: (){
-                                  selected_city="Delhi";
+                                onPressed: () async {
+                                  selected_city = "Delhi";
+                                  await UserSimplePreferences.setEmail(
+                                      selected_city);
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => HomePage()),
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()),
                                   );
                                 },
-                                child: Text("Delhi")
-                            ),
+                                child: Text("Delhi")),
                           ),
-                          SizedBox(width: 7,),
+                          SizedBox(
+                            width: 7,
+                          ),
                           Expanded(
                             child: FlatButton(
                                 color: btncolor,
-                                onPressed: (){
-                                  selected_city="Bangalore";
+                                onPressed: () async {
+                                  selected_city = "Bangalore";
+                                  await UserSimplePreferences.setEmail(
+                                      selected_city);
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => HomePage()),
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()),
                                   );
                                 },
-                                child: Text("Bangalore")
-                            ),
+                                child: Text("Bangalore")),
                           ),
-                          SizedBox(width: 7,),
+                          SizedBox(
+                            width: 7,
+                          ),
                           Expanded(
                             child: FlatButton(
                                 color: btncolor,
-                                onPressed: (){
-                                  selected_city="Chennai";
+                                onPressed: () async {
+                                  selected_city = "Chennai";
+                                  await UserSimplePreferences.setEmail(
+                                      selected_city);
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => HomePage()),
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()),
                                   );
                                 },
-                                child: Text("Chennai")
-                            ),
+                                child: Text("Chennai")),
                           ),
                         ],
                       ),
@@ -109,30 +130,35 @@ class _chooselocationState extends State<chooselocation> {
                             Expanded(
                               child: FlatButton(
                                   color: btncolor,
-                                  onPressed: (){
-                                    selected_city="Mumbai";
+                                  onPressed: () async {
+                                    selected_city = "Mumbai";
+                                    await UserSimplePreferences.setEmail(
+                                        selected_city);
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => HomePage()),
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()),
                                     );
                                   },
-                                  child: Text("Mumbai")
-                              ),
+                                  child: Text("Mumbai")),
                             ),
-                            SizedBox(width: 7,),
+                            SizedBox(
+                              width: 7,
+                            ),
                             Expanded(
                               child: FlatButton(
                                   color: btncolor,
-                                  onPressed: (){
-                                    selected_city="Kolkata";
+                                  onPressed: () async {
+                                    selected_city = "Kolkata";
+                                    await UserSimplePreferences.setEmail(
+                                        selected_city);
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => HomePage()),
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()),
                                     );
-
                                   },
-                                  child: Text("Kolkata")
-                              ),
+                                  child: Text("Kolkata")),
                             ),
                           ],
                         ),
@@ -142,50 +168,59 @@ class _chooselocationState extends State<chooselocation> {
                           Expanded(
                             child: FlatButton(
                                 color: btncolor,
-                                onPressed: (){
-                                  selected_city="Lucknow";
+                                onPressed: () async {
+                                  selected_city = "Lucknow";
+                                  await UserSimplePreferences.setEmail(
+                                      selected_city);
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => HomePage()),
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()),
                                   );
                                 },
-                                child: Text("Lucknow")
-                            ),
+                                child: Text("Lucknow")),
                           ),
-                          SizedBox(width: 7,),
+                          SizedBox(
+                            width: 7,
+                          ),
                           Expanded(
                             child: FlatButton(
                                 color: btncolor,
-                                onPressed: (){
-                                  selected_city="Noida";
+                                onPressed: () async {
+                                  selected_city = "Noida";
+                                  await UserSimplePreferences.setEmail(
+                                      selected_city);
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => HomePage()),
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()),
                                   );
                                 },
-                                child: Text("Noida")
-                            ),
+                                child: Text("Noida")),
                           ),
-                          SizedBox(width: 7,),
+                          SizedBox(
+                            width: 7,
+                          ),
                           Expanded(
                             child: FlatButton(
                                 color: btncolor,
-                                onPressed: (){
-                                  selected_city="Gurgaon";
+                                onPressed: () async {
+                                  selected_city = "Gurgaon";
+                                  await UserSimplePreferences.setEmail(
+                                      selected_city);
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => HomePage()),
+                                    MaterialPageRoute(
+                                        builder: (context) => HomePage()),
                                   );
                                 },
-                                child: Text("Gurgaon")
-                            ),
+                                child: Text("Gurgaon")),
                           ),
                         ],
                       ),
                     ],
                   ),
                 )
-
               ],
             ),
           ),
@@ -193,5 +228,4 @@ class _chooselocationState extends State<chooselocation> {
       ),
     );
   }
-
 }
