@@ -19,6 +19,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+   getbody(){
+    try {
+      return tab[_selectedItemPosition];
+    } catch (e) {
+      Text("");
+    };
+  }
   bool allsupplies = true;
   List<Posts> postList = [];
   final controller = ScrollController();
@@ -282,8 +289,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ],
             ),
           ),
-          body: postList.length == 0 ? tab[0] : tab[_selectedItemPosition],
-          bottomNavigationBar: SnakeNavigationBar.color(
+          body:getbody(),
+            bottomNavigationBar: SnakeNavigationBar.color(
             // backgroundColor: Colors.blue,
             behaviour: SnakeBarBehaviour.floating,
             selectedItemColor: Colors.black,
