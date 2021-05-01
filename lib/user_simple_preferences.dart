@@ -6,6 +6,8 @@ class UserSimplePreferences {
   static const _keyEmail = 'email_user';
   static const _keyCity = 'city_filter';
   static const _keyCategory = 'category';
+  static const _keyUserName = 'user_name';
+  static const _keyPhoneNum = 'phnum';
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
@@ -24,4 +26,14 @@ class UserSimplePreferences {
       await _preferences.setString(_keyCategory, cat);
 
   static String getCategory() => _preferences.getString(_keyCategory);
+
+  static Future setUserName(String name) async =>
+      await _preferences.setString(_keyUserName, name);
+
+  static String getUserName() => _preferences.getString(_keyUserName);
+
+  static Future setphonenumber(String phnum) async =>
+      await _preferences.setString(_keyPhoneNum, phnum);
+
+  static String getphonenumber() => _preferences.getString(_keyPhoneNum);
 }
