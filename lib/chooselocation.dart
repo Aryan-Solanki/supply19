@@ -51,6 +51,7 @@ class _chooselocationState extends State<chooselocation> {
                     onChanged: (value) {
                       if (value != null) {
                         selected_city = value.data;
+                        UserSimplePreferences.setCity(selected_city);
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => HomePage()),
