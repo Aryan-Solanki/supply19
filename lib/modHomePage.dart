@@ -22,6 +22,15 @@ class modHomePage extends StatefulWidget {
 
 class _modHomePageState extends State<modHomePage>
     with TickerProviderStateMixin {
+  getbody() {
+    try {
+      return tab[_selectedItemPosition];
+    } catch (e) {
+      Text("");
+    }
+    ;
+  }
+
   bool allsupplies = true;
   String email;
   List<User> userif = [];
@@ -83,9 +92,7 @@ class _modHomePageState extends State<modHomePage>
       vsync: this,
       duration: Duration(milliseconds: 400),
     );
-
     // Getting user info from Firebase
-
     DatabaseReference postsRef0 =
         FirebaseDatabase.instance.reference().child("User-Data");
     postsRef0.once().then((DataSnapshot snap0) {
@@ -112,50 +119,96 @@ class _modHomePageState extends State<modHomePage>
           print(UserSimplePreferences.getUserName());
         }
       }
-      // Getting user info from Firebase
+    });
+    // Getting user info from Firebase
 
-      DatabaseReference postsRef =
-          FirebaseDatabase.instance.reference().child("Posts");
-      postsRef.once().then((DataSnapshot snap) {
-        var KEYS = snap.value.keys;
-        var DATA = snap.value;
+    // Getting user posts {
 
-        postList.cast();
-        bool verified = false;
+    DatabaseReference postsRef1 =
+        FirebaseDatabase.instance.reference().child("Posts");
+    postsRef1.once().then((DataSnapshot snap1) {
+      var KEYS1 = snap1.value.keys;
+      var DATA1 = snap1.value;
 
-        for (var indivisualKey in KEYS) {
-          Posts posts = new Posts(
-            DATA[indivisualKey]['image'],
-            DATA[indivisualKey]['description'],
-            DATA[indivisualKey]['date'],
-            DATA[indivisualKey]['time'],
-            DATA[indivisualKey]['phnum'],
-            DATA[indivisualKey]['volname'],
-            DATA[indivisualKey]['status'],
-            DATA[indivisualKey]['location'],
-            DATA[indivisualKey]['category'],
-          );
-          if (posts.status != "fake") {
-            postList.add(posts);
+      for (var indivisualKey in KEYS1) {
+        Posts posts = new Posts(
+          DATA1[indivisualKey]['image'],
+          DATA1[indivisualKey]['description'],
+          DATA1[indivisualKey]['date'],
+          DATA1[indivisualKey]['time'],
+          DATA1[indivisualKey]['phnum'],
+          DATA1[indivisualKey]['volname'],
+          DATA1[indivisualKey]['status'],
+          DATA1[indivisualKey]['location'],
+          DATA1[indivisualKey]['category'],
+        );
+        var x = UserSimplePreferences.getphonenumber();
+        if (posts.status != "fake") {
+          if (posts.phnum == x) {
+            postListuser.add(posts);
           }
         }
-        setState(() {
-          print('Length: $postList.length');
-          tab = [
-            Container(
-              child: Text("This is cityyy"),
-            ),
-            Container(
+      }
+    });
+
+    // Getting user posts }
+
+    DatabaseReference postsRef =
+        FirebaseDatabase.instance.reference().child("Posts");
+    postsRef.once().then((DataSnapshot snap) {
+      var KEYS = snap.value.keys;
+      var DATA = snap.value;
+
+      postList.cast();
+      bool verified = false;
+
+      for (var indivisualKey in KEYS) {
+        Posts posts = new Posts(
+          DATA[indivisualKey]['image'],
+          DATA[indivisualKey]['description'],
+          DATA[indivisualKey]['date'],
+          DATA[indivisualKey]['time'],
+          DATA[indivisualKey]['phnum'],
+          DATA[indivisualKey]['volname'],
+          DATA[indivisualKey]['status'],
+          DATA[indivisualKey]['location'],
+          DATA[indivisualKey]['category'],
+        );
+        if (posts.status != "fake") {
+          postList.add(posts);
+        }
+      }
+      setState(() {
+        print('Length: $postList.length');
+        tab = [
+          Container(
+            child: Text("This is cityyy"),
+          ),
+          Container(
+            child: postListuser.length == 0
+                ? Text("lol")
+                : ListView.builder(
+                    itemCount: postListuser.length,
+                    itemBuilder: (_, index) {
+                      return yourPostsUI(
+                        postListuser[index].image,
+                        postListuser[index].description,
+                        postListuser[index].date,
+                        postListuser[index].time,
+                        postListuser[index].phnum,
+                        postListuser[index].volname,
+                      );
+                    }),
+          ),
+          UploadPhotoPage(),
+          SafeArea(
+            child: Container(
               child: postList.length == 0
-                  ? LoadingHud(
-                      context,
-                      cancelable: false,
-                      canceledOnTouchOutside: false,
-                    )
+                  ? Text("")
                   : ListView.builder(
                       itemCount: postList.length,
                       itemBuilder: (_, index) {
-                        return yourPostsUI(
+                        return PostsUI(
                           postList[index].image,
                           postList[index].description,
                           postList[index].date,
@@ -165,57 +218,9 @@ class _modHomePageState extends State<modHomePage>
                         );
                       }),
             ),
-            UploadPhotoPage(),
-            SafeArea(
-              child: Container(
-                child: postList.length == 0
-                    ? LoadingHud(
-                        context,
-                        cancelable: false,
-                        canceledOnTouchOutside: false,
-                      )
-                    : ListView.builder(
-                        itemCount: postList.length,
-                        itemBuilder: (_, index) {
-                          return yourPostsUI(
-                            postList[index].image,
-                            postList[index].description,
-                            postList[index].date,
-                            postList[index].time,
-                            postList[index].phnum,
-                            postList[index].volname,
-                          );
-                        }),
-              ),
-            ),
-            Container(
-              child: Text("This is queryy"),
-            ),
-            SafeArea(
-              child: Container(
-                child: postList.length == 0
-                    ? LoadingHud(
-                        context,
-                        cancelable: false,
-                        canceledOnTouchOutside: false,
-                      )
-                    : ListView.builder(
-                        itemCount: postList.length,
-                        itemBuilder: (_, index) {
-                          return PostsUI(
-                            postList[index].image,
-                            postList[index].description,
-                            postList[index].date,
-                            postList[index].time,
-                            postList[index].phnum,
-                            postList[index].volname,
-                          );
-                        }),
-              ),
-            ),
-            meet_team(),
-          ];
-        });
+          ),
+          meet_team(),
+        ];
       });
     });
   }
@@ -290,7 +295,7 @@ class _modHomePageState extends State<modHomePage>
                 ],
               ),
             ),
-            body: postList.length == 0 ? null : tab[_selectedItemPosition],
+            body: getbody(),
             bottomNavigationBar: SnakeNavigationBar.color(
               // backgroundColor: Colors.blue,
               behaviour: SnakeBarBehaviour.floating,
