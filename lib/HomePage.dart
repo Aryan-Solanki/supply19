@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   int _selectedItemPosition = 2;
   String city_name;
   List tab = [];
-  String categorySelector = '';
+  String categorySelector = 'All Supplies';
   AnimationController _controller;
   bool _visible = true;
 
@@ -82,7 +82,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     city_name = UserSimplePreferences.getCity() ?? '';
-    categorySelector = UserSimplePreferences.getCategory() ?? '';
+    categorySelector = UserSimplePreferences.getCategory() ?? 'All Supplies';
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 400),
@@ -200,36 +200,53 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             child: AppBar(
               bottom: PreferredSize(
                   child: Container(
-                    margin: EdgeInsets.only(left: 15,right: 10,bottom: 5),
-                    child: city_name!=""?
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            height: 30,
-                            decoration: BoxDecoration(
-                              color: Color(0xff09427d),
-                              borderRadius: BorderRadius.circular(30)
+                    margin: EdgeInsets.only(left: 15, right: 10, bottom: 5),
+                    child: city_name != ""
+                        ? Align(
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  color: Color(0xff09427d),
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: FlatButton(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      city_name,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontFamily: "OpenSans"),
+                                    ),
+                                    Text(
+                                      "  X",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          fontFamily: "HKGrotesk",
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    )
+                                  ],
+                                ),
+                                onPressed: () {
+                                  UserSimplePreferences.setCity('');
+                                  print(UserSimplePreferences.getCity());
+                                  setState(() {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()),
+                                    );
+                                  });
+                                },
+                              ),
                             ),
-                            child: FlatButton(
-                              child:  Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                Text(city_name,style: TextStyle(color: Colors.white,fontSize: 15,fontFamily: "OpenSans"),),
-                                Text("  X",style: TextStyle(fontSize: 13,fontFamily: "HKGrotesk",fontWeight: FontWeight.bold,color: Colors.white),)
-
-                            ],
+                          )
+                        : Container(
+                            height: 1,
                           ),
-                          onPressed: (){
-                                setState(() {
-                                  city_name="";
-                                });
-                          },
-                            ),
-                          ),
-                        )
-                        :Container(
-                      height: 1,
-                    ),
                   ),
                   preferredSize: Size.fromHeight(0.0)),
               elevation: 0.0,
@@ -241,7 +258,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 padding: EdgeInsets.only(left: 20.0),
                 color: Color(0xFFBDD4EB),
                 child: DropdownButton(
-                  hint: Text("All Supplies"),
+                  hint: categorySelector == ''
+                      ? Text('All Supplies')
+                      : Text(categorySelector),
                   dropdownColor: Color(0xFFBDD4EB),
                   icon: Icon(
                     Icons.keyboard_arrow_down,
