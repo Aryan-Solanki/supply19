@@ -12,6 +12,7 @@ import 'package:loading_hud/loading_hud.dart';
 import 'appbarslide.dart';
 import 'user_simple_preferences.dart';
 import 'yourpostui.dart';
+import 'userinfo.dart';
 
 class modHomePage extends StatefulWidget {
   final String title = "modHomePage Timeline";
@@ -22,8 +23,10 @@ class modHomePage extends StatefulWidget {
 class _modHomePageState extends State<modHomePage>
     with TickerProviderStateMixin {
   bool allsupplies = true;
-  String name;
+  String email;
+  List<User> userif = [];
   List<Posts> postList = [];
+  List<Posts> postListuser = [];
   final controller = ScrollController();
   int _selectedItemPosition = 1;
   List tab = [];
@@ -32,27 +35,42 @@ class _modHomePageState extends State<modHomePage>
 
   final items = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
-      icon: FaIcon(FontAwesomeIcons.user,color: Color(0xff09427d),),
+      icon: FaIcon(
+        FontAwesomeIcons.user,
+        color: Color(0xff09427d),
+      ),
       label: "Profile",
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.contact_page_outlined,size: 28,color: Color(0xff09427d),
-
+      icon: Icon(
+        Icons.contact_page_outlined,
+        size: 28,
+        color: Color(0xff09427d),
       ),
       label: "Your Post",
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.add_a_photo_outlined,color: Color(0xff09427d),size: 28,),
+      icon: Icon(
+        Icons.add_a_photo_outlined,
+        color: Color(0xff09427d),
+        size: 28,
+      ),
       label: "Add Post",
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.timeline_outlined,size: 28,color: Color(0xff09427d),
-
+      icon: Icon(
+        Icons.timeline_outlined,
+        size: 28,
+        color: Color(0xff09427d),
       ),
       label: "TimeLine",
     ),
     BottomNavigationBarItem(
-      icon: Icon(Icons.info_outline,size: 28,color: Color(0xff09427d),),
+      icon: Icon(
+        Icons.info_outline,
+        size: 28,
+        color: Color(0xff09427d),
+      ),
       label: "About Us",
     ),
   ];
@@ -60,37 +78,78 @@ class _modHomePageState extends State<modHomePage>
   @override
   void initState() {
     super.initState();
-    name = UserSimplePreferences.getEmail() ?? '';
+    email = UserSimplePreferences.getEmail() ?? '';
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 400),
     );
-    DatabaseReference postsRef =
-        FirebaseDatabase.instance.reference().child("Posts");
-    postsRef.once().then((DataSnapshot snap) {
-      var KEYS = snap.value.keys;
-      var DATA = snap.value;
 
-      postList.cast();
-      bool verified = false;
+    // Getting user info from Firebase
 
-      for (var indivisualKey in KEYS) {
-        Posts posts = new Posts(
-          DATA[indivisualKey]['image'],
-          DATA[indivisualKey]['description'],
-          DATA[indivisualKey]['date'],
-          DATA[indivisualKey]['time'],
-          DATA[indivisualKey]['phnum'],
-          DATA[indivisualKey]['volname'],
-          DATA[indivisualKey]['status'],
-          DATA[indivisualKey]['location'],
-          DATA[indivisualKey]['category'],
+    DatabaseReference postsRef0 =
+        FirebaseDatabase.instance.reference().child("User-Data");
+    postsRef0.once().then((DataSnapshot snap0) {
+      var KEYS0 = snap0.value.keys;
+      var DATA0 = snap0.value;
+
+      for (var indivisualKey in KEYS0) {
+        User user = new User(
+          DATA0[indivisualKey]['email'],
+          DATA0[indivisualKey]['name'],
+          DATA0[indivisualKey]['phnum'],
+          DATA0[indivisualKey]['verify'],
+          DATA0[indivisualKey]['volid'],
+          DATA0[indivisualKey]['number_of_posts'],
+          DATA0[indivisualKey]['points'],
         );
-        if (posts.status != "fake") {
-          postList.add(posts);
+        if (user.email == email) {
+          userif.add(user);
+          UserSimplePreferences.setUserName(user.name);
+          print(UserSimplePreferences.getUserName());
+          UserSimplePreferences.setphonenumber(user.phnum);
+          print(UserSimplePreferences.getphonenumber());
+          UserSimplePreferences.setUserName(user.name);
+          print(UserSimplePreferences.getUserName());
         }
       }
 
+<<<<<<< HEAD
+      // Getting user info from Firebase
+
+      DatabaseReference postsRef =
+          FirebaseDatabase.instance.reference().child("Posts");
+      postsRef.once().then((DataSnapshot snap) {
+        var KEYS = snap.value.keys;
+        var DATA = snap.value;
+
+        postList.cast();
+        bool verified = false;
+
+        for (var indivisualKey in KEYS) {
+          Posts posts = new Posts(
+            DATA[indivisualKey]['image'],
+            DATA[indivisualKey]['description'],
+            DATA[indivisualKey]['date'],
+            DATA[indivisualKey]['time'],
+            DATA[indivisualKey]['phnum'],
+            DATA[indivisualKey]['volname'],
+            DATA[indivisualKey]['status'],
+            DATA[indivisualKey]['location'],
+            DATA[indivisualKey]['category'],
+          );
+          if (posts.status != "fake") {
+            postList.add(posts);
+          }
+        }
+
+        setState(() {
+          print('Length: $postList.length');
+          tab = [
+            Container(
+              child: Text("This is cityyy"),
+            ),
+            Container(
+=======
       setState(() {
         print('Length: $postList.length');
         tab = [
@@ -120,28 +179,54 @@ class _modHomePageState extends State<modHomePage>
           UploadPhotoPage(),
           SafeArea(
             child: Container(
+>>>>>>> 2fb39bcf20bd7e38030fea5e5c5fe582db0376ec
               child: postList.length == 0
                   ? LoadingHud(
-                context,
-                cancelable: false,
-                canceledOnTouchOutside: false,
-              )
+                      context,
+                      cancelable: false,
+                      canceledOnTouchOutside: false,
+                    )
                   : ListView.builder(
-                  itemCount: postList.length,
-                  itemBuilder: (_, index) {
-                    return PostsUI(
-                      postList[index].image,
-                      postList[index].description,
-                      postList[index].date,
-                      postList[index].time,
-                      postList[index].phnum,
-                      postList[index].volname,
-                    );
-                  }),
+                      itemCount: postList.length,
+                      itemBuilder: (_, index) {
+                        return yourPostsUI(
+                          postList[index].image,
+                          postList[index].description,
+                          postList[index].date,
+                          postList[index].time,
+                          postList[index].phnum,
+                          postList[index].volname,
+                        );
+                      }),
             ),
-          ),
-          meet_team()
-        ];
+            Container(
+              child: Text("This is queryy"),
+            ),
+            SafeArea(
+              child: Container(
+                child: postList.length == 0
+                    ? LoadingHud(
+                        context,
+                        cancelable: false,
+                        canceledOnTouchOutside: false,
+                      )
+                    : ListView.builder(
+                        itemCount: postList.length,
+                        itemBuilder: (_, index) {
+                          return PostsUI(
+                            postList[index].image,
+                            postList[index].description,
+                            postList[index].date,
+                            postList[index].time,
+                            postList[index].phnum,
+                            postList[index].volname,
+                          );
+                        }),
+              ),
+            ),
+            meet_team()
+          ];
+        });
       });
     });
   }
@@ -158,7 +243,7 @@ class _modHomePageState extends State<modHomePage>
   List listItem = ["Item 1", "Item 2", "Item 3"];
   void checkboollol() {
     setState(() {
-      if ((_selectedItemPosition == 1) || (_selectedItemPosition == 3) ) {
+      if ((_selectedItemPosition == 1) || (_selectedItemPosition == 3)) {
         allsupplies = true;
       } else {
         allsupplies = false;
@@ -186,7 +271,10 @@ class _modHomePageState extends State<modHomePage>
                   width: double.infinity,
                   color: Color(0xFFBDD4EB),
                   child: Center(
-                    child: Text(_selectedItemPosition==1?name:"TimeLine",
+                    child: Text(
+                      _selectedItemPosition == 1
+                          ? UserSimplePreferences.getUserName()
+                          : "TimeLine",
                       style: TextStyle(
                           color: Color(0xFF09427d),
                           fontSize: 20.0,
