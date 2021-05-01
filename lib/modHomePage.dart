@@ -112,8 +112,6 @@ class _modHomePageState extends State<modHomePage>
           print(UserSimplePreferences.getUserName());
         }
       }
-
-<<<<<<< HEAD
       // Getting user info from Firebase
 
       DatabaseReference postsRef =
@@ -141,7 +139,6 @@ class _modHomePageState extends State<modHomePage>
             postList.add(posts);
           }
         }
-
         setState(() {
           print('Length: $postList.length');
           tab = [
@@ -149,37 +146,6 @@ class _modHomePageState extends State<modHomePage>
               child: Text("This is cityyy"),
             ),
             Container(
-=======
-      setState(() {
-        print('Length: $postList.length');
-        tab = [
-          Container(
-            child: Text("This is cityyy"),
-          ),
-          Container(
-            child: postList.length == 0
-                ? LoadingHud(
-              context,
-              cancelable: false,
-              canceledOnTouchOutside: false,
-            )
-                : ListView.builder(
-                itemCount: postList.length,
-                itemBuilder: (_, index) {
-                  return yourPostsUI(
-                    postList[index].image,
-                    postList[index].description,
-                    postList[index].date,
-                    postList[index].time,
-                    postList[index].phnum,
-                    postList[index].volname,
-                  );
-                }),
-          ),
-          UploadPhotoPage(),
-          SafeArea(
-            child: Container(
->>>>>>> 2fb39bcf20bd7e38030fea5e5c5fe582db0376ec
               child: postList.length == 0
                   ? LoadingHud(
                       context,
@@ -198,6 +164,29 @@ class _modHomePageState extends State<modHomePage>
                           postList[index].volname,
                         );
                       }),
+            ),
+            UploadPhotoPage(),
+            SafeArea(
+              child: Container(
+                child: postList.length == 0
+                    ? LoadingHud(
+                        context,
+                        cancelable: false,
+                        canceledOnTouchOutside: false,
+                      )
+                    : ListView.builder(
+                        itemCount: postList.length,
+                        itemBuilder: (_, index) {
+                          return yourPostsUI(
+                            postList[index].image,
+                            postList[index].description,
+                            postList[index].date,
+                            postList[index].time,
+                            postList[index].phnum,
+                            postList[index].volname,
+                          );
+                        }),
+              ),
             ),
             Container(
               child: Text("This is queryy"),
@@ -224,7 +213,7 @@ class _modHomePageState extends State<modHomePage>
                         }),
               ),
             ),
-            meet_team()
+            meet_team(),
           ];
         });
       });
