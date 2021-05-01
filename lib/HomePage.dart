@@ -25,7 +25,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   int _selectedItemPosition = 2;
   String city_name;
   List tab = [];
-  String categorySelector = '';
+  String categorySelector = 'All Supplies';
   AnimationController _controller;
   bool _visible = true;
 
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     city_name = UserSimplePreferences.getCity() ?? '';
-    categorySelector = UserSimplePreferences.getCategory() ?? '';
+    categorySelector = UserSimplePreferences.getCategory() ?? 'All Supplies';
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 400),
@@ -224,8 +224,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   ],
                                 ),
                                 onPressed: () {
+                                  UserSimplePreferences.setCity('');
+                                  print(UserSimplePreferences.getCity());
                                   setState(() {
-                                    city_name = "";
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()),
+                                    );
                                   });
                                 },
                               ),
@@ -245,7 +251,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 padding: EdgeInsets.only(left: 20.0),
                 color: Color(0xFFBDD4EB),
                 child: DropdownButton(
-                  hint: Text("All Supplies"),
+                  hint: categorySelector == ''
+                      ? Text('All Supplies')
+                      : Text(categorySelector),
                   dropdownColor: Color(0xFFBDD4EB),
                   icon: Icon(
                     Icons.keyboard_arrow_down,
