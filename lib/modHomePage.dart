@@ -13,6 +13,7 @@ import 'appbarslide.dart';
 import 'user_simple_preferences.dart';
 import 'yourpostui.dart';
 import 'userinfo.dart';
+import 'drawerScreen.dart';
 
 class modHomePage extends StatefulWidget {
   final String title = "modHomePage Timeline";
@@ -117,6 +118,8 @@ class _modHomePageState extends State<modHomePage>
           print(UserSimplePreferences.getphonenumber());
           UserSimplePreferences.setUserName(user.name);
           print(UserSimplePreferences.getUserName());
+          UserSimplePreferences.setVerifyStatus(user.verify);
+          print(UserSimplePreferences.getVerifyStatus());
         }
       }
     });
@@ -245,80 +248,127 @@ class _modHomePageState extends State<modHomePage>
     });
   }
 
+  double xOffset = 0;
+  double yOffset = 0;
+  double scaleFactor = 1;
+
+  bool isDrawerOpen = false;
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            backgroundColor: Color(0xFFEDEDED),
-            appBar: SlidingAppBar(
-              controller: _controller,
-              visible: allsupplies,
-              child: AppBar(
-                elevation: 0.0,
-                backgroundColor: Color(0xFFEDEDED),
-                toolbarHeight: 80,
-                automaticallyImplyLeading: false,
-                title: Container(
-                  height: 40.0,
-                  margin: EdgeInsets.only(top: 0.0),
-                  padding: EdgeInsets.only(left: 20.0),
-                  width: double.infinity,
-                  color: Color(0xFFBDD4EB),
-                  child: Center(
-                    child: Text(
-                      _selectedItemPosition == 1
-                          ? UserSimplePreferences.getUserName()
-                          : "TimeLine",
-                      style: TextStyle(
-                          color: Color(0xFF09427d),
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold),
+    return Stack(
+      children: [
+        DrawerScreen(),
+        AnimatedContainer(
+          transform: Matrix4.translationValues(xOffset, yOffset, 0)
+            ..scale(scaleFactor)
+            ..rotateY(isDrawerOpen ? -0.5 : 0),
+          duration: Duration(milliseconds: 250),
+          decoration: BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: BorderRadius.circular(isDrawerOpen ? 40 : 0.0)),
+          child: MaterialApp(
+              home: Scaffold(
+                  backgroundColor: Color(0xFFEDEDED),
+                  appBar: SlidingAppBar(
+                    controller: _controller,
+                    visible: allsupplies,
+                    child: AppBar(
+                      elevation: 0.0,
+                      backgroundColor: Color(0xFFEDEDED),
+                      toolbarHeight: 80,
+                      automaticallyImplyLeading: false,
+                      leading: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.only(top: 0.0),
+                              child: isDrawerOpen
+                                  ? IconButton(
+                                      icon: Icon(
+                                        Icons.arrow_back_ios,
+                                        size: 40.0,
+                                        color: Color(0xFF2F3437),
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          xOffset = 0;
+                                          yOffset = 0;
+                                          scaleFactor = 1;
+                                          isDrawerOpen = false;
+                                        });
+                                      },
+                                    )
+                                  : IconButton(
+                                      icon: Icon(
+                                        Icons.dehaze_outlined,
+                                        size: 40.0,
+                                        color: Color(0xFF2F3437),
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          xOffset = 230;
+                                          yOffset = 150;
+                                          scaleFactor = 0.6;
+                                          isDrawerOpen = true;
+                                        });
+                                      }),
+                            ),
+                            SizedBox(
+                              width: 10.0,
+                            )
+                          ],
+                        ),
+                      ),
+                      title: Container(
+                        height: 40.0,
+                        margin: EdgeInsets.only(top: 0.0),
+                        padding: EdgeInsets.only(left: 20.0),
+                        width: double.infinity,
+                        color: Color(0xFFBDD4EB),
+                        child: Center(
+                          child: Text(
+                            _selectedItemPosition == 1
+                                ? UserSimplePreferences.getUserName()
+                                : "TimeLine",
+                            style: TextStyle(
+                                color: Color(0xFF09427d),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                      actions: [],
                     ),
                   ),
-                ),
-                actions: [
-                  Row(
-                    children: [
-                      Container(
-                        child: Icon(
-                          Icons.dehaze_outlined,
-                          size: 40.0,
-                          color: Color(0xFF2F3437),
-                        ),
-                        margin: EdgeInsets.only(top: 0.0),
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      )
-                    ],
-                  ),
-                ],
+                  body: getbody(),
+                  bottomNavigationBar: SnakeNavigationBar.color(
+                    // backgroundColor: Colors.blue,
+                    behaviour: SnakeBarBehaviour.floating,
+                    selectedItemColor: Colors.black,
+                    // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
+                    // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
+                    // shape: ,
+                    snakeShape: SnakeShape.indicator,
+                    showSelectedLabels: true,
+                    // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
+                    padding: EdgeInsets.all(12),
+                    currentIndex: _selectedItemPosition,
+                    onTap: (index) {
+                      setState(() {
+                        _selectedItemPosition = index;
+                        checkboollol();
+                      });
+                    },
+                    items: items,
+                  ))
+              // This trailing comma makes auto-formatting nicer for build methods.
               ),
-            ),
-            body: getbody(),
-            bottomNavigationBar: SnakeNavigationBar.color(
-              // backgroundColor: Colors.blue,
-              behaviour: SnakeBarBehaviour.floating,
-              selectedItemColor: Colors.black,
-              // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
-              // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25)),
-              // shape: ,
-              snakeShape: SnakeShape.indicator,
-              showSelectedLabels: true,
-              // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
-              padding: EdgeInsets.all(12),
-              currentIndex: _selectedItemPosition,
-              onTap: (index) {
-                setState(() {
-                  _selectedItemPosition = index;
-                  checkboollol();
-                });
-              },
-              items: items,
-            ))
-        // This trailing comma makes auto-formatting nicer for build methods.
-        );
+        ),
+      ],
+    );
   }
 }

@@ -4,11 +4,13 @@ import 'package:intl/intl.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:medicalapp/user_simple_preferences.dart';
 import 'HomePage.dart';
 import 'dart:io';
 import 'main.dart';
 import 'city.dart';
 import 'package:search_choices/search_choices.dart';
+import 'package:cool_alert/cool_alert.dart';
 
 class UploadPhotoPage extends StatefulWidget {
   @override
@@ -30,13 +32,41 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
     String time = formatTime.format(dbTimeKey);
 
     DatabaseReference ref = FirebaseDatabase.instance.reference();
+    String vef;
+    if (UserSimplePreferences.getVerifyStatus() == "yes") {
+      vef = "true";
+    } else {
+      vef = "fake";
+    }
+
     var data = {
-      "image": url,
-      "description": _myValue,
+      "category": selected_item,
       "date": date,
+      "description": _myValue,
+      "image": url,
+      "location": selected_city,
+      "phnum": UserSimplePreferences.getphonenumber(),
+      "status": vef,
       "time": time,
+      "volname": UserSimplePreferences.getUserName()
     };
+
     ref.child("Posts").push().set(data);
+
+    if (vef == "true") {
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.success,
+        text: "Your post was successful",
+      );
+    } else {
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.warning,
+        text:
+            "Your post will be verified by our volunteers before appearing on the timeline",
+      );
+    }
   }
 
   void goToHomePage() {
@@ -70,28 +100,35 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         var imageUrl = await (await uploadTask).ref.getDownloadURL();
         final String url_akshat = imageUrl.toString();
         print(url_akshat);
-        // savetoDatabase(url_akshat);
+        savetoDatabase(url_akshat);
         // goToHomePage();
       }
     }
 
     col = [
-        Container(
-          margin: EdgeInsets.only(top: 20,bottom: 25),
-          color: Color(0xffb9cde2),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("  ADD POST",style: TextStyle(fontSize: 20,fontFamily: "OpenSans"),),
-              IconButton(
-                  icon:Icon(Icons.done),
-                onPressed: (){
+      Container(
+        margin: EdgeInsets.only(top: 20, bottom: 25),
+        color: Color(0xffb9cde2),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "  ADD POST",
+              style: TextStyle(fontSize: 20, fontFamily: "OpenSans"),
+            ),
+            IconButton(
+              icon: Icon(Icons.done),
+              onPressed: () {
+                if (sampleImage == null) {
+                  savetoDatabase('');
+                } else {
                   uploadStatusImage();
+                }
               },
-              )
-            ],
-          ),
+            )
+          ],
         ),
+      ),
       Text(
         "Location:",
         style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
@@ -247,11 +284,11 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
             child: Container(
               margin: EdgeInsets.symmetric(horizontal: 20),
               child: Form(
-              key: formkey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: col_append(),
-              )),
+                  key: formkey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: col_append(),
+                  )),
             ),
           ),
           floatingActionButton: FloatingActionButton(
