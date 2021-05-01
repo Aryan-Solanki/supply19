@@ -114,7 +114,7 @@ class _profile_selectState extends State<profile_select> {
                     color: Color(0xFF4686C8),
                     onPressed: () {
                       if (gv1 == 1) {
-                        Navigator.pushNamed(context, "/login");
+                        Navigator.pushNamed(context, "/registration");
                       } else if (gv2 == 1) {
                         Navigator.pushNamed(context, "/homepage");
                       }
