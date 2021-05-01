@@ -4,6 +4,7 @@ import 'package:medicalapp/chooselocation.dart';
 import 'package:medicalapp/citypage.dart';
 import 'package:medicalapp/meet_team.dart';
 import 'package:medicalapp/privacypolicy.dart';
+import 'package:medicalapp/uploadimg.dart';
 import 'login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'splash.dart';

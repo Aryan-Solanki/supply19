@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medicalapp/meet_team.dart';
 import 'package:medicalapp/profile_select.dart';
+import 'package:medicalapp/uploadimg.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'postui.dart';
@@ -112,6 +113,7 @@ class _modHomePageState extends State<modHomePage>
         }
       }
 
+<<<<<<< HEAD
       // Getting user info from Firebase
 
       DatabaseReference postsRef =
@@ -147,6 +149,37 @@ class _modHomePageState extends State<modHomePage>
               child: Text("This is cityyy"),
             ),
             Container(
+=======
+      setState(() {
+        print('Length: $postList.length');
+        tab = [
+          Container(
+            child: Text("This is cityyy"),
+          ),
+          Container(
+            child: postList.length == 0
+                ? LoadingHud(
+              context,
+              cancelable: false,
+              canceledOnTouchOutside: false,
+            )
+                : ListView.builder(
+                itemCount: postList.length,
+                itemBuilder: (_, index) {
+                  return yourPostsUI(
+                    postList[index].image,
+                    postList[index].description,
+                    postList[index].date,
+                    postList[index].time,
+                    postList[index].phnum,
+                    postList[index].volname,
+                  );
+                }),
+          ),
+          UploadPhotoPage(),
+          SafeArea(
+            child: Container(
+>>>>>>> 2fb39bcf20bd7e38030fea5e5c5fe582db0376ec
               child: postList.length == 0
                   ? LoadingHud(
                       context,
