@@ -4,6 +4,7 @@ import 'package:medicalapp/chooselocation.dart';
 import 'package:medicalapp/citypage.dart';
 import 'package:medicalapp/meet_team.dart';
 import 'package:medicalapp/privacypolicy.dart';
+import 'package:medicalapp/profile.dart';
 import 'package:medicalapp/registration.dart';
 import 'package:medicalapp/uploadimg.dart';
 import 'login.dart';
@@ -22,7 +23,7 @@ void main() async {
   await UserSimplePreferences.init();
   await UserSimplePreferences.setCategory('');
   await UserSimplePreferences.setCity('');
-  runApp(modHomePage());
+  runApp(profile());
 }
 
 class my extends StatelessWidget {

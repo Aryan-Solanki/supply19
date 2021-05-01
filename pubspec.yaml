@@ -45,6 +45,7 @@ dependencies:
   flutter_snake_navigationbar: ^0.5.0
   dropdown_search: ^0.5.0
   search_choices: ^2.0.3
+  flutter_zoom_drawer: ^2.0.1
 
 dev_dependencies:
   flutter_test:
