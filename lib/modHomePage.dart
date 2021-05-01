@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medicalapp/meet_team.dart';
 import 'package:medicalapp/profile_select.dart';
+import 'package:medicalapp/uploadimg.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'postui.dart';
@@ -116,10 +117,7 @@ class _modHomePageState extends State<modHomePage>
                   );
                 }),
           ),
-          Container(
-            child: Text("This is queryy"),
-          ),
-
+          UploadPhotoPage(),
           SafeArea(
             child: Container(
               child: postList.length == 0
