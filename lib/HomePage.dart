@@ -193,36 +193,47 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             child: AppBar(
               bottom: PreferredSize(
                   child: Container(
-                    margin: EdgeInsets.only(left: 15,right: 10,bottom: 5),
-                    child: city_name!=""?
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            height: 30,
-                            decoration: BoxDecoration(
-                              color: Color(0xff09427d),
-                              borderRadius: BorderRadius.circular(30)
+                    margin: EdgeInsets.only(left: 15, right: 10, bottom: 5),
+                    child: city_name != ""
+                        ? Align(
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              height: 30,
+                              decoration: BoxDecoration(
+                                  color: Color(0xff09427d),
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: FlatButton(
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      city_name,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 15,
+                                          fontFamily: "OpenSans"),
+                                    ),
+                                    Text(
+                                      "  X",
+                                      style: TextStyle(
+                                          fontSize: 13,
+                                          fontFamily: "HKGrotesk",
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white),
+                                    )
+                                  ],
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    city_name = "";
+                                  });
+                                },
+                              ),
                             ),
-                            child: FlatButton(
-                              child:  Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                Text(city_name,style: TextStyle(color: Colors.white,fontSize: 15,fontFamily: "OpenSans"),),
-                                Text("  X",style: TextStyle(fontSize: 13,fontFamily: "HKGrotesk",fontWeight: FontWeight.bold,color: Colors.white),)
-
-                            ],
+                          )
+                        : Container(
+                            height: 1,
                           ),
-                          onPressed: (){
-                                setState(() {
-                                  city_name="";
-                                });
-                          },
-                            ),
-                          ),
-                        )
-                        :Container(
-                      height: 1,
-                    ),
                   ),
                   preferredSize: Size.fromHeight(0.0)),
               elevation: 0.0,
@@ -282,7 +293,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ],
             ),
           ),
-          body: postList.length == 0 ? tab[0] : tab[_selectedItemPosition],
+          body: postList.length == 0
+              ? Text("No information")
+              : tab[_selectedItemPosition],
           bottomNavigationBar: SnakeNavigationBar.color(
             // backgroundColor: Colors.blue,
             behaviour: SnakeBarBehaviour.floating,
