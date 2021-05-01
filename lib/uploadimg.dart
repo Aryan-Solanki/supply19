@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -75,11 +76,28 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
     }
 
     col = [
+        Container(
+          margin: EdgeInsets.only(top: 20,bottom: 25),
+          color: Color(0xffb9cde2),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("  ADD POST",style: TextStyle(fontSize: 20,fontFamily: "OpenSans"),),
+              IconButton(
+                  icon:Icon(Icons.done),
+                onPressed: (){
+                  uploadStatusImage();
+              },
+              )
+            ],
+          ),
+        ),
       Text(
         "Location:",
-        style: TextStyle(fontFamily: "OpenSans", fontSize: 20),
+        style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
       ),
       Container(
+        margin: EdgeInsets.symmetric(vertical: 15),
         color: Color(0xffa7c2de),
         child: SearchChoices.single(
           items: city(),
@@ -95,9 +113,10 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       ),
       Text(
         "Select Lead Category:",
-        style: TextStyle(fontFamily: "OpenSans", fontSize: 20),
+        style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
       ),
       Container(
+        margin: EdgeInsets.symmetric(vertical: 15),
         color: Color(0xffa7c2de),
         child: SearchChoices.single(
           items: items(),
@@ -120,26 +139,87 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
           return _myValue = value;
         },
       ),
-      SizedBox(
-        height: 15.0,
-      ),
-      TextButton(
-        child: Text('Add a new Post'),
-        onPressed: () {
-          print("Is this working");
-          uploadStatusImage();
-          print("hiiii");
-        },
-      ),
     ];
   }
 
   List<DropdownMenuItem> items() {
     return [
       DropdownMenuItem(
-        child: Text("Delhi"),
-        value: Text("Delhi"),
-      )
+        child: Text("Beds"),
+        value: Text("Beds"),
+      ),
+      DropdownMenuItem(
+        child: Text("Oxygen"),
+        value: Text("Oxygen"),
+      ),
+      DropdownMenuItem(
+        child: Text("Ventilator"),
+        value: Text("Ventilator"),
+      ),
+      DropdownMenuItem(
+        child: Text("Fabiflu"),
+        value: Text("Fabiflu"),
+      ),
+      DropdownMenuItem(
+        child: Text("Favipiravir"),
+        value: Text("Favipiravir"),
+      ),
+      DropdownMenuItem(
+        child: Text("Oxygen Bed"),
+        value: Text("Oxygen Bed"),
+      ),
+      DropdownMenuItem(
+        child: Text("Non Oxygen Bed"),
+        value: Text("Non Oxygen Bed"),
+      ),
+      DropdownMenuItem(
+        child: Text("ICU Bed"),
+        value: Text("ICU Bed"),
+      ),
+      DropdownMenuItem(
+        child: Text("Non-ICU Bed"),
+        value: Text("Non-ICU Bed"),
+      ),
+      DropdownMenuItem(
+        child: Text("Oxygen Refilling"),
+        value: Text("Oxygen Refilling"),
+      ),
+      DropdownMenuItem(
+        child: Text("Plasma"),
+        value: Text("Plasma"),
+      ),
+      DropdownMenuItem(
+        child: Text("Tocilizumab"),
+        value: Text("Tocilizumab"),
+      ),
+      DropdownMenuItem(
+        child: Text("Remidivisir"),
+        value: Text("Remidivisir"),
+      ),
+      DropdownMenuItem(
+        child: Text("Injection"),
+        value: Text("Injection"),
+      ),
+      DropdownMenuItem(
+        child: Text("Doctor"),
+        value: Text("Doctor"),
+      ),
+      DropdownMenuItem(
+        child: Text("Hospital"),
+        value: Text("Hospital"),
+      ),
+      DropdownMenuItem(
+        child: Text("Ambulance"),
+        value: Text("Ambulance"),
+      ),
+      DropdownMenuItem(
+        child: Text("Testing"),
+        value: Text("Testing"),
+      ),
+      DropdownMenuItem(
+        child: Text("Hospital At Home"),
+        value: Text("Hospital At Home"),
+      ),
     ];
   }
 
@@ -162,16 +242,18 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           body: SingleChildScrollView(
-              child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            child: Form(
-                key: formkey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: col_append(),
-                )),
-          )),
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              child: Form(
+              key: formkey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: col_append(),
+              )),
+            ),
+          ),
           floatingActionButton: FloatingActionButton(
             onPressed: getImage,
             tooltip: 'Add Image',
@@ -187,7 +269,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       return col;
     } else {
       col.insert(
-        0,
+        1,
         Image.file(
           sampleImage,
           height: 330.0,
