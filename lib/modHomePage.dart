@@ -278,48 +278,45 @@ class _modHomePageState extends State<modHomePage>
                       backgroundColor: Color(0xFFEDEDED),
                       toolbarHeight: 80,
                       automaticallyImplyLeading: false,
-                      leading: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(top: 0.0),
-                              child: isDrawerOpen
-                                  ? IconButton(
-                                      icon: Icon(
-                                        Icons.arrow_back_ios,
-                                        size: 40.0,
-                                        color: Color(0xFF2F3437),
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          xOffset = 0;
-                                          yOffset = 0;
-                                          scaleFactor = 1;
-                                          isDrawerOpen = false;
-                                        });
-                                      },
-                                    )
-                                  : IconButton(
-                                      icon: Icon(
-                                        Icons.dehaze_outlined,
-                                        size: 40.0,
-                                        color: Color(0xFF2F3437),
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          xOffset = 230;
-                                          yOffset = 150;
-                                          scaleFactor = 0.6;
-                                          isDrawerOpen = true;
-                                        });
-                                      }),
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            )
-                          ],
-                        ),
+                      leading: Row(
+                        children: [
+                          Container(
+                            margin: EdgeInsets.only(top: 0.0),
+                            child: isDrawerOpen
+                                ? IconButton(
+                                    icon: Icon(
+                                      Icons.arrow_back_ios,
+                                      size: 40.0,
+                                      color: Color(0xFF2F3437),
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        xOffset = 0;
+                                        yOffset = 0;
+                                        scaleFactor = 1;
+                                        isDrawerOpen = false;
+                                      });
+                                    },
+                                  )
+                                : IconButton(
+                                    icon: Icon(
+                                      Icons.dehaze_outlined,
+                                      size: 40.0,
+                                      color: Color(0xFF2F3437),
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        xOffset = 230;
+                                        yOffset = 150;
+                                        scaleFactor = 0.6;
+                                        isDrawerOpen = true;
+                                      });
+                                    }),
+                          ),
+                          SizedBox(
+                            width: 10.0,
+                          )
+                        ],
                       ),
                       title: Container(
                         height: 40.0,
