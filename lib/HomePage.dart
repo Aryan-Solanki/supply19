@@ -108,7 +108,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             if (categorySelector == posts.categpry) {
               postList.add(posts);
             }
-          } else if (city_name != '' && categorySelector == '') {
+          } else if (city_name != '' &&
+              (categorySelector == '' || categorySelector == 'All Supplies')) {
             if (city_name == posts.location) {
               postList.add(posts);
             }
@@ -122,7 +123,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       }
 
       setState(() {
-        print('Length: $postList.length');
         tab = [
           chooselocation(),
           SafeArea(
@@ -132,12 +132,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           ),
           SafeArea(
             child: Container(
-              child: postList.length == 0
-                  ? LoadingHud(
-                      context,
-                      cancelable: false,
-                      canceledOnTouchOutside: false,
-                    )
+              child: (postList.length == 0 || postList.length == null)
+                  ? Text("ok I AM AKSHAT Rastogi")
                   : ListView.builder(
                       itemCount: postList.length,
                       itemBuilder: (_, index) {
@@ -251,7 +247,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               ],
             ),
           ),
-          body: postList.length == 0 ? null : tab[_selectedItemPosition],
+          body: postList.length == 0 ? tab[0] : tab[_selectedItemPosition],
           bottomNavigationBar: SnakeNavigationBar.color(
             // backgroundColor: Colors.blue,
             behaviour: SnakeBarBehaviour.floating,
