@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class registration extends StatefulWidget {
   @override
@@ -6,7 +8,21 @@ class registration extends StatefulWidget {
 }
 
 class _registrationState extends State<registration> {
-  String _name, _number,_email;
+  String _name, _number, _email;
+
+  void savetoDatabase() {
+    DatabaseReference ref = FirebaseDatabase.instance.reference();
+    var data = {
+      "email": _email,
+      "name": _name,
+      "number_of_posts": 0,
+      "phnum": _number,
+      "points": 0,
+      "verify": "no",
+      "volid": 'test',
+    };
+    ref.child("User-Data").push().set(data);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,155 +32,158 @@ class _registrationState extends State<registration> {
           body: SingleChildScrollView(
             child: SafeArea(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.all(30),
-                      child: Text(
-                        "Registration",
-                        style: TextStyle(
-                            fontFamily: "LatoBold",
-                            fontSize: 45,
-                            color: Color(0xFF09427D)),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 30),
-                      child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.white),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  margin: EdgeInsets.all(30),
+                  child: Text(
+                    "Registration",
+                    style: TextStyle(
+                        fontFamily: "LatoBold",
+                        fontSize: 45,
+                        color: Color(0xFF09427D)),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 30),
+                  child: Column(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Name :",
+                              style: TextStyle(
+                                  fontFamily: "OpenSans", fontSize: 20),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 15),
+                              decoration: BoxDecoration(
+                                  // borderRadius: BorderRadius.circular(5),
+                                  color: Color(0xffafc9e5)),
+                              child: Container(
+                                margin: EdgeInsets.only(left: 10.0),
+                                child: TextField(
+                                  keyboardType: TextInputType.name,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _name = value.trim();
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            Text(
+                              "Number :",
+                              style: TextStyle(
+                                  fontFamily: "OpenSans", fontSize: 20),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 15),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Color(0xffafc9e5)),
+                              child: Container(
+                                padding: EdgeInsets.only(left: 10.0),
+                                child: TextField(
+                                  obscureText: false,
+                                  keyboardType: TextInputType.phone,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _number = value.trim();
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            Text(
+                              "Email :",
+                              style: TextStyle(
+                                  fontFamily: "OpenSans", fontSize: 20),
+                            ),
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 15),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Color(0xffafc9e5)),
+                              child: Container(
+                                padding: EdgeInsets.only(left: 10.0),
+                                child: TextField(
+                                  obscureText: false,
+                                  keyboardType: TextInputType.emailAddress,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _email = value.trim();
+                                    });
+                                  },
+                                ),
+                              ),
+                            ),
+                            Row(
                               children: [
                                 Text(
-                                  "Name :",
-                                  style:
-                                  TextStyle(fontFamily: "OpenSans", fontSize: 20),
+                                  "  Are you a Moderator?",
+                                  style: TextStyle(
+                                      fontFamily: "OpenSansLight",
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(vertical: 15),
-                                  decoration: BoxDecoration(
-                                    // borderRadius: BorderRadius.circular(5),
-                                      color: Color(0xffafc9e5)),
-                                  child: Container(
-                                    margin: EdgeInsets.only(left: 10.0),
-                                    child: TextField(
-                                      keyboardType: TextInputType.emailAddress,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _name = value.trim();
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  "Number :",
-                                  style:
-                                  TextStyle(fontFamily: "OpenSans", fontSize: 20),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(vertical: 15),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: Color(0xffafc9e5)),
-                                  child: Container(
-                                    padding: EdgeInsets.only(left: 10.0),
-                                    child: TextField(
-                                      obscureText: true,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _number = value.trim();
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  "Email :",
-                                  style:
-                                  TextStyle(fontFamily: "OpenSans", fontSize: 20),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.symmetric(vertical: 15),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(5),
-                                      color: Color(0xffafc9e5)),
-                                  child: Container(
-                                    padding: EdgeInsets.only(left: 10.0),
-                                    child: TextField(
-                                      obscureText: true,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          _email = value.trim();
-                                        });
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      "  Are you a Moderator?",
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.pushNamed(context, "/login");
+                                    },
+                                    child: Text(
+                                      "Sign In",
                                       style: TextStyle(
                                           fontFamily: "OpenSansLight",
-                                          color: Colors.black,
                                           fontWeight: FontWeight.bold),
-                                    ),
-                                    TextButton(
-                                        onPressed: () {
-                                          Navigator.pushNamed(context, "/login");
-                                        },
-                                        child: Text(
-                                          "Sign In",
-                                          style: TextStyle(
-                                              fontFamily: "OpenSansLight",
-                                              fontWeight: FontWeight.bold),
-                                        ))
-                                  ],
-                                ),
-                                Center(
-                                  child: Container(
-                                    margin: EdgeInsets.all(12),
-                                    width: 170,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Color(0xFF4686c8),
-                                    ),
-                                    child: TextButton(
-                                      onPressed: (){
-                                        print(_name);
-                                        print(_number);
-                                        print(_email);
-                                      },
-                                      child: Text(
-                                        "Continue",
-                                        style: TextStyle(
-                                            fontFamily: "OpenSans",
-                                            fontSize: 25,
-                                            color: Colors.white),
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                    ))
                               ],
                             ),
-                          )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 1,
-                    )
-                  ],
-                )),
+                            Center(
+                              child: Container(
+                                margin: EdgeInsets.all(12),
+                                width: 170,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Color(0xFF4686c8),
+                                ),
+                                child: TextButton(
+                                  onPressed: () {
+                                    print(_name);
+                                    print(_number);
+                                    print(_email);
+                                    savetoDatabase();
+                                  },
+                                  child: Text(
+                                    "Continue",
+                                    style: TextStyle(
+                                        fontFamily: "OpenSans",
+                                        fontSize: 25,
+                                        color: Colors.white),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 1,
+                )
+              ],
+            )),
           )),
     );
   }

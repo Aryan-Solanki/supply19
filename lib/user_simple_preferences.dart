@@ -8,6 +8,7 @@ class UserSimplePreferences {
   static const _keyCategory = 'category';
   static const _keyUserName = 'user_name';
   static const _keyPhoneNum = 'phnum';
+  static const _keyVerify = 'verify';
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
@@ -36,4 +37,9 @@ class UserSimplePreferences {
       await _preferences.setString(_keyPhoneNum, phnum);
 
   static String getphonenumber() => _preferences.getString(_keyPhoneNum);
+
+  static Future setVerifyStatus(String vf) async =>
+      await _preferences.setString(_keyVerify, vf);
+
+  static String getVerifyStatus() => _preferences.getString(_keyVerify);
 }
