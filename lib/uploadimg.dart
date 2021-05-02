@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:medicalapp/modHomePage.dart';
 import 'package:medicalapp/user_simple_preferences.dart';
 import 'HomePage.dart';
 import 'dart:io';
@@ -61,12 +62,24 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
     ref.child("Posts").push().set(data);
 
     if (vef == "true") {
+      Navigator.push(
+        context,
+        new MaterialPageRoute(
+          builder: (context) => new modHomePage(),
+        ),
+      );
       CoolAlert.show(
         context: context,
         type: CoolAlertType.success,
         text: "Your post was successful",
       );
     } else {
+      Navigator.push(
+        context,
+        new MaterialPageRoute(
+          builder: (context) => new modHomePage(),
+        ),
+      );
       CoolAlert.show(
         context: context,
         type: CoolAlertType.warning,
