@@ -40,6 +40,8 @@ class my extends StatelessWidget {
         '/signup': (context) => signup(),
         '/citypage': (context) => citypage(),
         '/registration': (context) => registration(),
+        '/termandcondition': (context) => termandcondition(),
+        '/privacypolicy': (context) => privacypolicy(),
       },
     );
   }
