@@ -249,20 +249,6 @@ class _modHomePageState extends State<modHomePage>
                       children: [
                         Container(
                           margin: EdgeInsets.only(top: 0.0),
-                          padding: EdgeInsets.only(left: 20.0),
-                          width: double.infinity,
-                          color: Color(0xFFBDD4EB),
-                          child: Center(
-                            child: Text(
-                              _selectedItemPosition == 0
-                                  ? UserSimplePreferences.getUserName()
-                                  : "TimeLine",
-                              style: TextStyle(
-                                  color: Color(0xFF09427d),
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
                           child: isDrawerOpen
                               ? IconButton(
                                   icon: Icon(
@@ -307,7 +293,7 @@ class _modHomePageState extends State<modHomePage>
                       color: Color(0xFFBDD4EB),
                       child: Center(
                         child: Text(
-                          _selectedItemPosition == 1
+                          _selectedItemPosition == 0
                               ? UserSimplePreferences.getUserName()
                               : "TimeLine",
                           style: TextStyle(
