@@ -108,22 +108,25 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
     col = [
       Container(
         margin: EdgeInsets.only(top: 20, bottom: 25),
-        color: Color(0xffb9cde2),
+        color: Color(0xFFBDD4EB),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               "  ADD POST",
-              style: TextStyle(fontSize: 20, fontFamily: "OpenSans"),
+              style: TextStyle(fontSize: 20, fontFamily: "OpenSans",fontWeight: FontWeight.bold,color: Color(0xFF09427d)),
             ),
             IconButton(
               icon: Icon(Icons.done),
               onPressed: () {
-                if (sampleImage == null) {
-                  validateAndSave();
-                  savetoDatabase('');
-                } else {
-                  uploadStatusImage();
+                // validateAndSave();
+                if (validateAndSave()) {
+                  if (sampleImage == null) {
+                    validateAndSave();
+                    savetoDatabase('');
+                  } else {
+                    uploadStatusImage();
+                  }
                 }
               },
             )

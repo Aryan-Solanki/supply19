@@ -73,10 +73,7 @@ class _modHomePageState extends State<modHomePage>
   ];
 
   Future<Null> refreshList() async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => modHomePage()),
-    );
+    Navigator.pushReplacementNamed(context, '/homepage2');
     await Future.delayed(Duration(seconds: 2));
     return null;
   }
@@ -236,7 +233,6 @@ class _modHomePageState extends State<modHomePage>
   double scaleFactor = 1;
 
   bool isDrawerOpen = false;
-
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -279,6 +275,7 @@ class _modHomePageState extends State<modHomePage>
                                     scaleFactor = 1;
                                     isDrawerOpen = false;
                                   });
+
                                 },
                               )
                             : IconButton(
@@ -288,6 +285,7 @@ class _modHomePageState extends State<modHomePage>
                                   color: Color(0xFF2F3437),
                                 ),
                                 onPressed: () {
+
                                   setState(() {
                                     xOffset = 230;
                                     yOffset = 150;

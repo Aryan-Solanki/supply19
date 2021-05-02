@@ -48,6 +48,7 @@ dependencies:
   cool_alert: ^1.0.3
   flutter_zoom_drawer: ^2.0.1
   hidden_drawer_menu: ^3.0.0
+  flutter_animator: ^3.1.1
 
 dev_dependencies:
   flutter_test:

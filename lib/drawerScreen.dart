@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class DrawerScreen extends StatefulWidget {
+
   @override
   _DrawerScreenState createState() => _DrawerScreenState();
 }
@@ -19,6 +20,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -61,7 +63,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     ),
                     SizedBox(height: 5,),
                     FlatButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.pushNamed(context, "/homepage");
+                        },
                         child: Row(
                           children: [
                             // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
