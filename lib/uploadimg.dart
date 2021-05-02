@@ -145,7 +145,11 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
           children: [
             Text(
               "  ADD POST",
-              style: TextStyle(fontSize: 20, fontFamily: "OpenSans",fontWeight: FontWeight.bold,color: Color(0xFF09427d)),
+              style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: "OpenSans",
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF09427d)),
             ),
             IconButton(
               icon: Icon(Icons.done),
