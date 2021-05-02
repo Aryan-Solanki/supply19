@@ -292,7 +292,12 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
             ),
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: getImage,
+            onPressed: (){
+              if (sampleImage!=null){
+                col.removeAt(1);
+              }
+              getImage();
+            },
             tooltip: 'Add Image',
             child: Icon(Icons.add_a_photo),
           ),
