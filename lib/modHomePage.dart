@@ -42,6 +42,7 @@ class _modHomePageState extends State<modHomePage>
   List tab = [];
   AnimationController _controller;
   bool _visible = true;
+  GlobalKey<RefreshIndicatorState> refreshKey;
 
   final items = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
@@ -85,9 +86,19 @@ class _modHomePageState extends State<modHomePage>
     ),
   ];
 
+  Future<Null> refreshList() async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => modHomePage()),
+    );
+    await Future.delayed(Duration(seconds: 2));
+    return null;
+  }
+
   @override
   void initState() {
     super.initState();
+    refreshKey = GlobalKey<RefreshIndicatorState>();
     email = UserSimplePreferences.getEmail() ?? '';
     _controller = AnimationController(
       vsync: this,
@@ -181,6 +192,7 @@ class _modHomePageState extends State<modHomePage>
           postList.add(posts);
         }
       }
+
       setState(() {
         print('Length: $postList.length');
         tab = [
@@ -190,18 +202,24 @@ class _modHomePageState extends State<modHomePage>
           Container(
             child: postListuser.length == 0
                 ? Text("lol")
-                : ListView.builder(
-                    itemCount: postListuser.length,
-                    itemBuilder: (_, index) {
-                      return yourPostsUI(
-                        postListuser[index].image,
-                        postListuser[index].description,
-                        postListuser[index].date,
-                        postListuser[index].time,
-                        postListuser[index].phnum,
-                        postListuser[index].volname,
-                      );
-                    }),
+                : RefreshIndicator(
+                    key: refreshKey,
+                    onRefresh: () async {
+                      await refreshList();
+                    },
+                    child: ListView.builder(
+                        itemCount: postListuser.length,
+                        itemBuilder: (_, index) {
+                          return yourPostsUI(
+                            postListuser[index].image,
+                            postListuser[index].description,
+                            postListuser[index].date,
+                            postListuser[index].time,
+                            postListuser[index].phnum,
+                            postListuser[index].volname,
+                          );
+                        }),
+                  ),
           ),
           UploadPhotoPage(),
           SafeArea(
@@ -282,48 +300,43 @@ class _modHomePageState extends State<modHomePage>
                     automaticallyImplyLeading: false,
                     leading: Row(
                       children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 0.0),
-                          child: isDrawerOpen
-                              ? IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_back_ios,
-                                    size: 40.0,
-                                    color: Color(0xFF2F3437),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      xOffset = 0;
-                                      yOffset = 0;
-                                      scaleFactor = 1;
-                                      isDrawerOpen = false;
-                                    });
-                                  },
-                                )
-                              : IconButton(
-                                  icon: Icon(
-                                    Icons.dehaze_outlined,
-                                    size: 40.0,
-                                    color: Color(0xFF2F3437),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      xOffset = 230;
-                                      yOffset = 150;
-                                      scaleFactor = 0.6;
-                                      isDrawerOpen = true;
-                                    });
-                                  }),
-                        ),
-                        SizedBox(
-                          width: 10.0,
-                        )
+                        isDrawerOpen
+                            ? IconButton(
+                                icon: Icon(
+                                  Icons.arrow_back_ios,
+                                  size: 35.0,
+                                  color: Color(0xFF2F3437),
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    xOffset = 0;
+                                    yOffset = 0;
+                                    scaleFactor = 1;
+                                    isDrawerOpen = false;
+                                  });
+                                },
+                              )
+                            : IconButton(
+                                icon: Icon(
+                                  Icons.dehaze_outlined,
+                                  size: 35.0,
+                                  color: Color(0xFF2F3437),
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    xOffset = 230;
+                                    yOffset = 150;
+                                    scaleFactor = 0.6;
+                                    isDrawerOpen = true;
+                                  });
+                                }),
+                        // SizedBox(
+                        //   width: 5.0,
+                        // )
                       ],
                     ),
                     title: Container(
                       height: 40.0,
-                      margin: EdgeInsets.only(top: 0.0),
-                      padding: EdgeInsets.only(left: 20.0),
                       width: double.infinity,
                       color: Color(0xFFBDD4EB),
                       child: Center(
