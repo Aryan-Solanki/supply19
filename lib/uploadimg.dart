@@ -120,6 +120,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
               icon: Icon(Icons.done),
               onPressed: () {
                 if (sampleImage == null) {
+                  validateAndSave();
                   savetoDatabase('');
                 } else {
                   uploadStatusImage();
