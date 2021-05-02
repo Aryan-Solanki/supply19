@@ -90,45 +90,44 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       vsync: this,
       duration: Duration(milliseconds: 400),
     );
-    DatabaseReference postsRef =
-        FirebaseDatabase.instance.reference().child("Posts");
-    postsRef.once().then((DataSnapshot snap) {
-      var KEYS = snap.value.keys;
-      var DATA = snap.value;
+    List data = [];
+    FirebaseDatabase.instance
+        .reference()
+        .child("Posts")
+        .orderByChild("order")
+        .onChildAdded
+        .listen((event) {
+      print(event.snapshot.value);
+      print(event.snapshot.value['image']);
+      Posts posts = new Posts(
+        event.snapshot.value['image'],
+        event.snapshot.value['description'],
+        event.snapshot.value['date'],
+        event.snapshot.value['time'],
+        event.snapshot.value['phnum'],
+        event.snapshot.value['volname'],
+        event.snapshot.value['status'],
+        event.snapshot.value['location'],
+        event.snapshot.value['category'],
+      );
 
-      postList.cast();
-      bool verified = false;
-
-      for (var indivisualKey in KEYS) {
-        Posts posts = new Posts(
-          DATA[indivisualKey]['image'],
-          DATA[indivisualKey]['description'],
-          DATA[indivisualKey]['date'],
-          DATA[indivisualKey]['time'],
-          DATA[indivisualKey]['phnum'],
-          DATA[indivisualKey]['volname'],
-          DATA[indivisualKey]['status'],
-          DATA[indivisualKey]['location'],
-          DATA[indivisualKey]['category'],
-        );
-        if (posts.status != "fake") {
-          if (city_name == '' &&
-              (categorySelector == '' || categorySelector == 'All Supplies')) {
+      if (posts.status != "fake") {
+        if (city_name == '' &&
+            (categorySelector == '' || categorySelector == 'All Supplies')) {
+          postList.add(posts);
+        } else if (city_name == '' && categorySelector != '') {
+          if (categorySelector == posts.categpry) {
             postList.add(posts);
-          } else if (city_name == '' && categorySelector != '') {
-            if (categorySelector == posts.categpry) {
-              postList.add(posts);
-            }
-          } else if (city_name != '' &&
-              (categorySelector == '' || categorySelector == 'All Supplies')) {
-            if (city_name == posts.location) {
-              postList.add(posts);
-            }
-          } else {
-            if (city_name == posts.location &&
-                categorySelector == posts.categpry) {
-              postList.add(posts);
-            }
+          }
+        } else if (city_name != '' &&
+            (categorySelector == '' || categorySelector == 'All Supplies')) {
+          if (city_name == posts.location) {
+            postList.add(posts);
+          }
+        } else {
+          if (city_name == posts.location &&
+              categorySelector == posts.categpry) {
+            postList.add(posts);
           }
         }
       }

@@ -45,7 +45,6 @@ class _modHomePageState extends State<modHomePage>
   GlobalKey<RefreshIndicatorState> refreshKey;
 
   final items = <BottomNavigationBarItem>[
-
     BottomNavigationBarItem(
       icon: Icon(
         Icons.contact_page_outlined,
@@ -119,63 +118,34 @@ class _modHomePageState extends State<modHomePage>
     });
     // Getting user info from Firebase
 
-    // Getting user posts {
+    // Getting user posts
 
-    DatabaseReference postsRef1 =
-        FirebaseDatabase.instance.reference().child("Posts");
-    postsRef1.once().then((DataSnapshot snap1) {
-      var KEYS1 = snap1.value.keys;
-      var DATA1 = snap1.value;
+    FirebaseDatabase.instance
+        .reference()
+        .child("Posts")
+        .orderByChild("order")
+        .onChildAdded
+        .listen((event) {
+      print(event.snapshot.value);
+      print(event.snapshot.value['image']);
+      Posts posts = new Posts(
+        event.snapshot.value['image'],
+        event.snapshot.value['description'],
+        event.snapshot.value['date'],
+        event.snapshot.value['time'],
+        event.snapshot.value['phnum'],
+        event.snapshot.value['volname'],
+        event.snapshot.value['status'],
+        event.snapshot.value['location'],
+        event.snapshot.value['category'],
+      );
 
-      for (var indivisualKey in KEYS1) {
-        Posts posts = new Posts(
-          DATA1[indivisualKey]['image'],
-          DATA1[indivisualKey]['description'],
-          DATA1[indivisualKey]['date'],
-          DATA1[indivisualKey]['time'],
-          DATA1[indivisualKey]['phnum'],
-          DATA1[indivisualKey]['volname'],
-          DATA1[indivisualKey]['status'],
-          DATA1[indivisualKey]['location'],
-          DATA1[indivisualKey]['category'],
-        );
-        var x = UserSimplePreferences.getphonenumber();
-        if (posts.status != "fake") {
-          if (posts.phnum == x) {
-            postListuser.add(posts);
-          }
+      var x = UserSimplePreferences.getphonenumber();
+      if (posts.status != "fake") {
+        if (posts.phnum == x) {
+          postListuser.add(posts);
         }
       }
-    });
-
-    // Getting user posts }
-
-    DatabaseReference postsRef =
-        FirebaseDatabase.instance.reference().child("Posts");
-    postsRef.once().then((DataSnapshot snap) {
-      var KEYS = snap.value.keys;
-      var DATA = snap.value;
-
-      postList.cast();
-      bool verified = false;
-
-      for (var indivisualKey in KEYS) {
-        Posts posts = new Posts(
-          DATA[indivisualKey]['image'],
-          DATA[indivisualKey]['description'],
-          DATA[indivisualKey]['date'],
-          DATA[indivisualKey]['time'],
-          DATA[indivisualKey]['phnum'],
-          DATA[indivisualKey]['volname'],
-          DATA[indivisualKey]['status'],
-          DATA[indivisualKey]['location'],
-          DATA[indivisualKey]['category'],
-        );
-        if (posts.status != "fake") {
-          postList.add(posts);
-        }
-      }
-
       setState(() {
         print('Length: $postList.length');
         tab = [
@@ -220,7 +190,7 @@ class _modHomePageState extends State<modHomePage>
   List listItem = ["Item 1", "Item 2", "Item 3"];
   void checkboollol() {
     setState(() {
-      if (_selectedItemPosition == 0)  {
+      if (_selectedItemPosition == 0) {
         allsupplies = true;
       } else {
         allsupplies = false;
