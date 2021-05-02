@@ -34,6 +34,7 @@ class my extends StatelessWidget {
       routes: {
         '/splash': (context) => splash(),
         '/profile_select': (context) => profile_select(),
+        '/profile': (context) => profile(),
         '/login': (context) => login(),
         '/homepage': (context) => HomePage(),
         '/homepage2': (context) => modHomePage(),

@@ -38,20 +38,14 @@ class _modHomePageState extends State<modHomePage>
   List<Posts> postList = [];
   List<Posts> postListuser = [];
   final controller = ScrollController();
-  int _selectedItemPosition = 1;
+  int _selectedItemPosition = 0;
   List tab = [];
   AnimationController _controller;
   bool _visible = true;
   GlobalKey<RefreshIndicatorState> refreshKey;
 
   final items = <BottomNavigationBarItem>[
-    BottomNavigationBarItem(
-      icon: FaIcon(
-        FontAwesomeIcons.user,
-        color: Color(0xff09427d),
-      ),
-      label: "Profile",
-    ),
+
     BottomNavigationBarItem(
       icon: Icon(
         Icons.contact_page_outlined,
@@ -67,14 +61,6 @@ class _modHomePageState extends State<modHomePage>
         size: 28,
       ),
       label: "Add Post",
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(
-        Icons.timeline_outlined,
-        size: 28,
-        color: Color(0xff09427d),
-      ),
-      label: "TimeLine",
     ),
     BottomNavigationBarItem(
       icon: Icon(
@@ -197,9 +183,6 @@ class _modHomePageState extends State<modHomePage>
         print('Length: $postList.length');
         tab = [
           Container(
-            child: Text("This is cityyy"),
-          ),
-          Container(
             child: postListuser.length == 0
                 ? Text("lol")
                 : RefreshIndicator(
@@ -222,24 +205,6 @@ class _modHomePageState extends State<modHomePage>
                   ),
           ),
           UploadPhotoPage(),
-          SafeArea(
-            child: Container(
-              child: postList.length == 0
-                  ? Text("")
-                  : ListView.builder(
-                      itemCount: postList.length,
-                      itemBuilder: (_, index) {
-                        return PostsUI(
-                          postList[index].image,
-                          postList[index].description,
-                          postList[index].date,
-                          postList[index].time,
-                          postList[index].phnum,
-                          postList[index].volname,
-                        );
-                      }),
-            ),
-          ),
           meet_team(),
         ];
       });
@@ -258,7 +223,7 @@ class _modHomePageState extends State<modHomePage>
   List listItem = ["Item 1", "Item 2", "Item 3"];
   void checkboollol() {
     setState(() {
-      if ((_selectedItemPosition == 1) || (_selectedItemPosition == 3)) {
+      if (_selectedItemPosition == 0)  {
         allsupplies = true;
       } else {
         allsupplies = false;
@@ -341,7 +306,7 @@ class _modHomePageState extends State<modHomePage>
                       color: Color(0xFFBDD4EB),
                       child: Center(
                         child: Text(
-                          _selectedItemPosition == 1
+                          _selectedItemPosition == 0
                               ? UserSimplePreferences.getUserName()
                               : "TimeLine",
                           style: TextStyle(
