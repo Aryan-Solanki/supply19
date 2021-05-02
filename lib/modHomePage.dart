@@ -234,59 +234,20 @@ class _modHomePageState extends State<modHomePage>
               borderRadius: BorderRadius.circular(isDrawerOpen ? 40 : 0.0)),
           child: MaterialApp(
               home: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Scaffold(
+            borderRadius: BorderRadius.circular(30),
+            child: Scaffold(
+                backgroundColor: Color(0xFFEDEDED),
+                appBar: SlidingAppBar(
+                  controller: _controller,
+                  visible: allsupplies,
+                  child: AppBar(
+                    elevation: 0.0,
                     backgroundColor: Color(0xFFEDEDED),
-                    appBar: SlidingAppBar(
-                      controller: _controller,
-                      visible: allsupplies,
-                      child: AppBar(
-                        elevation: 0.0,
-                        backgroundColor: Color(0xFFEDEDED),
-                        toolbarHeight: 80,
-                        automaticallyImplyLeading: false,
-                        leading: Row(
-                          children: [
-                            Container(
-                              margin: EdgeInsets.only(top: 0.0),
-                              child: isDrawerOpen
-                                  ? IconButton(
-                                      icon: Icon(
-                                        Icons.arrow_back_ios,
-                                        size: 40.0,
-                                        color: Color(0xFF2F3437),
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          xOffset = 0;
-                                          yOffset = 0;
-                                          scaleFactor = 1;
-                                          isDrawerOpen = false;
-                                        });
-                                      },
-                                    )
-                                  : IconButton(
-                                      icon: Icon(
-                                        Icons.dehaze_outlined,
-                                        size: 40.0,
-                                        color: Color(0xFF2F3437),
-                                      ),
-                                      onPressed: () {
-                                        setState(() {
-                                          xOffset = 230;
-                                          yOffset = 150;
-                                          scaleFactor = 0.6;
-                                          isDrawerOpen = true;
-                                        });
-                                      }),
-                            ),
-                            SizedBox(
-                              width: 10.0,
-                            )
-                          ],
-                        ),
-                        title: Container(
-                          height: 40.0,
+                    toolbarHeight: 80,
+                    automaticallyImplyLeading: false,
+                    leading: Row(
+                      children: [
+                        Container(
                           margin: EdgeInsets.only(top: 0.0),
                           padding: EdgeInsets.only(left: 20.0),
                           width: double.infinity,
@@ -302,34 +263,87 @@ class _modHomePageState extends State<modHomePage>
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
+                          child: isDrawerOpen
+                              ? IconButton(
+                                  icon: Icon(
+                                    Icons.arrow_back_ios,
+                                    size: 40.0,
+                                    color: Color(0xFF2F3437),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      xOffset = 0;
+                                      yOffset = 0;
+                                      scaleFactor = 1;
+                                      isDrawerOpen = false;
+                                    });
+                                  },
+                                )
+                              : IconButton(
+                                  icon: Icon(
+                                    Icons.dehaze_outlined,
+                                    size: 40.0,
+                                    color: Color(0xFF2F3437),
+                                  ),
+                                  onPressed: () {
+                                    setState(() {
+                                      xOffset = 230;
+                                      yOffset = 150;
+                                      scaleFactor = 0.6;
+                                      isDrawerOpen = true;
+                                    });
+                                  }),
                         ),
-                        actions: [],
+                        SizedBox(
+                          width: 10.0,
+                        )
+                      ],
+                    ),
+                    title: Container(
+                      height: 40.0,
+                      margin: EdgeInsets.only(top: 0.0),
+                      padding: EdgeInsets.only(left: 20.0),
+                      width: double.infinity,
+                      color: Color(0xFFBDD4EB),
+                      child: Center(
+                        child: Text(
+                          _selectedItemPosition == 1
+                              ? UserSimplePreferences.getUserName()
+                              : "TimeLine",
+                          style: TextStyle(
+                              color: Color(0xFF09427d),
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
-                    body: getbody(),
-                    bottomNavigationBar: SnakeNavigationBar.color(
-                      // backgroundColor: Colors.blue,
-                      behaviour: SnakeBarBehaviour.floating,
-                      selectedItemColor: Colors.black,
-                      // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
-                      // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25)),
-                      // shape: ,
-                      snakeShape: SnakeShape.indicator,
-                      showSelectedLabels: true,
-                      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
-                      padding: EdgeInsets.all(12),
-                      currentIndex: _selectedItemPosition,
-                      onTap: (index) {
-                        setState(() {
-                          _selectedItemPosition = index;
-                          checkboollol();
-                        });
-                      },
-                      items: items,
-                    )),
-              )
+                    actions: [],
+                  ),
+                ),
+                body: getbody(),
+                bottomNavigationBar: SnakeNavigationBar.color(
+                  // backgroundColor: Colors.blue,
+                  behaviour: SnakeBarBehaviour.floating,
+                  selectedItemColor: Colors.black,
+                  // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
+                  // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25)),
+                  // shape: ,
+                  snakeShape: SnakeShape.indicator,
+                  showSelectedLabels: true,
+                  // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
+                  padding: EdgeInsets.all(12),
+                  currentIndex: _selectedItemPosition,
+                  onTap: (index) {
+                    setState(() {
+                      _selectedItemPosition = index;
+                      checkboollol();
+                    });
+                  },
+                  items: items,
+                )),
+          )
               // This trailing comma makes auto-formatting nicer for build methods.
               ),
         ),

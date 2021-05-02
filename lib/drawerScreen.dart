@@ -125,6 +125,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
           ),
         ),
       ),
+    return Container(
+      color: Color(0xFF09427D),
     );
   }
 }
