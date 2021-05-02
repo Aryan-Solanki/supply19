@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:medicalapp/modHomePage.dart';
 import 'package:medicalapp/user_simple_preferences.dart';
 import 'HomePage.dart';
 import 'dart:io';
@@ -132,7 +133,11 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
           children: [
             Text(
               "  ADD POST",
-              style: TextStyle(fontSize: 20, fontFamily: "OpenSans",fontWeight: FontWeight.bold,color: Color(0xFF09427d)),
+              style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: "OpenSans",
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF09427d)),
             ),
             IconButton(
               icon: Icon(Icons.done),
