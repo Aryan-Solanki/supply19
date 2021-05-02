@@ -62,12 +62,24 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
     ref.child("Posts").push().set(data);
 
     if (vef == "true") {
+      Navigator.push(
+        context,
+        new MaterialPageRoute(
+          builder: (context) => new modHomePage(),
+        ),
+      );
       CoolAlert.show(
         context: context,
         type: CoolAlertType.success,
         text: "Your post was successful",
       );
     } else {
+      Navigator.push(
+        context,
+        new MaterialPageRoute(
+          builder: (context) => new modHomePage(),
+        ),
+      );
       CoolAlert.show(
         context: context,
         type: CoolAlertType.warning,
