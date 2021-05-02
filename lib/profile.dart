@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class profile extends StatefulWidget {
   @override
@@ -6,6 +8,14 @@ class profile extends StatefulWidget {
 }
 
 class _profileState extends State<profile> {
+    File sampleImage;
+    Future getImage() async {
+      var tempImage = await ImagePicker().getImage(source: ImageSource.gallery);
+      File imageFile = File(tempImage.path);
+      setState(() {
+        sampleImage = imageFile;
+      });
+    }
   @override
 
   Widget build(BuildContext context) {
@@ -21,7 +31,7 @@ class _profileState extends State<profile> {
                   flex: 1,
                     child:  CircleAvatar(
                       radius: 100,
-                       backgroundImage:AssetImage("images/dina.jpeg"),
+                       backgroundImage:sampleImage==null?AssetImage("images/nodp.jpg"):FileImage(sampleImage)
                     )
                 ),
                 Expanded(
@@ -40,6 +50,7 @@ class _profileState extends State<profile> {
                           children: [
                             Container(
                                 padding: EdgeInsets.symmetric(vertical: 2,horizontal: 30),
+                                width: 120,
                                 color: Color(0xff607d8b),
                                 child:Column(
                                   children: [
@@ -51,6 +62,7 @@ class _profileState extends State<profile> {
                             ),
                             SizedBox(width: 10,),
                             Container(
+                                width: 120,
                                 padding: EdgeInsets.symmetric(vertical: 2,horizontal: 30),
                                 color: Color(0xff607d8b),
                                 child:Column(
@@ -83,7 +95,9 @@ class _profileState extends State<profile> {
                               borderRadius: BorderRadius.circular(20)
                           ),
                           child: FlatButton(
-                            onPressed: (){},
+                            onPressed: (){
+                              Navigator.pushNamed(context,'/termandcondition');
+                            },
                             child: Text("Terms & Conditions",style: TextStyle(fontSize: 20,fontFamily: "OpenSans",color: Colors.white),),
                           ),
                         ),
@@ -94,10 +108,14 @@ class _profileState extends State<profile> {
                               borderRadius: BorderRadius.circular(20)
                           ),
                           child: FlatButton(
-                            onPressed: (){},
+                            onPressed: (){
+                              Navigator.pushNamed(context,'/privacypolicy');
+                            },
                             child: Text("Privacy Policy",style: TextStyle(fontSize: 20,fontFamily: "OpenSans",color: Colors.white),),
                           ),
                         ),
+
+
                       ],
                     ),
                   ),
@@ -105,6 +123,11 @@ class _profileState extends State<profile> {
 
               ],
             ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: getImage,
+            tooltip: 'Add Image',
+            child: Icon(Icons.add_a_photo),
           ),
         ),
       ),
