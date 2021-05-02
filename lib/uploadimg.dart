@@ -22,6 +22,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
   String selected_item = "";
   String selectedValueSingleDialog = "";
   List<Widget> col = [];
+  int current_post_number;
 
   void savetoDatabase(url) {
     var dbTimeKey = new DateTime.now();
@@ -48,8 +49,14 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       "phnum": UserSimplePreferences.getphonenumber(),
       "status": vef,
       "time": time,
-      "volname": UserSimplePreferences.getUserName()
+      "volname": UserSimplePreferences.getUserName(),
+      "post_num": current_post_number,
+      "order": (9999999 - current_post_number),
     };
+
+    int newx = current_post_number + 1;
+
+    ref.child("current").update({'post_no': newx});
 
     ref.child("Posts").push().set(data);
 
@@ -88,6 +95,17 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
   @override
   void initState() {
     super.initState();
+
+    DatabaseReference ref0 = FirebaseDatabase.instance.reference();
+    ref0.once().then((DataSnapshot snap1) {
+      var KEYS1 = snap1.value.keys;
+      var DATA1 = snap1.value;
+
+      for (var indivisualKey in KEYS1) {
+        current_post_number = DATA1[indivisualKey]['post_no'];
+        break;
+      }
+    });
 
     Future<void> uploadStatusImage() async {
       if (validateAndSave()) {
@@ -293,8 +311,8 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
             ),
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: (){
-              if (sampleImage!=null){
+            onPressed: () {
+              if (sampleImage != null) {
                 col.removeAt(1);
               }
               getImage();
