@@ -197,6 +197,7 @@ class _volHomePageState extends State<volHomePage>
                         postListuser[index].time,
                         postListuser[index].phnum,
                         postListuser[index].volname,
+                        postListuser[index].status,
                       );
                     }),
           ),

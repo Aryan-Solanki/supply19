@@ -13,15 +13,15 @@ import 'appbarslide.dart';
 import 'user_simple_preferences.dart';
 import 'yourpostui.dart';
 import 'userinfo.dart';
-import 'drawerScreen.dart';
+import 'regdrawerScreen.dart';
 
-class modHomePage extends StatefulWidget {
-  final String title = "modHomePage Timeline";
+class regHomePage extends StatefulWidget {
+  final String title = "regHomePage Timeline";
   @override
-  _modHomePageState createState() => _modHomePageState();
+  _regHomePageState createState() => _regHomePageState();
 }
 
-class _modHomePageState extends State<modHomePage>
+class _regHomePageState extends State<regHomePage>
     with TickerProviderStateMixin {
   getbody() {
     try {
@@ -33,7 +33,7 @@ class _modHomePageState extends State<modHomePage>
   }
 
   bool allsupplies = true;
-  String email;
+  String phnumber;
   List<User> userif = [];
   List<Posts> postList = [];
   List<Posts> postListuser = [];
@@ -81,7 +81,7 @@ class _modHomePageState extends State<modHomePage>
   void initState() {
     super.initState();
     refreshKey = GlobalKey<RefreshIndicatorState>();
-    email = UserSimplePreferences.getEmail() ?? '';
+    phnumber = UserSimplePreferences.getphonenumber() ?? '';
     _controller = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 400),
@@ -103,7 +103,7 @@ class _modHomePageState extends State<modHomePage>
           DATA0[indivisualKey]['number_of_posts'],
           DATA0[indivisualKey]['points'],
         );
-        if (user.email == email) {
+        if (user.phnum == phnumber) {
           userif.add(user);
           UserSimplePreferences.setUserName(user.name);
           print(UserSimplePreferences.getUserName());
@@ -141,8 +141,10 @@ class _modHomePageState extends State<modHomePage>
       );
 
       var x = UserSimplePreferences.getphonenumber();
-      if (posts.phnum == x) {
-        postListuser.add(posts);
+      if (posts.status != "fake") {
+        if (posts.phnum == x) {
+          postListuser.add(posts);
+        }
       }
       setState(() {
         print('Length: $postList.length');
@@ -206,7 +208,7 @@ class _modHomePageState extends State<modHomePage>
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        DrawerScreen(),
+        regDrawerScreen(),
         AnimatedContainer(
           transform: Matrix4.translationValues(xOffset, yOffset, 0)
             ..scale(scaleFactor)
@@ -281,6 +283,7 @@ class _modHomePageState extends State<modHomePage>
                         ),
                       ),
                     ),
+                    actions: [],
                   ),
                 ),
                 body: getbody(),

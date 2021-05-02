@@ -1,14 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'user_simple_preferences.dart';
 
-class DrawerScreen extends StatefulWidget {
+class regDrawerScreen extends StatefulWidget {
   @override
-  _DrawerScreenState createState() => _DrawerScreenState();
+  _regDrawerScreenState createState() => _regDrawerScreenState();
 }
 
-class _DrawerScreenState extends State<DrawerScreen> {
+class _regDrawerScreenState extends State<regDrawerScreen> {
+  List<Map> drawerItems = [
+    {'icon': FontAwesomeIcons.paw, 'title': 'Adoption'},
+    {'icon': Icons.mail, 'title': 'Donation'},
+    {'icon': FontAwesomeIcons.plus, 'title': 'Add pet'},
+    {'icon': Icons.favorite, 'title': 'Favorites'},
+    {'icon': Icons.mail, 'title': 'Messages'},
+    {'icon': FontAwesomeIcons.userAlt, 'title': 'Profile'},
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,7 +44,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   Expanded(
                       flex: 3,
                       child: Text(
-                        UserSimplePreferences.getUserName(),
+                        "Akshat Rastogi",
                         style: TextStyle(
                             fontSize: 25,
                             color: Colors.white,
@@ -52,6 +60,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     FlatButton(
                         onPressed: () {
                           Navigator.pushNamed(context, "/profile");
+                          ;
                         },
                         child: Row(
                           children: [
@@ -61,29 +70,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                             ),
                             Text(
                               "   Profile",
-                              style: TextStyle(
-                                  fontFamily: "OpenSans",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white),
-                            )
-                          ],
-                        )),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    FlatButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, "/homepage2");
-                        },
-                        child: Row(
-                          children: [
-                            // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              " Homepage",
                               style: TextStyle(
                                   fontFamily: "OpenSans",
                                   fontWeight: FontWeight.bold,
@@ -181,23 +167,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   ],
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 20),
-                height: 35,
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                    color: Color(0xff2193b0),
-                    borderRadius: BorderRadius.circular(30)),
-                child: FlatButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Log Out",
-                      style: TextStyle(
-                          fontFamily: "OpenSans",
-                          fontSize: 20,
-                          color: Colors.white),
-                    )),
-              )
             ],
           ),
         ),

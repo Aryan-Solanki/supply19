@@ -1,14 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'user_simple_preferences.dart';
 
-class DrawerScreen extends StatefulWidget {
+class BenDrawerScreen extends StatefulWidget {
   @override
-  _DrawerScreenState createState() => _DrawerScreenState();
+  _BenDrawerScreenState createState() => _BenDrawerScreenState();
 }
 
-class _DrawerScreenState extends State<DrawerScreen> {
+class _BenDrawerScreenState extends State<BenDrawerScreen> {
+  List<Map> drawerItems = [
+    {'icon': FontAwesomeIcons.paw, 'title': 'Adoption'},
+    {'icon': Icons.mail, 'title': 'Donation'},
+    {'icon': FontAwesomeIcons.plus, 'title': 'Add pet'},
+    {'icon': Icons.favorite, 'title': 'Favorites'},
+    {'icon': Icons.mail, 'title': 'Messages'},
+    {'icon': FontAwesomeIcons.userAlt, 'title': 'Profile'},
+  ];
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -36,7 +44,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   Expanded(
                       flex: 3,
                       child: Text(
-                        UserSimplePreferences.getUserName(),
+                        "Akshat Rastogi",
                         style: TextStyle(
                             fontSize: 25,
                             color: Colors.white,
@@ -52,6 +60,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     FlatButton(
                         onPressed: () {
                           Navigator.pushNamed(context, "/profile");
+                          ;
                         },
                         child: Row(
                           children: [
@@ -60,30 +69,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               width: 20,
                             ),
                             Text(
-                              "   Profile",
-                              style: TextStyle(
-                                  fontFamily: "OpenSans",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white),
-                            )
-                          ],
-                        )),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    FlatButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, "/homepage2");
-                        },
-                        child: Row(
-                          children: [
-                            // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              " Homepage",
+                              "   Moderator",
                               style: TextStyle(
                                   fontFamily: "OpenSans",
                                   fontWeight: FontWeight.bold,
