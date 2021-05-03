@@ -152,6 +152,7 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
                           postList[index].time,
                           postList[index].phnum,
                           postList[index].volname,
+                          postList[index].status,
                         );
                       }),
             ),

@@ -12,7 +12,13 @@ _makingPhoneCall(callString) async {
 }
 
 Widget PostsUI(String image, String description, String date, String time,
-    String phnum, String volname) {
+    String phnum, String volname, String status) {
+  String verified;
+  if (status != "fake") {
+    verified = "Verified";
+  } else {
+    verified = "Not Verified";
+  }
   return Column(
     children: [
       Column(
@@ -35,6 +41,32 @@ Widget PostsUI(String image, String description, String date, String time,
                               // style: Theme.of(context).textTheme.subtitle,
                               textAlign: TextAlign.center,
                             ),
+                            Column(
+                                children: (verified == "Not Verified")
+                                    ? [
+                                        Icon(
+                                          Icons.not_interested_rounded,
+                                          color: Colors.red,
+                                        ),
+                                        Text(
+                                          verified,
+                                          // style: Theme.of(context).textTheme.subtitle,
+                                          style: TextStyle(fontSize: 8.0),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ]
+                                    : [
+                                        Icon(
+                                          Icons.verified_user,
+                                          color: Colors.green,
+                                        ),
+                                        Text(
+                                          verified,
+                                          // style: Theme.of(context).textTheme.subtitle,
+                                          style: TextStyle(fontSize: 8.0),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                      ]),
                             Text(
                               time,
                               // style: Theme.of(context).textTheme.subtitle,

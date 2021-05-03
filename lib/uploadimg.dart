@@ -23,6 +23,8 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
   String selected_item = "";
   String selectedValueSingleDialog = "";
   List<Widget> col = [];
+  String lname = '';
+  String lphnum = '';
   int current_post_number;
 
   void savetoDatabase(url) {
@@ -49,6 +51,8 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       "location": selected_city,
       "phnum": UserSimplePreferences.getphonenumber(),
       "status": vef,
+      "lphnum": lphnum,
+      "lname": lname,
       "time": time,
       "volname": UserSimplePreferences.getUserName(),
       "post_num": current_post_number,
@@ -204,6 +208,48 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
             }
           },
           isExpanded: true,
+        ),
+      ),
+      Text(
+        "Lead Contact Name:",
+        style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
+      ),
+      Container(
+        margin: EdgeInsets.symmetric(vertical: 15),
+        decoration: BoxDecoration(
+            // borderRadius: BorderRadius.circular(5),
+            color: Color(0xffafc9e5)),
+        child: Container(
+          margin: EdgeInsets.only(left: 10.0),
+          child: TextField(
+            keyboardType: TextInputType.name,
+            onChanged: (value) {
+              setState(() {
+                lname = value.trim();
+              });
+            },
+          ),
+        ),
+      ),
+      Text(
+        "Lead Contact Number:",
+        style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
+      ),
+      Container(
+        margin: EdgeInsets.symmetric(vertical: 15),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5), color: Color(0xffafc9e5)),
+        child: Container(
+          padding: EdgeInsets.only(left: 10.0),
+          child: TextField(
+            obscureText: false,
+            keyboardType: TextInputType.phone,
+            onChanged: (value) {
+              setState(() {
+                lphnum = value.trim();
+              });
+            },
+          ),
         ),
       ),
       TextFormField(
