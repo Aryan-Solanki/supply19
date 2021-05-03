@@ -23,8 +23,8 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
   String selected_item = "";
   String selectedValueSingleDialog = "";
   List<Widget> col = [];
-  String lname = '';
-  String lphnum = '';
+  String sname = '';
+  String sphnum = '';
   int current_post_number;
 
   void savetoDatabase(url) {
@@ -51,8 +51,8 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       "location": selected_city,
       "phnum": UserSimplePreferences.getphonenumber(),
       "status": vef,
-      "lphnum": lphnum,
-      "lname": lname,
+      "sphnum": sphnum,
+      "sname": sname,
       "time": time,
       "volname": UserSimplePreferences.getUserName(),
       "post_num": current_post_number,
@@ -225,7 +225,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
             keyboardType: TextInputType.name,
             onChanged: (value) {
               setState(() {
-                lname = value.trim();
+                sname = value.trim();
               });
             },
           ),
@@ -246,7 +246,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
             keyboardType: TextInputType.phone,
             onChanged: (value) {
               setState(() {
-                lphnum = value.trim();
+                sphnum = value.trim();
               });
             },
           ),

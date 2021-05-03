@@ -34,7 +34,7 @@ class _modHomePageState extends State<modHomePage>
 
   bool allsupplies = true;
   String email;
-  List<User> userif = [];
+  List<UserData> userif = [];
   List<Posts> postList = [];
   List<Posts> postListuser = [];
   final controller = ScrollController();
@@ -94,7 +94,7 @@ class _modHomePageState extends State<modHomePage>
       var DATA0 = snap0.value;
 
       for (var indivisualKey in KEYS0) {
-        User user = new User(
+        UserData user = new UserData(
           DATA0[indivisualKey]['email'],
           DATA0[indivisualKey]['name'],
           DATA0[indivisualKey]['phnum'],
@@ -138,6 +138,8 @@ class _modHomePageState extends State<modHomePage>
         event.snapshot.value['status'],
         event.snapshot.value['location'],
         event.snapshot.value['category'],
+        event.snapshot.value['sname'],
+        event.snapshot.value['sphnum'],
       );
 
       var x = UserSimplePreferences.getphonenumber();
@@ -166,6 +168,8 @@ class _modHomePageState extends State<modHomePage>
                             postListuser[index].phnum,
                             postListuser[index].volname,
                             postListuser[index].status,
+                            postListuser[index].sname,
+                            postListuser[index].sphnum,
                           );
                         }),
                   ),

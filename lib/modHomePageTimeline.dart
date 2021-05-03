@@ -111,6 +111,8 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
         event.snapshot.value['status'],
         event.snapshot.value['location'],
         event.snapshot.value['category'],
+        event.snapshot.value['location'],
+        event.snapshot.value['category'],
       );
 
       if (posts.status != "fake") {
@@ -153,6 +155,8 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
                           postList[index].phnum,
                           postList[index].volname,
                           postList[index].status,
+                          postList[index].sname,
+                          postList[index].sphnum,
                         );
                       }),
             ),
