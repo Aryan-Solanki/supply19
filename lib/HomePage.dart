@@ -13,6 +13,8 @@ import 'user_simple_preferences.dart';
 import 'main.dart';
 import 'drawerScreen.dart';
 import 'postQuery.dart';
+import 'termandcondition.dart';
+import 'privacypolicy.dart';
 
 class HomePage extends StatefulWidget {
   final String title = "HomePage Timeline";
@@ -81,6 +83,13 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       label: "About Us",
     ),
   ];
+
+  static const String Share = 'Share';
+  static const String RateUs = 'Rate Us';
+  static const String TandC = 'T&C';
+  static const String PP = 'Privacy Policy';
+
+  static const List<String> choices = <String>[Share, RateUs, TandC, PP];
 
   @override
   void initState() {
@@ -187,6 +196,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     });
   }
 
+  void choiceAction(String choice) {
+    if (choice == RateUs) {
+      print('Rate Us');
+    } else if (choice == Share) {
+      print('Share');
+    } else if (choice == TandC) {
+      print('T&C');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => termandcondition()),
+      );
+    } else if (choice == PP) {
+      print('Privacy Policy');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => privacypolicy()),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -199,24 +228,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               controller: _controller,
               visible: allsupplies,
               child: AppBar(
-                leading: Row(
-                  children: [
-                    IconButton(
-                        icon: Icon(
-                          Icons.dehaze_outlined,
-                          size: 35.0,
-                          color: Color(0xFF2F3437),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            print("Testing");
-                          });
-                        }),
-                    // SizedBox(
-                    //   width: 5.0,
-                    // )
-                  ],
-                ),
                 bottom: PreferredSize(
                     child: Container(
                       margin: EdgeInsets.only(left: 15, right: 10, bottom: 5),
@@ -268,6 +279,27 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             ),
                     ),
                     preferredSize: Size.fromHeight(0.0)),
+                actions: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(right: 15.0),
+                    child: PopupMenuButton<String>(
+                      icon: Icon(
+                        Icons.dehaze_outlined,
+                        size: 35.0,
+                        color: Color(0xFF2F3437),
+                      ),
+                      onSelected: choiceAction,
+                      itemBuilder: (BuildContext context) {
+                        return choices.map((String choice) {
+                          return PopupMenuItem<String>(
+                            value: choice,
+                            child: Text(choice),
+                          );
+                        }).toList();
+                      },
+                    ),
+                  )
+                ],
                 elevation: 0.0,
                 backgroundColor: Color(0xFFEDEDED),
                 toolbarHeight: 100,
