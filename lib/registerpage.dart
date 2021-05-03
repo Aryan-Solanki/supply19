@@ -5,6 +5,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'userinfo.dart';
 import 'regHomePage.dart';
 import 'user_simple_preferences.dart';
+import 'utility.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class registerpage extends StatefulWidget {
   String phnum;
@@ -23,12 +25,32 @@ class _registerpageState extends State<registerpage> {
   String _fname, _lname;
   String full_name;
   File sampleImage;
+  Image image;
+
   Future getImage() async {
     var tempImage = await ImagePicker().getImage(source: ImageSource.gallery);
     File imageFile = File(tempImage.path);
     setState(() {
       sampleImage = imageFile;
+      image = Image.file(sampleImage);
     });
+    ImageSharedPrefs.saveImageToPrefs(
+        ImageSharedPrefs.base64String(sampleImage.readAsBytesSync()));
+  }
+
+  Future<void> uploadStatusImage() async {
+    if (true) {
+      FirebaseStorage storage = FirebaseStorage.instance;
+      final Reference postImageRef = storage.ref().child("Post Images");
+      var timeKey = new DateTime.now();
+      String xyz = timeKey.toString() + ".jpg";
+      final UploadTask uploadTask =
+          postImageRef.child(xyz).putFile(sampleImage);
+      var imageUrl = await (await uploadTask).ref.getDownloadURL();
+      final String url_akshat = imageUrl.toString();
+      print(url_akshat);
+      savetoDatabase(url_akshat);
+    }
   }
 
   @override
@@ -61,7 +83,9 @@ class _registerpageState extends State<registerpage> {
     super.initState();
   }
 
-  void savetoDatabase() {
+  void savetoDatabase(url) {
+    UserSimplePreferences.setUserName(full_name);
+    UserSimplePreferences.setphonenumber(phnum);
     DatabaseReference ref = FirebaseDatabase.instance.reference();
     var data = {
       "email": '',
@@ -71,6 +95,7 @@ class _registerpageState extends State<registerpage> {
       "points": 0,
       "verify": "no",
       "volid": 'test',
+      "image": url,
     };
     ref.child("User-Data").push().set(data);
   }
@@ -186,7 +211,11 @@ class _registerpageState extends State<registerpage> {
                                   child: TextButton(
                                     onPressed: () {
                                       full_name = _fname + " " + _lname;
-                                      savetoDatabase();
+                                      if (image == null || image == "") {
+                                        savetoDatabase("");
+                                      } else {
+                                        uploadStatusImage();
+                                      }
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(

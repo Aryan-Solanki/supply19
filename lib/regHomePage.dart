@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,6 +15,7 @@ import 'user_simple_preferences.dart';
 import 'yourpostui.dart';
 import 'userinfo.dart';
 import 'drawerScreen.dart';
+import 'regdrawerScreen.dart';
 
 class regHomePage extends StatefulWidget {
   final String title = "regHomePage Timeline";
@@ -210,7 +212,7 @@ class _regHomePageState extends State<regHomePage>
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        DrawerScreen(),
+        regDrawerScreen(),
         AnimatedContainer(
           transform: Matrix4.translationValues(xOffset, yOffset, 0)
             ..scale(scaleFactor)
@@ -277,7 +279,9 @@ class _regHomePageState extends State<regHomePage>
                         child: Center(
                           child: Text(
                             _selectedItemPosition == 0
-                                ? UserSimplePreferences.getUserName()
+                                ? ((postListuser.length == 0)
+                                    ? "Your Posts"
+                                    : UserSimplePreferences.getUserName())
                                 : "TimeLine",
                             style: TextStyle(
                                 color: Color(0xFF09427d),
