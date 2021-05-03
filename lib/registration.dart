@@ -60,7 +60,7 @@ class _registrationState extends State<registration> {
     });
   }
 
-  String _name, _number, _email="";
+  String _name, _number="", _email="";
   bool otpsend=false;
   bool numverify=false;
 
@@ -91,33 +91,33 @@ class _registrationState extends State<registration> {
                   fontFamily: "OpenSans", fontSize: 20,fontWeight: FontWeight.bold),
             ),
             Container(
-              margin: EdgeInsets.symmetric(vertical: 15),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Color(0xffededed)
-            ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(" +91 -",style: TextStyle(fontSize: 17),),
-                  Expanded(
-                    child: Container(
-                      padding: EdgeInsets.only(left: 10.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
+                margin: EdgeInsets.symmetric(vertical: 15),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    color: Color(0xffededed)
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(" +91 -",style: TextStyle(fontSize: 17),),
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.only(left: 10.0),
+                        child: TextField(
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                          ),
+                          keyboardType: TextInputType.phone,
+                          onChanged: (value) {
+                            setState(() {
+                              _number = value.trim();
+                            });
+                          },
                         ),
-                        keyboardType: TextInputType.phone,
-                        onChanged: (value) {
-                          setState(() {
-                            _number = value.trim();
-                          });
-                        },
                       ),
                     ),
-                  ),
-                ],
-              )
+                  ],
+                )
             ),
           ],
         ),
@@ -171,7 +171,7 @@ class _registrationState extends State<registration> {
                                             otpsend==false?
                                             TextButton(
                                               onPressed: (){
-                                                if(_number==null){
+                                                if(_number==""){
                                                   FocusScope.of(context).unfocus();
                                                   _scaffoldkey.currentState
                                                       .showSnackBar(SnackBar(content: Text('Provide Number')));
@@ -188,7 +188,7 @@ class _registrationState extends State<registration> {
                                               child: Text("Send OTP"),
                                             ):TextButton(
                                               onPressed: (){
-                                                if(_number==null){
+                                                if(_number==""){
                                                   FocusScope.of(context).unfocus();
                                                   _scaffoldkey.currentState
                                                       .showSnackBar(SnackBar(content: Text('Provide Number')));
@@ -289,7 +289,7 @@ class _registrationState extends State<registration> {
                 ),
               ),
             ),
-            
+
           ],
         ),
       ),);
