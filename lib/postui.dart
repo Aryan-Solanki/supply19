@@ -102,12 +102,27 @@ Widget PostsUI(String image, String description, String date, String time,
                               children: [
                                 Expanded(
                                   child: Container(
-                                    padding: EdgeInsets.only(left: 10.0),
-                                    child: Text(
-                                      "Supplier Name :  " + volname,
-                                      style: TextStyle(
-                                          fontSize: 15, color: Colors.black),
-                                    ),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(
+                                            "   Supplier Name ",
+                                            style: TextStyle(
+                                                fontSize: 15, color: Colors.black,fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              volname,
+                                              style: TextStyle(
+                                                  fontSize: 15, color: Colors.black),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    )
                                   ),
                                 ),
                               ],
@@ -121,19 +136,26 @@ Widget PostsUI(String image, String description, String date, String time,
                             color: Colors.white,
                             margin: EdgeInsets.only(top: 20.0),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Expanded(
-                                  child: Container(
-                                    child: TextButton(
-                                      // padding: EdgeInsets.all(0),
-                                      onPressed: () {
-                                        _makingPhoneCall(phnum);
-                                      },
+                                  child: Text(
+                                    "   Cotact No. ",
+                                    style: TextStyle(
+                                        fontSize: 15, color: Colors.black,fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: TextButton(
+                                    // padding: EdgeInsets.all(0),
+                                    onPressed: () {
+                                      _makingPhoneCall(phnum);
+                                    },
+                                    child: Align(
+                                      alignment: Alignment.center,
                                       child: Text(
                                         "+91-" + phnum,
                                         style: TextStyle(
-                                            fontSize: 15, color: Colors.black),
+                                            fontSize: 15, color: Colors.blue),
                                       ),
                                     ),
                                   ),

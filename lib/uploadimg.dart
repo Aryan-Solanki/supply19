@@ -362,30 +362,28 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SafeArea(
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: SingleChildScrollView(
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              child: Form(
-                  key: formkey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: col_append(),
-                  )),
-            ),
+      home: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            child: Form(
+                key: formkey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: col_append(),
+                )),
           ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              if (sampleImage != null) {
-                col.removeAt(1);
-              }
-              getImage();
-            },
-            tooltip: 'Add Image',
-            child: Icon(Icons.add_a_photo),
-          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            if (sampleImage != null) {
+              col.removeAt(1);
+            }
+            getImage();
+          },
+          tooltip: 'Add Image',
+          child: Icon(Icons.add_a_photo),
         ),
       ),
     );

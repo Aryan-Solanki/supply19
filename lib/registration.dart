@@ -142,7 +142,7 @@ class _registrationState extends State<registration> {
             Container(
               margin: EdgeInsets.all(30),
               child: Text(
-                "Registration",
+                "Volunteer",
                 style: TextStyle(
                     fontFamily: "LatoBold",
                     fontSize: 45,
