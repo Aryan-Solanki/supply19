@@ -118,113 +118,113 @@ class _registrationState extends State<registration> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-      key: _scaffoldkey,
-      backgroundColor: Color(0xffededed),
-      body: SingleChildScrollView(
-          child: SafeArea(
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-            Container(
-              margin: EdgeInsets.all(30),
-              child: Text(
-                "Registration",
-                style: TextStyle(
-                    fontFamily: "LatoBold",
-                    fontSize: 45,
-                    color: Color(0xFF09427D)),
-              ),
-            ),
-            Container(
-                margin: EdgeInsets.symmetric(horizontal: 30),
-                child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                        padding: EdgeInsets.all(15),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.white),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Column(children: appendcon()),
-                            Row(
+          key: _scaffoldkey,
+          backgroundColor: Color(0xffededed),
+          body: SingleChildScrollView(
+              child: SafeArea(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.all(30),
+                          child: Text(
+                            "Registration",
+                            style: TextStyle(
+                                fontFamily: "LatoBold",
+                                fontSize: 45,
+                                color: Color(0xFF09427D)),
+                          ),
+                        ),
+                        Container(
+                            margin: EdgeInsets.symmetric(horizontal: 30),
+                            child: Column(
+                              // mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                otpsend == false
-                                    ? TextButton(
-                                        onPressed: () {
-                                          if (_number == "") {
-                                            FocusScope.of(context).unfocus();
-                                            _scaffoldkey.currentState
-                                                .showSnackBar(SnackBar(
-                                                    content: Text(
-                                                        'Provide Number')));
-                                          } else {
-                                            _verifyPhone();
-                                            setState(() {
-                                              timer = true;
-                                              numreq = true;
-                                              startTimer();
-                                            });
-                                          }
-                                        },
-                                        child: Text("Send OTP"),
-                                      )
-                                    : TextButton(
-                                        onPressed: () {
-                                          if (_number == "") {
-                                            FocusScope.of(context).unfocus();
-                                            _scaffoldkey.currentState
-                                                .showSnackBar(SnackBar(
-                                                    content: Text(
-                                                        'Provide Number')));
-                                          } else {
-                                            setState(() {
-                                              timer = true;
-                                              _current = 60;
-                                              startTimer();
-                                              _verifyPhone();
-                                            });
-                                          }
-                                        },
-                                        child: Text("Resend OTP"),
-                                      ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                timer == true ? Text("$_current") : Text(""),
+                                Container(
+                                    padding: EdgeInsets.all(15),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.white),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Column(children: appendcon()),
+                                        Row(
+                                          children: [
+                                            otpsend == false
+                                                ? TextButton(
+                                              onPressed: () {
+                                                if (_number == "") {
+                                                  FocusScope.of(context).unfocus();
+                                                  _scaffoldkey.currentState
+                                                      .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                          'Provide Number')));
+                                                } else {
+                                                  _verifyPhone();
+                                                  setState(() {
+                                                    timer = true;
+                                                    numreq = true;
+                                                    startTimer();
+                                                  });
+                                                }
+                                              },
+                                              child: Text("Send OTP"),
+                                            )
+                                                : TextButton(
+                                              onPressed: () {
+                                                if (_number == "") {
+                                                  FocusScope.of(context).unfocus();
+                                                  _scaffoldkey.currentState
+                                                      .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                          'Provide Number')));
+                                                } else {
+                                                  setState(() {
+                                                    timer = true;
+                                                    _current = 60;
+                                                    startTimer();
+                                                    _verifyPhone();
+                                                  });
+                                                }
+                                              },
+                                              child: Text("Resend OTP"),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            timer == true ? Text("$_current") : Text(""),
+                                          ],
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "  Are you a Moderator?",
+                                              style: TextStyle(
+                                                  fontFamily: "OpenSansLight",
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            TextButton(
+                                                onPressed: () {
+                                                  Navigator.pushNamed(context, "/login");
+                                                },
+                                                child: Text(
+                                                  "Sign In",
+                                                  style: TextStyle(
+                                                      fontFamily: "OpenSansLight",
+                                                      fontWeight: FontWeight.bold),
+                                                ))
+                                          ],
+                                        ),
+                                      ],
+                                    )),
                               ],
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  "  Are you a Moderator?",
-                                  style: TextStyle(
-                                      fontFamily: "OpenSansLight",
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                TextButton(
-                                    onPressed: () {
-                                      Navigator.pushNamed(context, "/login");
-                                    },
-                                    child: Text(
-                                      "Sign In",
-                                      style: TextStyle(
-                                          fontFamily: "OpenSansLight",
-                                          fontWeight: FontWeight.bold),
-                                    ))
-                              ],
-                            ),
-                          ],
-                        )),
-                  ],
-                ))
-          ]))),
-    ));
+                            ))
+                      ]))),
+        ));
   }
 
   List appendcon() {
@@ -255,15 +255,15 @@ class _registrationState extends State<registration> {
                   try {
                     await FirebaseAuth.instance
                         .signInWithCredential(PhoneAuthProvider.credential(
-                            verificationId: _verificationCode, smsCode: pin))
+                        verificationId: _verificationCode, smsCode: pin))
                         .then((value) async {
                       if (value.user != null) {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => registerpage(
-                                    phnum: _number,
-                                  )),
+                                phnum: _number,
+                              )),
                         );
                       }
                     });
@@ -310,9 +310,9 @@ class _registrationState extends State<registration> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => registerpage(
-                            phnum: _number,
-                          )),
-                  (route) => false);
+                        phnum: _number,
+                      )),
+                      (route) => false);
             }
           });
         },

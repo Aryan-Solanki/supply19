@@ -88,6 +88,7 @@ Widget PostsUI(String image, String description, String date, String time,
                         ),
                         Text(
                           description,
+                          style: TextStyle(fontSize: 17),
                           // style: Theme.of(context).textTheme.subhead,
                           textAlign: TextAlign.center,
                         ),
