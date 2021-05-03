@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserSimplePreferences {
@@ -9,6 +11,7 @@ class UserSimplePreferences {
   static const _keyUserName = 'user_name';
   static const _keyPhoneNum = 'phnum';
   static const _keyVerify = 'verify';
+  static const _keyImagePath = 'imgpath';
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
@@ -42,4 +45,9 @@ class UserSimplePreferences {
       await _preferences.setString(_keyVerify, vf);
 
   static String getVerifyStatus() => _preferences.getString(_keyVerify);
+
+  static Future setImagePath(String ip) async =>
+      await _preferences.setString(_keyImagePath, ip);
+
+  static String getImagePath() => _preferences.getString(_keyImagePath);
 }

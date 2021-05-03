@@ -13,6 +13,11 @@ import 'user_simple_preferences.dart';
 import 'yourpostui.dart';
 import 'userinfo.dart';
 import 'drawerScreen.dart';
+import 'utility.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'utility.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'myclipper.dart';
 
 class profile extends StatefulWidget {
   @override
@@ -21,21 +26,179 @@ class profile extends StatefulWidget {
 
 class _profileState extends State<profile> {
   File sampleImage;
-  Future getImage() async {
-    var tempImage = await ImagePicker().getImage(source: ImageSource.gallery);
-    File imageFile = File(tempImage.path);
-    setState(() {
-      sampleImage = imageFile;
-    });
-  }
-
+  Image image;
   int userpts = 0;
   int nop = 0;
 
+  List contain = [];
+
   @override
   void initState() {
-    // user ke database se points nikale hain
+    contain = [
+      Container(
+        margin: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 20),
+        child: Column(
+          children: [
+            Expanded(
+              flex: 1,
+              child: CircleAvatar(
+                radius: 100,
+                backgroundImage: sampleImage == null
+                    ? AssetImage("images/nodp.jpg")
+                    : FileImage(sampleImage),
+              ),
+            ),
+            Expanded(
+              flex: 2,
+              child: Container(
+                margin: EdgeInsets.only(top: 20),
+                child: Column(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(vertical: 15),
+                      child: Text(
+                        UserSimplePreferences.getUserName(),
+                        style: TextStyle(
+                            fontSize: 25,
+                            fontFamily: "OpenSans",
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xfc121b6e)),
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 2, horizontal: 30),
+                            width: 120,
+                            color: Color(0xff607d8b),
+                            child: Column(
+                              children: [
+                                Text(
+                                  nop.toString(),
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontFamily: "HKGrotesk",
+                                      color: Colors.white),
+                                ),
+                                Text(
+                                  "Posts",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: "HKGrotesk",
+                                      color: Colors.white),
+                                ),
+                              ],
+                            )),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Container(
+                            width: 120,
+                            padding: EdgeInsets.symmetric(
+                                vertical: 2, horizontal: 30),
+                            color: Color(0xff607d8b),
+                            child: Column(
+                              children: [
+                                Text(
+                                  userpts.toString(),
+                                  style: TextStyle(
+                                      fontSize: 30,
+                                      fontFamily: "HKGrotesk",
+                                      color: Colors.white),
+                                ),
+                                Text(
+                                  "Points",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontFamily: "HKGrotesk",
+                                      color: Colors.white),
+                                ),
+                              ],
+                            )),
+                      ],
+                    ),
+                    Container(
+                      width: 300,
+                      margin: EdgeInsets.only(top: 35),
+                      decoration: BoxDecoration(
+                          color: Color(0xff4686c8),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: FlatButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Change Password",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: "OpenSans",
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 300,
+                      margin: EdgeInsets.symmetric(vertical: 15),
+                      decoration: BoxDecoration(
+                          color: Color(0xff4686c8),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/termandcondition');
+                        },
+                        child: Text(
+                          "Terms & Conditions",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: "OpenSans",
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      width: 300,
+                      decoration: BoxDecoration(
+                          color: Color(0xff4686c8),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: FlatButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/privacypolicy');
+                        },
+                        child: Text(
+                          "Privacy Policy",
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontFamily: "OpenSans",
+                              color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    ];
 
+    loadImageFromPrefs();
+
+    Future<String> uploadStatusImage() async {
+      if (true) {
+        FirebaseStorage storage = FirebaseStorage.instance;
+        final Reference postImageRef = storage.ref().child("Post Images");
+        var timeKey = new DateTime.now();
+        String xyz = timeKey.toString() + ".jpg";
+        final UploadTask uploadTask =
+            postImageRef.child(xyz).putFile(sampleImage);
+        var imageUrl = await (await uploadTask).ref.getDownloadURL();
+        final String url_akshat = imageUrl.toString();
+        return (url_akshat);
+      }
+    }
+
+    // user ke database se points nikale hain
     String phnumu = UserSimplePreferences.getphonenumber();
     DatabaseReference postsRef0 =
         FirebaseDatabase.instance.reference().child("User-Data");
@@ -56,11 +219,185 @@ class _profileState extends State<profile> {
         if (user.phnum == phnumu) {
           userpts = user.points;
           nop = user.number_of_posts;
+          setState(() {
+            contain = [
+              Container(
+                margin:
+                    EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 20),
+                child: Column(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: CircleAvatar(
+                        radius: 100,
+                        backgroundImage: sampleImage == null
+                            ? AssetImage("images/nodp.jpg")
+                            : FileImage(sampleImage),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        margin: EdgeInsets.only(top: 20),
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: EdgeInsets.symmetric(vertical: 15),
+                              child: Text(
+                                UserSimplePreferences.getUserName(),
+                                style: TextStyle(
+                                    fontSize: 25,
+                                    fontFamily: "OpenSans",
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xfc121b6e)),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 2, horizontal: 30),
+                                    width: 120,
+                                    color: Color(0xff607d8b),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          nop.toString(),
+                                          style: TextStyle(
+                                              fontSize: 30,
+                                              fontFamily: "HKGrotesk",
+                                              color: Colors.white),
+                                        ),
+                                        Text(
+                                          "Posts",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontFamily: "HKGrotesk",
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    )),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                    width: 120,
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 2, horizontal: 30),
+                                    color: Color(0xff607d8b),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          userpts.toString(),
+                                          style: TextStyle(
+                                              fontSize: 30,
+                                              fontFamily: "HKGrotesk",
+                                              color: Colors.white),
+                                        ),
+                                        Text(
+                                          "Points",
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              fontFamily: "HKGrotesk",
+                                              color: Colors.white),
+                                        ),
+                                      ],
+                                    )),
+                              ],
+                            ),
+                            Container(
+                              width: 300,
+                              margin: EdgeInsets.only(top: 35),
+                              decoration: BoxDecoration(
+                                  color: Color(0xff4686c8),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: FlatButton(
+                                onPressed: () {},
+                                child: Text(
+                                  "Change Password",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: "OpenSans",
+                                      color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 300,
+                              margin: EdgeInsets.symmetric(vertical: 15),
+                              decoration: BoxDecoration(
+                                  color: Color(0xff4686c8),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: FlatButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, '/termandcondition');
+                                },
+                                child: Text(
+                                  "Terms & Conditions",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: "OpenSans",
+                                      color: Colors.white),
+                                ),
+                              ),
+                            ),
+                            Container(
+                              width: 300,
+                              decoration: BoxDecoration(
+                                  color: Color(0xff4686c8),
+                                  borderRadius: BorderRadius.circular(20)),
+                              child: FlatButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, '/privacypolicy');
+                                },
+                                child: Text(
+                                  "Privacy Policy",
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      fontFamily: "OpenSans",
+                                      color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ];
+          });
           break;
         }
       }
     });
     super.initState();
+  }
+
+  Future getImage() async {
+    var tempImage = await ImagePicker().getImage(source: ImageSource.gallery);
+    File imageFile = File(tempImage.path);
+    setState(() {
+      sampleImage = imageFile;
+      image = Image.file(sampleImage);
+    });
+    ImageSharedPrefs.saveImageToPrefs(
+        ImageSharedPrefs.base64String(sampleImage.readAsBytesSync()));
+  }
+
+  loadImageFromPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final imageKeyValue = prefs.getString(IMAGE_KEY);
+    if (imageKeyValue != null) {
+      final imageString = await ImageSharedPrefs.loadImageFromPrefs();
+      setState(() {
+        image = ImageSharedPrefs.imageFrom64BaseString(imageString);
+      });
+    }
   }
 
   @override
@@ -77,9 +414,13 @@ class _profileState extends State<profile> {
                   flex: 1,
                   child: CircleAvatar(
                     radius: 100,
-                    backgroundImage: sampleImage == null
-                        ? AssetImage("images/nodp.jpg")
-                        : FileImage(sampleImage),
+                    child: ClipOval(
+                      // borderRadius: BorderRadius.circular(50.0),
+                      clipper: CircleRevealClipper(),
+                      child: image == null
+                          ? Image.asset("images/nodp.jpg")
+                          : image,
+                    ),
                   ),
                 ),
                 Expanded(
