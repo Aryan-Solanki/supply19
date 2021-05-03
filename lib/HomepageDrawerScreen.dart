@@ -22,163 +22,68 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                children: [
-                  Expanded(
-                      flex: 1,
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage: AssetImage("images/nodp.jpg"),
-                      )),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  Expanded(
-                      flex: 3,
-                      child: Text(
-                        UserSimplePreferences.getUserName(),
-                        style: TextStyle(
-                            fontSize: 25,
-                            color: Colors.white,
-                            fontFamily: "OpenSans",
-                            fontWeight: FontWeight.bold),
-                      ))
-                ],
-              ),
               Container(
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    FlatButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, "/profile");
-                        },
-                        child: Row(
-                          children: [
-                            // FaIcon(FontAwesomeIcons.user,size: 25,color: Colors.white,),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              "   Profile",
-                              style: TextStyle(
-                                  fontFamily: "OpenSans",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white),
-                            )
-                          ],
-                        )),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    FlatButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, "/homepage2");
-                        },
-                        child: Row(
-                          children: [
-                            // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              " Homepage",
-                              style: TextStyle(
-                                  fontFamily: "OpenSans",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white),
-                            )
-                          ],
-                        )),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    FlatButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, "/homepage");
-                        },
-                        child: Row(
-                          children: [
-                            // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              " Timeline",
-                              style: TextStyle(
-                                  fontFamily: "OpenSans",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white),
-                            )
-                          ],
-                        )),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    FlatButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: [
-                            // FaIcon(FontAwesomeIcons.star,size: 25,color: Colors.white,),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              "  Rate Us",
-                              style: TextStyle(
-                                  fontFamily: "OpenSans",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white),
-                            )
-                          ],
-                        )),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    FlatButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: [
-                            // Icon(Icons.share_outlined,size: 25,color: Colors.white,),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              "Share App",
-                              style: TextStyle(
-                                  fontFamily: "OpenSans",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white),
-                            )
-                          ],
-                        )),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    FlatButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: [
-                            // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              "     T&C",
-                              style: TextStyle(
-                                  fontFamily: "OpenSans",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white),
-                            )
-                          ],
-                        )),
-                  ],
+                children: [
+                  FlatButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          // FaIcon(FontAwesomeIcons.star,size: 25,color: Colors.white,),
+                          Text(
+                            "  Rate Us",
+                            style: TextStyle(
+                                fontFamily: "OpenSans",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white),
+                          )
+                        ],
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  FlatButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          // Icon(Icons.share_outlined,size: 25,color: Colors.white,),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            "Share App",
+                            style: TextStyle(
+                                fontFamily: "OpenSans",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white),
+                          )
+                        ],
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  FlatButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            "     T&C",
+                            style: TextStyle(
+                                fontFamily: "OpenSans",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white),
+                          )
+                        ],
+                      )),
+                ],
                 ),
               ),
               Container(

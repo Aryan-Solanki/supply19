@@ -410,17 +410,13 @@ class _profileState extends State<profile> {
             margin: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 20),
             child: Column(
               children: [
-                Expanded(
-                  flex: 1,
-                  child: CircleAvatar(
-                    radius: 100,
-                    child: ClipOval(
-                      // borderRadius: BorderRadius.circular(50.0),
-                      clipper: CircleRevealClipper(),
-                      child: image == null
-                          ? Image.asset("images/nodp.jpg")
-                          : image,
-                    ),
+                Container(
+                  width: 200,
+                  height: 200,
+                  decoration: BoxDecoration(
+                  ),
+                  child: ClipOval(
+                    child: image,
                   ),
                 ),
                 Expanded(
@@ -556,7 +552,10 @@ class _profileState extends State<profile> {
             ),
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: getImage,
+            onPressed:(){
+                getImage();
+            },
+
             tooltip: 'Add Image',
             child: Icon(Icons.add_a_photo),
           ),
