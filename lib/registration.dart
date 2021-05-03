@@ -9,8 +9,8 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-int _start = 10;
-int _current = 10;
+int _start = 60;
+int _current = 60;
 bool timer=false;
 bool numreq=false;
 int count =0;
@@ -131,6 +131,7 @@ class _registrationState extends State<registration> {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
+          key: _scaffoldkey,
           backgroundColor: Color(0xffededed),
           body: SingleChildScrollView(
               child: SafeArea(
@@ -170,25 +171,37 @@ class _registrationState extends State<registration> {
                                             otpsend==false?
                                             TextButton(
                                               onPressed: (){
-                                                print('+91'+_number);
-                                                _verifyPhone();
-                                                setState(() {
-                                                  timer=true;
-                                                  numreq=true;
-                                                  startTimer();
-                                                });
+                                                if(_number==null){
+                                                  FocusScope.of(context).unfocus();
+                                                  _scaffoldkey.currentState
+                                                      .showSnackBar(SnackBar(content: Text('Provide Number')));
+                                                }
+                                                else{
+                                                  _verifyPhone();
+                                                  setState(() {
+                                                    timer=true;
+                                                    numreq=true;
+                                                    startTimer();
+                                                  });
+                                                }
                                               },
                                               child: Text("Send OTP"),
                                             ):TextButton(
                                               onPressed: (){
+                                                if(_number==null){
+                                                  FocusScope.of(context).unfocus();
+                                                  _scaffoldkey.currentState
+                                                      .showSnackBar(SnackBar(content: Text('Provide Number')));
+                                                }
+                                                else{
+                                                  setState(() {
+                                                    timer=true;
+                                                    _current=60;
+                                                    startTimer();
+                                                    _verifyPhone();
+                                                  });
+                                                }
 
-                                                setState(() {
-
-                                                  timer=true;
-                                                  _current=10;
-
-                                                  startTimer();
-                                                });
                                               },
                                               child: Text("Resend OTP"),
                                             ),
@@ -316,7 +329,7 @@ class _registrationState extends State<registration> {
             _verificationCode = verificationID;
           });
         },
-        timeout: Duration(seconds: 10));
+        timeout: Duration(seconds: 30));
   }
 
 
