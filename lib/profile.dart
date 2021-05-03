@@ -215,6 +215,7 @@ class _profileState extends State<profile> {
           DATA0[indivisualKey]['volid'],
           DATA0[indivisualKey]['number_of_posts'],
           DATA0[indivisualKey]['points'],
+          DATA0[indivisualKey]['image'],
         );
         if (user.phnum == phnumu) {
           userpts = user.points;
@@ -413,8 +414,7 @@ class _profileState extends State<profile> {
                 Container(
                   width: 200,
                   height: 200,
-                  decoration: BoxDecoration(
-                  ),
+                  decoration: BoxDecoration(),
                   child: ClipOval(
                     child: image,
                   ),
@@ -552,10 +552,9 @@ class _profileState extends State<profile> {
             ),
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed:(){
-                getImage();
+            onPressed: () {
+              getImage();
             },
-
             tooltip: 'Add Image',
             child: Icon(Icons.add_a_photo),
           ),

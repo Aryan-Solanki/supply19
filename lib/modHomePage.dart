@@ -81,7 +81,10 @@ class _modHomePageState extends State<modHomePage>
   ];
 
   Future<Null> refreshList() async {
-    Navigator.pushReplacementNamed(context, '/homepage2');
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => modHomePage()),
+    );
     await Future.delayed(Duration(seconds: 2));
     return null;
   }
@@ -111,6 +114,7 @@ class _modHomePageState extends State<modHomePage>
           DATA0[indivisualKey]['volid'],
           DATA0[indivisualKey]['number_of_posts'],
           DATA0[indivisualKey]['points'],
+          DATA0[indivisualKey]['image'],
         );
         if (user.email == email) {
           userif.add(user);
@@ -238,6 +242,7 @@ class _modHomePageState extends State<modHomePage>
   double xOffset = 0;
   double yOffset = 0;
   double scaleFactor = 1;
+  String current_page = "modhomepage";
 
   bool isDrawerOpen = false;
   @override
