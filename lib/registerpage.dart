@@ -70,6 +70,7 @@ class _registerpageState extends State<registerpage> {
           DATA0[indivisualKey]['volid'],
           DATA0[indivisualKey]['number_of_posts'],
           DATA0[indivisualKey]['points'],
+          DATA0[indivisualKey]['image'],
         );
         if (phnum == user.phnum) {
           UserSimplePreferences.setphonenumber(phnum);

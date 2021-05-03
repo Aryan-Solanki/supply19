@@ -12,6 +12,7 @@ import 'main.dart';
 import 'city.dart';
 import 'package:search_choices/search_choices.dart';
 import 'package:cool_alert/cool_alert.dart';
+import 'userinfo.dart';
 
 class UploadPhotoPage extends StatefulWidget {
   @override
@@ -26,6 +27,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
   String sname = '';
   String sphnum = '';
   int current_post_number;
+  int user_current_posts;
 
   void savetoDatabase(url) {
     var dbTimeKey = new DateTime.now();
@@ -62,6 +64,11 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
     int newx = current_post_number + 1;
 
     ref.child("current").update({'post_no': newx});
+
+    DatabaseReference _ref =
+        FirebaseDatabase.instance.reference().child('User-Data');
+    int newposts = user_current_posts + 1;
+    _ref.child(currentUserKey).update({'number_of_posts': newposts});
 
     ref.child("Posts").push().set(data);
 
@@ -109,9 +116,37 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
     }
   }
 
+  var currentUserKey;
+
   @override
   void initState() {
     super.initState();
+
+    // User ke current number of posts {
+    FirebaseDatabase.instance
+        .reference()
+        .child("User-Data")
+        .orderByChild("order")
+        .onChildAdded
+        .listen((event) {
+      print(event.snapshot.value);
+      UserData ud = new UserData(
+        event.snapshot.value['email'],
+        event.snapshot.value['name'],
+        event.snapshot.value['phnum'],
+        event.snapshot.value['verify'],
+        event.snapshot.value['volid'],
+        event.snapshot.value['number_of_posts'],
+        event.snapshot.value['points'],
+        event.snapshot.value['image'],
+      );
+      if (UserSimplePreferences.getphonenumber() == ud.phnum) {
+        user_current_posts = ud.number_of_posts;
+        currentUserKey = event.snapshot.key;
+      }
+    });
+
+    // User ke current number of posts }
 
     DatabaseReference ref0 = FirebaseDatabase.instance.reference();
     ref0.once().then((DataSnapshot snap1) {

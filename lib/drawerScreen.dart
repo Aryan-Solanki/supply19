@@ -52,6 +52,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     FlatButton(
                         onPressed: () {
                           Navigator.pushNamed(context, "/profile");
+                          ;
                         },
                         child: Row(
                           children: [
@@ -97,7 +98,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     ),
                     FlatButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, "/homepage");
+                          Navigator.pushNamed(context, "/modtimeline");
                         },
                         child: Row(
                           children: [

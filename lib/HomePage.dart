@@ -15,6 +15,7 @@ import 'drawerScreen.dart';
 import 'postQuery.dart';
 import 'HomepageDrawerScreen.dart';
 import 'rankui.dart';
+import 'userinfo.dart';
 
 class HomePage extends StatefulWidget {
   final String title = "HomePage Timeline";
@@ -84,9 +85,34 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     ),
   ];
 
+  List<UserData> userslist = [];
+
   @override
   void initState() {
     super.initState();
+    int i = 0;
+    FirebaseDatabase.instance
+        .reference()
+        .child("User-Data")
+        .orderByChild("order")
+        .onChildAdded
+        .listen((event) {
+      print(event.snapshot.value);
+      UserData ud = new UserData(
+        event.snapshot.value['email'],
+        event.snapshot.value['name'],
+        event.snapshot.value['phnum'],
+        event.snapshot.value['verify'],
+        event.snapshot.value['volid'],
+        event.snapshot.value['number_of_posts'],
+        event.snapshot.value['points'],
+        event.snapshot.value['image'],
+      );
+      if (i < 101) {
+        userslist.add(ud);
+        i += 1;
+      }
+    });
     city_name = UserSimplePreferences.getCity() ?? '';
     categorySelector = UserSimplePreferences.getCategory() ?? 'All Supplies';
     _controller = AnimationController(
@@ -176,19 +202,21 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 height: 10,
               ),
               Container(
-                child: Expanded(
-                  child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: 10,
-                      itemBuilder: (_, index) {
-                        return RankUI(
-                            "https://zvelo.com/wp-content/uploads/2018/11/anatomy-of-a-full-path-url-hostname-tld-path-protocol.jpg",
-                            1,
-                            123,
-                            "aaaaaaaaaaaaaaaaaa");
-                      }),
-                ),
-              ),
+                  child: Expanded(
+                child: (userslist.length == 0 || userslist.length == null)
+                    ? Text("No information available")
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: userslist.length,
+                        itemBuilder: (_, index) {
+                          return RankUI(
+                            userslist[index].image,
+                            (index + 1),
+                            userslist[index].points,
+                            userslist[index].name,
+                          );
+                        }),
+              )),
             ],
           )),
           meet_team()

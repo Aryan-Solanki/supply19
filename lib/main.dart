@@ -19,6 +19,7 @@ import 'user_simple_preferences.dart';
 import 'termandcondition.dart';
 import 'regHomePage.dart';
 import 'regTimeline.dart';
+import 'modHomePageTimeline.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -41,6 +42,7 @@ class my extends StatelessWidget {
         '/login': (context) => login(),
         '/homepage': (context) => HomePage(),
         '/homepage2': (context) => modHomePage(),
+        '/modtimeline': (context) => modHomePageTimeline(),
         '/homepage3': (context) => regHomePage(),
         '/regtimeline': (context) => regTimeline(),
         '/signup': (context) => signup(),

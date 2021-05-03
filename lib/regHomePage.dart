@@ -104,6 +104,7 @@ class _regHomePageState extends State<regHomePage>
           DATA0[indivisualKey]['volid'],
           DATA0[indivisualKey]['number_of_posts'],
           DATA0[indivisualKey]['points'],
+          DATA0[indivisualKey]['image'],
         );
         if (user.phnum == phnum) {
           userif.add(user);
