@@ -13,6 +13,8 @@ import 'user_simple_preferences.dart';
 import 'main.dart';
 import 'drawerScreen.dart';
 import 'postQuery.dart';
+import 'userinfo.dart';
+import 'rankui.dart';
 
 class modHomePageTimeline extends StatefulWidget {
   final String title = "modHomePageTimeline Timeline";
@@ -83,9 +85,34 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
     ),
   ];
 
+  List<UserData> userslist = [];
+
   @override
   void initState() {
     super.initState();
+    int i = 0;
+    FirebaseDatabase.instance
+        .reference()
+        .child("User-Data")
+        .orderByChild("order")
+        .onChildAdded
+        .listen((event) {
+      print(event.snapshot.value);
+      UserData ud = new UserData(
+        event.snapshot.value['email'],
+        event.snapshot.value['name'],
+        event.snapshot.value['phnum'],
+        event.snapshot.value['verify'],
+        event.snapshot.value['volid'],
+        event.snapshot.value['number_of_posts'],
+        event.snapshot.value['points'],
+        event.snapshot.value['image'],
+      );
+      if (i < 101) {
+        userslist.add(ud);
+        i += 1;
+      }
+    });
     city_name = UserSimplePreferences.getCity() ?? '';
     categorySelector = UserSimplePreferences.getCategory() ?? 'All Supplies';
     _controller = AnimationController(
@@ -162,10 +189,36 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
             ),
           ),
           SafeArea(
-            child: Container(
-              child: Text("This is victory"),
-            ),
-          ),
+              child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Leaderboard",
+                style: TextStyle(fontSize: 30, fontFamily: "OpenSans"),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                  child: Expanded(
+                child: (userslist.length == 0 || userslist.length == null)
+                    ? Text("No information available")
+                    : ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: userslist.length,
+                        itemBuilder: (_, index) {
+                          return RankUI(
+                            userslist[index].image,
+                            (index + 1),
+                            userslist[index].points,
+                            userslist[index].name,
+                          );
+                        }),
+              )),
+            ],
+          )),
           meet_team()
         ];
       });
