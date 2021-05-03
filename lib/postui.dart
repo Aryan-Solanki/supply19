@@ -90,6 +90,57 @@ Widget PostsUI(String image, String description, String date, String time,
                           // style: Theme.of(context).textTheme.subhead,
                           textAlign: TextAlign.center,
                         ),
+                        Container(
+                          margin: EdgeInsets.only(top: 0.0),
+                          padding: EdgeInsets.all(0.0),
+                          child: Container(
+                            color: Colors.white,
+                            margin: EdgeInsets.only(top: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    padding: EdgeInsets.only(left: 10.0),
+                                    child: Text(
+                                      "Supplier Name :  " + volname,
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.black),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 0.0),
+                          padding: EdgeInsets.all(0.0),
+                          child: Container(
+                            color: Colors.white,
+                            margin: EdgeInsets.only(top: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    child: TextButton(
+                                      // padding: EdgeInsets.all(0),
+                                      onPressed: () {
+                                        _makingPhoneCall(phnum);
+                                      },
+                                      child: Text(
+                                        "+91-" + phnum,
+                                        style: TextStyle(
+                                            fontSize: 15, color: Colors.black),
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
