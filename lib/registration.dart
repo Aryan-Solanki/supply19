@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:medicalapp/HomePage.dart';
+import 'package:medicalapp/registerpage.dart';
 import 'package:quiver/async.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import 'package:pinput/pin_put/pin_put_state.dart';
@@ -61,20 +62,6 @@ class _registrationState extends State<registration> {
   String _name, _number = "", _email = "";
   bool otpsend = false;
   bool numverify = false;
-
-  void savetoDatabase() {
-    DatabaseReference ref = FirebaseDatabase.instance.reference();
-    var data = {
-      "email": _email,
-      "name": _name,
-      "number_of_posts": 0,
-      "phnum": _number,
-      "points": 0,
-      "verify": "no",
-      "volid": 'test',
-    };
-    ref.child("User-Data").push().set(data);
-  }
 
   @override
   void initState() {
@@ -142,7 +129,7 @@ class _registrationState extends State<registration> {
             Container(
               margin: EdgeInsets.all(30),
               child: Text(
-                "Volunteer",
+                "Registration",
                 style: TextStyle(
                     fontFamily: "LatoBold",
                     fontSize: 45,
@@ -271,10 +258,17 @@ class _registrationState extends State<registration> {
                             verificationId: _verificationCode, smsCode: pin))
                         .then((value) async {
                       if (value.user != null) {
-                        Navigator.pushNamed(context, "/homepage");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => registerpage(
+                                    phnum: _number,
+                                  )),
+                        );
                       }
                     });
                   } catch (e) {
+                    print(e);
                     FocusScope.of(context).unfocus();
                     _scaffoldkey.currentState
                         .showSnackBar(SnackBar(content: Text('Invalid OTP')));
@@ -314,7 +308,10 @@ class _registrationState extends State<registration> {
             if (value.user != null) {
               Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
+                  MaterialPageRoute(
+                      builder: (context) => registerpage(
+                            phnum: _number,
+                          )),
                   (route) => false);
             }
           });

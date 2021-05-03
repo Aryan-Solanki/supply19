@@ -17,6 +17,7 @@ import 'HomePage.dart';
 import 'modHomePage.dart';
 import 'user_simple_preferences.dart';
 import 'termandcondition.dart';
+import 'regHomePage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,7 +25,7 @@ void main() async {
   await UserSimplePreferences.init();
   await UserSimplePreferences.setCategory('');
   await UserSimplePreferences.setCity('');
-  runApp(registerpage());
+  runApp(my());
 }
 
 class my extends StatelessWidget {
@@ -39,6 +40,7 @@ class my extends StatelessWidget {
         '/login': (context) => login(),
         '/homepage': (context) => HomePage(),
         '/homepage2': (context) => modHomePage(),
+        '/homepage3': (context) => regHomePage(),
         '/signup': (context) => signup(),
         '/citypage': (context) => citypage(),
         '/registration': (context) => registration(),

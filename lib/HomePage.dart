@@ -111,6 +111,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         event.snapshot.value['status'],
         event.snapshot.value['location'],
         event.snapshot.value['category'],
+        event.snapshot.value['sname'],
+        event.snapshot.value['sphnum'],
       );
 
       if (posts.status != "fake") {
@@ -153,6 +155,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           postList[index].phnum,
                           postList[index].volname,
                           postList[index].status,
+                          postList[index].sname,
+                          postList[index].sphnum,
                         );
                       }),
             ),

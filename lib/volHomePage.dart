@@ -33,7 +33,7 @@ class _volHomePageState extends State<volHomePage>
 
   bool allsupplies = true;
   String email;
-  List<User> userif = [];
+  List<UserData> userif = [];
   List<Posts> postList = [];
   List<Posts> postListuser = [];
   final controller = ScrollController();
@@ -100,7 +100,7 @@ class _volHomePageState extends State<volHomePage>
       var DATA0 = snap0.value;
 
       for (var indivisualKey in KEYS0) {
-        User user = new User(
+        UserData user = new UserData(
           DATA0[indivisualKey]['email'],
           DATA0[indivisualKey]['name'],
           DATA0[indivisualKey]['phnum'],
@@ -141,6 +141,8 @@ class _volHomePageState extends State<volHomePage>
           DATA1[indivisualKey]['status'],
           DATA1[indivisualKey]['location'],
           DATA1[indivisualKey]['category'],
+          DATA1[indivisualKey]['sname'],
+          DATA1[indivisualKey]['sphnum'],
         );
         var x = UserSimplePreferences.getphonenumber();
         if (posts.status != "fake") {
@@ -173,6 +175,8 @@ class _volHomePageState extends State<volHomePage>
           DATA[indivisualKey]['status'],
           DATA[indivisualKey]['location'],
           DATA[indivisualKey]['category'],
+          DATA[indivisualKey]['sname'],
+          DATA[indivisualKey]['sphnum'],
         );
         if (posts.status != "fake") {
           postList.add(posts);
@@ -198,6 +202,8 @@ class _volHomePageState extends State<volHomePage>
                         postListuser[index].phnum,
                         postListuser[index].volname,
                         postListuser[index].status,
+                        postListuser[index].sname,
+                        postListuser[index].sphnum,
                       );
                     }),
           ),
@@ -217,6 +223,8 @@ class _volHomePageState extends State<volHomePage>
                           postList[index].phnum,
                           postList[index].volname,
                           postList[index].status,
+                          postList[index].sname,
+                          postList[index].sphnum,
                         );
                       }),
             ),

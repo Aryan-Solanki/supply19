@@ -207,7 +207,7 @@ class _profileState extends State<profile> {
       var DATA0 = snap0.value;
 
       for (var indivisualKey in KEYS0) {
-        User user = new User(
+        UserData user = new UserData(
           DATA0[indivisualKey]['email'],
           DATA0[indivisualKey]['name'],
           DATA0[indivisualKey]['phnum'],

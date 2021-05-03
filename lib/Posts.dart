@@ -7,7 +7,19 @@ class Posts {
       volname,
       status,
       location,
-      categpry;
-  Posts(this.image, this.description, this.date, this.time, this.phnum,
-      this.volname, this.status, this.location, this.categpry);
+      categpry,
+      sname,
+      sphnum;
+  Posts(
+      this.image,
+      this.description,
+      this.date,
+      this.time,
+      this.phnum,
+      this.volname,
+      this.status,
+      this.location,
+      this.categpry,
+      this.sname,
+      this.sphnum);
 }

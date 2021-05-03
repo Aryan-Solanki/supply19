@@ -12,7 +12,7 @@ _makingPhoneCall(callString) async {
 }
 
 Widget yourPostsUI(String image, String description, String date, String time,
-    String phnum, String volname, String status) {
+    String phnum, String volname, String status, String sname, String sphnum) {
   String verified;
   if (status != "fake") {
     verified = "Verified";
@@ -86,6 +86,91 @@ Widget yourPostsUI(String image, String description, String date, String time,
                   // style: Theme.of(context).textTheme.subhead,
                   textAlign: TextAlign.center,
                 ),
+                (sname == null || sname == "")
+                    ? SizedBox(
+                        height: 1.0,
+                      )
+                    : Container(
+                        margin: EdgeInsets.only(top: 0.0),
+                        padding: EdgeInsets.all(0.0),
+                        child: Container(
+                          color: Colors.white,
+                          margin: EdgeInsets.only(top: 20.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                    child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        "   Supplier Name ",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          sname,
+                                          style: TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                (sphnum == null || sphnum == "")
+                    ? SizedBox(
+                        height: 1.0,
+                      )
+                    : Container(
+                        margin: EdgeInsets.only(top: 0.0),
+                        padding: EdgeInsets.all(0.0),
+                        child: Container(
+                          color: Colors.white,
+                          margin: EdgeInsets.only(top: 20.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: Text(
+                                  "   Cotact No. ",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                              Expanded(
+                                child: TextButton(
+                                  // padding: EdgeInsets.all(0),
+                                  onPressed: () {
+                                    _makingPhoneCall(phnum);
+                                  },
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "+91-" + sphnum,
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.blue),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
               ],
             ),
           ),
