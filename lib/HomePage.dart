@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medicalapp/chooselocation.dart';
 import 'package:medicalapp/meet_team.dart';
-import 'package:medicalapp/rankpage.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'postui.dart';
@@ -164,25 +163,34 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
           ),
           SafeArea(
-            child: Column(
-              children: [
-                SizedBox(height: 10,),
-                Text("Leaderboard",style: TextStyle(fontSize: 30,fontFamily: "OpenSans"),),
-                SizedBox(height: 10,),
-                Container(
-                  child: Expanded(
-                    child: ListView.builder(
+              child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Leaderboard",
+                style: TextStyle(fontSize: 30, fontFamily: "OpenSans"),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                child: Expanded(
+                  child: ListView.builder(
                       shrinkWrap: true,
-                        itemCount: 10,
-                        itemBuilder: (_,index){
-                          return RankUI("https://zvelo.com/wp-content/uploads/2018/11/anatomy-of-a-full-path-url-hostname-tld-path-protocol.jpg", 1, 123, "aaaaaaaaaaaaaaaaaa");
-                        }
-                    ),
-                  ),
+                      itemCount: 10,
+                      itemBuilder: (_, index) {
+                        return RankUI(
+                            "https://zvelo.com/wp-content/uploads/2018/11/anatomy-of-a-full-path-url-hostname-tld-path-protocol.jpg",
+                            1,
+                            123,
+                            "aaaaaaaaaaaaaaaaaa");
+                      }),
                 ),
-              ],
-            )
-          ),
+              ),
+            ],
+          )),
           meet_team()
         ];
       });
