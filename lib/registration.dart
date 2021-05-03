@@ -25,6 +25,7 @@ class registration extends StatefulWidget {
 
 
 class _registrationState extends State<registration> {
+  final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   String _verificationCode;
   final TextEditingController _pinPutController = TextEditingController();
   final FocusNode _pinPutFocusNode = FocusNode();
@@ -246,14 +247,21 @@ class _registrationState extends State<registration> {
             ),
             PinPut(
               fieldsCount: 6,
-              onSubmit: (a){
-                CoolAlert.show(
-                  context: context,
-                  type: CoolAlertType.success,
-                  text: "Your post was successful",
-                );
-                print(a);
-                print("hiiii");
+              onSubmit: (pin) async{
+                try {
+                  await FirebaseAuth.instance
+                      .signInWithCredential(PhoneAuthProvider.credential(
+                      verificationId: _verificationCode, smsCode: pin))
+                      .then((value) async {
+                    if (value.user != null) {
+                      Navigator.pushNamed(context, "/homepage");
+                    }
+                  });
+                } catch (e) {
+                  FocusScope.of(context).unfocus();
+                  _scaffoldkey.currentState
+                      .showSnackBar(SnackBar(content: Text('Invalid OTP')));
+                }
               },
               focusNode: _pinPutFocusNode,
               controller: _pinPutController,
@@ -308,7 +316,7 @@ class _registrationState extends State<registration> {
             _verificationCode = verificationID;
           });
         },
-        timeout: Duration(seconds: 120));
+        timeout: Duration(seconds: 10));
   }
 
 
