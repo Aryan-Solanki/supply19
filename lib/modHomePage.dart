@@ -22,15 +22,21 @@ import 'queryuidata.dart';
 
 class modHomePage extends StatefulWidget {
   final String title = "modHomePage Timeline";
+  int selectedItemPosition;
+  modHomePage({this.selectedItemPosition});
   @override
-  _modHomePageState createState() => _modHomePageState();
+  _modHomePageState createState() =>
+      _modHomePageState(selectedItemPosition: selectedItemPosition);
 }
 
 class _modHomePageState extends State<modHomePage>
     with TickerProviderStateMixin {
+  int selectedItemPosition;
+  _modHomePageState({this.selectedItemPosition});
+
   getbody() {
     try {
-      return tab[_selectedItemPosition];
+      return tab[selectedItemPosition];
     } catch (e) {
       Text("");
     }
@@ -44,11 +50,11 @@ class _modHomePageState extends State<modHomePage>
   List<Posts> postListuser = [];
   List<QueryUiData> uq = [];
   final controller = ScrollController();
-  int _selectedItemPosition = 1;
   List tab = [];
   AnimationController _controller;
   bool _visible = true;
   GlobalKey<RefreshIndicatorState> refreshKey;
+  GlobalKey<RefreshIndicatorState> refreshKeyQuery;
 
   final items = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
@@ -85,10 +91,22 @@ class _modHomePageState extends State<modHomePage>
     ),
   ];
 
-  Future<Null> refreshList() async {
+  Future<Null> refreshList(int selected_item) async {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => modHomePage()),
+      MaterialPageRoute(
+          builder: (context) =>
+              modHomePage(selectedItemPosition: selected_item)),
+    );
+    await Future.delayed(Duration(seconds: 2));
+    return null;
+  }
+
+  Future<Null> refreshListQuery() async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => modHomePage(selectedItemPosition: 0)),
     );
     await Future.delayed(Duration(seconds: 2));
     return null;
@@ -98,6 +116,7 @@ class _modHomePageState extends State<modHomePage>
   void initState() {
     super.initState();
     refreshKey = GlobalKey<RefreshIndicatorState>();
+    refreshKeyQuery = GlobalKey<RefreshIndicatorState>();
     email = UserSimplePreferences.getEmail() ?? '';
     _controller = AnimationController(
       vsync: this,
@@ -197,20 +216,26 @@ class _modHomePageState extends State<modHomePage>
           Container(
             child: uq.length == 0
                 ? Text("No Queries Available")
-                : ListView.builder(
-                    itemCount: uq.length,
-                    itemBuilder: (_, index) {
-                      return QueryUI(
-                        uq[index].image,
-                        uq[index].description,
-                        uq[index].date,
-                        uq[index].time,
-                        uq[index].phnum,
-                        uq[index].name,
-                        uq[index].requirement,
-                        uq[index].location,
-                      );
-                    }),
+                : RefreshIndicator(
+                    key: refreshKeyQuery,
+                    onRefresh: () async {
+                      await refreshListQuery();
+                    },
+                    child: ListView.builder(
+                        itemCount: uq.length,
+                        itemBuilder: (_, index) {
+                          return QueryUI(
+                            uq[index].image,
+                            uq[index].description,
+                            uq[index].date,
+                            uq[index].time,
+                            uq[index].phnum,
+                            uq[index].name,
+                            uq[index].requirement,
+                            uq[index].location,
+                          );
+                        }),
+                  ),
           ),
           Container(
             child: postListuser.length == 0
@@ -218,7 +243,7 @@ class _modHomePageState extends State<modHomePage>
                 : RefreshIndicator(
                     key: refreshKey,
                     onRefresh: () async {
-                      await refreshList();
+                      await refreshList(1);
                     },
                     child: ListView.builder(
                         itemCount: postListuser.length,
@@ -256,7 +281,7 @@ class _modHomePageState extends State<modHomePage>
   List listItem = ["Item 1", "Item 2", "Item 3"];
   void checkboollol() {
     setState(() {
-      if (_selectedItemPosition == 1) {
+      if (selectedItemPosition == 1 || selectedItemPosition == 0) {
         allsupplies = true;
       } else {
         allsupplies = false;
@@ -340,11 +365,13 @@ class _modHomePageState extends State<modHomePage>
                         color: Color(0xFFBDD4EB),
                         child: Center(
                           child: Text(
-                            _selectedItemPosition == 1
+                            selectedItemPosition == 1
                                 ? ((postListuser.length == 0)
                                     ? "Your Posts"
                                     : UserSimplePreferences.getUserName())
-                                : "TimeLine",
+                                : ((selectedItemPosition == 0)
+                                    ? "Query"
+                                    : "Timeline"),
                             style: TextStyle(
                                 color: Color(0xFF09427d),
                                 fontSize: 20.0,
@@ -368,10 +395,10 @@ class _modHomePageState extends State<modHomePage>
                     showSelectedLabels: true,
                     // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
                     padding: EdgeInsets.all(12),
-                    currentIndex: _selectedItemPosition,
+                    currentIndex: selectedItemPosition,
                     onTap: (index) {
                       setState(() {
-                        _selectedItemPosition = index;
+                        selectedItemPosition = index;
                         checkboollol();
                       });
                     },

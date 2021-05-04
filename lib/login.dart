@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'user_simple_preferences.dart';
+import 'modHomePage.dart';
 
 class login extends StatefulWidget {
   @override
@@ -55,8 +56,8 @@ class _loginState extends State<login> {
                           children: [
                             Text(
                               "Email :",
-                              style:
-                                  TextStyle(fontFamily: "OpenSans", fontSize: 20),
+                              style: TextStyle(
+                                  fontFamily: "OpenSans", fontSize: 20),
                             ),
                             Container(
                               margin: EdgeInsets.symmetric(vertical: 15),
@@ -79,8 +80,8 @@ class _loginState extends State<login> {
                             ),
                             Text(
                               "Password :",
-                              style:
-                                  TextStyle(fontFamily: "OpenSans", fontSize: 20),
+                              style: TextStyle(
+                                  fontFamily: "OpenSans", fontSize: 20),
                             ),
                             Container(
                               margin: EdgeInsets.symmetric(vertical: 15),
@@ -141,7 +142,12 @@ class _loginState extends State<login> {
                                       );
                                       await UserSimplePreferences.setEmail(
                                           _email);
-                                      Navigator.pushNamed(context, "/homepage2");
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => modHomePage(
+                                                selectedItemPosition: 1)),
+                                      );
                                     } on FirebaseAuthException catch (e) {
                                       if (e.code == 'user-not-found') {
                                         setState(() {
