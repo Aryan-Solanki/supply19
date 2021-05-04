@@ -22,7 +22,7 @@ import 'queryuidata.dart';
 
 class modHomePage extends StatefulWidget {
   final String title = "modHomePage Timeline";
-  int selectedItemPosition = 1;
+  int selectedItemPosition;
   modHomePage({this.selectedItemPosition});
   @override
   _modHomePageState createState() =>
@@ -31,7 +31,7 @@ class modHomePage extends StatefulWidget {
 
 class _modHomePageState extends State<modHomePage>
     with TickerProviderStateMixin {
-  int selectedItemPosition = 1;
+  int selectedItemPosition;
   _modHomePageState({this.selectedItemPosition});
 
   getbody() {
