@@ -91,8 +91,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          modHomePageTimeline()),
+                                      builder: (context) => modHomePageTimeline(
+                                          selectedItemPosition: 2)),
                                 );
                               });
                               Timer(Duration(seconds: 1), () {
