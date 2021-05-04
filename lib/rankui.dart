@@ -41,7 +41,7 @@ Widget RankUI(String image, int rank, int points,String volname) {
           padding: const EdgeInsets.only(right: 10),
           child: CircleAvatar(
             radius: 40,
-            backgroundImage: NetworkImage(image),
+            backgroundImage: (image=="")?AssetImage("images/nodp.jpg"):NetworkImage(image),
           ),
         ),
         rank<4?crown(rank):SizedBox(width: 0,),
@@ -89,7 +89,7 @@ Widget RankUI(String image, int rank, int points,String volname) {
           padding: const EdgeInsets.only(right: 10),
           child: CircleAvatar(
             radius: 40,
-            backgroundImage: NetworkImage(image),
+            backgroundImage: (image=="")?AssetImage("images/nodp.jpg"):NetworkImage(image),
           ),
         ),
         rank<4?crown(rank):SizedBox(width: 0,),
