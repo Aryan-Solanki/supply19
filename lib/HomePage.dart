@@ -427,7 +427,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      HomePage()),
+                                                      HomePage(
+                                                        selectedItemPosition: 2,
+                                                      )),
                                             );
                                           });
                                         },
@@ -472,7 +474,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()),
+                                  builder: (context) => HomePage(
+                                        selectedItemPosition: 2,
+                                      )),
                             );
                           },
                           items: listItem.map((valueItem) {

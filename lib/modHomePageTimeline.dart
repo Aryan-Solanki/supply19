@@ -435,7 +435,9 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      modHomePageTimeline()),
+                                                      modHomePageTimeline(
+                                                        selectedItemPosition: 2,
+                                                      )),
                                             );
                                           });
                                         },
@@ -480,7 +482,9 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => modHomePage()),
+                                  builder: (context) => modHomePage(
+                                        selectedItemPosition: 2,
+                                      )),
                             );
                           },
                           items: listItem.map((valueItem) {

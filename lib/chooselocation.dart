@@ -79,7 +79,7 @@ class _chooselocationState extends State<chooselocation> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => HomePage(
-                                      selectedItemPosition: 3,
+                                      selectedItemPosition: 2,
                                     )),
                           );
                         }
@@ -123,7 +123,7 @@ class _chooselocationState extends State<chooselocation> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => HomePage(
-                                                selectedItemPosition: 3,
+                                                selectedItemPosition: 2,
                                               )),
                                     );
                                   }
@@ -158,7 +158,7 @@ class _chooselocationState extends State<chooselocation> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => HomePage(
-                                                selectedItemPosition: 3,
+                                                selectedItemPosition: 2,
                                               )),
                                     );
                                   }
@@ -193,7 +193,7 @@ class _chooselocationState extends State<chooselocation> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => HomePage(
-                                                selectedItemPosition: 3,
+                                                selectedItemPosition: 2,
                                               )),
                                     );
                                   }
@@ -233,7 +233,7 @@ class _chooselocationState extends State<chooselocation> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => HomePage(
-                                                  selectedItemPosition: 3,
+                                                  selectedItemPosition: 2,
                                                 )),
                                       );
                                     }
@@ -270,7 +270,7 @@ class _chooselocationState extends State<chooselocation> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => HomePage(
-                                                  selectedItemPosition: 3,
+                                                  selectedItemPosition: 2,
                                                 )),
                                       );
                                     }
@@ -307,7 +307,7 @@ class _chooselocationState extends State<chooselocation> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => HomePage(
-                                                selectedItemPosition: 3,
+                                                selectedItemPosition: 2,
                                               )),
                                     );
                                   }
@@ -343,7 +343,7 @@ class _chooselocationState extends State<chooselocation> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => HomePage(
-                                                selectedItemPosition: 3,
+                                                selectedItemPosition: 2,
                                               )),
                                     );
                                   }
@@ -378,7 +378,7 @@ class _chooselocationState extends State<chooselocation> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => HomePage(
-                                                selectedItemPosition: 3,
+                                                selectedItemPosition: 2,
                                               )),
                                     );
                                   }
