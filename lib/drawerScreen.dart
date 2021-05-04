@@ -118,7 +118,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                         : FlatButton(
                             onPressed: () {
                               setState(() {
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => modHomePage(
