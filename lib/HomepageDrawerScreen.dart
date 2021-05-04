@@ -14,17 +14,30 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
     return SafeArea(
       child: Scaffold(
         body: Container(
+          padding: EdgeInsets.all(20),
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   colors: [Color(0xff6dd5ed), Color(0xff2193b0)])),
-          padding: EdgeInsets.only(top: 30, bottom: 50, left: 10),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                child: Column(
-                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 50,
+                  backgroundImage: AssetImage("images/logo.png"),
+                ),
+                Text("  SUPPLY - 19",
+                  style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontFamily: "OpenSans",
+              fontWeight: FontWeight.bold),)
+              ],
+            ),
+            Container(
+              child: Column(
                 children: [
                   FlatButton(
                       onPressed: () {},
@@ -32,7 +45,7 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                         children: [
                           // FaIcon(FontAwesomeIcons.star,size: 25,color: Colors.white,),
                           Text(
-                            "  Rate Us",
+                            "     Rate Us",
                             style: TextStyle(
                                 fontFamily: "OpenSans",
                                 fontWeight: FontWeight.bold,
@@ -84,26 +97,10 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                         ],
                       )),
                 ],
-                ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 20),
-                height: 35,
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                decoration: BoxDecoration(
-                    color: Color(0xff2193b0),
-                    borderRadius: BorderRadius.circular(30)),
-                child: FlatButton(
-                    onPressed: () {},
-                    child: Text(
-                      "Log Out",
-                      style: TextStyle(
-                          fontFamily: "OpenSans",
-                          fontSize: 20,
-                          color: Colors.white),
-                    )),
-              )
-            ],
+            ),
+            SizedBox(height: 0,)
+          ],
           ),
         ),
       ),

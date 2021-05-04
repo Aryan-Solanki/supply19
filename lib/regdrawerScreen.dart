@@ -12,7 +12,7 @@ import 'regHomePage.dart';
 import 'regTimeline.dart';
 import 'termandcondition.dart';
 
-String current = "modhomepage";
+
 
 class regDrawerScreen extends StatefulWidget {
   @override
@@ -22,7 +22,7 @@ class regDrawerScreen extends StatefulWidget {
 class _regDrawerScreenState extends State<regDrawerScreen> {
   File sampleImage;
   Image image;
-
+  String current = "reghomepage";
   @override
   void initState() {
     loadImageFromPrefs();
@@ -110,27 +110,21 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                   SizedBox(
                     height: 5,
                   ),
-                  current == "modhomepage"
+                  current == "reghomepage"
                       ? FlatButton(
                           onPressed: () {
                             setState(() {
+                              current = "timeline";
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => regTimeline()),
                               );
                             });
-                            Timer(Duration(seconds: 1), () {
-                              current = "timeline";
-                            });
+
+
                           },
-                          child: Row(
-                            children: [
-                              // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
+                      child: Text(
                                 " Timeline",
                                 style: TextStyle(
                                     fontFamily: "OpenSans",
@@ -138,27 +132,20 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                                     fontSize: 18,
                                     color: Colors.white),
                               )
-                            ],
-                          ))
+                          )
                       : FlatButton(
                           onPressed: () {
                             setState(() {
-                              Navigator.push(
+                              current = "reghomepage";
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => regHomePage()),
                               );
                             });
-                            Timer(Duration(seconds: 1), () {
-                              current = "modhomepage";
-                            });
+
                           },
-                          child: Row(
-                            children: [
-                              // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
-                              SizedBox(
-                                width: 20,
-                              ),
+                          child:
                               Text(
                                 " Homepage",
                                 style: TextStyle(
@@ -167,8 +154,8 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                                     fontSize: 18,
                                     color: Colors.white),
                               )
-                            ],
-                          )),
+
+                          ),
                   SizedBox(
                     height: 5,
                   ),
