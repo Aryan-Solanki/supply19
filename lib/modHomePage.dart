@@ -19,6 +19,7 @@ import 'userinfo.dart';
 import 'drawerScreen.dart';
 import 'queryui.dart';
 import 'queryuidata.dart';
+import 'moderatorVerify.dart';
 
 class modHomePage extends StatefulWidget {
   final String title = "modHomePage Timeline";
@@ -294,6 +295,7 @@ class _modHomePageState extends State<modHomePage>
                   ),
           ),
           UploadPhotoPage(),
+          moderatorVerify(),
           meet_team(),
         ];
       });
