@@ -14,7 +14,7 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 20),
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   colors: [Color(0xff6dd5ed), Color(0xff2193b0)])),
@@ -45,7 +45,7 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                         children: [
                           // FaIcon(FontAwesomeIcons.star,size: 25,color: Colors.white,),
                           Text(
-                            "     Rate Us",
+                            "       Rate Us",
                             style: TextStyle(
                                 fontFamily: "OpenSans",
                                 fontWeight: FontWeight.bold,
@@ -66,7 +66,7 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                             width: 20,
                           ),
                           Text(
-                            "Share App",
+                            "  Share App",
                             style: TextStyle(
                                 fontFamily: "OpenSans",
                                 fontWeight: FontWeight.bold,
@@ -87,7 +87,70 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                             width: 20,
                           ),
                           Text(
-                            "     T&C",
+                            "About Plasma",
+                            style: TextStyle(
+                                fontFamily: "OpenSans",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white),
+                          )
+                        ],
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  FlatButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            "About Covid",
+                            style: TextStyle(
+                                fontFamily: "OpenSans",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white),
+                          )
+                        ],
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  FlatButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            " Support Us",
+                            style: TextStyle(
+                                fontFamily: "OpenSans",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white),
+                          )
+                        ],
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  FlatButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            "        T&C",
                             style: TextStyle(
                                 fontFamily: "OpenSans",
                                 fontWeight: FontWeight.bold,
@@ -99,7 +162,7 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 0,)
+            SizedBox(height: 70,)
           ],
           ),
         ),
