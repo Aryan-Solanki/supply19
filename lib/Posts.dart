@@ -9,7 +9,8 @@ class Posts {
       location,
       categpry,
       sname,
-      sphnum;
+      sphnum,
+      key;
   Posts(
       this.image,
       this.description,
@@ -21,5 +22,6 @@ class Posts {
       this.location,
       this.categpry,
       this.sname,
-      this.sphnum);
+      this.sphnum,
+      this.key);
 }
