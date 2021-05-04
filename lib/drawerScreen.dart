@@ -47,7 +47,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   Expanded(
                       flex: 3,
                       child: Text(
-                        UserSimplePreferences.getUserName(),
+                        UserSimplePreferences.getUserName() ?? '',
                         style: TextStyle(
                             fontSize: 25,
                             color: Colors.white,
