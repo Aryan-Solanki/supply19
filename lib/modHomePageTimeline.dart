@@ -19,25 +19,31 @@ import 'modHomePage.dart';
 
 class modHomePageTimeline extends StatefulWidget {
   final String title = "modHomePageTimeline Timeline";
+  int selectedItemPosition;
+  modHomePageTimeline({this.selectedItemPosition});
   @override
-  _modHomePageTimelineState createState() => _modHomePageTimelineState();
+  _modHomePageTimelineState createState() =>
+      _modHomePageTimelineState(selectedItemPosition: selectedItemPosition);
 }
 
 class _modHomePageTimelineState extends State<modHomePageTimeline>
     with TickerProviderStateMixin {
+  int selectedItemPosition;
+  _modHomePageTimelineState({this.selectedItemPosition});
   getbody() {
     try {
-      return tab[_selectedItemPosition];
+      return tab[selectedItemPosition];
     } catch (e) {
       Text("");
     }
     ;
   }
 
+  GlobalKey<RefreshIndicatorState> refreshKey;
+  GlobalKey<RefreshIndicatorState> refreshKeyQuery;
   bool allsupplies = true;
   List<Posts> postList = [];
   final controller = ScrollController();
-  int _selectedItemPosition = 2;
   String city_name;
   List tab = [];
   String categorySelector = 'All Supplies';
@@ -88,9 +94,32 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
 
   List<UserData> userslist = [];
 
+  Future<Null> refreshList(int screen) async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => modHomePageTimeline(
+                selectedItemPosition: 2,
+              )),
+    );
+    await Future.delayed(Duration(seconds: 2));
+    return null;
+  }
+
+  Future<Null> refreshListQuery() async {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => modHomePageTimeline(selectedItemPosition: 3),
+        ));
+    await Future.delayed(Duration(seconds: 2));
+    return null;
+  }
+
   @override
   void initState() {
     super.initState();
+    refreshKey = GlobalKey<RefreshIndicatorState>();
     int i = 0;
     FirebaseDatabase.instance
         .reference()
@@ -166,6 +195,7 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
       }
 
       setState(() {
+        checkboollol();
         tab = [
           chooselocation(backlink: "moderator"),
           PostQuery(),
@@ -173,21 +203,27 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
             child: Container(
               child: (postList.length == 0 || postList.length == null)
                   ? Center(child: Text("No information available"))
-                  : ListView.builder(
-                      itemCount: postList.length,
-                      itemBuilder: (_, index) {
-                        return PostsUI(
-                          postList[index].image,
-                          postList[index].description,
-                          postList[index].date,
-                          postList[index].time,
-                          postList[index].phnum,
-                          postList[index].volname,
-                          postList[index].status,
-                          postList[index].sname,
-                          postList[index].sphnum,
-                        );
-                      }),
+                  : RefreshIndicator(
+                      key: refreshKey,
+                      onRefresh: () async {
+                        await refreshList(2);
+                      },
+                      child: ListView.builder(
+                          itemCount: postList.length,
+                          itemBuilder: (_, index) {
+                            return PostsUI(
+                              postList[index].image,
+                              postList[index].description,
+                              postList[index].date,
+                              postList[index].time,
+                              postList[index].phnum,
+                              postList[index].volname,
+                              postList[index].status,
+                              postList[index].sname,
+                              postList[index].sphnum,
+                            );
+                          }),
+                    ),
             ),
           ),
           SafeArea(
@@ -220,17 +256,23 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
                   child: Expanded(
                 child: (userslist.length == 0 || userslist.length == null)
                     ? Text("No information available")
-                    : ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: userslist.length,
-                        itemBuilder: (_, index) {
-                          return RankUI(
-                            userslist[index].image,
-                            (index + 1),
-                            userslist[index].points,
-                            userslist[index].name,
-                          );
-                        }),
+                    : RefreshIndicator(
+                        key: refreshKeyQuery,
+                        onRefresh: () async {
+                          await refreshListQuery();
+                        },
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: userslist.length,
+                            itemBuilder: (_, index) {
+                              return RankUI(
+                                userslist[index].image,
+                                (index + 1),
+                                userslist[index].points,
+                                userslist[index].name,
+                              );
+                            }),
+                      ),
               )),
             ],
           )),
@@ -274,7 +316,10 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
 
   void checkboollol() {
     setState(() {
-      if (_selectedItemPosition == 2) {
+      if (selectedItemPosition == 3) {
+        allsupplies = false;
+      }
+      if (selectedItemPosition == 2) {
         allsupplies = true;
       } else {
         allsupplies = false;
@@ -460,10 +505,10 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
                     showSelectedLabels: true,
                     // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
                     padding: EdgeInsets.all(12),
-                    currentIndex: _selectedItemPosition,
+                    currentIndex: selectedItemPosition,
                     onTap: (index) {
                       setState(() {
-                        _selectedItemPosition = index;
+                        selectedItemPosition = index;
                         checkboollol();
                       });
                     },
