@@ -16,11 +16,14 @@ import 'package:cool_alert/cool_alert.dart';
 import 'userinfo.dart';
 
 class UploadPhotoPage extends StatefulWidget {
+
+
   @override
   _UploadPhotoPageState createState() => _UploadPhotoPageState();
 }
 
 class _UploadPhotoPageState extends State<UploadPhotoPage> {
+  final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   String selected_city = "";
   String selected_item = "";
   String selectedValueSingleDialog = "";
@@ -196,15 +199,25 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
             IconButton(
               icon: Icon(Icons.done),
               onPressed: () {
-                // validateAndSave();
-                if (validateAndSave()) {
-                  if (sampleImage == null) {
-                    validateAndSave();
-                    savetoDatabase('');
-                  } else {
-                    uploadStatusImage();
+                if(selected_city=="" || selected_item==""){
+                  FocusScope.of(context).unfocus();
+                  _scaffoldkey.currentState
+                      .showSnackBar(SnackBar(
+                      content: Text(
+                          'Fill All Details')));
+                }
+                else{
+                  if (validateAndSave()) {
+                    if (sampleImage == null) {
+                      validateAndSave();
+                      savetoDatabase('');
+                    } else {
+                      uploadStatusImage();
+                    }
                   }
                 }
+                // validateAndSave();
+
               },
             )
           ],
@@ -301,10 +314,6 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       ),
     ];
   }
-
-
-
-
 
 
   List<DropdownMenuItem> items() {
@@ -406,6 +415,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        key: _scaffoldkey,
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Container(
