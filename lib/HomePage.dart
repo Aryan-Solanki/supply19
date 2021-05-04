@@ -195,6 +195,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       }
 
       setState(() {
+        checkboollol();
         tab = [
           chooselocation(backlink: "beneficiary"),
           PostQuery(),
