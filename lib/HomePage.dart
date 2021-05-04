@@ -90,6 +90,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    UserSimplePreferences.setisBenefeciary("yes");
     int i = 0;
     FirebaseDatabase.instance
         .reference()

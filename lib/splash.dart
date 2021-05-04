@@ -1,14 +1,62 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:medicalapp/HomePage.dart';
 import 'package:swipe_up/swipe_up.dart';
 import 'package:medicalapp/login.dart';
-//weer
-class splash extends StatelessWidget {
+import 'user_simple_preferences.dart';
+import 'modHomePage.dart';
+import 'regHomePage.dart';
+import 'package:medicalapp/profile_select.dart';
+
+class splash extends StatefulWidget {
+  @override
+  _splashState createState() => _splashState();
+}
+
+class _splashState extends State<splash> {
+  String ismoderator = '', isvolunteer = '', isbeneficiary = '';
+
+  @override
+  void initState() {
+    ismoderator = UserSimplePreferences.getisModerator() ?? '';
+    isvolunteer = UserSimplePreferences.getisVolunteer() ?? '';
+    isbeneficiary = UserSimplePreferences.getisBenefeciary() ?? '';
+    super.initState();
+    ismoderator = UserSimplePreferences.getisModerator() ?? '';
+    isvolunteer = UserSimplePreferences.getisVolunteer() ?? '';
+    isbeneficiary = UserSimplePreferences.getisBenefeciary() ?? '';
+  }
+
   @override
   Widget build(BuildContext context) {
     return SwipeUp(
-      onSwipe: (){
-        Navigator.pushNamed(context, "/profile_select");
+      onSwipe: () {
+        ismoderator = UserSimplePreferences.getisModerator() ?? '';
+        isvolunteer = UserSimplePreferences.getisVolunteer() ?? '';
+        isbeneficiary = UserSimplePreferences.getisBenefeciary() ?? '';
+        if ((ismoderator == "") &&
+            (isvolunteer == "") &&
+            (isbeneficiary == "")) {
+          Navigator.pushNamed(context, "/profile_select");
+        } else if (ismoderator != "") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => modHomePage(
+                      selectedItemPosition: 1,
+                    )),
+          );
+        } else if (isvolunteer != "") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => regHomePage()),
+          );
+        } else if (isbeneficiary != "") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+          );
+        }
       },
       body: Scaffold(
           backgroundColor: Color(0xFFEDEDED),
@@ -16,20 +64,42 @@ class splash extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(width: double.infinity,),
+              SizedBox(
+                width: double.infinity,
+              ),
               Expanded(
                 flex: 4,
                 child: Container(
                   child: Lottie.asset('assets/lottie/human.json'),
                 ),
               ),
-              Expanded(flex: 1, child: Text("Supply - 19",style: TextStyle(fontFamily: "LatoBold",color: Color(0xFF4686C8),fontWeight: FontWeight.bold,fontSize: 45),)),
-              Expanded(child: Text("A volunteer based Covid-19 crisis prevention platform",style: TextStyle(fontFamily: "HKGrotesk",color: Color(0xFF09427D),fontSize: 20),textAlign: TextAlign.center,)),
-              Expanded(flex:2,child: SizedBox(height: 1,)),
+              Expanded(
+                  flex: 1,
+                  child: Text(
+                    "Supply - 19",
+                    style: TextStyle(
+                        fontFamily: "LatoBold",
+                        color: Color(0xFF4686C8),
+                        fontWeight: FontWeight.bold,
+                        fontSize: 45),
+                  )),
+              Expanded(
+                  child: Text(
+                "A volunteer based Covid-19 crisis prevention platform",
+                style: TextStyle(
+                    fontFamily: "HKGrotesk",
+                    color: Color(0xFF09427D),
+                    fontSize: 20),
+                textAlign: TextAlign.center,
+              )),
+              Expanded(
+                  flex: 2,
+                  child: SizedBox(
+                    height: 1,
+                  )),
             ],
-          )
-      ),
-      child:Material(
+          )),
+      child: Material(
         color: Colors.transparent,
         child: Text('Swipe Up', style: TextStyle(color: Colors.black)),
       ),

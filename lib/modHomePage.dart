@@ -127,6 +127,7 @@ class _modHomePageState extends State<modHomePage>
   @override
   void initState() {
     super.initState();
+    UserSimplePreferences.setisModerator("yes");
     refreshKey = GlobalKey<RefreshIndicatorState>();
     refreshKeyQuery = GlobalKey<RefreshIndicatorState>();
     email = UserSimplePreferences.getEmail() ?? '';
@@ -315,7 +316,9 @@ class _modHomePageState extends State<modHomePage>
   List listItem = ["Item 1", "Item 2", "Item 3"];
   void checkboollol() {
     setState(() {
-      if (selectedItemPosition == 1 || selectedItemPosition == 0 || selectedItemPosition==3) {
+      if (selectedItemPosition == 1 ||
+          selectedItemPosition == 0 ||
+          selectedItemPosition == 3) {
         allsupplies = true;
       } else {
         allsupplies = false;
