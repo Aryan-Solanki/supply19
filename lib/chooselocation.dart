@@ -64,7 +64,9 @@ class _chooselocationState extends State<chooselocation> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => modHomePage()),
+                                builder: (context) => modHomePage(
+                                      selectedItemPosition: 2,
+                                    )),
                           );
                         } else if (backlink == "registration") {
                           Navigator.pushReplacement(
@@ -75,7 +77,10 @@ class _chooselocationState extends State<chooselocation> {
                         } else if (backlink == "beneficiary") {
                           Navigator.pushReplacement(
                             context,
-                            MaterialPageRoute(builder: (context) => HomePage()),
+                            MaterialPageRoute(
+                                builder: (context) => HomePage(
+                                      selectedItemPosition: 3,
+                                    )),
                           );
                         }
                       }
