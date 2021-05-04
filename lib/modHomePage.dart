@@ -112,6 +112,9 @@ class _modHomePageState extends State<modHomePage>
     return null;
   }
 
+  int user_points = 0;
+  var currentUserKey;
+
   @override
   void initState() {
     super.initState();
@@ -142,14 +145,17 @@ class _modHomePageState extends State<modHomePage>
         );
         if (user.email == email) {
           userif.add(user);
+          currentUserKey = indivisualKey;
           UserSimplePreferences.setUserName(user.name);
-          print(UserSimplePreferences.getUserName());
+          // print(UserSimplePreferences.getUserName());
           UserSimplePreferences.setphonenumber(user.phnum);
-          print(UserSimplePreferences.getphonenumber());
+          // print(UserSimplePreferences.getphonenumber());
           UserSimplePreferences.setUserName(user.name);
-          print(UserSimplePreferences.getUserName());
+          // print(UserSimplePreferences.getUserName());
           UserSimplePreferences.setVerifyStatus(user.verify);
-          print(UserSimplePreferences.getVerifyStatus());
+          // print(UserSimplePreferences.getVerifyStatus());
+          UserSimplePreferences.setImagePath(user.image);
+          // print(UserSimplePreferences.getImagelink());
         }
       }
     });
@@ -163,8 +169,8 @@ class _modHomePageState extends State<modHomePage>
         .orderByChild("order")
         .onChildAdded
         .listen((event) {
-      print(event.snapshot.value);
-      print(event.snapshot.value['image']);
+      // print(event.snapshot.value);
+      // print(event.snapshot.value['image']);
       QueryUiData query = new QueryUiData(
         event.snapshot.value['date'],
         event.snapshot.value['description'],
@@ -190,8 +196,8 @@ class _modHomePageState extends State<modHomePage>
         .orderByChild("order")
         .onChildAdded
         .listen((event) {
-      print(event.snapshot.value);
-      print(event.snapshot.value['image']);
+      // print(event.snapshot.value);
+      // print(event.snapshot.value['image']);
       Posts posts = new Posts(
         event.snapshot.value['image'],
         event.snapshot.value['description'],
@@ -208,10 +214,27 @@ class _modHomePageState extends State<modHomePage>
 
       var x = UserSimplePreferences.getphonenumber();
       if (posts.phnum == x) {
+        if (posts.status != "fake") {
+          user_points += 5;
+          if (posts.image == "" || posts.image == null) {
+            print("No image found");
+          } else {
+            user_points += 3;
+          }
+          if (posts.description.length >= 25) {
+            user_points += 3;
+          }
+        }
         postListuser.add(posts);
+        DatabaseReference _ref =
+            FirebaseDatabase.instance.reference().child('User-Data');
+        _ref
+            .child(currentUserKey)
+            .update({'points': user_points, 'order': (9999999 - user_points)});
       }
       setState(() {
-        print('Length: $postList.length');
+        print(user_points);
+        // print('Length: $postList.length');
         tab = [
           Container(
             child: uq.length == 0

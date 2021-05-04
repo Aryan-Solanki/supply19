@@ -32,7 +32,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       flex: 1,
                       child: CircleAvatar(
                         radius: 50,
-                        backgroundImage: AssetImage("images/nodp.jpg"),
+                        backgroundImage:
+                            (UserSimplePreferences.getImageLink() == "" ||
+                                    UserSimplePreferences.getImageLink() ==
+                                        null)
+                                ? AssetImage("images/nodp.jpg")
+                                : Image.network(
+                                    UserSimplePreferences.getImageLink()),
                       )),
                   SizedBox(
                     width: 30,

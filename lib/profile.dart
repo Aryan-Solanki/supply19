@@ -12,11 +12,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'user_simple_preferences.dart';
 import 'yourpostui.dart';
 import 'userinfo.dart';
-import 'drawerScreen.dart';
-import 'utility.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'utility.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'myclipper.dart';
 
 class profile extends StatefulWidget {
@@ -25,8 +20,6 @@ class profile extends StatefulWidget {
 }
 
 class _profileState extends State<profile> {
-  File sampleImage;
-  Image image;
   int userpts = 0;
   int nop = 0;
 
@@ -43,9 +36,10 @@ class _profileState extends State<profile> {
               flex: 1,
               child: CircleAvatar(
                 radius: 100,
-                backgroundImage: sampleImage == null
+                backgroundImage: (UserSimplePreferences.getImageLink() == "" ||
+                        UserSimplePreferences.getImageLink() == null)
                     ? AssetImage("images/nodp.jpg")
-                    : FileImage(sampleImage),
+                    : Image.network(UserSimplePreferences.getImageLink()),
               ),
             ),
             Expanded(
@@ -182,22 +176,6 @@ class _profileState extends State<profile> {
       ),
     ];
 
-    loadImageFromPrefs();
-
-    Future<String> uploadStatusImage() async {
-      if (true) {
-        FirebaseStorage storage = FirebaseStorage.instance;
-        final Reference postImageRef = storage.ref().child("Post Images");
-        var timeKey = new DateTime.now();
-        String xyz = timeKey.toString() + ".jpg";
-        final UploadTask uploadTask =
-            postImageRef.child(xyz).putFile(sampleImage);
-        var imageUrl = await (await uploadTask).ref.getDownloadURL();
-        final String url_akshat = imageUrl.toString();
-        return (url_akshat);
-      }
-    }
-
     // user ke database se points nikale hain
     String phnumu = UserSimplePreferences.getphonenumber();
     DatabaseReference postsRef0 =
@@ -231,9 +209,13 @@ class _profileState extends State<profile> {
                       flex: 1,
                       child: CircleAvatar(
                         radius: 100,
-                        backgroundImage: sampleImage == null
-                            ? AssetImage("images/nodp.jpg")
-                            : FileImage(sampleImage),
+                        backgroundImage:
+                            (UserSimplePreferences.getImageLink() == "" ||
+                                    UserSimplePreferences.getImageLink() ==
+                                        null)
+                                ? AssetImage("images/nodp.jpg")
+                                : Image.network(
+                                    UserSimplePreferences.getImageLink()),
                       ),
                     ),
                     Expanded(
@@ -379,28 +361,6 @@ class _profileState extends State<profile> {
     super.initState();
   }
 
-  Future getImage() async {
-    var tempImage = await ImagePicker().getImage(source: ImageSource.gallery);
-    File imageFile = File(tempImage.path);
-    setState(() {
-      sampleImage = imageFile;
-      image = Image.file(sampleImage);
-    });
-    ImageSharedPrefs.saveImageToPrefs(
-        ImageSharedPrefs.base64String(sampleImage.readAsBytesSync()));
-  }
-
-  loadImageFromPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final imageKeyValue = prefs.getString(IMAGE_KEY);
-    if (imageKeyValue != null) {
-      final imageString = await ImageSharedPrefs.loadImageFromPrefs();
-      setState(() {
-        image = ImageSharedPrefs.imageFrom64BaseString(imageString);
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -411,12 +371,15 @@ class _profileState extends State<profile> {
             margin: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 20),
             child: Column(
               children: [
-                Container(
-                  width: 200,
-                  height: 200,
-                  decoration: BoxDecoration(),
-                  child: ClipOval(
-                    child: image,
+                Expanded(
+                  flex: 1,
+                  child: CircleAvatar(
+                    radius: 100,
+                    backgroundImage: (UserSimplePreferences.getImageLink() ==
+                                "" ||
+                            UserSimplePreferences.getImageLink() == null)
+                        ? AssetImage("images/nodp.jpg")
+                        : Image.network(UserSimplePreferences.getImageLink()),
                   ),
                 ),
                 Expanded(
@@ -550,13 +513,6 @@ class _profileState extends State<profile> {
                 )
               ],
             ),
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              getImage();
-            },
-            tooltip: 'Add Image',
-            child: Icon(Icons.add_a_photo),
           ),
         ),
       ),

@@ -12,9 +12,21 @@ class UserSimplePreferences {
   static const _keyPhoneNum = 'phnum';
   static const _keyVerify = 'verify';
   static const _keyImagePath = 'imgpath';
+  static const _keyUserPoints = 'user_points';
+  static const _keyImagelink = 'image_link';
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
+
+  static Future setuserpoints(int pts) async =>
+      await _preferences.setInt(_keyUserPoints, pts);
+
+  static int getuserpoints() => _preferences.getInt(_keyUserPoints);
+
+  static Future setImageLink(String link) async =>
+      await _preferences.setString(_keyImagelink, link);
+
+  static String getImageLink() => _preferences.getString(_keyImagelink);
 
   static Future setEmail(String email) async =>
       await _preferences.setString(_keyEmail, email);
