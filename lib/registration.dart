@@ -162,7 +162,15 @@ class _registrationState extends State<registration> {
                                                       .showSnackBar(SnackBar(
                                                       content: Text(
                                                           'Provide Number')));
-                                                } else {
+                                                }
+                                                else if(_current>0&&_current<60){
+                                                  FocusScope.of(context).unfocus();
+                                                  _scaffoldkey.currentState
+                                                      .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                          'Wait for $_current secs')));
+                                                }
+                                                else {
                                                   _verifyPhone();
                                                   setState(() {
                                                     timer = true;
@@ -181,7 +189,15 @@ class _registrationState extends State<registration> {
                                                       .showSnackBar(SnackBar(
                                                       content: Text(
                                                           'Provide Number')));
-                                                } else {
+                                                }
+                                                else if(_current>0&&_current<60){
+                                                  FocusScope.of(context).unfocus();
+                                                  _scaffoldkey.currentState
+                                                      .showSnackBar(SnackBar(
+                                                      content: Text(
+                                                          'Wait for $_current secs')));
+                                                }
+                                                else {
                                                   setState(() {
                                                     timer = true;
                                                     _current = 60;
