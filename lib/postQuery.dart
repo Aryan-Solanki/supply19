@@ -19,6 +19,7 @@ class PostQuery extends StatefulWidget {
 }
 
 class _PostQueryState extends State<PostQuery> {
+  final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   String selected_city = "";
   String selected_item = "";
   String phnum = "";
@@ -129,15 +130,26 @@ class _PostQueryState extends State<PostQuery> {
             IconButton(
               icon: Icon(Icons.done),
               onPressed: () {
-                // validateAndSave();
-                if (validateAndSave()) {
-                  if (sampleImage == null) {
-                    validateAndSave();
-                    savetoDatabase('');
-                  } else {
-                    uploadStatusImage();
+
+                if (pname == "" || phnum == "" || selected_item == "" || selected_city == ""){
+                  FocusScope.of(context).unfocus();
+                  _scaffoldkey.currentState
+                      .showSnackBar(SnackBar(
+                      content: Text(
+                          'Fill All Details')));
+                }
+                else{
+                  if (validateAndSave()) {
+                    if (sampleImage == null) {
+                      validateAndSave();
+                      savetoDatabase('');
+                    } else {
+                      uploadStatusImage();
+                    }
                   }
                 }
+                // validateAndSave();
+
               },
             )
           ],
@@ -317,7 +329,7 @@ class _PostQueryState extends State<PostQuery> {
   }
 
   File sampleImage;
-  String _myValue;
+  String _myValue="";
 
   String url_lol = "lol";
   final formkey = new GlobalKey<FormState>();
@@ -334,6 +346,7 @@ class _PostQueryState extends State<PostQuery> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        key: _scaffoldkey,
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
           child: Container(
