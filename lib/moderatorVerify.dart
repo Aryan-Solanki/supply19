@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'notverifiedpostui.dart';
 import 'queryuidata.dart';
 import 'queryui.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -54,9 +55,8 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                   performsFirstActionWithFullSwipe: true,
                   trailingActions: <SwipeAction>[
                     SwipeAction(
-                        title: " Not Verified",
+                        title: "NOT VERIFIED",
                         onTap: (CompletionHandler handler) async {
-                          // print("Verified" + index.toString());
                           await handler(true);
                           var key = uq[index].key;
                           DatabaseReference _ref = FirebaseDatabase.instance
@@ -70,9 +70,8 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                   ],
                   leadingActions: [
                     SwipeAction(
-                        title: "Verified",
+                        title: "VERIFIED",
                         onTap: (handler) async {
-                          print("Not Verified" + index.toString());
                           await handler(true);
                           var key = uq[index].key;
                           DatabaseReference _ref = FirebaseDatabase.instance
@@ -86,7 +85,7 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                   ],
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: PostsUI(
+                    child: NotVerifiedPostsUI(
                       uq[index].image,
                       uq[index].description,
                       uq[index].date,
@@ -117,9 +116,8 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                   performsFirstActionWithFullSwipe: true,
                   trailingActions: <SwipeAction>[
                     SwipeAction(
-                        title: " Not Verified",
+                        title: "NOT VERIFIED",
                         onTap: (CompletionHandler handler) async {
-                          // print("Verified" + index.toString());
                           await handler(true);
                           var key = uq[index].key;
                           DatabaseReference _ref = FirebaseDatabase.instance
@@ -133,9 +131,8 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                   ],
                   leadingActions: [
                     SwipeAction(
-                        title: "Verified",
+                        title: "VERIFIED",
                         onTap: (handler) async {
-                          print("Not Verified" + index.toString());
                           await handler(true);
                           var key = uq[index].key;
                           DatabaseReference _ref = FirebaseDatabase.instance
@@ -149,7 +146,7 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                   ],
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: PostsUI(
+                    child: NotVerifiedPostsUI(
                       uq[index].image,
                       uq[index].description,
                       uq[index].date,

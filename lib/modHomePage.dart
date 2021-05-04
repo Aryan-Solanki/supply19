@@ -315,7 +315,7 @@ class _modHomePageState extends State<modHomePage>
   List listItem = ["Item 1", "Item 2", "Item 3"];
   void checkboollol() {
     setState(() {
-      if (selectedItemPosition == 1 || selectedItemPosition == 0) {
+      if (selectedItemPosition == 1 || selectedItemPosition == 0 || selectedItemPosition==3) {
         allsupplies = true;
       } else {
         allsupplies = false;
@@ -405,7 +405,7 @@ class _modHomePageState extends State<modHomePage>
                                     : UserSimplePreferences.getUserName())
                                 : ((selectedItemPosition == 0)
                                     ? "Query"
-                                    : "Timeline"),
+                                    : "Verify Posts"),
                             style: TextStyle(
                                 color: Color(0xFF09427d),
                                 fontSize: 20.0,
