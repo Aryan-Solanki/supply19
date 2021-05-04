@@ -87,6 +87,25 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   List<UserData> userslist = [];
 
+  Future<Null> refreshList(int selected_item) async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => HomePage()),
+    );
+    await Future.delayed(Duration(seconds: 2));
+    return null;
+  }
+
+  Future<Null> refreshListQuery() async {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ));
+    await Future.delayed(Duration(seconds: 2));
+    return null;
+  }
+
   @override
   void initState() {
     super.initState();

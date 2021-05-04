@@ -21,6 +21,7 @@ import 'termandcondition.dart';
 import 'regHomePage.dart';
 import 'regTimeline.dart';
 import 'modHomePageTimeline.dart';
+import 'package:flutter/services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +35,8 @@ void main() async {
 class my extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return MaterialApp(
       initialRoute: '/splash',
       routes: {
