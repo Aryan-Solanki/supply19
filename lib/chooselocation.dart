@@ -5,10 +5,16 @@ import 'package:medicalapp/citypage.dart';
 import 'city.dart';
 import 'package:search_choices/search_choices.dart';
 import 'user_simple_preferences.dart';
+import 'modHomePage.dart';
+import 'regHomePage.dart';
 
 class chooselocation extends StatefulWidget {
+  String backlink;
+  // "registration", "moderator", "beneficiary"
+  chooselocation({this.backlink});
   @override
-  _chooselocationState createState() => _chooselocationState();
+  _chooselocationState createState() =>
+      _chooselocationState(backlink: backlink);
 }
 
 String selected_city = "";
@@ -16,6 +22,8 @@ Color btncolor = Color(0xffc6ced2);
 String selectedValueSingleDialog = "";
 
 class _chooselocationState extends State<chooselocation> {
+  String backlink;
+  _chooselocationState({this.backlink});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -52,10 +60,24 @@ class _chooselocationState extends State<chooselocation> {
                       if (value != null) {
                         selected_city = value.data;
                         UserSimplePreferences.setCity(selected_city);
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
-                        );
+                        if (backlink == "moderator") {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => modHomePage()),
+                          );
+                        } else if (backlink == "registration") {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => regHomePage()),
+                          );
+                        } else if (backlink == "beneficiary") {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        }
                       }
 
                       // selectedValueSingleDialog = value;
@@ -77,11 +99,25 @@ class _chooselocationState extends State<chooselocation> {
                                 onPressed: () {
                                   selected_city = "Delhi";
                                   UserSimplePreferences.setCity(selected_city);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomePage()),
-                                  );
+                                  if (backlink == "moderator") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => modHomePage()),
+                                    );
+                                  } else if (backlink == "registration") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => regHomePage()),
+                                    );
+                                  } else if (backlink == "beneficiary") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()),
+                                    );
+                                  }
                                 },
                                 child: Text("Delhi")),
                           ),
@@ -94,11 +130,25 @@ class _chooselocationState extends State<chooselocation> {
                                 onPressed: () {
                                   selected_city = "Bangalore";
                                   UserSimplePreferences.setCity(selected_city);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomePage()),
-                                  );
+                                  if (backlink == "moderator") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => modHomePage()),
+                                    );
+                                  } else if (backlink == "registration") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => regHomePage()),
+                                    );
+                                  } else if (backlink == "beneficiary") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()),
+                                    );
+                                  }
                                 },
                                 child: Text("Bangalore")),
                           ),
@@ -111,11 +161,25 @@ class _chooselocationState extends State<chooselocation> {
                                 onPressed: () {
                                   selected_city = "Chennai";
                                   UserSimplePreferences.setCity(selected_city);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomePage()),
-                                  );
+                                  if (backlink == "moderator") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => modHomePage()),
+                                    );
+                                  } else if (backlink == "registration") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => regHomePage()),
+                                    );
+                                  } else if (backlink == "beneficiary") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()),
+                                    );
+                                  }
                                 },
                                 child: Text("Chennai")),
                           ),
@@ -132,11 +196,27 @@ class _chooselocationState extends State<chooselocation> {
                                     selected_city = "Mumbai";
                                     UserSimplePreferences.setCity(
                                         selected_city);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomePage()),
-                                    );
+                                    if (backlink == "moderator") {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                modHomePage()),
+                                      );
+                                    } else if (backlink == "registration") {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                regHomePage()),
+                                      );
+                                    } else if (backlink == "beneficiary") {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => HomePage()),
+                                      );
+                                    }
                                   },
                                   child: Text("Mumbai")),
                             ),
@@ -150,11 +230,27 @@ class _chooselocationState extends State<chooselocation> {
                                     selected_city = "Kolkata";
                                     UserSimplePreferences.setCity(
                                         selected_city);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomePage()),
-                                    );
+                                    if (backlink == "moderator") {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                modHomePage()),
+                                      );
+                                    } else if (backlink == "registration") {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                regHomePage()),
+                                      );
+                                    } else if (backlink == "beneficiary") {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => HomePage()),
+                                      );
+                                    }
                                   },
                                   child: Text("Kolkata")),
                             ),
@@ -169,11 +265,25 @@ class _chooselocationState extends State<chooselocation> {
                                 onPressed: () {
                                   selected_city = "Lucknow";
                                   UserSimplePreferences.setCity(selected_city);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomePage()),
-                                  );
+                                  if (backlink == "moderator") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => modHomePage()),
+                                    );
+                                  } else if (backlink == "registration") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => regHomePage()),
+                                    );
+                                  } else if (backlink == "beneficiary") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()),
+                                    );
+                                  }
                                 },
                                 child: Text("Lucknow")),
                           ),
@@ -187,11 +297,25 @@ class _chooselocationState extends State<chooselocation> {
                                   selected_city = "Noida";
                                   await UserSimplePreferences.setCity(
                                       selected_city);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomePage()),
-                                  );
+                                  if (backlink == "moderator") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => modHomePage()),
+                                    );
+                                  } else if (backlink == "registration") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => regHomePage()),
+                                    );
+                                  } else if (backlink == "beneficiary") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()),
+                                    );
+                                  }
                                 },
                                 child: Text("Noida")),
                           ),
@@ -204,11 +328,25 @@ class _chooselocationState extends State<chooselocation> {
                                 onPressed: () {
                                   selected_city = "Gurgaon";
                                   UserSimplePreferences.setCity(selected_city);
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => HomePage()),
-                                  );
+                                  if (backlink == "moderator") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => modHomePage()),
+                                    );
+                                  } else if (backlink == "registration") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => regHomePage()),
+                                    );
+                                  } else if (backlink == "beneficiary") {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => HomePage()),
+                                    );
+                                  }
                                 },
                                 child: Text("Gurgaon")),
                           ),

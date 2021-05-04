@@ -16,6 +16,7 @@ import 'postQuery.dart';
 import 'regDrawerScreen.dart';
 import 'userinfo.dart';
 import 'rankui.dart';
+import 'regHomePage.dart';
 
 class regTimeline extends StatefulWidget {
   final String title = "regTimeline Timeline";
@@ -167,7 +168,9 @@ class _regTimelineState extends State<regTimeline>
 
       setState(() {
         tab = [
-          chooselocation(),
+          chooselocation(
+            backlink: "registration",
+          ),
           PostQuery(),
           SafeArea(
             child: Container(
@@ -236,7 +239,28 @@ class _regTimelineState extends State<regTimeline>
   }
 
   String categoryChoose;
-  List listItem = ["All Supplies","Beds","Oxygen","Ventilator","Fabiflu","Favipiravir","Oxygen Bed","Non Oxygen Bed","ICU Bed","Non-ICU Bed","Oxygen Refilling","Plasma","Tocilizumab","Remidivisir","Injection","Doctor","Hospital","Ambulance","Testing","Hospital At Home"];
+  List listItem = [
+    "All Supplies",
+    "Beds",
+    "Oxygen",
+    "Ventilator",
+    "Fabiflu",
+    "Favipiravir",
+    "Oxygen Bed",
+    "Non Oxygen Bed",
+    "ICU Bed",
+    "Non-ICU Bed",
+    "Oxygen Refilling",
+    "Plasma",
+    "Tocilizumab",
+    "Remidivisir",
+    "Injection",
+    "Doctor",
+    "Hospital",
+    "Ambulance",
+    "Testing",
+    "Hospital At Home"
+  ];
 
   void checkboollol() {
     setState(() {
@@ -398,8 +422,11 @@ class _regTimelineState extends State<regTimeline>
                               categoryChoose = newValue;
                               categorySelector = categoryChoose;
                             });
-                            Navigator.pushReplacementNamed(
-                                context, '/regTimeline');
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => regHomePage()),
+                            );
                           },
                           items: listItem.map((valueItem) {
                             return DropdownMenuItem(

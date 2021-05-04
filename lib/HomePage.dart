@@ -167,7 +167,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
       setState(() {
         tab = [
-          chooselocation(),
+          chooselocation(backlink: "beneficiary"),
           PostQuery(),
           SafeArea(
             child: Container(
@@ -240,16 +240,29 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     });
   }
 
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   String categoryChoose;
-  List listItem = ["All Supplies","Beds","Oxygen","Ventilator","Fabiflu","Favipiravir","Oxygen Bed","Non Oxygen Bed","ICU Bed","Non-ICU Bed","Oxygen Refilling","Plasma","Tocilizumab","Remidivisir","Injection","Doctor","Hospital","Ambulance","Testing","Hospital At Home"];
+  List listItem = [
+    "All Supplies",
+    "Beds",
+    "Oxygen",
+    "Ventilator",
+    "Fabiflu",
+    "Favipiravir",
+    "Oxygen Bed",
+    "Non Oxygen Bed",
+    "ICU Bed",
+    "Non-ICU Bed",
+    "Oxygen Refilling",
+    "Plasma",
+    "Tocilizumab",
+    "Remidivisir",
+    "Injection",
+    "Doctor",
+    "Hospital",
+    "Ambulance",
+    "Testing",
+    "Hospital At Home"
+  ];
 
   void checkboollol() {
     setState(() {
@@ -365,7 +378,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                           print(
                                               UserSimplePreferences.getCity());
                                           setState(() {
-                                            Navigator.push(
+                                            Navigator.pushReplacement(
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
@@ -411,8 +424,11 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               categoryChoose = newValue;
                               categorySelector = categoryChoose;
                             });
-                            Navigator.pushReplacementNamed(
-                                context, '/homepage');
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()),
+                            );
                           },
                           items: listItem.map((valueItem) {
                             return DropdownMenuItem(
