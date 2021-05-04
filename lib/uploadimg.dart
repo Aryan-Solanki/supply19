@@ -77,7 +77,9 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       Navigator.push(
         context,
         new MaterialPageRoute(
-          builder: (context) => new modHomePage(),
+          builder: (context) => new modHomePage(
+            selectedItemPosition: 1,
+          ),
         ),
       );
       CoolAlert.show(
