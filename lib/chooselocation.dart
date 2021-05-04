@@ -108,7 +108,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => modHomePage()),
+                                          builder: (context) => modHomePage(
+                                                selectedItemPosition: 2,
+                                              )),
                                     );
                                   } else if (backlink == "registration") {
                                     Navigator.pushReplacement(
@@ -120,7 +122,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => HomePage()),
+                                          builder: (context) => HomePage(
+                                                selectedItemPosition: 3,
+                                              )),
                                     );
                                   }
                                 },
@@ -139,7 +143,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => modHomePage()),
+                                          builder: (context) => modHomePage(
+                                                selectedItemPosition: 2,
+                                              )),
                                     );
                                   } else if (backlink == "registration") {
                                     Navigator.pushReplacement(
@@ -151,7 +157,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => HomePage()),
+                                          builder: (context) => HomePage(
+                                                selectedItemPosition: 3,
+                                              )),
                                     );
                                   }
                                 },
@@ -170,7 +178,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => modHomePage()),
+                                          builder: (context) => modHomePage(
+                                                selectedItemPosition: 2,
+                                              )),
                                     );
                                   } else if (backlink == "registration") {
                                     Navigator.pushReplacement(
@@ -182,7 +192,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => HomePage()),
+                                          builder: (context) => HomePage(
+                                                selectedItemPosition: 3,
+                                              )),
                                     );
                                   }
                                 },
@@ -205,8 +217,9 @@ class _chooselocationState extends State<chooselocation> {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                modHomePage()),
+                                            builder: (context) => modHomePage(
+                                                  selectedItemPosition: 2,
+                                                )),
                                       );
                                     } else if (backlink == "registration") {
                                       Navigator.pushReplacement(
@@ -219,7 +232,9 @@ class _chooselocationState extends State<chooselocation> {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => HomePage()),
+                                            builder: (context) => HomePage(
+                                                  selectedItemPosition: 3,
+                                                )),
                                       );
                                     }
                                   },
@@ -239,8 +254,9 @@ class _chooselocationState extends State<chooselocation> {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                modHomePage()),
+                                            builder: (context) => modHomePage(
+                                                  selectedItemPosition: 2,
+                                                )),
                                       );
                                     } else if (backlink == "registration") {
                                       Navigator.pushReplacement(
@@ -253,7 +269,9 @@ class _chooselocationState extends State<chooselocation> {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => HomePage()),
+                                            builder: (context) => HomePage(
+                                                  selectedItemPosition: 3,
+                                                )),
                                       );
                                     }
                                   },
@@ -274,7 +292,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => modHomePage()),
+                                          builder: (context) => modHomePage(
+                                                selectedItemPosition: 2,
+                                              )),
                                     );
                                   } else if (backlink == "registration") {
                                     Navigator.pushReplacement(
@@ -286,7 +306,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => HomePage()),
+                                          builder: (context) => HomePage(
+                                                selectedItemPosition: 3,
+                                              )),
                                     );
                                   }
                                 },
@@ -306,7 +328,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => modHomePage()),
+                                          builder: (context) => modHomePage(
+                                                selectedItemPosition: 2,
+                                              )),
                                     );
                                   } else if (backlink == "registration") {
                                     Navigator.pushReplacement(
@@ -318,7 +342,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => HomePage()),
+                                          builder: (context) => HomePage(
+                                                selectedItemPosition: 3,
+                                              )),
                                     );
                                   }
                                 },
@@ -337,7 +363,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => modHomePage()),
+                                          builder: (context) => modHomePage(
+                                                selectedItemPosition: 2,
+                                              )),
                                     );
                                   } else if (backlink == "registration") {
                                     Navigator.pushReplacement(
@@ -349,7 +377,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => HomePage()),
+                                          builder: (context) => HomePage(
+                                                selectedItemPosition: 3,
+                                              )),
                                     );
                                   }
                                 },
