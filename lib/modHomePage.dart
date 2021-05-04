@@ -83,6 +83,14 @@ class _modHomePageState extends State<modHomePage>
     ),
     BottomNavigationBarItem(
       icon: Icon(
+        Icons.verified_user_outlined,
+        size: 28,
+        color: Color(0xff09427d),
+      ),
+      label: "Verify",
+    ),
+    BottomNavigationBarItem(
+      icon: Icon(
         Icons.info_outline,
         size: 28,
         color: Color(0xff09427d),
