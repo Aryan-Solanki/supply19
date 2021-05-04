@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medicalapp/HomePage.dart';
 
 class profile_select extends StatefulWidget {
   @override
@@ -50,7 +51,7 @@ class _profile_selectState extends State<profile_select> {
                           Text(
                             "Volunteer",
                             style:
-                            TextStyle(fontSize: 24, fontFamily: "OpenSans"),
+                                TextStyle(fontSize: 24, fontFamily: "OpenSans"),
                           )
                         ],
                       ),
@@ -62,7 +63,7 @@ class _profile_selectState extends State<profile_select> {
                           child: Text(
                             "You want to help other people during this pandemic, by providing verified sources of medical suppliers, life-saving drugs, injections etc.",
                             style:
-                            TextStyle(fontFamily: "OpenSans", fontSize: 15),
+                                TextStyle(fontFamily: "OpenSans", fontSize: 15),
                           )),
                       SizedBox(
                         height: 50,
@@ -84,7 +85,7 @@ class _profile_selectState extends State<profile_select> {
                           Text(
                             "Beneficiary",
                             style:
-                            TextStyle(fontSize: 24, fontFamily: "OpenSans"),
+                                TextStyle(fontSize: 24, fontFamily: "OpenSans"),
                           )
                         ],
                       ),
@@ -96,7 +97,7 @@ class _profile_selectState extends State<profile_select> {
                           child: Text(
                             "You are facing difficulties, in finding medical supplies for yourself, or for your loved ones.You will be able to see the latest medical supply updates in your area.",
                             style:
-                            TextStyle(fontFamily: "OpenSans", fontSize: 15),
+                                TextStyle(fontFamily: "OpenSans", fontSize: 15),
                           )),
                     ],
                   ),
@@ -116,7 +117,13 @@ class _profile_selectState extends State<profile_select> {
                       if (gv1 == 1) {
                         Navigator.pushNamed(context, "/registration");
                       } else if (gv2 == 1) {
-                        Navigator.pushNamed(context, "/homepage");
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomePage(
+                                    selectedItemPosition: 2,
+                                  )),
+                        );
                       }
                     },
                     child: Text(

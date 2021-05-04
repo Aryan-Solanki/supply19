@@ -53,9 +53,12 @@ class _splashState extends State<splash> {
           );
         } else if (isbeneficiary != "") {
           Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-          );
+              context,
+              MaterialPageRoute(
+                builder: (context) => HomePage(
+                  selectedItemPosition: 2,
+                ),
+              ));
         }
       },
       body: Scaffold(
