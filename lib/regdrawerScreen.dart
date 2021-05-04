@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -10,6 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'regHomePage.dart';
 import 'regTimeline.dart';
 import 'termandcondition.dart';
+
+String current = "modhomepage";
 
 class regDrawerScreen extends StatefulWidget {
   @override
@@ -83,7 +86,7 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                 children: [
                   FlatButton(
                       onPressed: () {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => profile()),
                         );
@@ -107,57 +110,65 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                   SizedBox(
                     height: 5,
                   ),
-                  FlatButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => regHomePage()),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            " Homepage",
-                            style: TextStyle(
-                                fontFamily: "OpenSans",
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.white),
-                          )
-                        ],
-                      )),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  FlatButton(
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => regTimeline()),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            " Timeline",
-                            style: TextStyle(
-                                fontFamily: "OpenSans",
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.white),
-                          )
-                        ],
-                      )),
+                  current == "modhomepage"
+                      ? FlatButton(
+                          onPressed: () {
+                            setState(() {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => regTimeline()),
+                              );
+                            });
+                            Timer(Duration(seconds: 1), () {
+                              current = "timeline";
+                            });
+                          },
+                          child: Row(
+                            children: [
+                              // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                " Timeline",
+                                style: TextStyle(
+                                    fontFamily: "OpenSans",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.white),
+                              )
+                            ],
+                          ))
+                      : FlatButton(
+                          onPressed: () {
+                            setState(() {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => regHomePage()),
+                              );
+                            });
+                            Timer(Duration(seconds: 1), () {
+                              current = "modhomepage";
+                            });
+                          },
+                          child: Row(
+                            children: [
+                              // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              Text(
+                                " Homepage",
+                                style: TextStyle(
+                                    fontFamily: "OpenSans",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.white),
+                              )
+                            ],
+                          )),
                   SizedBox(
                     height: 5,
                   ),
@@ -205,7 +216,7 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                   ),
                   FlatButton(
                       onPressed: () {
-                        Navigator.pushReplacement(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) => termandcondition()),
@@ -230,23 +241,6 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                 ],
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(left: 20),
-              height: 35,
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              decoration: BoxDecoration(
-                  color: Color(0xff2193b0),
-                  borderRadius: BorderRadius.circular(30)),
-              child: FlatButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Log Out",
-                    style: TextStyle(
-                        fontFamily: "OpenSans",
-                        fontSize: 20,
-                        color: Colors.white),
-                  )),
-            )
           ],
         ),
       ),

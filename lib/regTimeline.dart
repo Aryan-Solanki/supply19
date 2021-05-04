@@ -425,7 +425,7 @@ class _regTimelineState extends State<regTimeline>
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => regHomePage()),
+                                  builder: (context) => regTimeline()),
                             );
                           },
                           items: listItem.map((valueItem) {
