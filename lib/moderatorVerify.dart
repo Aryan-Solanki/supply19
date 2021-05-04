@@ -19,6 +19,7 @@ class _moderatorVerifyState extends State<moderatorVerify> {
   @override
   void initState() {
     super.initState();
+
     FirebaseDatabase.instance
         .reference()
         .child("Posts")
@@ -39,6 +40,7 @@ class _moderatorVerifyState extends State<moderatorVerify> {
         event.snapshot.value['category'],
         event.snapshot.value['sname'],
         event.snapshot.value['sphnum'],
+        event.snapshot.key,
       );
       if (posts.status == "fake") {
         uq.add(posts);
@@ -56,6 +58,11 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                         title: "NOT VERIFIED",
                         onTap: (CompletionHandler handler) async {
                           await handler(true);
+                          var key = uq[index].key;
+                          DatabaseReference _ref = FirebaseDatabase.instance
+                              .reference()
+                              .child('Posts');
+                          _ref.child(key).update({'status': "true"});
                           uq.removeAt(index);
                           setState(() {});
                         },
@@ -66,6 +73,11 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                         title: "VERIFIED",
                         onTap: (handler) async {
                           await handler(true);
+                          var key = uq[index].key;
+                          DatabaseReference _ref = FirebaseDatabase.instance
+                              .reference()
+                              .child('Posts');
+                          _ref.child(key).update({'status': "fake"});
                           uq.removeAt(index);
                           setState(() {});
                         },
@@ -100,16 +112,18 @@ class _moderatorVerifyState extends State<moderatorVerify> {
               itemCount: uq.length,
               itemBuilder: (context, index) {
                 return SwipeActionCell(
-                  ///this key is necessary
                   key: ObjectKey(uq[index]),
-
-                  ///this is the same as iOS native
                   performsFirstActionWithFullSwipe: true,
                   trailingActions: <SwipeAction>[
                     SwipeAction(
                         title: "NOT VERIFIED",
                         onTap: (CompletionHandler handler) async {
                           await handler(true);
+                          var key = uq[index].key;
+                          DatabaseReference _ref = FirebaseDatabase.instance
+                              .reference()
+                              .child('Posts');
+                          _ref.child(key).update({'status': "fake"});
                           uq.removeAt(index);
                           setState(() {});
                         },
@@ -120,6 +134,11 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                         title: "VERIFIED",
                         onTap: (handler) async {
                           await handler(true);
+                          var key = uq[index].key;
+                          DatabaseReference _ref = FirebaseDatabase.instance
+                              .reference()
+                              .child('Posts');
+                          _ref.child(key).update({'status': "true"});
                           uq.removeAt(index);
                           setState(() {});
                         },
