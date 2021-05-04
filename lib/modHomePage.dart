@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -15,6 +17,8 @@ import 'user_simple_preferences.dart';
 import 'yourpostui.dart';
 import 'userinfo.dart';
 import 'drawerScreen.dart';
+import 'queryui.dart';
+import 'queryuidata.dart';
 
 class modHomePage extends StatefulWidget {
   final String title = "modHomePage Timeline";
@@ -38,6 +42,7 @@ class _modHomePageState extends State<modHomePage>
   List<UserData> userif = [];
   List<Posts> postList = [];
   List<Posts> postListuser = [];
+  List<QueryUiData> uq = [];
   final controller = ScrollController();
   int _selectedItemPosition = 1;
   List tab = [];
@@ -131,6 +136,33 @@ class _modHomePageState extends State<modHomePage>
     });
     // Getting user info from Firebase
 
+    // Gettign user query {
+
+    FirebaseDatabase.instance
+        .reference()
+        .child("Query")
+        .orderByChild("order")
+        .onChildAdded
+        .listen((event) {
+      print(event.snapshot.value);
+      print(event.snapshot.value['image']);
+      QueryUiData query = new QueryUiData(
+        event.snapshot.value['date'],
+        event.snapshot.value['description'],
+        event.snapshot.value['image'],
+        event.snapshot.value['location'],
+        event.snapshot.value['name'],
+        event.snapshot.value['order'],
+        event.snapshot.value['phnum'],
+        event.snapshot.value['query_num'],
+        event.snapshot.value['requirement'],
+        event.snapshot.value['time'],
+      );
+      uq.add(query);
+    });
+
+    // Gettign user query }
+
     // Getting user posts
 
     FirebaseDatabase.instance
@@ -163,33 +195,26 @@ class _modHomePageState extends State<modHomePage>
         print('Length: $postList.length');
         tab = [
           Container(
-            child: postListuser.length == 0
-                ? Text("lol")
-                : RefreshIndicator(
-              key: refreshKey,
-              onRefresh: () async {
-                await refreshList();
-              },
-              child: ListView.builder(
-                  itemCount: postListuser.length,
-                  itemBuilder: (_, index) {
-                    return  QueryUI(
-                      postListuser[index].image,
-                      postListuser[index].description,
-                      postListuser[index].date,
-                      postListuser[index].time,
-                      postListuser[index].phnum,
-                      postListuser[index].volname,
-                      postListuser[index].status,
-                      postListuser[index].sname,
-                      postListuser[index].sphnum,
-                    );
-                  }),
-            ),
+            child: uq.length == 0
+                ? Text("No Queries Available")
+                : ListView.builder(
+                    itemCount: uq.length,
+                    itemBuilder: (_, index) {
+                      return QueryUI(
+                        uq[index].image,
+                        uq[index].description,
+                        uq[index].date,
+                        uq[index].time,
+                        uq[index].phnum,
+                        uq[index].name,
+                        uq[index].requirement,
+                        uq[index].location,
+                      );
+                    }),
           ),
           Container(
             child: postListuser.length == 0
-                ? Text("lol")
+                ? Text("No information available")
                 : RefreshIndicator(
                     key: refreshKey,
                     onRefresh: () async {
