@@ -51,9 +51,11 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                   flex: 1,
                   child: CircleAvatar(
                     radius: 100,
-                    backgroundImage: sampleImage == null
+                    backgroundImage: (UserSimplePreferences.getImageLink() ==
+                                "" ||
+                            UserSimplePreferences.getImageLink() == null)
                         ? AssetImage("images/nodp.jpg")
-                        : FileImage(sampleImage),
+                        : Image.network(UserSimplePreferences.getImageLink()),
                   ),
                 ),
                 SizedBox(

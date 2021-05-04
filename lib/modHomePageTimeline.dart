@@ -194,9 +194,22 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
               SizedBox(
                 height: 10,
               ),
-              Text(
-                "Leaderboard",
-                style: TextStyle(fontSize: 30, fontFamily: "OpenSans"),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: EdgeInsets.symmetric(vertical: 10),
+                width: double.infinity,
+                color: Color(0xFFBDD4EB),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Leaderboard",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: "OpenSans",
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF09427d)),
+                  ),
+                ),
               ),
               SizedBox(
                 height: 10,
