@@ -74,7 +74,10 @@ class _regHomePageState extends State<regHomePage>
   ];
 
   Future<Null> refreshList() async {
-    Navigator.pushReplacementNamed(context, '/homepage2');
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => regHomePage()),
+    );
     await Future.delayed(Duration(seconds: 2));
     return null;
   }

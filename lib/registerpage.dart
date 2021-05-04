@@ -85,6 +85,7 @@ class _registerpageState extends State<registerpage> {
   }
 
   void savetoDatabase(url) {
+    UserSimplePreferences.setImageLink(url);
     UserSimplePreferences.setUserName(full_name);
     UserSimplePreferences.setphonenumber(phnum);
     DatabaseReference ref = FirebaseDatabase.instance.reference();
