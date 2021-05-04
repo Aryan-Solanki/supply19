@@ -52,25 +52,25 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                   performsFirstActionWithFullSwipe: true,
                   trailingActions: <SwipeAction>[
                     SwipeAction(
-                        title: "Verified",
+                        title: " Not Verified",
                         onTap: (CompletionHandler handler) async {
-                          print("Verified" + index.toString());
+                          // print("Verified" + index.toString());
                           await handler(true);
                           uq.removeAt(index);
                           setState(() {});
                         },
-                        color: Colors.green),
+                        color: Colors.red),
                   ],
                   leadingActions: [
                     SwipeAction(
-                        title: "Not Verified",
+                        title: "Verified",
                         onTap: (handler) async {
                           print("Not Verified" + index.toString());
                           await handler(true);
                           uq.removeAt(index);
                           setState(() {});
                         },
-                        color: Colors.red),
+                        color: Colors.green),
                   ],
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -108,25 +108,25 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                   performsFirstActionWithFullSwipe: true,
                   trailingActions: <SwipeAction>[
                     SwipeAction(
-                        title: "Verified",
+                        title: " Not Verified",
                         onTap: (CompletionHandler handler) async {
                           print("Verified" + index.toString());
                           await handler(true);
                           uq.removeAt(index);
                           setState(() {});
                         },
-                        color: Colors.green),
+                        color: Colors.red),
                   ],
                   leadingActions: [
                     SwipeAction(
-                        title: "Not Verified",
+                        title: "Verified",
                         onTap: (handler) async {
                           print("Not Verified" + index.toString());
                           await handler(true);
                           uq.removeAt(index);
                           setState(() {});
                         },
-                        color: Colors.red),
+                        color: Colors.green),
                   ],
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
