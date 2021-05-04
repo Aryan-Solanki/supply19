@@ -3,15 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'user_simple_preferences.dart';
 import 'dart:async';
+import 'modHomePage.dart';
 
-String current="modhomepage";
+String current = "modhomepage";
+
 class DrawerScreen extends StatefulWidget {
   @override
   _DrawerScreenState createState() => _DrawerScreenState();
 }
 
 class _DrawerScreenState extends State<DrawerScreen> {
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -76,61 +77,61 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     SizedBox(
                       height: 5,
                     ),
-
-                    current=="modhomepage"?FlatButton(
-                        onPressed: () {
-                          setState(() {
-                            Navigator.pushNamed(context, "/modtimeline");
-                          });
-                          Timer(Duration(seconds: 1), () {
-                            current="timeline";
-                          });
-
-
-                        },
-                        child: Row(
-                          children: [
-                            // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              " Timeline",
-                              style: TextStyle(
-                                  fontFamily: "OpenSans",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white),
-                            )
-                          ],
-                        )):
-                    FlatButton(
-                        onPressed: () {
-                          setState(() {
-                            Navigator.pushNamed(context, "/homepage2");
-                          });
-                          Timer(Duration(seconds: 1), () {
-                            current="modhomepage";
-                          });
-
-
-                        },
-                        child: Row(
-                          children: [
-                            // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              " Homepage",
-                              style: TextStyle(
-                                  fontFamily: "OpenSans",
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18,
-                                  color: Colors.white),
-                            )
-                          ],
-                        )),
+                    current == "modhomepage"
+                        ? FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                Navigator.pushNamed(context, "/modtimeline");
+                              });
+                              Timer(Duration(seconds: 1), () {
+                                current = "timeline";
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  " Timeline",
+                                  style: TextStyle(
+                                      fontFamily: "OpenSans",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Colors.white),
+                                )
+                              ],
+                            ))
+                        : FlatButton(
+                            onPressed: () {
+                              setState(() {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => modHomePage()),
+                                );
+                              });
+                              Timer(Duration(seconds: 1), () {
+                                current = "modhomepage";
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  " Homepage",
+                                  style: TextStyle(
+                                      fontFamily: "OpenSans",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Colors.white),
+                                )
+                              ],
+                            )),
                     SizedBox(
                       height: 5,
                     ),
