@@ -24,9 +24,9 @@ FaIcon crown(int rank){
 
 
 Widget RankUI(String image, int rank, int points,String volname) {
-  return Container(
+  return rank%2==0?FadeInLeft(child: Container(
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(10),
         color: colour(rank)
     ),
     margin: EdgeInsets.only(bottom: 10,left: 20,right: 20),
@@ -55,7 +55,7 @@ Widget RankUI(String image, int rank, int points,String volname) {
                 FittedBox(
                   fit: BoxFit.scaleDown,
                   child: Text(volname,style: TextStyle(fontSize: 20,fontFamily: "LatoBold",color: Colors.black),),
-                  ),
+                ),
                 SizedBox(height: 6,),
                 Container(
                   padding: EdgeInsets.symmetric(vertical: 2),
@@ -63,7 +63,7 @@ Widget RankUI(String image, int rank, int points,String volname) {
                   child: Align(alignment:Alignment.center,child: Text(points.toString(),style: TextStyle(fontFamily: "LatoBold",fontSize: 27,color: Colors.white),)),
                   decoration: BoxDecoration(
                       color: Color(0xff09427d),
-                    borderRadius: BorderRadius.circular(30)
+                      borderRadius: BorderRadius.circular(30)
                   ),
                 )
               ],
@@ -72,5 +72,53 @@ Widget RankUI(String image, int rank, int points,String volname) {
         )
       ],
     ),
-  );
+  )):FadeInRight(child: Container(
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: colour(rank)
+    ),
+    margin: EdgeInsets.only(bottom: 10,left: 20,right: 20),
+    width: double.infinity,
+    height: 100,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: [
+        Text(" "+rank.toString()+".",style:TextStyle(fontSize: 25,fontFamily: "OpenSans")),
+        SizedBox(width: 10,),
+        Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: CircleAvatar(
+            radius: 40,
+            backgroundImage: NetworkImage(image),
+          ),
+        ),
+        rank<4?crown(rank):SizedBox(width: 0,),
+        Expanded(
+          child: Container(
+            margin: EdgeInsets.only(right: 8),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(volname,style: TextStyle(fontSize: 20,fontFamily: "LatoBold",color: Colors.black),),
+                ),
+                SizedBox(height: 6,),
+                Container(
+                  padding: EdgeInsets.symmetric(vertical: 2),
+                  width: 180,
+                  child: Align(alignment:Alignment.center,child: Text(points.toString(),style: TextStyle(fontFamily: "LatoBold",fontSize: 27,color: Colors.white),)),
+                  decoration: BoxDecoration(
+                      color: Color(0xff09427d),
+                      borderRadius: BorderRadius.circular(30)
+                  ),
+                )
+              ],
+            ),
+          ),
+        )
+      ],
+    ),
+  ));
 }
