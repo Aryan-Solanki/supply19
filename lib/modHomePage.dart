@@ -22,15 +22,21 @@ import 'queryuidata.dart';
 
 class modHomePage extends StatefulWidget {
   final String title = "modHomePage Timeline";
+  int selectedItemPosition=1;
+  modHomePage({this.selectedItemPosition});
   @override
-  _modHomePageState createState() => _modHomePageState();
+  _modHomePageState createState() =>
+      _modHomePageState(selectedItemPosition: selectedItemPosition);
 }
 
 class _modHomePageState extends State<modHomePage>
     with TickerProviderStateMixin {
+  int selectedItemPosition=1;
+  _modHomePageState({this.selectedItemPosition});
+
   getbody() {
     try {
-      return tab[_selectedItemPosition];
+      return tab[selectedItemPosition];
     } catch (e) {
       Text("");
     }
@@ -44,11 +50,11 @@ class _modHomePageState extends State<modHomePage>
   List<Posts> postListuser = [];
   List<QueryUiData> uq = [];
   final controller = ScrollController();
-  int _selectedItemPosition = 1;
   List tab = [];
   AnimationController _controller;
   bool _visible = true;
   GlobalKey<RefreshIndicatorState> refreshKey;
+  GlobalKey<RefreshIndicatorState> refreshKeyQuery;
 
   final items = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
@@ -85,10 +91,22 @@ class _modHomePageState extends State<modHomePage>
     ),
   ];
 
-  Future<Null> refreshList() async {
+  Future<Null> refreshList(int selected_item) async {
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => modHomePage()),
+      MaterialPageRoute(
+          builder: (context) =>
+              modHomePage(selectedItemPosition: selected_item)),
+    );
+    await Future.delayed(Duration(seconds: 2));
+    return null;
+  }
+
+  Future<Null> refreshListQuery() async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => modHomePage(selectedItemPosition: 0)),
     );
     await Future.delayed(Duration(seconds: 2));
     return null;
@@ -98,6 +116,7 @@ class _modHomePageState extends State<modHomePage>
   void initState() {
     super.initState();
     refreshKey = GlobalKey<RefreshIndicatorState>();
+    refreshKeyQuery = GlobalKey<RefreshIndicatorState>();
     email = UserSimplePreferences.getEmail() ?? '';
     _controller = AnimationController(
       vsync: this,
@@ -105,7 +124,7 @@ class _modHomePageState extends State<modHomePage>
     );
     // Getting user info from Firebase
     DatabaseReference postsRef0 =
-        FirebaseDatabase.instance.reference().child("User-Data");
+    FirebaseDatabase.instance.reference().child("User-Data");
     postsRef0.once().then((DataSnapshot snap0) {
       var KEYS0 = snap0.value.keys;
       var DATA0 = snap0.value;
@@ -194,76 +213,54 @@ class _modHomePageState extends State<modHomePage>
       setState(() {
         print('Length: $postList.length');
         tab = [
-          Column(
-            children: [
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
-                padding: EdgeInsets.symmetric(vertical:10),
-                width: double.infinity,
-                color: Color(0xFFBDD4EB),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    "Queries",
-                    style: TextStyle(fontSize: 20, fontFamily: "OpenSans",fontWeight: FontWeight.bold,color:Color(0xFF09427d) ),
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                child: uq.length == 0
-                    ? Text("No Queries Available")
-                    : Expanded(
-                  child: ListView.builder(
-                      shrinkWrap:true,
-                      itemCount: uq.length,
-                      itemBuilder: (_, index) {
-                        return QueryUI(
-                          uq[index].image,
-                          uq[index].description,
-                          uq[index].date,
-                          uq[index].time,
-                          uq[index].phnum,
-                          uq[index].name,
-                          uq[index].requirement,
-                          uq[index].location,
-                        );
-                      }),
-                ),
-              ),
-
-            ],
+          Container(
+            child: uq.length == 0
+                ? Text("No Queries Available")
+                : RefreshIndicator(
+              key: refreshKeyQuery,
+              onRefresh: () async {
+                await refreshListQuery();
+              },
+              child: ListView.builder(
+                  itemCount: uq.length,
+                  itemBuilder: (_, index) {
+                    return QueryUI(
+                      uq[index].image,
+                      uq[index].description,
+                      uq[index].date,
+                      uq[index].time,
+                      uq[index].phnum,
+                      uq[index].name,
+                      uq[index].requirement,
+                      uq[index].location,
+                    );
+                  }),
+            ),
           ),
-
           Container(
             child: postListuser.length == 0
                 ? Text("No information available")
                 : RefreshIndicator(
-                    key: refreshKey,
-                    onRefresh: () async {
-                      await refreshList();
-                    },
-                    child: ListView.builder(
-                        itemCount: postListuser.length,
-                        itemBuilder: (_, index) {
-                          return yourPostsUI(
-                            postListuser[index].image,
-                            postListuser[index].description,
-                            postListuser[index].date,
-                            postListuser[index].time,
-                            postListuser[index].phnum,
-                            postListuser[index].volname,
-                            postListuser[index].status,
-                            postListuser[index].sname,
-                            postListuser[index].sphnum,
-                          );
-                        }),
-                  ),
+              key: refreshKey,
+              onRefresh: () async {
+                await refreshList(1);
+              },
+              child: ListView.builder(
+                  itemCount: postListuser.length,
+                  itemBuilder: (_, index) {
+                    return yourPostsUI(
+                      postListuser[index].image,
+                      postListuser[index].description,
+                      postListuser[index].date,
+                      postListuser[index].time,
+                      postListuser[index].phnum,
+                      postListuser[index].volname,
+                      postListuser[index].status,
+                      postListuser[index].sname,
+                      postListuser[index].sphnum,
+                    );
+                  }),
+            ),
           ),
           UploadPhotoPage(),
           meet_team(),
@@ -284,7 +281,7 @@ class _modHomePageState extends State<modHomePage>
   List listItem = ["Item 1", "Item 2", "Item 3"];
   void checkboollol() {
     setState(() {
-      if (_selectedItemPosition == 1) {
+      if (selectedItemPosition == 1 || selectedItemPosition == 0) {
         allsupplies = true;
       } else {
         allsupplies = false;
@@ -313,37 +310,37 @@ class _modHomePageState extends State<modHomePage>
               borderRadius: BorderRadius.circular(isDrawerOpen ? 40 : 0.0)),
           child: MaterialApp(
               home: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: SafeArea(
-              child: Scaffold(
-                  backgroundColor: Color(0xFFEDEDED),
-                  appBar: SlidingAppBar(
-                    controller: _controller,
-                    visible: allsupplies,
-                    child: AppBar(
-                      elevation: 0.0,
+                borderRadius: BorderRadius.circular(30),
+                child: SafeArea(
+                  child: Scaffold(
                       backgroundColor: Color(0xFFEDEDED),
-                      toolbarHeight: 80,
-                      automaticallyImplyLeading: false,
-                      leading: Row(
-                        children: [
-                          isDrawerOpen
-                              ? IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_back_ios,
-                                    size: 35.0,
-                                    color: Color(0xFF2F3437),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      xOffset = 0;
-                                      yOffset = 0;
-                                      scaleFactor = 1;
-                                      isDrawerOpen = false;
-                                    });
-                                  },
-                                )
-                              : IconButton(
+                      appBar: SlidingAppBar(
+                        controller: _controller,
+                        visible: allsupplies,
+                        child: AppBar(
+                          elevation: 0.0,
+                          backgroundColor: Color(0xFFEDEDED),
+                          toolbarHeight: 80,
+                          automaticallyImplyLeading: false,
+                          leading: Row(
+                            children: [
+                              isDrawerOpen
+                                  ? IconButton(
+                                icon: Icon(
+                                  Icons.arrow_back_ios,
+                                  size: 35.0,
+                                  color: Color(0xFF2F3437),
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    xOffset = 0;
+                                    yOffset = 0;
+                                    scaleFactor = 1;
+                                    isDrawerOpen = false;
+                                  });
+                                },
+                              )
+                                  : IconButton(
                                   icon: Icon(
                                     Icons.dehaze_outlined,
                                     size: 35.0,
@@ -357,58 +354,60 @@ class _modHomePageState extends State<modHomePage>
                                       isDrawerOpen = true;
                                     });
                                   }),
-                          // SizedBox(
-                          //   width: 5.0,
-                          // )
-                        ],
-                      ),
-                      title: Container(
-                        height: 40.0,
-                        width: double.infinity,
-                        color: Color(0xFFBDD4EB),
-                        child: Center(
-                          child: Text(
-                            _selectedItemPosition == 1
-                                ? ((postListuser.length == 0)
+                              // SizedBox(
+                              //   width: 5.0,
+                              // )
+                            ],
+                          ),
+                          title: Container(
+                            height: 40.0,
+                            width: double.infinity,
+                            color: Color(0xFFBDD4EB),
+                            child: Center(
+                              child: Text(
+                                selectedItemPosition == 1
+                                    ? ((postListuser.length == 0)
                                     ? "Your Posts"
                                     : UserSimplePreferences.getUserName())
-                                : "TimeLine",
-                            style: TextStyle(
-                                color: Color(0xFF09427d),
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),
+                                    : ((selectedItemPosition == 0)
+                                    ? "Query"
+                                    : "Timeline"),
+                                style: TextStyle(
+                                    color: Color(0xFF09427d),
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ),
-                  body: getbody(),
-                  bottomNavigationBar: SnakeNavigationBar.color(
-                    // backgroundColor: Colors.blue,
-                    behaviour: SnakeBarBehaviour.floating,
-                    selectedItemColor: Colors.black,
-                    // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
-                    // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25)),
-                    // shape: ,
-                    snakeShape: SnakeShape.indicator,
-                    showSelectedLabels: true,
-                    // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
-                    padding: EdgeInsets.all(12),
-                    currentIndex: _selectedItemPosition,
-                    onTap: (index) {
-                      setState(() {
-                        _selectedItemPosition = index;
-                        checkboollol();
-                      });
-                    },
-                    items: items,
-                  )),
-            ),
-          )
-              // This trailing comma makes auto-formatting nicer for build methods.
-              ),
+                      body: getbody(),
+                      bottomNavigationBar: SnakeNavigationBar.color(
+                        // backgroundColor: Colors.blue,
+                        behaviour: SnakeBarBehaviour.floating,
+                        selectedItemColor: Colors.black,
+                        // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
+                        // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25)),
+                        // shape: ,
+                        snakeShape: SnakeShape.indicator,
+                        showSelectedLabels: true,
+                        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
+                        padding: EdgeInsets.all(12),
+                        currentIndex: selectedItemPosition,
+                        onTap: (index) {
+                          setState(() {
+                            selectedItemPosition = index;
+                            checkboollol();
+                          });
+                        },
+                        items: items,
+                      )),
+                ),
+              )
+            // This trailing comma makes auto-formatting nicer for build methods.
+          ),
         ),
       ],
     );
