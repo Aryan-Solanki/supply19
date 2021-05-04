@@ -172,7 +172,7 @@ class _regTimelineState extends State<regTimeline>
           SafeArea(
             child: Container(
               child: (postList.length == 0 || postList.length == null)
-                  ? Text("No information available")
+                  ? Center(child: Text("No information available"))
                   : ListView.builder(
                       itemCount: postList.length,
                       itemBuilder: (_, index) {
@@ -236,7 +236,7 @@ class _regTimelineState extends State<regTimeline>
   }
 
   String categoryChoose;
-  List listItem = ["All Supplies", "Oxygen", "Remdesivir", "Plasma"];
+  List listItem = ["All Supplies","Beds","Oxygen","Ventilator","Fabiflu","Favipiravir","Oxygen Bed","Non Oxygen Bed","ICU Bed","Non-ICU Bed","Oxygen Refilling","Plasma","Tocilizumab","Remidivisir","Injection","Doctor","Hospital","Ambulance","Testing","Hospital At Home"];
 
   void checkboollol() {
     setState(() {

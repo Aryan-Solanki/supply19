@@ -272,7 +272,7 @@ class _modHomePageState extends State<modHomePage>
           ),
           Container(
             child: postListuser.length == 0
-                ? Text("No information available")
+                ? Align(alignment:Alignment.center,child: Text("No information available"))
                 : RefreshIndicator(
                     key: refreshKey,
                     onRefresh: () async {
@@ -312,7 +312,6 @@ class _modHomePageState extends State<modHomePage>
   }
 
   String valueChoose;
-  List listItem = ["Item 1", "Item 2", "Item 3"];
   void checkboollol() {
     setState(() {
       if (selectedItemPosition == 1 || selectedItemPosition == 0 || selectedItemPosition==3) {

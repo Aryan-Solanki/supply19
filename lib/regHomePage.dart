@@ -155,7 +155,7 @@ class _regHomePageState extends State<regHomePage>
         tab = [
           Container(
             child: postListuser.length == 0
-                ? Text("lol")
+                ? Center(child: Text("No information available"))
                 : RefreshIndicator(
                     key: refreshKey,
                     onRefresh: () async {
