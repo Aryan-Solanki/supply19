@@ -7,6 +7,7 @@ import 'package:medicalapp/privacypolicy.dart';
 import 'package:medicalapp/profile.dart';
 import 'package:medicalapp/registerpage.dart';
 import 'package:medicalapp/registration.dart';
+import 'package:medicalapp/testingg.dart';
 import 'package:medicalapp/uploadimg.dart';
 import 'login.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,7 +28,7 @@ void main() async {
   await UserSimplePreferences.init();
   await UserSimplePreferences.setCategory('');
   await UserSimplePreferences.setCity('');
-  runApp(my());
+  runApp(testingg());
 }
 
 class my extends StatelessWidget {
