@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:medicalapp/HomePage.dart';
 import 'package:medicalapp/citypage.dart';
+import 'package:medicalapp/regTimeline.dart';
 import 'city.dart';
 import 'package:search_choices/search_choices.dart';
 import 'user_simple_preferences.dart';
@@ -65,14 +66,16 @@ class _chooselocationState extends State<chooselocation> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => modHomePage(
-                                      selectedItemPosition: 2,
+                                      selectedItemPosition: 1,
                                     )),
                           );
                         } else if (backlink == "registration") {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => regHomePage()),
+                                builder: (context) => regTimeline(
+                                      selectedItemPosition: 2,
+                                    )),
                           );
                         } else if (backlink == "beneficiary") {
                           Navigator.pushReplacement(
@@ -109,14 +112,16 @@ class _chooselocationState extends State<chooselocation> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => modHomePage(
-                                                selectedItemPosition: 2,
+                                                selectedItemPosition: 1,
                                               )),
                                     );
                                   } else if (backlink == "registration") {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => regHomePage()),
+                                          builder: (context) => regTimeline(
+                                                selectedItemPosition: 2,
+                                              )),
                                     );
                                   } else if (backlink == "beneficiary") {
                                     Navigator.pushReplacement(
@@ -144,14 +149,16 @@ class _chooselocationState extends State<chooselocation> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => modHomePage(
-                                                selectedItemPosition: 2,
+                                                selectedItemPosition: 1,
                                               )),
                                     );
                                   } else if (backlink == "registration") {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => regHomePage()),
+                                          builder: (context) => regTimeline(
+                                                selectedItemPosition: 2,
+                                              )),
                                     );
                                   } else if (backlink == "beneficiary") {
                                     Navigator.pushReplacement(
@@ -179,14 +186,16 @@ class _chooselocationState extends State<chooselocation> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => modHomePage(
-                                                selectedItemPosition: 2,
+                                                selectedItemPosition: 1,
                                               )),
                                     );
                                   } else if (backlink == "registration") {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => regHomePage()),
+                                          builder: (context) => regTimeline(
+                                                selectedItemPosition: 2,
+                                              )),
                                     );
                                   } else if (backlink == "beneficiary") {
                                     Navigator.pushReplacement(
@@ -218,15 +227,16 @@ class _chooselocationState extends State<chooselocation> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => modHomePage(
-                                                  selectedItemPosition: 2,
+                                                  selectedItemPosition: 1,
                                                 )),
                                       );
                                     } else if (backlink == "registration") {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                regHomePage()),
+                                            builder: (context) => regTimeline(
+                                                  selectedItemPosition: 2,
+                                                )),
                                       );
                                     } else if (backlink == "beneficiary") {
                                       Navigator.pushReplacement(
@@ -255,15 +265,16 @@ class _chooselocationState extends State<chooselocation> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => modHomePage(
-                                                  selectedItemPosition: 2,
+                                                  selectedItemPosition: 1,
                                                 )),
                                       );
                                     } else if (backlink == "registration") {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                regHomePage()),
+                                            builder: (context) => regTimeline(
+                                                  selectedItemPosition: 2,
+                                                )),
                                       );
                                     } else if (backlink == "beneficiary") {
                                       Navigator.pushReplacement(
@@ -293,14 +304,16 @@ class _chooselocationState extends State<chooselocation> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => modHomePage(
-                                                selectedItemPosition: 2,
+                                                selectedItemPosition: 1,
                                               )),
                                     );
                                   } else if (backlink == "registration") {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => regHomePage()),
+                                          builder: (context) => regTimeline(
+                                                selectedItemPosition: 2,
+                                              )),
                                     );
                                   } else if (backlink == "beneficiary") {
                                     Navigator.pushReplacement(
@@ -329,14 +342,16 @@ class _chooselocationState extends State<chooselocation> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => modHomePage(
-                                                selectedItemPosition: 2,
+                                                selectedItemPosition: 1,
                                               )),
                                     );
                                   } else if (backlink == "registration") {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => regHomePage()),
+                                          builder: (context) => regTimeline(
+                                                selectedItemPosition: 2,
+                                              )),
                                     );
                                   } else if (backlink == "beneficiary") {
                                     Navigator.pushReplacement(
@@ -364,14 +379,16 @@ class _chooselocationState extends State<chooselocation> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => modHomePage(
-                                                selectedItemPosition: 2,
+                                                selectedItemPosition: 1,
                                               )),
                                     );
                                   } else if (backlink == "registration") {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => regHomePage()),
+                                          builder: (context) => regTimeline(
+                                                selectedItemPosition: 2,
+                                              )),
                                     );
                                   } else if (backlink == "beneficiary") {
                                     Navigator.pushReplacement(

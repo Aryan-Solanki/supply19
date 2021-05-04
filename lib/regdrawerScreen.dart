@@ -1,18 +1,12 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:medicalapp/profile.dart';
-import 'user_simple_preferences.dart';
-import 'utility.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'regHomePage.dart';
 import 'regTimeline.dart';
-import 'termandcondition.dart';
+import 'user_simple_preferences.dart';
+import 'dart:async';
+import 'regHomePage.dart';
 
-
+String current0 = "regHomePage";
 
 class regDrawerScreen extends StatefulWidget {
   @override
@@ -20,215 +14,217 @@ class regDrawerScreen extends StatefulWidget {
 }
 
 class _regDrawerScreenState extends State<regDrawerScreen> {
-  File sampleImage;
-  Image image;
-  String current = "reghomepage";
-  @override
-  void initState() {
-    loadImageFromPrefs();
-    super.initState();
-  }
-
-  loadImageFromPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    final imageKeyValue = prefs.getString(IMAGE_KEY);
-    if (imageKeyValue != null) {
-      final imageString = await ImageSharedPrefs.loadImageFromPrefs();
-      setState(() {
-        image = ImageSharedPrefs.imageFrom64BaseString(imageString);
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-            gradient:
-                LinearGradient(colors: [Color(0xff6dd5ed), Color(0xff2193b0)])),
-        padding: EdgeInsets.only(top: 10, bottom: 50, left: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: CircleAvatar(
-                    radius: 100,
-                    backgroundImage: (UserSimplePreferences.getImageLink() ==
-                                "" ||
-                            UserSimplePreferences.getImageLink() == null)
-                        ? AssetImage("images/nodp.jpg")
-                        : Image.network(UserSimplePreferences.getImageLink()),
-                  ),
-                ),
-                SizedBox(
-                  width: 30,
-                ),
-                Expanded(
-                    flex: 3,
-                    child: Text(
-                      UserSimplePreferences.getUserName(),
-                      style: TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
-                          fontFamily: "OpenSans",
-                          fontWeight: FontWeight.bold),
-                    ))
-              ],
-            ),
-            Container(
-              child: Column(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  colors: [Color(0xff6dd5ed), Color(0xff2193b0)])),
+          padding: EdgeInsets.only(top: 30, bottom: 50, left: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
                 children: [
-                  FlatButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => profile()),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          // FaIcon(FontAwesomeIcons.user,size: 25,color: Colors.white,),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            "   Profile",
-                            style: TextStyle(
-                                fontFamily: "OpenSans",
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.white),
-                          )
-                        ],
+                  Expanded(
+                      flex: 1,
+                      child: CircleAvatar(
+                        radius: 50,
+                        backgroundImage:
+                            (UserSimplePreferences.getImageLink() == "" ||
+                                    UserSimplePreferences.getImageLink() ==
+                                        null)
+                                ? AssetImage("images/nodp.jpg")
+                                : Image.network(
+                                    UserSimplePreferences.getImageLink()),
                       )),
                   SizedBox(
-                    height: 5,
+                    width: 30,
                   ),
-                  current == "reghomepage"
-                      ? FlatButton(
-                          onPressed: () {
-                            setState(() {
-                              current = "timeline";
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => regTimeline()),
-                              );
-                            });
-
-
-                          },
+                  Expanded(
+                      flex: 3,
                       child: Text(
-                                " Timeline",
-                                style: TextStyle(
-                                    fontFamily: "OpenSans",
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: Colors.white),
-                              )
-                          )
-                      : FlatButton(
-                          onPressed: () {
-                            setState(() {
-                              current = "reghomepage";
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => regHomePage()),
-                              );
-                            });
-
-                          },
-                          child:
-                              Text(
-                                " Homepage",
-                                style: TextStyle(
-                                    fontFamily: "OpenSans",
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: Colors.white),
-                              )
-
-                          ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  FlatButton(
-                      onPressed: () {},
-                      child: Row(
-                        children: [
-                          // FaIcon(FontAwesomeIcons.star,size: 25,color: Colors.white,),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            "  Rate Us",
-                            style: TextStyle(
-                                fontFamily: "OpenSans",
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.white),
-                          )
-                        ],
-                      )),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  FlatButton(
-                      onPressed: () {},
-                      child: Row(
-                        children: [
-                          // Icon(Icons.share_outlined,size: 25,color: Colors.white,),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            "Share App",
-                            style: TextStyle(
-                                fontFamily: "OpenSans",
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.white),
-                          )
-                        ],
-                      )),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  FlatButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => termandcondition()),
-                        );
-                      },
-                      child: Row(
-                        children: [
-                          // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(
-                            "     T&C",
-                            style: TextStyle(
-                                fontFamily: "OpenSans",
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.white),
-                          )
-                        ],
-                      )),
+                        UserSimplePreferences.getUserName() ?? '',
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white,
+                            fontFamily: "OpenSans",
+                            fontWeight: FontWeight.bold),
+                      ))
                 ],
               ),
-            ),
-          ],
+              Container(
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, "/profile");
+                          ;
+                        },
+                        child: Row(
+                          children: [
+                            // FaIcon(FontAwesomeIcons.user,size: 25,color: Colors.white,),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              "   Profile",
+                              style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            )
+                          ],
+                        )),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    current0 == "regHomePage"
+                        ? FlatButton(
+                            onPressed: () {
+                              current0 = "timeline";
+                              setState(() {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          regTimeline(selectedItemPosition: 2)),
+                                );
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  " Timeline",
+                                  style: TextStyle(
+                                      fontFamily: "OpenSans",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Colors.white),
+                                )
+                              ],
+                            ))
+                        : FlatButton(
+                            onPressed: () {
+                              current0 = "regHomePage";
+                              setState(() {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => regHomePage()),
+                                );
+                              });
+                            },
+                            child: Row(
+                              children: [
+                                // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  " Homepage",
+                                  style: TextStyle(
+                                      fontFamily: "OpenSans",
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 18,
+                                      color: Colors.white),
+                                )
+                              ],
+                            )),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    FlatButton(
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            // FaIcon(FontAwesomeIcons.star,size: 25,color: Colors.white,),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              "  Rate Us",
+                              style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            )
+                          ],
+                        )),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    FlatButton(
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            // Icon(Icons.share_outlined,size: 25,color: Colors.white,),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              "Share App",
+                              style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            )
+                          ],
+                        )),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    FlatButton(
+                        onPressed: () {},
+                        child: Row(
+                          children: [
+                            // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              "     T&C",
+                              style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            )
+                          ],
+                        )),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.only(left: 20),
+                height: 35,
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                decoration: BoxDecoration(
+                    color: Color(0xff2193b0),
+                    borderRadius: BorderRadius.circular(30)),
+                child: FlatButton(
+                    onPressed: () {},
+                    child: Text(
+                      "Log Out",
+                      style: TextStyle(
+                          fontFamily: "OpenSans",
+                          fontSize: 20,
+                          color: Colors.white),
+                    )),
+              )
+            ],
+          ),
         ),
       ),
     );

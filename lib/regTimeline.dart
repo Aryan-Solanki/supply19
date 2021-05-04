@@ -20,25 +20,31 @@ import 'regHomePage.dart';
 
 class regTimeline extends StatefulWidget {
   final String title = "regTimeline Timeline";
+  int selectedItemPosition;
+  regTimeline({this.selectedItemPosition});
   @override
-  _regTimelineState createState() => _regTimelineState();
+  _regTimelineState createState() =>
+      _regTimelineState(selectedItemPosition: selectedItemPosition);
 }
 
 class _regTimelineState extends State<regTimeline>
     with TickerProviderStateMixin {
+  int selectedItemPosition;
+  _regTimelineState({this.selectedItemPosition});
   getbody() {
     try {
-      return tab[_selectedItemPosition];
+      return tab[selectedItemPosition];
     } catch (e) {
       Text("");
     }
     ;
   }
 
+  GlobalKey<RefreshIndicatorState> refreshKey;
+  GlobalKey<RefreshIndicatorState> refreshKeyQuery;
   bool allsupplies = true;
   List<Posts> postList = [];
   final controller = ScrollController();
-  int _selectedItemPosition = 2;
   String city_name;
   List tab = [];
   String categorySelector = 'All Supplies';
@@ -89,9 +95,32 @@ class _regTimelineState extends State<regTimeline>
 
   List<UserData> userslist = [];
 
+  Future<Null> refreshList(int screen) async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => regTimeline(
+                selectedItemPosition: 2,
+              )),
+    );
+    await Future.delayed(Duration(seconds: 2));
+    return null;
+  }
+
+  Future<Null> refreshListQuery() async {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => regTimeline(selectedItemPosition: 3),
+        ));
+    await Future.delayed(Duration(seconds: 2));
+    return null;
+  }
+
   @override
   void initState() {
     super.initState();
+    refreshKey = GlobalKey<RefreshIndicatorState>();
     int i = 0;
     FirebaseDatabase.instance
         .reference()
@@ -167,6 +196,7 @@ class _regTimelineState extends State<regTimeline>
       }
 
       setState(() {
+        checkboollol();
         tab = [
           chooselocation(
             backlink: "registration",
@@ -176,21 +206,27 @@ class _regTimelineState extends State<regTimeline>
             child: Container(
               child: (postList.length == 0 || postList.length == null)
                   ? Center(child: Text("No information available"))
-                  : ListView.builder(
-                      itemCount: postList.length,
-                      itemBuilder: (_, index) {
-                        return PostsUI(
-                          postList[index].image,
-                          postList[index].description,
-                          postList[index].date,
-                          postList[index].time,
-                          postList[index].phnum,
-                          postList[index].volname,
-                          postList[index].status,
-                          postList[index].sname,
-                          postList[index].sphnum,
-                        );
-                      }),
+                  : RefreshIndicator(
+                      key: refreshKey,
+                      onRefresh: () async {
+                        await refreshList(2);
+                      },
+                      child: ListView.builder(
+                          itemCount: postList.length,
+                          itemBuilder: (_, index) {
+                            return PostsUI(
+                              postList[index].image,
+                              postList[index].description,
+                              postList[index].date,
+                              postList[index].time,
+                              postList[index].phnum,
+                              postList[index].volname,
+                              postList[index].status,
+                              postList[index].sname,
+                              postList[index].sphnum,
+                            );
+                          }),
+                    ),
             ),
           ),
           SafeArea(
@@ -210,31 +246,29 @@ class _regTimelineState extends State<regTimeline>
                   child: Expanded(
                 child: (userslist.length == 0 || userslist.length == null)
                     ? Text("No information available")
-                    : ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: userslist.length,
-                        itemBuilder: (_, index) {
-                          return RankUI(
-                            userslist[index].image,
-                            (index + 1),
-                            userslist[index].points,
-                            userslist[index].name,
-                          );
-                        }),
+                    : RefreshIndicator(
+                        key: refreshKeyQuery,
+                        onRefresh: () async {
+                          await refreshListQuery();
+                        },
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: userslist.length,
+                            itemBuilder: (_, index) {
+                              return RankUI(
+                                userslist[index].image,
+                                (index + 1),
+                                userslist[index].points,
+                                userslist[index].name,
+                              );
+                            }),
+                      ),
               )),
             ],
           )),
           meet_team()
         ];
       });
-    });
-  }
-
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
     });
   }
 
@@ -264,7 +298,10 @@ class _regTimelineState extends State<regTimeline>
 
   void checkboollol() {
     setState(() {
-      if (_selectedItemPosition == 2) {
+      if (selectedItemPosition == 3) {
+        allsupplies = false;
+      }
+      if (selectedItemPosition == 2) {
         allsupplies = true;
       } else {
         allsupplies = false;
@@ -380,7 +417,9 @@ class _regTimelineState extends State<regTimeline>
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      regTimeline()),
+                                                      regTimeline(
+                                                          selectedItemPosition:
+                                                              2)),
                                             );
                                           });
                                         },
@@ -425,7 +464,9 @@ class _regTimelineState extends State<regTimeline>
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => regTimeline()),
+                                  builder: (context) => regTimeline(
+                                        selectedItemPosition: 2,
+                                      )),
                             );
                           },
                           items: listItem.map((valueItem) {
@@ -450,10 +491,10 @@ class _regTimelineState extends State<regTimeline>
                     showSelectedLabels: true,
                     // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
                     padding: EdgeInsets.all(12),
-                    currentIndex: _selectedItemPosition,
+                    currentIndex: selectedItemPosition,
                     onTap: (index) {
                       setState(() {
-                        _selectedItemPosition = index;
+                        selectedItemPosition = index;
                         checkboollol();
                       });
                     },
