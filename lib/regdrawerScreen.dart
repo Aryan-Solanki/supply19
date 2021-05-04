@@ -3,9 +3,13 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:medicalapp/profile.dart';
 import 'user_simple_preferences.dart';
 import 'utility.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'regHomePage.dart';
+import 'regTimeline.dart';
+import 'termandcondition.dart';
 
 class regDrawerScreen extends StatefulWidget {
   @override
@@ -79,7 +83,10 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                 children: [
                   FlatButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, "/profile");
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => profile()),
+                        );
                       },
                       child: Row(
                         children: [
@@ -102,7 +109,11 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                   ),
                   FlatButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, "/homepage3");
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => regHomePage()),
+                        );
                       },
                       child: Row(
                         children: [
@@ -125,7 +136,11 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                   ),
                   FlatButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, "/regtimeline");
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => regTimeline()),
+                        );
                       },
                       child: Row(
                         children: [
@@ -189,7 +204,13 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                     height: 5,
                   ),
                   FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => termandcondition()),
+                        );
+                      },
                       child: Row(
                         children: [
                           // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
