@@ -2,6 +2,32 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+void _launchURL(String a) async {
+  String url="";
+  if (a=="akshatlinkedin"){
+    print("hiii");
+    url = 'https://www.linkedin.com/in/akshat-rastogi-3425aa1b8/';
+  }
+  else if (a=="akshattwitter"){
+    url = 'https://twitter.com/AkshatRasogi';
+  }
+  else if (a=="aryanlinkedin"){
+    url = 'https://www.linkedin.com/in/aryan-solanki-3b13191b5/';
+  }
+  else{
+    url = 'https://twitter.com/AryanSo34013859';
+  }
+
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+
 
 final pages = [
   Container(
@@ -45,7 +71,9 @@ final pages = [
                 Row(
                   children: [
                     MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _launchURL("akshatlinkedin");
+                      },
                       minWidth: 10,
                       color: Color(0xff29427d),
                       textColor: Colors.white,
@@ -61,7 +89,9 @@ final pages = [
                     ),
                     MaterialButton(
                       minWidth: 10,
-                      onPressed: () {},
+                      onPressed: () {
+                        _launchURL("akshattwitter");
+                      },
                       color: Color(0xff29427d),
                       textColor: Colors.white,
                       child: FaIcon(
@@ -123,7 +153,9 @@ final pages = [
                 Row(
                   children: [
                     MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        _launchURL("aryanlinkedin");
+                      },
                       minWidth: 10,
                       color: Color(0xff29427d),
                       textColor: Colors.white,
@@ -139,7 +171,9 @@ final pages = [
                     ),
                     MaterialButton(
                       minWidth: 10,
-                      onPressed: () {},
+                      onPressed: () {
+                        _launchURL("aryantwitter");
+                      },
                       color: Color(0xff29427d),
                       textColor: Colors.white,
                       child: FaIcon(
@@ -190,6 +224,7 @@ class meet_team extends StatelessWidget {
     ;
     ;
   }
+
 }
 
 // Container(
