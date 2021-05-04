@@ -14,9 +14,33 @@ class UserSimplePreferences {
   static const _keyImagePath = 'imgpath';
   static const _keyUserPoints = 'user_points';
   static const _keyImagelink = 'image_link';
+  static const _keyIsModerator = 'isModerator';
+  static const _keyIsVolunteer = 'isVolunteer';
+  static const _keyIsBenefeciary = 'isBenefeciary';
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
+
+  static Future setisModerator(String status) async =>
+      await _preferences.setString(_keyIsModerator, status);
+
+  static String getisModerator() => _preferences.getString(_keyIsModerator);
+
+  //
+
+  static Future setisVolunteer(String status) async =>
+      await _preferences.setString(_keyIsVolunteer, status);
+
+  static String getisVolunteer() => _preferences.getString(_keyIsVolunteer);
+
+  //
+
+  static Future setisBenefeciary(String status) async =>
+      await _preferences.setString(_keyIsBenefeciary, status);
+
+  static String getisBenefeciary() => _preferences.getString(_keyIsBenefeciary);
+
+  //
 
   static Future setuserpoints(int pts) async =>
       await _preferences.setInt(_keyUserPoints, pts);

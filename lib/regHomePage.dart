@@ -82,6 +82,7 @@ class _regHomePageState extends State<regHomePage>
   @override
   void initState() {
     super.initState();
+    UserSimplePreferences.setisVolunteer("yes");
     refreshKey = GlobalKey<RefreshIndicatorState>();
     phnum = UserSimplePreferences.getphonenumber() ?? '';
     _controller = AnimationController(
