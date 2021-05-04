@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medicalapp/meet_team.dart';
 import 'package:medicalapp/profile_select.dart';
+import 'package:medicalapp/queryui.dart';
 import 'package:medicalapp/uploadimg.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -38,13 +39,21 @@ class _modHomePageState extends State<modHomePage>
   List<Posts> postList = [];
   List<Posts> postListuser = [];
   final controller = ScrollController();
-  int _selectedItemPosition = 0;
+  int _selectedItemPosition = 1;
   List tab = [];
   AnimationController _controller;
   bool _visible = true;
   GlobalKey<RefreshIndicatorState> refreshKey;
 
   final items = <BottomNavigationBarItem>[
+    BottomNavigationBarItem(
+      icon: Icon(
+        Icons.question_answer_outlined,
+        size: 28,
+        color: Color(0xff09427d),
+      ),
+      label: "Inquiry",
+    ),
     BottomNavigationBarItem(
       icon: Icon(
         Icons.contact_page_outlined,
@@ -157,6 +166,31 @@ class _modHomePageState extends State<modHomePage>
             child: postListuser.length == 0
                 ? Text("lol")
                 : RefreshIndicator(
+              key: refreshKey,
+              onRefresh: () async {
+                await refreshList();
+              },
+              child: ListView.builder(
+                  itemCount: postListuser.length,
+                  itemBuilder: (_, index) {
+                    return  QueryUI(
+                      postListuser[index].image,
+                      postListuser[index].description,
+                      postListuser[index].date,
+                      postListuser[index].time,
+                      postListuser[index].phnum,
+                      postListuser[index].volname,
+                      postListuser[index].status,
+                      postListuser[index].sname,
+                      postListuser[index].sphnum,
+                    );
+                  }),
+            ),
+          ),
+          Container(
+            child: postListuser.length == 0
+                ? Text("lol")
+                : RefreshIndicator(
                     key: refreshKey,
                     onRefresh: () async {
                       await refreshList();
@@ -197,7 +231,7 @@ class _modHomePageState extends State<modHomePage>
   List listItem = ["Item 1", "Item 2", "Item 3"];
   void checkboollol() {
     setState(() {
-      if (_selectedItemPosition == 0) {
+      if (_selectedItemPosition == 1) {
         allsupplies = true;
       } else {
         allsupplies = false;
@@ -281,7 +315,7 @@ class _modHomePageState extends State<modHomePage>
                         color: Color(0xFFBDD4EB),
                         child: Center(
                           child: Text(
-                            _selectedItemPosition == 0
+                            _selectedItemPosition == 1
                                 ? UserSimplePreferences.getUserName()
                                 : "TimeLine",
                             style: TextStyle(
