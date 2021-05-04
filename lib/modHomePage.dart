@@ -194,24 +194,52 @@ class _modHomePageState extends State<modHomePage>
       setState(() {
         print('Length: $postList.length');
         tab = [
-          Container(
-            child: uq.length == 0
-                ? Text("No Queries Available")
-                : ListView.builder(
-                    itemCount: uq.length,
-                    itemBuilder: (_, index) {
-                      return QueryUI(
-                        uq[index].image,
-                        uq[index].description,
-                        uq[index].date,
-                        uq[index].time,
-                        uq[index].phnum,
-                        uq[index].name,
-                        uq[index].requirement,
-                        uq[index].location,
-                      );
-                    }),
+          Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20,vertical: 10),
+                padding: EdgeInsets.symmetric(vertical:10),
+                width: double.infinity,
+                color: Color(0xFFBDD4EB),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Queries",
+                    style: TextStyle(fontSize: 20, fontFamily: "OpenSans",fontWeight: FontWeight.bold,color:Color(0xFF09427d) ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                child: uq.length == 0
+                    ? Text("No Queries Available")
+                    : Expanded(
+                  child: ListView.builder(
+                      shrinkWrap:true,
+                      itemCount: uq.length,
+                      itemBuilder: (_, index) {
+                        return QueryUI(
+                          uq[index].image,
+                          uq[index].description,
+                          uq[index].date,
+                          uq[index].time,
+                          uq[index].phnum,
+                          uq[index].name,
+                          uq[index].requirement,
+                          uq[index].location,
+                        );
+                      }),
+                ),
+              ),
+
+            ],
           ),
+
           Container(
             child: postListuser.length == 0
                 ? Text("No information available")
