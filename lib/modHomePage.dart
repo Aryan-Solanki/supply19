@@ -369,7 +369,9 @@ class _modHomePageState extends State<modHomePage>
                         child: Center(
                           child: Text(
                             _selectedItemPosition == 1
-                                ? UserSimplePreferences.getUserName()
+                                ? ((postListuser.length == 0)
+                                    ? "Your Posts"
+                                    : UserSimplePreferences.getUserName())
                                 : "TimeLine",
                             style: TextStyle(
                                 color: Color(0xFF09427d),
