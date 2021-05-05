@@ -119,7 +119,7 @@ final pages = [
   ),
   Container(
     padding: EdgeInsets.only(left: 30, top: 30),
-    color: Color(0xff47617c),
+    color: Color(0xff313157),
     width: double.infinity,
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -193,7 +193,7 @@ final pages = [
           flex: 4,
           child: Align(
             alignment: Alignment.bottomRight,
-            child: Container(child: Image.asset("images/aryan.png")),
+            child: Container(child: Image.asset("images/aryan3.png")),
           ),
         )
       ],
