@@ -170,7 +170,8 @@ Widget PostsUI(
                                         ),
                                       ),
                                       Expanded(
-                                        child: TextButton(
+                                        child: RawMaterialButton(
+                                          materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                           // padding: EdgeInsets.all(0),
                                           onPressed: () {
                                             _makingPhoneCall(phnum);
@@ -220,7 +221,38 @@ Widget PostsUI(
                               ],
                             ),
                           ),
-                        )
+                        ),
+    Container(
+      margin: EdgeInsets.only(top: 0.0),
+      padding: EdgeInsets.all(0.0),
+      child: Container(
+        color: Colors.white,
+        margin: EdgeInsets.only(top: 20.0),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                "   Supply ",
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold),
+              ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.center,
+                child: Text(
+                  category,
+                  style: TextStyle(
+                      fontSize: 15, color: Colors.black),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    ),
                       ],
                     ),
                   ),
