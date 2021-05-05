@@ -117,10 +117,7 @@ class _regTimelineState extends State<regTimeline>
     return null;
   }
 
-  @override
-  void initState() {
-    super.initState();
-    refreshKey = GlobalKey<RefreshIndicatorState>();
+  refreshLearderboard() {
     int i = 0;
     FirebaseDatabase.instance
         .reference()
@@ -144,6 +141,13 @@ class _regTimelineState extends State<regTimeline>
         i += 1;
       }
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    refreshKey = GlobalKey<RefreshIndicatorState>();
+    refreshLearderboard();
     city_name = UserSimplePreferences.getCity() ?? '';
     categorySelector = UserSimplePreferences.getCategory() ?? 'All Supplies';
     _controller = AnimationController(
@@ -197,6 +201,7 @@ class _regTimelineState extends State<regTimeline>
 
       setState(() {
         checkboollol();
+        refreshLearderboard();
         tab = [
           chooselocation(
             backlink: "registration",
