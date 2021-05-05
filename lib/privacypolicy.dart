@@ -11,15 +11,27 @@ class privacypolicy extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(margin: EdgeInsets.only(top: 20),child: Text("Privacy Policy",style: TextStyle(fontSize: 30,color: Colors.black,fontFamily: "OpenSans"),)),
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 20),
-                color: Colors.white,
-                child: Column(
-                  children: [
-                    Text("Lorem ipsum dolor sit amet, id mei partem dissentiet concludaturque. Eu graeci aliquam duo, at has utroque explicari principes. Ea impetus dolorem maiestatis nam, dicit menandri ne mea. Eu vis solum etiam sententiae.\n",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenSansLight",fontSize: 18),),
-                    Text("Lorem ipsum dolor sit amet, id mei partem dissentiet concludaturque. Eu graeci aliquam duo, at has utroque explicari principes. Ea impetus dolorem maiestatis nam, dicit menandri ne mea. Eu vis solum etiam sententiae.\n",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenSansLight",fontSize: 18),),
-                    Text("Lorem ipsum dolor sit amet, id mei partem dissentiet concludaturque. Eu graeci aliquam duo, at has utroque explicari principes. Ea impetus dolorem maiestatis nam, dicit menandri ne mea. Eu vis solum etiam sententiae.\n",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenSansLight",fontSize: 18),),
-                  ],
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 20),
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        Text("We are aware that the security of your private information from the use of our App for supply management (“Supply-19”) is an important concern. We take the protection of your personal data very seriously. Therefore, we would like you to know what data we maintain and what data we discard. With this privacy statement, we would like to inform you about our data privacy measures. The constant development of the internet requires occasional adjustments to our privacy statement. We retain the right to make changes when necessary.\n",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenSansLight",fontSize: 15),),
+                        Text("Collection and Processing of Personal Data\n",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenSansLight",fontSize: 24,fontWeight: FontWeight.bold),),
+                        Text(""""If you send us data of your personal information, that data will be transferred to us, which may contain the following information: your name / Address / Contact Number etc.
+Your personal data may be passed on by us or by our agents for use by third parties but only if the use of the data is restricted to the purpose of helping the user with his/her supply needs. We will retain control of and responsibility for the use of any personal data you disclose to us.
+\n""",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenSansLight",fontSize: 15),),
+                        Text("Purposes of Use\n",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenSansLight",fontSize: 24,fontWeight: FontWeight.bold),),
+                        Text("The data we collect will only be processed for the purpose of enabling the user to access help in finding the supplies, that the user has requested from the application. The data for application moderators and volunteers may be used for analysis and speculatory purpose.\n",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenSansLight",fontSize: 15),),
+                        Text("Data Retention\n",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenSansLight",fontSize: 24,fontWeight: FontWeight.bold),),
+                        Text("We only retain personal data for as long as is necessary for us to render the service you have re-quested or to which you have given your consent, except where otherwise provided by law.\n",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenSansLight",fontSize: 15),),
+                        Text("Security\n",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenSansLight",fontSize: 24,fontWeight: FontWeight.bold),),
+                        Text("We use technical and organizational security precautions to protect your data from manipulation, loss, destruction or access by unauthorized persons. Any personal data that is provided to us by the user will be encrypted in transit to prevent its possible misuse by third parties. Our security procedures are continuously revised based on new technological developments.\n",textAlign: TextAlign.center,style: TextStyle(fontFamily: "OpenSansLight",fontSize: 15),),
+                      ],
+                    ),
+                  ),
                 ),
               ),
               Container(
