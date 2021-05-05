@@ -402,7 +402,7 @@ class _modHomePageState extends State<modHomePage>
                                     ? "Your Posts"
                                     : UserSimplePreferences.getUserName())
                                 : ((selectedItemPosition == 0)
-                                    ? "Query"
+                                    ? "Inquiries"
                                     : "Pending Posts"),
                             style: TextStyle(
                                 color: Color(0xFF09427d),

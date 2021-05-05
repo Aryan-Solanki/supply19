@@ -124,6 +124,22 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
 
   var currentUserKey;
 
+  Future<void> uploadStatusImage() async {
+    if (validateAndSave()) {
+      FirebaseStorage storage = FirebaseStorage.instance;
+      final Reference postImageRef = storage.ref().child("Post Images");
+      var timeKey = new DateTime.now();
+      String xyz = timeKey.toString() + ".jpg";
+      final UploadTask uploadTask =
+      postImageRef.child(xyz).putFile(sampleImage);
+      var imageUrl = await (await uploadTask).ref.getDownloadURL();
+      final String url_akshat = imageUrl.toString();
+      print(url_akshat);
+      savetoDatabase(url_akshat);
+      // goToHomePage();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -182,47 +198,6 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
     }
 
     col = [
-      Container(
-        margin: EdgeInsets.only(top: 20, bottom: 25),
-        color: Color(0xFFBDD4EB),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "  ADD POST",
-              style: TextStyle(
-                  fontSize: 20,
-                  fontFamily: "OpenSans",
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF09427d)),
-            ),
-            IconButton(
-              icon: Icon(Icons.done),
-              onPressed: () {
-                if(selected_city=="" || selected_item==""){
-                  FocusScope.of(context).unfocus();
-                  _scaffoldkey.currentState
-                      .showSnackBar(SnackBar(
-                      content: Text(
-                          'Fill All Details')));
-                }
-                else{
-                  if (validateAndSave()) {
-                    if (sampleImage == null) {
-                      validateAndSave();
-                      savetoDatabase('');
-                    } else {
-                      uploadStatusImage();
-                    }
-                  }
-                }
-                // validateAndSave();
-
-              },
-            )
-          ],
-        ),
-      ),
       Text(
         "Location*",
         style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
@@ -422,21 +397,68 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       home: Scaffold(
         key: _scaffoldkey,
         resizeToAvoidBottomInset: false,
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            child: Form(
-                key: formkey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: col_append(),
-                )),
-          ),
+        body: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          child: Form(
+              key: formkey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: 20, bottom: 25),
+                    color: Color(0xFFBDD4EB),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "   Add Post",
+                          style: TextStyle(
+                              color: Color(0xFF09427d),
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.done),
+                          onPressed: () {
+                            if(selected_city=="" || selected_item==""){
+                              FocusScope.of(context).unfocus();
+                              _scaffoldkey.currentState
+                                  .showSnackBar(SnackBar(
+                                  content: Text(
+                                      'Fill All Details')));
+                            }
+                            else{
+                              if (validateAndSave()) {
+                                if (sampleImage == null) {
+                                  validateAndSave();
+                                  savetoDatabase('');
+                                } else {
+                                  uploadStatusImage();
+                                }
+                              }
+                            }
+                            // validateAndSave();
+
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: col_append(),
+                      ),
+                    ),
+                  )
+                ],
+              )),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             if (sampleImage != null) {
-              col.removeAt(1);
+              col.removeAt(0);
             }
             getImage();
           },
@@ -452,7 +474,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       return col;
     } else {
       col.insert(
-        1,
+        0,
         Image.file(
           sampleImage,
           height: 330.0,

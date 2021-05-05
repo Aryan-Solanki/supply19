@@ -52,9 +52,8 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                       child: Text(
                         UserSimplePreferences.getUserName() ?? '',
                         style: TextStyle(
-                            fontSize: 25,
                             color: Colors.white,
-                            fontFamily: "OpenSans",
+                            fontSize: 25.0,
                             fontWeight: FontWeight.bold),
                       ))
                 ],
