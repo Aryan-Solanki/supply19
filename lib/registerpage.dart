@@ -74,6 +74,7 @@ class _registerpageState extends State<registerpage> {
         );
         if (phnum == user.phnum) {
           UserSimplePreferences.setphonenumber(phnum);
+          UserSimplePreferences.setImageLink(user.image);
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => regHomePage()),

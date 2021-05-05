@@ -126,6 +126,8 @@ class _regHomePageState extends State<regHomePage>
           print(UserSimplePreferences.getUserName());
           UserSimplePreferences.setVerifyStatus(user.verify);
           print(UserSimplePreferences.getVerifyStatus());
+          UserSimplePreferences.setImageLink(user.image);
+          print(UserSimplePreferences.getImageLink());
         }
       }
     });
