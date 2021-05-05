@@ -336,7 +336,7 @@ class _modHomePageState extends State<modHomePage>
         DateTime currenttime = DateTime.now();
         bool backbutton = backbuttonpressedTime == null ||
             currenttime.difference(backbuttonpressedTime) >
-                Duration(seconds: 3);
+                Duration(seconds: 2);
         if (backbutton) {
           backbuttonpressedTime = currenttime;
           Toast.show("Double Tap to close App", context,
