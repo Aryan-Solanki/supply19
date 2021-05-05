@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:medicalapp/privacypolicy.dart';
 import 'package:medicalapp/profile.dart';
+import 'package:medicalapp/termandcondition.dart';
 import 'regTimeline.dart';
 import 'user_simple_preferences.dart';
 import 'dart:async';
@@ -35,10 +37,12 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                       child: CircleAvatar(
                         radius: 50,
                         backgroundImage:
-                            (UserSimplePreferences.getImageLink() == null)
-                                ? AssetImage("images/nodp.jpg")
-                                : NetworkImage(
-                                    UserSimplePreferences.getImageLink()),
+                        (UserSimplePreferences.getImageLink() == "" ||
+                            UserSimplePreferences.getImageLink() ==
+                                null)
+                            ? AssetImage("images/nodp.jpg")
+                            : NetworkImage(
+                            UserSimplePreferences.getImageLink()),
                       )),
                   SizedBox(
                     width: 30,
@@ -189,7 +193,42 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                       height: 5,
                     ),
                     FlatButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    privacypolicy()),
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              "Privacy Policy",
+                              style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            )
+                          ],
+                        )),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    termandcondition()),
+                          );
+                        },
                         child: Row(
                           children: [
                             // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),

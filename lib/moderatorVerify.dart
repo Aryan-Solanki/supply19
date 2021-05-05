@@ -51,6 +51,7 @@ class _moderatorVerifyState extends State<moderatorVerify> {
               itemCount: uq.length,
               itemBuilder: (context, index) {
                 return SwipeActionCell(
+                  backgroundColor: Color(0xffededed),
                   key: ObjectKey(uq[index]),
                   performsFirstActionWithFullSwipe: true,
                   trailingActions: <SwipeAction>[
@@ -108,10 +109,12 @@ class _moderatorVerifyState extends State<moderatorVerify> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Color(0xffededed),
           body: ListView.builder(
               itemCount: uq.length,
               itemBuilder: (context, index) {
                 return SwipeActionCell(
+                  backgroundColor: Color(0xffededed),
                   key: ObjectKey(uq[index]),
                   performsFirstActionWithFullSwipe: true,
                   trailingActions: <SwipeAction>[
