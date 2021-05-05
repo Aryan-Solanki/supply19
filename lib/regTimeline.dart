@@ -33,7 +33,6 @@ class _regTimelineState extends State<regTimeline>
   _regTimelineState({this.selectedItemPosition});
   getbody() {
     try {
-      refreshLearderboard();
       return tab[selectedItemPosition];
     } catch (e) {
       Text("");
@@ -119,6 +118,7 @@ class _regTimelineState extends State<regTimeline>
   }
 
   refreshLearderboard() {
+    userslist = [];
     int i = 0;
     FirebaseDatabase.instance
         .reference()
@@ -126,7 +126,7 @@ class _regTimelineState extends State<regTimeline>
         .orderByChild("order")
         .onChildAdded
         .listen((event) {
-      print(event.snapshot.value);
+      // print(event.snapshot.value);
       UserData ud = new UserData(
         event.snapshot.value['email'],
         event.snapshot.value['name'],
@@ -142,6 +142,90 @@ class _regTimelineState extends State<regTimeline>
         i += 1;
       }
     });
+    print("LeaderBoard Updated");
+    setState(() {
+      checkboollol();
+      tab = [
+        chooselocation(
+          backlink: "registration",
+        ),
+        PostQuery(
+          backlink: "registration",
+        ),
+        SafeArea(
+          child: Container(
+            child: (postList.length == 0 || postList.length == null)
+                ? Center(child: Text("No information available"))
+                : RefreshIndicator(
+                    key: refreshKey,
+                    onRefresh: () async {
+                      await refreshList(2);
+                    },
+                    child: ListView.builder(
+                        itemCount: postList.length,
+                        itemBuilder: (_, index) {
+                          return PostsUI(
+                            postList[index].image,
+                            postList[index].description,
+                            postList[index].date,
+                            postList[index].time,
+                            postList[index].phnum,
+                            postList[index].volname,
+                            postList[index].status,
+                            postList[index].sname,
+                            postList[index].sphnum,
+                          );
+                        }),
+                  ),
+          ),
+        ),
+        SafeArea(
+            child: Column(
+          children: [
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "Leaderboard",
+              style: TextStyle(fontSize: 30, fontFamily: "OpenSans"),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+                child: Expanded(
+              child: (userslist.length == 0 || userslist.length == null)
+                  ? RefreshIndicator(
+                      child: Text("No information available"),
+                      key: refreshKeyQuery,
+                      onRefresh: () async {
+                        await refreshListQuery();
+                      },
+                    )
+                  : RefreshIndicator(
+                      key: refreshKeyQuery,
+                      onRefresh: () async {
+                        await refreshListQuery();
+                      },
+                      child: ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: userslist.length,
+                          itemBuilder: (_, index) {
+                            return RankUI(
+                              userslist[index].image,
+                              (index + 1),
+                              userslist[index].points,
+                              userslist[index].name,
+                            );
+                          }),
+                    ),
+            )),
+          ],
+        )),
+        meet_team()
+      ];
+    });
+    print("Length of Leaderboard" + userslist.length.toString());
   }
 
   @override
@@ -162,8 +246,8 @@ class _regTimelineState extends State<regTimeline>
         .orderByChild("order")
         .onChildAdded
         .listen((event) {
-      print(event.snapshot.value);
-      print(event.snapshot.value['image']);
+      // print(event.snapshot.value);
+      // print(event.snapshot.value['image']);
       Posts posts = new Posts(
         event.snapshot.value['image'],
         event.snapshot.value['description'],
@@ -202,7 +286,6 @@ class _regTimelineState extends State<regTimeline>
 
       setState(() {
         checkboollol();
-        refreshLearderboard();
         tab = [
           chooselocation(
             backlink: "registration",
@@ -424,8 +507,8 @@ class _regTimelineState extends State<regTimeline>
                                         ),
                                         onPressed: () {
                                           UserSimplePreferences.setCity('');
-                                          print(
-                                              UserSimplePreferences.getCity());
+                                          // print(
+                                          //     UserSimplePreferences.getCity());
                                           setState(() {
                                             Navigator.push(
                                               context,
@@ -470,7 +553,7 @@ class _regTimelineState extends State<regTimeline>
                               color: Color(0xFF09427d), fontSize: 20.0),
                           onChanged: (newValue) {
                             UserSimplePreferences.setCategory(newValue);
-                            print(UserSimplePreferences.getCategory());
+                            // print(UserSimplePreferences.getCategory());
                             setState(() {
                               categoryChoose = newValue;
                               categorySelector = categoryChoose;
