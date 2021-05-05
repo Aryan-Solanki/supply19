@@ -24,13 +24,9 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
           children: [
             Row(
               children: [
-                CircleAvatar(
-                  radius: 50,
-                  backgroundImage: AssetImage("images/logo.png"),
-                ),
                 Text("  SUPPLY - 19",
                   style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 30,
                   color: Colors.white,
                   fontFamily: "OpenSans",
               fontWeight: FontWeight.bold),)
@@ -45,7 +41,25 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                         children: [
                           // FaIcon(FontAwesomeIcons.star,size: 25,color: Colors.white,),
                           Text(
-                            "       Rate Us",
+                            "Become A Volunteer",
+                            style: TextStyle(
+                                fontFamily: "OpenSans",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white),
+                          )
+                        ],
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  FlatButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          // FaIcon(FontAwesomeIcons.star,size: 25,color: Colors.white,),
+                          Text(
+                            "         Rate Us",
                             style: TextStyle(
                                 fontFamily: "OpenSans",
                                 fontWeight: FontWeight.bold,
@@ -150,6 +164,27 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                             width: 20,
                           ),
                           Text(
+                            "  Privacy Policy",
+                            style: TextStyle(
+                                fontFamily: "OpenSans",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white),
+                          )
+                        ],
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  FlatButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
                             "        T&C",
                             style: TextStyle(
                                 fontFamily: "OpenSans",
@@ -159,6 +194,8 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                           )
                         ],
                       )),
+
+
                 ],
               ),
             ),
