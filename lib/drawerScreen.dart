@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:medicalapp/login.dart';
 import 'package:medicalapp/modHomePageTimeline.dart';
 import 'package:medicalapp/privacypolicy.dart';
 import 'package:medicalapp/profile.dart';
@@ -257,7 +258,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     color: Color(0xff2193b0),
                     borderRadius: BorderRadius.circular(30)),
                 child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      UserSimplePreferences.setisModerator("");
+                      UserSimplePreferences.setisBenefeciary("");
+                      UserSimplePreferences.setisVolunteer("");
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => login()));
+                    },
                     child: Text(
                       "Log Out",
                       style: TextStyle(
