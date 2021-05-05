@@ -38,7 +38,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                                     UserSimplePreferences.getImageLink() ==
                                         null)
                                 ? AssetImage("images/nodp.jpg")
-                                : Image.network(
+                                : NetworkImage(
                                     UserSimplePreferences.getImageLink()),
                       )),
                   SizedBox(
