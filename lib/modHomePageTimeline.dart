@@ -434,196 +434,208 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        DrawerScreen(),
-        AnimatedContainer(
-          transform: Matrix4.translationValues(xOffset, yOffset, 0)
-            ..scale(scaleFactor)
-            ..rotateY(isDrawerOpen ? -0.5 : 0),
-          duration: Duration(milliseconds: 250),
-          decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(isDrawerOpen ? 40 : 0.0)),
-          child: MaterialApp(
-              home: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: SafeArea(
-              child: Scaffold(
-                  backgroundColor: Color(0xFFEDEDED),
-                  appBar: SlidingAppBar(
-                    controller: _controller,
-                    visible: allsupplies,
-                    child: AppBar(
-                      leading: Row(
-                        children: [
-                          isDrawerOpen
-                              ? IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_back_ios,
-                                    size: 35.0,
-                                    color: Color(0xFF2F3437),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      xOffset = 0;
-                                      yOffset = 0;
-                                      scaleFactor = 1;
-                                      isDrawerOpen = false;
-                                    });
-                                  },
-                                )
-                              : IconButton(
-                                  icon: Icon(
-                                    Icons.dehaze_outlined,
-                                    size: 35.0,
-                                    color: Color(0xFF2F3437),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      xOffset = 230;
-                                      yOffset = 150;
-                                      scaleFactor = 0.6;
-                                      isDrawerOpen = true;
-                                    });
-                                  }),
-                          // SizedBox(
-                          //   width: 5.0,
-                          // )
-                        ],
-                      ),
-                      bottom: PreferredSize(
-                          child: Container(
-                            margin:
-                                EdgeInsets.only(left: 15, right: 10, bottom: 5),
-                            child: city_name != ""
-                                ? Align(
-                                    alignment: Alignment.center,
-                                    child: Container(
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                          color: Color(0xff09427d),
-                                          borderRadius:
-                                              BorderRadius.circular(30)),
-                                      child: FlatButton(
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Text(
-                                              city_name,
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15,
-                                                  fontFamily: "OpenSans"),
-                                            ),
-                                            Text(
-                                              "  X",
-                                              style: TextStyle(
-                                                  fontSize: 13,
-                                                  fontFamily: "HKGrotesk",
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.white),
-                                            )
-                                          ],
-                                        ),
-                                        onPressed: () {
-                                          UserSimplePreferences.setCity('');
-                                          print(
-                                              UserSimplePreferences.getCity());
-                                          setState(() {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      modHomePageTimeline(
-                                                        selectedItemPosition: 2,
-                                                      )),
-                                            );
-                                          });
-                                        },
-                                      ),
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+                builder: (context) => modHomePage(
+                      selectedItemPosition: 1,
+                    )));
+        return false;
+      },
+      child: Stack(
+        children: [
+          DrawerScreen(),
+          AnimatedContainer(
+            transform: Matrix4.translationValues(xOffset, yOffset, 0)
+              ..scale(scaleFactor)
+              ..rotateY(isDrawerOpen ? -0.5 : 0),
+            duration: Duration(milliseconds: 250),
+            decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(isDrawerOpen ? 40 : 0.0)),
+            child: MaterialApp(
+                home: ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child: SafeArea(
+                child: Scaffold(
+                    backgroundColor: Color(0xFFEDEDED),
+                    appBar: SlidingAppBar(
+                      controller: _controller,
+                      visible: allsupplies,
+                      child: AppBar(
+                        leading: Row(
+                          children: [
+                            isDrawerOpen
+                                ? IconButton(
+                                    icon: Icon(
+                                      Icons.arrow_back_ios,
+                                      size: 35.0,
+                                      color: Color(0xFF2F3437),
                                     ),
+                                    onPressed: () {
+                                      setState(() {
+                                        xOffset = 0;
+                                        yOffset = 0;
+                                        scaleFactor = 1;
+                                        isDrawerOpen = false;
+                                      });
+                                    },
                                   )
-                                : Container(
-                                    height: 1,
-                                  ),
+                                : IconButton(
+                                    icon: Icon(
+                                      Icons.dehaze_outlined,
+                                      size: 35.0,
+                                      color: Color(0xFF2F3437),
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        xOffset = 230;
+                                        yOffset = 150;
+                                        scaleFactor = 0.6;
+                                        isDrawerOpen = true;
+                                      });
+                                    }),
+                            // SizedBox(
+                            //   width: 5.0,
+                            // )
+                          ],
+                        ),
+                        bottom: PreferredSize(
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                  left: 15, right: 10, bottom: 5),
+                              child: city_name != ""
+                                  ? Align(
+                                      alignment: Alignment.center,
+                                      child: Container(
+                                        height: 30,
+                                        decoration: BoxDecoration(
+                                            color: Color(0xff09427d),
+                                            borderRadius:
+                                                BorderRadius.circular(30)),
+                                        child: FlatButton(
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Text(
+                                                city_name,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 15,
+                                                    fontFamily: "OpenSans"),
+                                              ),
+                                              Text(
+                                                "  X",
+                                                style: TextStyle(
+                                                    fontSize: 13,
+                                                    fontFamily: "HKGrotesk",
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white),
+                                              )
+                                            ],
+                                          ),
+                                          onPressed: () {
+                                            UserSimplePreferences.setCity('');
+                                            print(UserSimplePreferences
+                                                .getCity());
+                                            setState(() {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        modHomePageTimeline(
+                                                          selectedItemPosition:
+                                                              2,
+                                                        )),
+                                              );
+                                            });
+                                          },
+                                        ),
+                                      ),
+                                    )
+                                  : Container(
+                                      height: 1,
+                                    ),
+                            ),
+                            preferredSize: Size.fromHeight(0.0)),
+                        elevation: 0.0,
+                        backgroundColor: Color(0xFFEDEDED),
+                        toolbarHeight: 100,
+                        automaticallyImplyLeading: false,
+                        title: Container(
+                          margin: EdgeInsets.only(top: 0.0),
+                          padding: EdgeInsets.only(left: 20.0),
+                          color: Color(0xFFBDD4EB),
+                          child: DropdownButton(
+                            hint: categorySelector == ''
+                                ? Text('All Supplies')
+                                : Text(categorySelector),
+                            dropdownColor: Color(0xFFBDD4EB),
+                            icon: Icon(
+                              Icons.keyboard_arrow_down,
+                              color: Color(0xFF09427D),
+                              size: 50.0,
+                            ),
+                            isExpanded: true,
+                            value: categoryChoose,
+                            underline: SizedBox(),
+                            style: TextStyle(
+                                color: Color(0xFF09427d), fontSize: 20.0),
+                            onChanged: (newValue) {
+                              UserSimplePreferences.setCategory(newValue);
+                              print(UserSimplePreferences.getCategory());
+                              setState(() {
+                                categoryChoose = newValue;
+                                categorySelector = categoryChoose;
+                              });
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => modHomePageTimeline(
+                                          selectedItemPosition: 2,
+                                        )),
+                              );
+                            },
+                            items: listItem.map((valueItem) {
+                              return DropdownMenuItem(
+                                  value: valueItem, child: Text(valueItem));
+                            }).toList(),
                           ),
-                          preferredSize: Size.fromHeight(0.0)),
-                      elevation: 0.0,
-                      backgroundColor: Color(0xFFEDEDED),
-                      toolbarHeight: 100,
-                      automaticallyImplyLeading: false,
-                      title: Container(
-                        margin: EdgeInsets.only(top: 0.0),
-                        padding: EdgeInsets.only(left: 20.0),
-                        color: Color(0xFFBDD4EB),
-                        child: DropdownButton(
-                          hint: categorySelector == ''
-                              ? Text('All Supplies')
-                              : Text(categorySelector),
-                          dropdownColor: Color(0xFFBDD4EB),
-                          icon: Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Color(0xFF09427D),
-                            size: 50.0,
-                          ),
-                          isExpanded: true,
-                          value: categoryChoose,
-                          underline: SizedBox(),
-                          style: TextStyle(
-                              color: Color(0xFF09427d), fontSize: 20.0),
-                          onChanged: (newValue) {
-                            UserSimplePreferences.setCategory(newValue);
-                            print(UserSimplePreferences.getCategory());
-                            setState(() {
-                              categoryChoose = newValue;
-                              categorySelector = categoryChoose;
-                            });
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => modHomePageTimeline(
-                                        selectedItemPosition: 2,
-                                      )),
-                            );
-                          },
-                          items: listItem.map((valueItem) {
-                            return DropdownMenuItem(
-                                value: valueItem, child: Text(valueItem));
-                          }).toList(),
                         ),
                       ),
                     ),
-                  ),
-                  body: getbody(),
-                  bottomNavigationBar: SnakeNavigationBar.color(
-                    // backgroundColor: Colors.blue,
-                    behaviour: SnakeBarBehaviour.floating,
-                    selectedItemColor: Colors.black,
-                    // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
-                    // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25)),
-                    // shape: ,
-                    snakeShape: SnakeShape.indicator,
-                    showSelectedLabels: true,
-                    // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
-                    padding: EdgeInsets.all(12),
-                    currentIndex: selectedItemPosition,
-                    onTap: (index) {
-                      setState(() {
-                        selectedItemPosition = index;
-                        checkboollol();
-                      });
-                    },
-                    items: items,
-                  )),
-            ),
-          )
-              // This trailing comma makes auto-formatting nicer for build methods.
+                    body: getbody(),
+                    bottomNavigationBar: SnakeNavigationBar.color(
+                      // backgroundColor: Colors.blue,
+                      behaviour: SnakeBarBehaviour.floating,
+                      selectedItemColor: Colors.black,
+                      // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
+                      // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25)),
+                      // shape: ,
+                      snakeShape: SnakeShape.indicator,
+                      showSelectedLabels: true,
+                      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
+                      padding: EdgeInsets.all(12),
+                      currentIndex: selectedItemPosition,
+                      onTap: (index) {
+                        setState(() {
+                          selectedItemPosition = index;
+                          checkboollol();
+                        });
+                      },
+                      items: items,
+                    )),
               ),
-        )
-      ],
+            )
+                // This trailing comma makes auto-formatting nicer for build methods.
+                ),
+          )
+        ],
+      ),
     );
   }
 }

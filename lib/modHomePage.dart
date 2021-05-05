@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medicalapp/meet_team.dart';
 import 'package:medicalapp/profile_select.dart';
@@ -20,6 +21,7 @@ import 'drawerScreen.dart';
 import 'queryui.dart';
 import 'queryuidata.dart';
 import 'moderatorVerify.dart';
+import 'package:toast/toast.dart';
 
 class modHomePage extends StatefulWidget {
   final String title = "modHomePage Timeline";
@@ -325,123 +327,139 @@ class _modHomePageState extends State<modHomePage>
   double yOffset = 0;
   double scaleFactor = 1;
   String current_page = "modhomepage";
-
+  DateTime backbuttonpressedTime;
   bool isDrawerOpen = false;
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        DrawerScreen(),
-        AnimatedContainer(
-          transform: Matrix4.translationValues(xOffset, yOffset, 0)
-            ..scale(scaleFactor)
-            ..rotateY(isDrawerOpen ? -0.5 : 0),
-          duration: Duration(milliseconds: 250),
-          decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: BorderRadius.circular(isDrawerOpen ? 40 : 0.0)),
-          child: MaterialApp(
-              home: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: SafeArea(
-              child: Scaffold(
-                  backgroundColor: Color(0xFFEDEDED),
-                  appBar: SlidingAppBar(
-                    controller: _controller,
-                    visible: allsupplies,
-                    child: AppBar(
-                      elevation: 0.0,
-                      backgroundColor: Color(0xFFEDEDED),
-                      toolbarHeight: 80,
-                      automaticallyImplyLeading: false,
-                      leading: Row(
-                        children: [
-                          isDrawerOpen
-                              ? IconButton(
-                                  icon: Icon(
-                                    Icons.arrow_back_ios,
-                                    size: 35.0,
-                                    color: Color(0xFF2F3437),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      xOffset = 0;
-                                      yOffset = 0;
-                                      scaleFactor = 1;
-                                      isDrawerOpen = false;
-                                    });
-                                  },
-                                )
-                              : IconButton(
-                                  icon: Icon(
-                                    Icons.dehaze_outlined,
-                                    size: 35.0,
-                                    color: Color(0xFF2F3437),
-                                  ),
-                                  onPressed: () {
-                                    setState(() {
-                                      xOffset = 230;
-                                      yOffset = 150;
-                                      scaleFactor = 0.6;
-                                      isDrawerOpen = true;
-                                    });
-                                  }),
-                          // SizedBox(
-                          //   width: 5.0,
-                          // )
-                        ],
-                      ),
-                      title: Container(
-                        height: 40.0,
-                        width: double.infinity,
-                        color: Color(0xFFBDD4EB),
-                        child: Center(
-                          child: Text(
-                            selectedItemPosition == 1
-                                ? ((postListuser.length == 0)
-                                    ? "Your Posts"
-                                    : UserSimplePreferences.getUserName())
-                                : ((selectedItemPosition == 0)
-                                    ? "Query"
-                                    : "Pending Posts"),
-                            style: TextStyle(
-                                color: Color(0xFF09427d),
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),
+    return WillPopScope(
+      onWillPop: () async {
+        DateTime currenttime = DateTime.now();
+        bool backbutton = backbuttonpressedTime == null ||
+            currenttime.difference(backbuttonpressedTime) >
+                Duration(seconds: 3);
+        if (backbutton) {
+          backbuttonpressedTime = currenttime;
+          Toast.show("Double Tap to close App", context,
+              duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+          return false;
+        }
+        SystemNavigator.pop();
+        return false;
+      },
+      child: Stack(
+        children: [
+          DrawerScreen(),
+          AnimatedContainer(
+            transform: Matrix4.translationValues(xOffset, yOffset, 0)
+              ..scale(scaleFactor)
+              ..rotateY(isDrawerOpen ? -0.5 : 0),
+            duration: Duration(milliseconds: 250),
+            decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(isDrawerOpen ? 40 : 0.0)),
+            child: MaterialApp(
+                home: ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child: SafeArea(
+                child: Scaffold(
+                    backgroundColor: Color(0xFFEDEDED),
+                    appBar: SlidingAppBar(
+                      controller: _controller,
+                      visible: allsupplies,
+                      child: AppBar(
+                        elevation: 0.0,
+                        backgroundColor: Color(0xFFEDEDED),
+                        toolbarHeight: 80,
+                        automaticallyImplyLeading: false,
+                        leading: Row(
+                          children: [
+                            isDrawerOpen
+                                ? IconButton(
+                                    icon: Icon(
+                                      Icons.arrow_back_ios,
+                                      size: 35.0,
+                                      color: Color(0xFF2F3437),
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        xOffset = 0;
+                                        yOffset = 0;
+                                        scaleFactor = 1;
+                                        isDrawerOpen = false;
+                                      });
+                                    },
+                                  )
+                                : IconButton(
+                                    icon: Icon(
+                                      Icons.dehaze_outlined,
+                                      size: 35.0,
+                                      color: Color(0xFF2F3437),
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        xOffset = 230;
+                                        yOffset = 150;
+                                        scaleFactor = 0.6;
+                                        isDrawerOpen = true;
+                                      });
+                                    }),
+                            // SizedBox(
+                            //   width: 5.0,
+                            // )
+                          ],
+                        ),
+                        title: Container(
+                          height: 40.0,
+                          width: double.infinity,
+                          color: Color(0xFFBDD4EB),
+                          child: Center(
+                            child: Text(
+                              selectedItemPosition == 1
+                                  ? ((postListuser.length == 0)
+                                      ? "Your Posts"
+                                      : UserSimplePreferences.getUserName())
+                                  : ((selectedItemPosition == 0)
+                                      ? "Query"
+                                      : "Pending Posts"),
+                              style: TextStyle(
+                                  color: Color(0xFF09427d),
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  body: getbody(),
-                  bottomNavigationBar: SnakeNavigationBar.color(
-                    // backgroundColor: Colors.blue,
-                    behaviour: SnakeBarBehaviour.floating,
-                    selectedItemColor: Colors.black,
-                    // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
-                    // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25)),
-                    // shape: ,
-                    snakeShape: SnakeShape.indicator,
-                    showSelectedLabels: true,
-                    // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
-                    padding: EdgeInsets.all(12),
-                    currentIndex: selectedItemPosition,
-                    onTap: (index) {
-                      setState(() {
-                        selectedItemPosition = index;
-                        checkboollol();
-                      });
-                    },
-                    items: items,
-                  )),
-            ),
-          )
-              // This trailing comma makes auto-formatting nicer for build methods.
+                    body: getbody(),
+                    bottomNavigationBar: SnakeNavigationBar.color(
+                      // backgroundColor: Colors.blue,
+                      behaviour: SnakeBarBehaviour.floating,
+                      selectedItemColor: Colors.black,
+                      // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
+                      // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25)),
+                      // shape: ,
+                      snakeShape: SnakeShape.indicator,
+                      showSelectedLabels: true,
+                      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
+                      padding: EdgeInsets.all(12),
+                      currentIndex: selectedItemPosition,
+                      onTap: (index) {
+                        setState(() {
+                          selectedItemPosition = index;
+                          checkboollol();
+                        });
+                      },
+                      items: items,
+                    )),
               ),
-        ),
-      ],
+            )
+                // This trailing comma makes auto-formatting nicer for build methods.
+                ),
+          ),
+        ],
+      ),
     );
   }
 }
