@@ -89,68 +89,67 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     SizedBox(
                       height: 5,
                     ),
-                    current == "modhomepage"
-                        ? FlatButton(
-                            onPressed: () {
-                              setState(() {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => modHomePageTimeline(
-                                          selectedItemPosition: 2)),
-                                );
-                              });
-                              Timer(Duration(seconds: 1), () {
-                                current = "timeline";
-                              });
-                            },
-                            child: Row(
-                              children: [
-                                // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  " Timeline",
-                                  style: TextStyle(
-                                      fontFamily: "OpenSans",
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: Colors.white),
-                                )
-                              ],
-                            ))
-                        : FlatButton(
-                            onPressed: () {
-                              setState(() {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => modHomePage(
-                                            selectedItemPosition: 1,
-                                          )),
-                                );
-                              });
-                              Timer(Duration(seconds: 1), () {
-                                current = "modhomepage";
-                              });
-                            },
-                            child: Row(
-                              children: [
-                                // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  " Homepage",
-                                  style: TextStyle(
-                                      fontFamily: "OpenSans",
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: Colors.white),
-                                )
-                              ],
-                            )),
+                    FlatButton(
+                        onPressed: () {
+                          setState(() {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => modHomePageTimeline(
+                                      selectedItemPosition: 2)),
+                            );
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              " Timeline",
+                              style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            )
+                          ],
+                        )),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    FlatButton(
+                        onPressed: () {
+                          setState(() {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => modHomePage(
+                                        selectedItemPosition: 1,
+                                      )),
+                            );
+                          });
+                          Timer(Duration(seconds: 1), () {
+                            current = "modhomepage";
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              " Homepage",
+                              style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            )
+                          ],
+                        )),
                     SizedBox(
                       height: 5,
                     ),
@@ -201,8 +200,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    privacypolicy()),
+                                builder: (context) => privacypolicy()),
                           );
                         },
                         child: Row(
@@ -229,8 +227,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    termandcondition()),
+                                builder: (context) => termandcondition()),
                           );
                         },
                         child: Row(
