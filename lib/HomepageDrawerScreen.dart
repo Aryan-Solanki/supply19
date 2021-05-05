@@ -164,6 +164,27 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                             width: 20,
                           ),
                           Text(
+                            "  Privacy Policy",
+                            style: TextStyle(
+                                fontFamily: "OpenSans",
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white),
+                          )
+                        ],
+                      )),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  FlatButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text(
                             "        T&C",
                             style: TextStyle(
                                 fontFamily: "OpenSans",
@@ -173,6 +194,8 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                           )
                         ],
                       )),
+
+
                 ],
               ),
             ),
