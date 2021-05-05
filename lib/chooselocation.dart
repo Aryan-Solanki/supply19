@@ -54,13 +54,13 @@ class _chooselocationState extends State<chooselocation> {
                 Container(
                   color: Colors.white,
                   child: SearchChoices.single(
-                    autofocus: true,
                     items: city(),
                     value: selectedValueSingleDialog,
                     hint: "Search for your city",
                     onChanged: (value) {
+
                       if (value != null) {
-                        selected_city = value.data;
+                        selected_city = value;
                         UserSimplePreferences.setCity(selected_city);
                         if (backlink == "moderator") {
                           Navigator.pushReplacement(

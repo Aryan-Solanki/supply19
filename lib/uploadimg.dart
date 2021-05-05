@@ -236,7 +236,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
           hint: "Search for your city",
           onChanged: (value) {
             if (value != null) {
-              selected_city = value.data;
+              selected_city = value;
             }
           },
           isExpanded: true,
@@ -255,7 +255,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
           hint: "Choose Categories",
           onChanged: (value) {
             if (value != null) {
-              selected_item = value.data;
+              selected_item = value;
             }
           },
           isExpanded: true,
@@ -325,79 +325,79 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
     return [
       DropdownMenuItem(
         child: Text("Beds"),
-        value: Text("Beds"),
+        value: "Beds",
       ),
       DropdownMenuItem(
         child: Text("Oxygen"),
-        value: Text("Oxygen"),
+        value: "Oxygen",
       ),
       DropdownMenuItem(
         child: Text("Ventilator"),
-        value: Text("Ventilator"),
+        value: "Ventilator",
       ),
       DropdownMenuItem(
         child: Text("Fabiflu"),
-        value: Text("Fabiflu"),
+        value: "Fabiflu",
       ),
       DropdownMenuItem(
         child: Text("Favipiravir"),
-        value: Text("Favipiravir"),
+        value: "Favipiravir",
       ),
       DropdownMenuItem(
         child: Text("Oxygen Bed"),
-        value: Text("Oxygen Bed"),
+        value: "Oxygen Bed",
       ),
       DropdownMenuItem(
         child: Text("Non Oxygen Bed"),
-        value: Text("Non Oxygen Bed"),
+        value: "Non Oxygen Bed",
       ),
       DropdownMenuItem(
         child: Text("ICU Bed"),
-        value: Text("ICU Bed"),
+        value: "ICU Bed",
       ),
       DropdownMenuItem(
         child: Text("Non-ICU Bed"),
-        value: Text("Non-ICU Bed"),
+        value: "Non-ICU Bed",
       ),
       DropdownMenuItem(
         child: Text("Oxygen Refilling"),
-        value: Text("Oxygen Refilling"),
+        value: "Oxygen Refilling",
       ),
       DropdownMenuItem(
         child: Text("Plasma"),
-        value: Text("Plasma"),
+        value: "Plasma",
       ),
       DropdownMenuItem(
         child: Text("Tocilizumab"),
-        value: Text("Tocilizumab"),
+        value: "Tocilizumab",
       ),
       DropdownMenuItem(
         child: Text("Remidivisir"),
-        value: Text("Remidivisir"),
+        value: "Remidivisir",
       ),
       DropdownMenuItem(
         child: Text("Injection"),
-        value: Text("Injection"),
+        value: "Injection",
       ),
       DropdownMenuItem(
         child: Text("Doctor"),
-        value: Text("Doctor"),
+        value: "Doctor",
       ),
       DropdownMenuItem(
         child: Text("Hospital"),
-        value: Text("Hospital"),
+        value: "Hospital",
       ),
       DropdownMenuItem(
         child: Text("Ambulance"),
-        value: Text("Ambulance"),
+        value: "Ambulance",
       ),
       DropdownMenuItem(
         child: Text("Testing"),
-        value: Text("Testing"),
+        value: "Testing",
       ),
       DropdownMenuItem(
         child: Text("Hospital At Home"),
-        value: Text("Hospital At Home"),
+        value: "Hospital At Home",
       ),
     ];
   }

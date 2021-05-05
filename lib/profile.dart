@@ -35,13 +35,15 @@ class _profileState extends State<profile> {
             Expanded(
               flex: 1,
               child: CircleAvatar(
-                radius: 100,
-                backgroundImage: (UserSimplePreferences.getImageLink() == "" ||
-                        UserSimplePreferences.getImageLink() == null)
+                radius: 50,
+                backgroundImage:
+                (UserSimplePreferences.getImageLink() == "" ||
+                    UserSimplePreferences.getImageLink() ==
+                        null)
                     ? AssetImage("images/nodp.jpg")
-                    : NetworkImage(UserSimplePreferences.getImageLink()),
-              ),
-            ),
+                    : NetworkImage(
+                    UserSimplePreferences.getImageLink()),
+              )),
             Expanded(
               flex: 2,
               child: Container(
@@ -204,7 +206,7 @@ class _profileState extends State<profile> {
                                     UserSimplePreferences.getImageLink() ==
                                         null)
                                 ? AssetImage("images/nodp.jpg")
-                                : Image.network(
+                                : NetworkImage(
                                     UserSimplePreferences.getImageLink()),
                       ),
                     ),
@@ -369,7 +371,7 @@ class _profileState extends State<profile> {
                                 "" ||
                             UserSimplePreferences.getImageLink() == null)
                         ? AssetImage("images/nodp.jpg")
-                        : Image.network(UserSimplePreferences.getImageLink()),
+                        : NetworkImage(UserSimplePreferences.getImageLink()),
                   ),
                 ),
                 Expanded(

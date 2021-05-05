@@ -392,7 +392,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                 EdgeInsets.only(left: 15, right: 10, bottom: 5),
                             child: city_name != ""
                                 ? Align(
-                                    alignment: Alignment.centerLeft,
+                                    alignment: Alignment.center,
                                     child: Container(
                                       height: 30,
                                       decoration: BoxDecoration(

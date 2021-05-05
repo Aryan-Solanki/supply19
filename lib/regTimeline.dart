@@ -377,10 +377,10 @@ class _regTimelineState extends State<regTimeline>
                       bottom: PreferredSize(
                           child: Container(
                             margin:
-                                EdgeInsets.only(left: 15, right: 10, bottom: 5),
+                                EdgeInsets.only(left:30, right: 10, bottom: 5),
                             child: city_name != ""
                                 ? Align(
-                                    alignment: Alignment.centerLeft,
+                                    alignment: Alignment.center,
                                     child: Container(
                                       height: 30,
                                       decoration: BoxDecoration(
