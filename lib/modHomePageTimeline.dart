@@ -580,7 +580,7 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => modHomePage(
+                                  builder: (context) => modHomePageTimeline(
                                         selectedItemPosition: 2,
                                       )),
                             );
