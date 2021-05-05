@@ -128,6 +128,8 @@ class _modHomePageState extends State<modHomePage>
   void initState() {
     super.initState();
     UserSimplePreferences.setisModerator("yes");
+    UserSimplePreferences.setisVolunteer("");
+    UserSimplePreferences.setisBenefeciary("");
     refreshKey = GlobalKey<RefreshIndicatorState>();
     refreshKeyQuery = GlobalKey<RefreshIndicatorState>();
     email = UserSimplePreferences.getEmail() ?? '';

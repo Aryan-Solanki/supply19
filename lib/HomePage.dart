@@ -120,6 +120,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     super.initState();
     refreshKey = GlobalKey<RefreshIndicatorState>();
     UserSimplePreferences.setisBenefeciary("yes");
+    UserSimplePreferences.setisVolunteer("");
+    UserSimplePreferences.setisModerator("");
     int i = 0;
     FirebaseDatabase.instance
         .reference()
