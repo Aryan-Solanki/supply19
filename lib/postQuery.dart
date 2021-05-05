@@ -103,6 +103,21 @@ class _PostQueryState extends State<PostQuery> {
       return false;
     }
   }
+  Future<void> uploadStatusImage() async {
+    if (validateAndSave()) {
+      FirebaseStorage storage = FirebaseStorage.instance;
+      final Reference postImageRef = storage.ref().child("Post Images");
+      var timeKey = new DateTime.now();
+      String xyz = timeKey.toString() + ".jpg";
+      final UploadTask uploadTask =
+      postImageRef.child(xyz).putFile(sampleImage);
+      var imageUrl = await (await uploadTask).ref.getDownloadURL();
+      final String url_akshat = imageUrl.toString();
+      print(url_akshat);
+      savetoDatabase(url_akshat);
+      // goToHomePage();
+    }
+  }
 
   @override
   void initState() {
@@ -136,46 +151,6 @@ class _PostQueryState extends State<PostQuery> {
     }
 
     col = [
-      Container(
-        margin: EdgeInsets.only(top: 20, bottom: 25),
-        color: Color(0xFFBDD4EB),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "  POST QUERY",
-              style: TextStyle(
-                  fontSize: 20,
-                  fontFamily: "OpenSans",
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF09427d)),
-            ),
-            IconButton(
-              icon: Icon(Icons.done),
-              onPressed: () {
-                if (pname == "" ||
-                    phnum == "" ||
-                    selected_item == "" ||
-                    selected_city == "") {
-                  FocusScope.of(context).unfocus();
-                  _scaffoldkey.currentState.showSnackBar(
-                      SnackBar(content: Text('Fill All Details')));
-                } else {
-                  if (validateAndSave()) {
-                    if (sampleImage == null) {
-                      validateAndSave();
-                      savetoDatabase('');
-                    } else {
-                      uploadStatusImage();
-                    }
-                  }
-                }
-                // validateAndSave();
-              },
-            )
-          ],
-        ),
-      ),
       Text(
         "Patient Name*",
         style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
@@ -242,7 +217,7 @@ class _PostQueryState extends State<PostQuery> {
       Container(
         margin: EdgeInsets.symmetric(vertical: 15),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5), color: Color(0xffafc9e5)),
+            color: Color(0xffafc9e5)),
         child: Container(
           padding: EdgeInsets.only(left: 10.0),
           child: TextField(
@@ -369,21 +344,67 @@ class _PostQueryState extends State<PostQuery> {
       home: Scaffold(
         key: _scaffoldkey,
         resizeToAvoidBottomInset: false,
-        body: SingleChildScrollView(
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
-            child: Form(
-                key: formkey,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: col_append(),
-                )),
-          ),
+        body: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          child: Form(
+              key: formkey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children:[
+                  Container(
+                    margin: EdgeInsets.only(top: 20, bottom: 25),
+                    color: Color(0xFFBDD4EB),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "   Post Query",
+                          style: TextStyle(
+                              color: Color(0xFF09427d),
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.done),
+                          onPressed: () {
+                            if (pname == "" ||
+                                phnum == "" ||
+                                selected_item == "" ||
+                                selected_city == "") {
+                              FocusScope.of(context).unfocus();
+                              _scaffoldkey.currentState.showSnackBar(
+                                  SnackBar(content: Text('Fill All Details')));
+                            } else {
+                              if (validateAndSave()) {
+                                if (sampleImage == null) {
+                                  validateAndSave();
+                                  savetoDatabase('');
+                                } else {
+                                  uploadStatusImage();
+                                }
+                              }
+                            }
+                            // validateAndSave();
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: col_append(),
+                      ),
+                    ),
+                  )
+                ]
+              )),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             if (sampleImage != null) {
-              col.removeAt(1);
+              col.removeAt(0);
             }
             getImage();
           },
@@ -399,7 +420,7 @@ class _PostQueryState extends State<PostQuery> {
       return col;
     } else {
       col.insert(
-        1,
+        0,
         Image.file(
           sampleImage,
           height: 330.0,

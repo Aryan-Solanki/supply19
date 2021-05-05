@@ -30,7 +30,7 @@ Widget RankUI(String image, int rank, int points,String volname) {
         color: colour(rank)
     ),
     margin: EdgeInsets.only(bottom: 10,left: 20,right: 20),
-    padding: EdgeInsets.only(bottom: 10),
+    padding: EdgeInsets.only(top: 10,bottom: 10),
     width: double.infinity,
     height: 70,
     child: Row(
@@ -74,12 +74,12 @@ Widget RankUI(String image, int rank, int points,String volname) {
       ],
     ),
   )):FadeInRight(child: Container(
-    padding: EdgeInsets.only(bottom: 10),
     decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: colour(rank)
     ),
     margin: EdgeInsets.only(bottom: 10,left: 20,right: 20),
+    padding: EdgeInsets.only(top: 10,bottom: 10),
     width: double.infinity,
     height: 70,
     child: Row(

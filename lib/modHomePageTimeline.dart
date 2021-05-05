@@ -197,10 +197,9 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
                     child: Text(
                       "Leaderboard",
                       style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: "OpenSans",
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF09427d)),
+                          color: Color(0xFF09427d),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),

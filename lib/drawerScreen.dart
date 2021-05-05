@@ -52,9 +52,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
                       child: Text(
                         UserSimplePreferences.getUserName() ?? '',
                         style: TextStyle(
-                            fontSize: 25,
                             color: Colors.white,
-                            fontFamily: "OpenSans",
+                            fontSize: 25.0,
                             fontWeight: FontWeight.bold),
                       ))
                 ],
