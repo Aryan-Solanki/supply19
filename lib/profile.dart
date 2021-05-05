@@ -119,16 +119,6 @@ class _profileState extends State<profile> {
                       decoration: BoxDecoration(
                           color: Color(0xff4686c8),
                           borderRadius: BorderRadius.circular(20)),
-                      child: FlatButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Change Password",
-                          style: TextStyle(
-                              fontSize: 20,
-                              fontFamily: "OpenSans",
-                              color: Colors.white),
-                        ),
-                      ),
                     ),
                     Container(
                       width: 300,

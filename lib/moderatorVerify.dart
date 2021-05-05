@@ -62,7 +62,7 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                           DatabaseReference _ref = FirebaseDatabase.instance
                               .reference()
                               .child('Posts');
-                          _ref.child(key).update({'status': "true"});
+                          _ref.child(key).update({'status': "fake not"});
                           uq.removeAt(index);
                           setState(() {});
                         },
@@ -77,7 +77,7 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                           DatabaseReference _ref = FirebaseDatabase.instance
                               .reference()
                               .child('Posts');
-                          _ref.child(key).update({'status': "fake"});
+                          _ref.child(key).update({'status': "true"});
                           uq.removeAt(index);
                           setState(() {});
                         },
@@ -123,7 +123,7 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                           DatabaseReference _ref = FirebaseDatabase.instance
                               .reference()
                               .child('Posts');
-                          _ref.child(key).update({'status': "fake"});
+                          _ref.child(key).update({'status': "fake not"});
                           uq.removeAt(index);
                           setState(() {});
                         },

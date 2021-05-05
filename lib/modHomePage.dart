@@ -164,7 +164,7 @@ class _modHomePageState extends State<modHomePage>
           // print(UserSimplePreferences.getUserName());
           UserSimplePreferences.setVerifyStatus(user.verify);
           // print(UserSimplePreferences.getVerifyStatus());
-          UserSimplePreferences.setImagePath(user.image);
+          UserSimplePreferences.setImageLink(user.image);
           // print(UserSimplePreferences.getImagelink());
         }
       }
@@ -273,7 +273,9 @@ class _modHomePageState extends State<modHomePage>
           ),
           Container(
             child: postListuser.length == 0
-                ? Align(alignment:Alignment.center,child: Text("No information available"))
+                ? Align(
+                    alignment: Alignment.center,
+                    child: Text("No information available"))
                 : RefreshIndicator(
                     key: refreshKey,
                     onRefresh: () async {
@@ -407,7 +409,7 @@ class _modHomePageState extends State<modHomePage>
                                     : UserSimplePreferences.getUserName())
                                 : ((selectedItemPosition == 0)
                                     ? "Query"
-                                    : "Verify Posts"),
+                                    : "Pending Posts"),
                             style: TextStyle(
                                 color: Color(0xFF09427d),
                                 fontSize: 20.0,

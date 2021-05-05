@@ -58,7 +58,7 @@ final pages = [
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  " Founder",
+                  " Founder & Developer",
                   style: TextStyle(
                       fontFamily: "HKGrotesk",
                       fontSize: 20,
@@ -140,7 +140,7 @@ final pages = [
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  " Founder",
+                  " Founder & Developer",
                   style: TextStyle(
                       fontFamily: "HKGrotesk",
                       fontSize: 20,
