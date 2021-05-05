@@ -223,6 +223,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               postList[index].status,
                               postList[index].sname,
                               postList[index].sphnum,
+                              postList[index].location,
                             );
                           }),
                     ),

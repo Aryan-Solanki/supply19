@@ -11,8 +11,17 @@ _makingPhoneCall(callString) async {
   }
 }
 
-Widget PostsUI(String image, String description, String date, String time,
-    String phnum, String volname, String status, String sname, String sphnum) {
+Widget PostsUI(
+    String image,
+    String description,
+    String date,
+    String time,
+    String phnum,
+    String volname,
+    String status,
+    String sname,
+    String sphnum,
+    String location) {
   String verified;
   if (status != "fake") {
     verified = "Verified";
