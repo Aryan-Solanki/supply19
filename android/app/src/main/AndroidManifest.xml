@@ -24,7 +24,7 @@
     </queries>
 
    <application
-        android:label="medicalapp"
+        android:label="Supply 19"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
