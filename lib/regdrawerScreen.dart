@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:medicalapp/privacypolicy.dart';
 import 'package:medicalapp/profile.dart';
+import 'package:medicalapp/registration.dart';
 import 'package:medicalapp/termandcondition.dart';
 import 'regTimeline.dart';
 import 'user_simple_preferences.dart';
@@ -37,12 +38,12 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                       child: CircleAvatar(
                         radius: 50,
                         backgroundImage:
-                        (UserSimplePreferences.getImageLink() == "" ||
-                            UserSimplePreferences.getImageLink() ==
-                                null)
-                            ? AssetImage("images/nodp.jpg")
-                            : NetworkImage(
-                            UserSimplePreferences.getImageLink()),
+                            (UserSimplePreferences.getImageLink() == "" ||
+                                    UserSimplePreferences.getImageLink() ==
+                                        null)
+                                ? AssetImage("images/nodp.jpg")
+                                : NetworkImage(
+                                    UserSimplePreferences.getImageLink()),
                       )),
                   SizedBox(
                     width: 30,
@@ -196,8 +197,7 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    privacypolicy()),
+                                builder: (context) => privacypolicy()),
                           );
                         },
                         child: Row(
@@ -224,8 +224,7 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    termandcondition()),
+                                builder: (context) => termandcondition()),
                           );
                         },
                         child: Row(
@@ -255,7 +254,15 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                     color: Color(0xff2193b0),
                     borderRadius: BorderRadius.circular(30)),
                 child: FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      UserSimplePreferences.setisModerator("");
+                      UserSimplePreferences.setisBenefeciary("");
+                      UserSimplePreferences.setisVolunteer("");
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => registration()));
+                    },
                     child: Text(
                       "Log Out",
                       style: TextStyle(
