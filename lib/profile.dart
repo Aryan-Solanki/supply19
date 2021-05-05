@@ -369,7 +369,7 @@ class _profileState extends State<profile> {
                                 "" ||
                             UserSimplePreferences.getImageLink() == null)
                         ? AssetImage("images/nodp.jpg")
-                        : Image.network(UserSimplePreferences.getImageLink()),
+                        : NetworkImage(UserSimplePreferences.getImageLink()),
                   ),
                 ),
                 Expanded(
