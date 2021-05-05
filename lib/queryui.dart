@@ -31,6 +31,20 @@ Widget QueryUI(String image, String description, String date, String time,
                       // style: Theme.of(context).textTheme.subtitle,
                       textAlign: TextAlign.center,
                     ),
+                    Column(
+                      children: [
+                      Icon(
+                        Icons.question_answer_outlined,
+                        color: Color(0xff09427d),
+                      ),
+                      Text(
+                        "Query",
+                        // style: Theme.of(context).textTheme.subtitle,
+                        style: TextStyle(fontSize: 8.0),
+                        textAlign: TextAlign.center,
+                      ),
+                      ]
+                ),
                     Text(
                       time,
                       // style: Theme.of(context).textTheme.subtitle,
