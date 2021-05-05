@@ -35,9 +35,7 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                       child: CircleAvatar(
                         radius: 50,
                         backgroundImage:
-                            (UserSimplePreferences.getImageLink() == "" ||
-                                    UserSimplePreferences.getImageLink() ==
-                                        null)
+                            (UserSimplePreferences.getImageLink() == null)
                                 ? AssetImage("images/nodp.jpg")
                                 : NetworkImage(
                                     UserSimplePreferences.getImageLink()),

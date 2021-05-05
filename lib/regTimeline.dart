@@ -247,7 +247,13 @@ class _regTimelineState extends State<regTimeline>
               Container(
                   child: Expanded(
                 child: (userslist.length == 0 || userslist.length == null)
-                    ? Text("No information available")
+                    ? RefreshIndicator(
+                        child: Text("No information available"),
+                        key: refreshKeyQuery,
+                        onRefresh: () async {
+                          await refreshListQuery();
+                        },
+                      )
                     : RefreshIndicator(
                         key: refreshKeyQuery,
                         onRefresh: () async {
