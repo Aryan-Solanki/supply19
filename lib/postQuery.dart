@@ -61,7 +61,7 @@ class _PostQueryState extends State<PostQuery> {
       context: context,
       type: CoolAlertType.success,
       text:
-          "Your request has been sucessfully recorded.\nWe will contact you soon via the contact number to collect other details needed to move forward.",
+          "Your request has been sucessfully recorded.\n\nWe will contact you soon",
     );
   }
 
@@ -130,15 +130,14 @@ class _PostQueryState extends State<PostQuery> {
             IconButton(
               icon: Icon(Icons.done),
               onPressed: () {
-
-                if (pname == "" || phnum == "" || selected_item == "" || selected_city == ""){
+                if (pname == "" ||
+                    phnum == "" ||
+                    selected_item == "" ||
+                    selected_city == "") {
                   FocusScope.of(context).unfocus();
-                  _scaffoldkey.currentState
-                      .showSnackBar(SnackBar(
-                      content: Text(
-                          'Fill All Details')));
-                }
-                else{
+                  _scaffoldkey.currentState.showSnackBar(
+                      SnackBar(content: Text('Fill All Details')));
+                } else {
                   if (validateAndSave()) {
                     if (sampleImage == null) {
                       validateAndSave();
@@ -149,7 +148,6 @@ class _PostQueryState extends State<PostQuery> {
                   }
                 }
                 // validateAndSave();
-
               },
             )
           ],
@@ -329,7 +327,7 @@ class _PostQueryState extends State<PostQuery> {
   }
 
   File sampleImage;
-  String _myValue="";
+  String _myValue = "";
 
   String url_lol = "lol";
   final formkey = new GlobalKey<FormState>();
