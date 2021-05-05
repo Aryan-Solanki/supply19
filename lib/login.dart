@@ -68,12 +68,10 @@ class _loginState extends State<login> {
                                 margin: EdgeInsets.symmetric(vertical: 15),
                                 decoration: BoxDecoration(
                                     // borderRadius: BorderRadius.circular(5),
-                                    color: Color(0xffafc9e5)),
+                                    color: Color(0xffededed)),
                                 child: Container(
                                   margin: EdgeInsets.only(left: 10.0),
                                   child: TextField(
-                                    decoration: InputDecoration(
-                                        hintText: "xyz@example.com"),
                                     keyboardType: TextInputType.emailAddress,
                                     onChanged: (value) {
                                       setState(() {
@@ -92,12 +90,10 @@ class _loginState extends State<login> {
                                 margin: EdgeInsets.symmetric(vertical: 15),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
-                                    color: Color(0xffafc9e5)),
+                                    color: Color(0xffededed)),
                                 child: Container(
                                   padding: EdgeInsets.only(left: 10.0),
                                   child: TextField(
-                                    decoration:
-                                        InputDecoration(hintText: "**********"),
                                     obscureText: true,
                                     onChanged: (value) {
                                       setState(() {
