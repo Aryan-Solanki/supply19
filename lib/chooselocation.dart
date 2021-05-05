@@ -8,6 +8,7 @@ import 'package:search_choices/search_choices.dart';
 import 'user_simple_preferences.dart';
 import 'modHomePage.dart';
 import 'regHomePage.dart';
+import 'modHomePageTimeline.dart';
 
 class chooselocation extends StatefulWidget {
   String backlink;
@@ -58,7 +59,6 @@ class _chooselocationState extends State<chooselocation> {
                     value: selectedValueSingleDialog,
                     hint: "Search for your city",
                     onChanged: (value) {
-
                       if (value != null) {
                         selected_city = value;
                         UserSimplePreferences.setCity(selected_city);
@@ -66,8 +66,8 @@ class _chooselocationState extends State<chooselocation> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => modHomePage(
-                                      selectedItemPosition: 1,
+                                builder: (context) => modHomePageTimeline(
+                                      selectedItemPosition: 2,
                                     )),
                           );
                         } else if (backlink == "registration") {
@@ -112,8 +112,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => modHomePage(
-                                                selectedItemPosition: 1,
+                                          builder: (context) =>
+                                              modHomePageTimeline(
+                                                selectedItemPosition: 2,
                                               )),
                                     );
                                   } else if (backlink == "registration") {
@@ -149,8 +150,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => modHomePage(
-                                                selectedItemPosition: 1,
+                                          builder: (context) =>
+                                              modHomePageTimeline(
+                                                selectedItemPosition: 2,
                                               )),
                                     );
                                   } else if (backlink == "registration") {
@@ -186,8 +188,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => modHomePage(
-                                                selectedItemPosition: 1,
+                                          builder: (context) =>
+                                              modHomePageTimeline(
+                                                selectedItemPosition: 2,
                                               )),
                                     );
                                   } else if (backlink == "registration") {
@@ -227,8 +230,9 @@ class _chooselocationState extends State<chooselocation> {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => modHomePage(
-                                                  selectedItemPosition: 1,
+                                            builder: (context) =>
+                                                modHomePageTimeline(
+                                                  selectedItemPosition: 2,
                                                 )),
                                       );
                                     } else if (backlink == "registration") {
@@ -265,8 +269,9 @@ class _chooselocationState extends State<chooselocation> {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => modHomePage(
-                                                  selectedItemPosition: 1,
+                                            builder: (context) =>
+                                                modHomePageTimeline(
+                                                  selectedItemPosition: 2,
                                                 )),
                                       );
                                     } else if (backlink == "registration") {
@@ -304,8 +309,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => modHomePage(
-                                                selectedItemPosition: 1,
+                                          builder: (context) =>
+                                              modHomePageTimeline(
+                                                selectedItemPosition: 2,
                                               )),
                                     );
                                   } else if (backlink == "registration") {
@@ -342,8 +348,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => modHomePage(
-                                                selectedItemPosition: 1,
+                                          builder: (context) =>
+                                              modHomePageTimeline(
+                                                selectedItemPosition: 2,
                                               )),
                                     );
                                   } else if (backlink == "registration") {
@@ -379,8 +386,9 @@ class _chooselocationState extends State<chooselocation> {
                                     Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => modHomePage(
-                                                selectedItemPosition: 1,
+                                          builder: (context) =>
+                                              modHomePageTimeline(
+                                                selectedItemPosition: 2,
                                               )),
                                     );
                                   } else if (backlink == "registration") {
