@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:medicalapp/HomePage.dart';
 import 'package:medicalapp/chooselocation.dart';
 import 'package:medicalapp/citypage.dart';
+import 'package:medicalapp/covid.dart';
 import 'package:medicalapp/meet_team.dart';
+import 'package:medicalapp/plasma.dart';
 import 'package:medicalapp/privacypolicy.dart';
 import 'package:medicalapp/profile.dart';
 import 'package:medicalapp/registerpage.dart';
@@ -29,7 +31,7 @@ void main() async {
   await UserSimplePreferences.init();
   await UserSimplePreferences.setCategory('');
   await UserSimplePreferences.setCity('');
-  runApp(privacypolicy());
+  runApp(my());
 }
 
 class my extends StatelessWidget {
