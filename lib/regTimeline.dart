@@ -33,6 +33,7 @@ class _regTimelineState extends State<regTimeline>
   _regTimelineState({this.selectedItemPosition});
   getbody() {
     try {
+      refreshLearderboard();
       return tab[selectedItemPosition];
     } catch (e) {
       Text("");
