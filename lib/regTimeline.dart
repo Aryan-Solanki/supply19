@@ -175,6 +175,7 @@ class _regTimelineState extends State<regTimeline>
                             postList[index].sname,
                             postList[index].sphnum,
                             postList[index].location,
+                            postList[index].categpry,
                           );
                         }),
                   ),
@@ -307,17 +308,17 @@ class _regTimelineState extends State<regTimeline>
                           itemCount: postList.length,
                           itemBuilder: (_, index) {
                             return PostsUI(
-                              postList[index].image,
-                              postList[index].description,
-                              postList[index].date,
-                              postList[index].time,
-                              postList[index].phnum,
-                              postList[index].volname,
-                              postList[index].status,
-                              postList[index].sname,
-                              postList[index].sphnum,
-                              postList[index].location,
-                            );
+                                postList[index].image,
+                                postList[index].description,
+                                postList[index].date,
+                                postList[index].time,
+                                postList[index].phnum,
+                                postList[index].volname,
+                                postList[index].status,
+                                postList[index].sname,
+                                postList[index].sphnum,
+                                postList[index].location,
+                                postList[index].categpry);
                           }),
                     ),
             ),

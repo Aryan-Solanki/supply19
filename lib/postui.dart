@@ -21,7 +21,8 @@ Widget PostsUI(
     String status,
     String sname,
     String sphnum,
-    String location) {
+    String location,
+    String category) {
   String verified;
   if (status != "fake") {
     verified = "Verified";
@@ -207,14 +208,14 @@ Widget PostsUI(
                                   ),
                                 ),
                                 Expanded(
-                                  child:Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    location,
-                                    style: TextStyle(
-                                        fontSize: 15, color: Colors.black),
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      location,
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.black),
+                                    ),
                                   ),
-                                ),
                                 )
                               ],
                             ),
