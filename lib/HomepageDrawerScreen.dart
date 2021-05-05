@@ -1,6 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:medicalapp/covid.dart';
+import 'package:medicalapp/plasma.dart';
+import 'package:medicalapp/privacypolicy.dart';
+import 'package:medicalapp/registration.dart';
+import 'package:medicalapp/supportus.dart';
+import 'package:medicalapp/termandcondition.dart';
 import 'user_simple_preferences.dart';
 
 class HomepageDrawerScreen extends StatefulWidget {
@@ -36,7 +42,14 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
               child: Column(
                 children: [
                   FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  registration()),
+                        );
+                      },
                       child: Row(
                         children: [
                           // FaIcon(FontAwesomeIcons.star,size: 25,color: Colors.white,),
@@ -93,7 +106,14 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                     height: 5,
                   ),
                   FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  plasma()),
+                        );
+                      },
                       child: Row(
                         children: [
                           // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
@@ -114,7 +134,14 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                     height: 5,
                   ),
                   FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  covid()),
+                        );
+                      },
                       child: Row(
                         children: [
                           // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
@@ -135,7 +162,14 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                     height: 5,
                   ),
                   FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  support()),
+                        );
+                      },
                       child: Row(
                         children: [
                           // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
@@ -156,7 +190,14 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                     height: 5,
                   ),
                   FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  privacypolicy()),
+                        );
+                      },
                       child: Row(
                         children: [
                           // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
@@ -177,7 +218,14 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                     height: 5,
                   ),
                   FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  termandcondition()),
+                        );
+                      },
                       child: Row(
                         children: [
                           // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
@@ -199,7 +247,7 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                 ],
               ),
             ),
-            SizedBox(height: 70,)
+            SizedBox(height: 50,)
           ],
           ),
         ),
