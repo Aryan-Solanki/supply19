@@ -174,6 +174,7 @@ class _registerpageState extends State<registerpage> {
                                 child: Container(
                                   margin: EdgeInsets.only(left: 10.0),
                                   child: TextField(
+                                    keyboardType: TextInputType.name,
                                     onChanged: (value) {
                                       setState(() {
                                         _fname = value.trim();
@@ -195,6 +196,7 @@ class _registerpageState extends State<registerpage> {
                                 child: Container(
                                   padding: EdgeInsets.only(left: 10.0),
                                   child: TextField(
+                                    keyboardType: TextInputType.name,
                                     onChanged: (value) {
                                       setState(() {
                                         _lname = value.trim();

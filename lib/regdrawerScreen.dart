@@ -84,62 +84,63 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                     SizedBox(
                       height: 5,
                     ),
-                    current0 == "regHomePage"
-                        ? FlatButton(
-                            onPressed: () {
-                              current0 = "timeline";
-                              setState(() {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          regTimeline(selectedItemPosition: 2)),
-                                );
-                              });
-                            },
-                            child: Row(
-                              children: [
-                                // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  " Timeline",
-                                  style: TextStyle(
-                                      fontFamily: "OpenSans",
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: Colors.white),
-                                )
-                              ],
-                            ))
-                        : FlatButton(
-                            onPressed: () {
-                              current0 = "regHomePage";
-                              setState(() {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => regHomePage()),
-                                );
-                              });
-                            },
-                            child: Row(
-                              children: [
-                                // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  " Homepage",
-                                  style: TextStyle(
-                                      fontFamily: "OpenSans",
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                      color: Colors.white),
-                                )
-                              ],
-                            )),
+                    FlatButton(
+                        onPressed: () {
+                          current0 = "timeline";
+                          setState(() {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      regTimeline(selectedItemPosition: 2)),
+                            );
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              " Timeline",
+                              style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            )
+                          ],
+                        )),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    FlatButton(
+                        onPressed: () {
+                          setState(() {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => regHomePage()),
+                            );
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              " Homepage",
+                              style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            )
+                          ],
+                        )),
                     SizedBox(
                       height: 5,
                     ),
