@@ -5,6 +5,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:medicalapp/modHomePage.dart';
+import 'package:medicalapp/modHomePageTimeline.dart';
+import 'package:medicalapp/regTimeline.dart';
 import 'package:medicalapp/user_simple_preferences.dart';
 import 'HomePage.dart';
 import 'dart:io';
@@ -14,11 +16,16 @@ import 'package:search_choices/search_choices.dart';
 import 'package:cool_alert/cool_alert.dart';
 
 class PostQuery extends StatefulWidget {
+  String backlink;
+  PostQuery({this.backlink});
   @override
-  _PostQueryState createState() => _PostQueryState();
+  _PostQueryState createState() => _PostQueryState(backlink: backlink);
 }
 
 class _PostQueryState extends State<PostQuery> {
+  String backlink;
+  _PostQueryState({this.backlink});
+  // "registration" "moderator"
   final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
   String selected_city = "";
   String selected_item = "";
@@ -56,6 +63,22 @@ class _PostQueryState extends State<PostQuery> {
     ref.child("current").update({'query_no': newx});
 
     ref.child("Query").push().set(data);
+
+    if (backlink == "registration") {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => regTimeline(
+                    selectedItemPosition: 2,
+                  )));
+    } else {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => modHomePageTimeline(
+                    selectedItemPosition: 2,
+                  )));
+    }
 
     CoolAlert.show(
       context: context,

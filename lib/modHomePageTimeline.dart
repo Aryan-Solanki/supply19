@@ -198,7 +198,9 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
         checkboollol();
         tab = [
           chooselocation(backlink: "moderator"),
-          PostQuery(),
+          PostQuery(
+            backlink: "moderator",
+          ),
           SafeArea(
             child: Container(
               child: (postList.length == 0 || postList.length == null)

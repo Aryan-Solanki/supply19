@@ -201,7 +201,9 @@ class _regTimelineState extends State<regTimeline>
           chooselocation(
             backlink: "registration",
           ),
-          PostQuery(),
+          PostQuery(
+            backlink: "registration",
+          ),
           SafeArea(
             child: Container(
               child: (postList.length == 0 || postList.length == null)
@@ -377,7 +379,7 @@ class _regTimelineState extends State<regTimeline>
                       bottom: PreferredSize(
                           child: Container(
                             margin:
-                                EdgeInsets.only(left:30, right: 10, bottom: 5),
+                                EdgeInsets.only(left: 30, right: 10, bottom: 5),
                             child: city_name != ""
                                 ? Align(
                                     alignment: Alignment.center,
