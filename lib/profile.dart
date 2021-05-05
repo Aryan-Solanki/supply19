@@ -283,23 +283,6 @@ class _profileState extends State<profile> {
                             ),
                             Container(
                               width: 300,
-                              margin: EdgeInsets.only(top: 35),
-                              decoration: BoxDecoration(
-                                  color: Color(0xff4686c8),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: FlatButton(
-                                onPressed: () {},
-                                child: Text(
-                                  "Change Password",
-                                  style: TextStyle(
-                                      fontSize: 20,
-                                      fontFamily: "OpenSans",
-                                      color: Colors.white),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 300,
                               margin: EdgeInsets.symmetric(vertical: 15),
                               decoration: BoxDecoration(
                                   color: Color(0xff4686c8),
@@ -444,23 +427,6 @@ class _profileState extends State<profile> {
                                   ],
                                 )),
                           ],
-                        ),
-                        Container(
-                          width: 300,
-                          margin: EdgeInsets.only(top: 35),
-                          decoration: BoxDecoration(
-                              color: Color(0xff4686c8),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: FlatButton(
-                            onPressed: () {},
-                            child: Text(
-                              "Change Password",
-                              style: TextStyle(
-                                  fontSize: 20,
-                                  fontFamily: "OpenSans",
-                                  color: Colors.white),
-                            ),
-                          ),
                         ),
                         Container(
                           width: 300,
