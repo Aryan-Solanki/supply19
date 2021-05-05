@@ -168,8 +168,8 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
         event.snapshot.value['status'],
         event.snapshot.value['location'],
         event.snapshot.value['category'],
-        event.snapshot.value['location'],
-        event.snapshot.value['category'],
+        event.snapshot.value['sname'],
+        event.snapshot.value['sphnum'],
         event.snapshot.key,
       );
 
