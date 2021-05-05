@@ -182,7 +182,7 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                                 width: 20,
                               ),
                               Text(
-                                " Support",
+                                "    Support",
                                 style: TextStyle(
                                     fontFamily: "OpenSans",
                                     fontWeight: FontWeight.bold,
@@ -208,7 +208,7 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                                 width: 20,
                               ),
                               Text(
-                                "  Privacy Policy",
+                                "Privacy Policy",
                                 style: TextStyle(
                                     fontFamily: "OpenSans",
                                     fontWeight: FontWeight.bold,
