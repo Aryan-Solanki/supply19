@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:medicalapp/profile.dart';
 import 'regTimeline.dart';
 import 'user_simple_preferences.dart';
 import 'dart:async';
@@ -62,7 +63,10 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                   children: [
                     FlatButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, "/profile");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => profile()));
                           ;
                         },
                         child: Row(

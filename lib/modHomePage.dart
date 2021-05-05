@@ -308,14 +308,6 @@ class _modHomePageState extends State<modHomePage>
     });
   }
 
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   String valueChoose;
   void checkboollol() {
     setState(() {

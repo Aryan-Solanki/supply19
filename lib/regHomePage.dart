@@ -82,6 +82,9 @@ class _regHomePageState extends State<regHomePage>
     return null;
   }
 
+  int user_points = 0;
+  var currentUserKey;
+
   @override
   void initState() {
     super.initState();
@@ -113,6 +116,7 @@ class _regHomePageState extends State<regHomePage>
           DATA0[indivisualKey]['image'],
         );
         if (user.phnum == phnum) {
+          currentUserKey = indivisualKey;
           userif.add(user);
           UserSimplePreferences.setUserName(user.name);
           print(UserSimplePreferences.getUserName());
@@ -154,7 +158,23 @@ class _regHomePageState extends State<regHomePage>
 
       var x = UserSimplePreferences.getphonenumber();
       if (posts.phnum == x) {
+        if (posts.status != "fake") {
+          user_points += 5;
+          if (posts.image == "" || posts.image == null) {
+            print("No image found");
+          } else {
+            user_points += 3;
+          }
+          if (posts.description.length >= 25) {
+            user_points += 3;
+          }
+        }
         postListuser.add(posts);
+        DatabaseReference _ref =
+            FirebaseDatabase.instance.reference().child('User-Data');
+        _ref
+            .child(currentUserKey)
+            .update({'points': user_points, 'order': (9999999 - user_points)});
       }
       setState(() {
         print('Length: $postList.length');
