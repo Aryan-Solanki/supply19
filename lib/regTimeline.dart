@@ -174,6 +174,7 @@ class _regTimelineState extends State<regTimeline>
                             postList[index].status,
                             postList[index].sname,
                             postList[index].sphnum,
+                            postList[index].location,
                           );
                         }),
                   ),
@@ -315,6 +316,7 @@ class _regTimelineState extends State<regTimeline>
                               postList[index].status,
                               postList[index].sname,
                               postList[index].sphnum,
+                              postList[index].location,
                             );
                           }),
                     ),

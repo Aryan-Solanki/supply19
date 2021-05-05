@@ -171,6 +171,7 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
                             postList[index].status,
                             postList[index].sname,
                             postList[index].sphnum,
+                            postList[index].location,
                           );
                         }),
                   ),
@@ -317,6 +318,7 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
                               postList[index].status,
                               postList[index].sname,
                               postList[index].sphnum,
+                              postList[index].location,
                             );
                           }),
                     ),
