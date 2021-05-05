@@ -38,7 +38,7 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                                     UserSimplePreferences.getImageLink() ==
                                         null)
                                 ? AssetImage("images/nodp.jpg")
-                                : Image.network(
+                                : NetworkImage(
                                     UserSimplePreferences.getImageLink()),
                       )),
                   SizedBox(
