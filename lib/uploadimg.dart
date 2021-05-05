@@ -224,7 +224,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         ),
       ),
       Text(
-        "Location:",
+        "Location*",
         style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
       ),
       Container(
@@ -243,7 +243,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         ),
       ),
       Text(
-        "Select Lead Category:",
+        "Select Lead Category*",
         style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
       ),
       Container(
@@ -262,7 +262,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         ),
       ),
       Text(
-        "Lead Contact Name:",
+        "Lead Contact Name",
         style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
       ),
       Container(
@@ -273,6 +273,9 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         child: Container(
           margin: EdgeInsets.only(left: 10.0),
           child: TextField(
+            decoration: InputDecoration(
+              hintText: "(Optional)"
+            ),
             keyboardType: TextInputType.name,
             onChanged: (value) {
               setState(() {
@@ -283,7 +286,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         ),
       ),
       Text(
-        "Lead Contact Number:",
+        "Lead Contact Number",
         style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
       ),
       Container(
@@ -293,7 +296,9 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         child: Container(
           padding: EdgeInsets.only(left: 10.0),
           child: TextField(
-            obscureText: false,
+            decoration: InputDecoration(
+                hintText: "(Optional)"
+            ),
             keyboardType: TextInputType.phone,
             onChanged: (value) {
               setState(() {
@@ -304,7 +309,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         ),
       ),
       TextFormField(
-        decoration: InputDecoration(labelText: 'Description'),
+        decoration: InputDecoration(labelText: 'Description*'),
         validator: (value) {
           return value.isEmpty ? 'Description is empty' : null;
         },

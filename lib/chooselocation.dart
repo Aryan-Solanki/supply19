@@ -54,6 +54,7 @@ class _chooselocationState extends State<chooselocation> {
                 Container(
                   color: Colors.white,
                   child: SearchChoices.single(
+                    autofocus: true,
                     items: city(),
                     value: selectedValueSingleDialog,
                     hint: "Search for your city",
