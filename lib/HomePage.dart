@@ -476,8 +476,14 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           color: Color(0xFFBDD4EB),
                           child: DropdownButton(
                             hint: categorySelector == ''
-                                ? Text('All Supplies')
-                                : Text(categorySelector),
+                                ? Text('All Supplies',style: TextStyle(
+                                color: Color(0xFF09427d),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold))
+                                : Text(categorySelector,style: TextStyle(
+                                color: Color(0xFF09427d),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold)),
                             dropdownColor: Color(0xFFBDD4EB),
                             icon: Icon(
                               Icons.keyboard_arrow_down,
