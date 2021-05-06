@@ -268,7 +268,7 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
         event.snapshot.key,
       );
 
-      if (posts.status != "fake") {
+      if (posts.status != "fake" && posts.status != "fake not") {
         if (city_name == '' &&
             (categorySelector == '' || categorySelector == 'All Supplies')) {
           postList.add(posts);
@@ -569,14 +569,20 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
                           color: Color(0xFFBDD4EB),
                           child: DropdownButton(
                             hint: categorySelector == ''
-                                ? Text('All Supplies',style: TextStyle(
-                                color: Color(0xFF09427d),
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),)
-                                : Text(categorySelector,style: TextStyle(
-                                color: Color(0xFF09427d),
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold),),
+                                ? Text(
+                                    'All Supplies',
+                                    style: TextStyle(
+                                        color: Color(0xFF09427d),
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold),
+                                  )
+                                : Text(
+                                    categorySelector,
+                                    style: TextStyle(
+                                        color: Color(0xFF09427d),
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                             dropdownColor: Color(0xFFBDD4EB),
                             icon: Icon(
                               Icons.keyboard_arrow_down,
