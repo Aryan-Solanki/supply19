@@ -198,6 +198,64 @@ class _modHomePageState extends State<modHomePage>
         event.snapshot.value['time'],
       );
       uq.add(query);
+      setState(() {
+        tab = [
+          Container(
+            child: uq.length == 0
+                ? Text("No Queries Available")
+                : RefreshIndicator(
+                    key: refreshKeyQuery,
+                    onRefresh: () async {
+                      await refreshListQuery();
+                    },
+                    child: ListView.builder(
+                        itemCount: uq.length,
+                        itemBuilder: (_, index) {
+                          return QueryUI(
+                            uq[index].image,
+                            uq[index].description,
+                            uq[index].date,
+                            uq[index].time,
+                            uq[index].phnum,
+                            uq[index].name,
+                            uq[index].requirement,
+                            uq[index].location,
+                          );
+                        }),
+                  ),
+          ),
+          Container(
+            child: postListuser.length == 0
+                ? Align(
+                    alignment: Alignment.center,
+                    child: Text("No information available"))
+                : RefreshIndicator(
+                    key: refreshKey,
+                    onRefresh: () async {
+                      await refreshList(1);
+                    },
+                    child: ListView.builder(
+                        itemCount: postListuser.length,
+                        itemBuilder: (_, index) {
+                          return yourPostsUI(
+                            postListuser[index].image,
+                            postListuser[index].description,
+                            postListuser[index].date,
+                            postListuser[index].time,
+                            postListuser[index].phnum,
+                            postListuser[index].volname,
+                            postListuser[index].status,
+                            postListuser[index].sname,
+                            postListuser[index].sphnum,
+                          );
+                        }),
+                  ),
+          ),
+          UploadPhotoPage(),
+          moderatorVerify(),
+          meet_team(),
+        ];
+      });
     });
 
     // Gettign user query }
