@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:medicalapp/HomePage.dart';
+import 'package:supply19/HomePage.dart';
 import 'package:swipe_up/swipe_up.dart';
-import 'package:medicalapp/login.dart';
+import 'package:supply19/login.dart';
 import 'user_simple_preferences.dart';
 import 'modHomePage.dart';
 import 'regHomePage.dart';
-import 'package:medicalapp/profile_select.dart';
+import 'package:supply19/profile_select.dart';
 
 class splash extends StatefulWidget {
   @override

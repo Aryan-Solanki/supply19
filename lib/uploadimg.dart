@@ -4,9 +4,9 @@ import 'package:intl/intl.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:medicalapp/modHomePage.dart';
-import 'package:medicalapp/regHomePage.dart';
-import 'package:medicalapp/user_simple_preferences.dart';
+import 'package:supply19/modHomePage.dart';
+import 'package:supply19/regHomePage.dart';
+import 'package:supply19/user_simple_preferences.dart';
 import 'HomePage.dart';
 import 'dart:io';
 import 'main.dart';
@@ -16,8 +16,6 @@ import 'package:cool_alert/cool_alert.dart';
 import 'userinfo.dart';
 
 class UploadPhotoPage extends StatefulWidget {
-
-
   @override
   _UploadPhotoPageState createState() => _UploadPhotoPageState();
 }
@@ -131,7 +129,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       var timeKey = new DateTime.now();
       String xyz = timeKey.toString() + ".jpg";
       final UploadTask uploadTask =
-      postImageRef.child(xyz).putFile(sampleImage);
+          postImageRef.child(xyz).putFile(sampleImage);
       var imageUrl = await (await uploadTask).ref.getDownloadURL();
       final String url_akshat = imageUrl.toString();
       print(url_akshat);
@@ -248,9 +246,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         child: Container(
           margin: EdgeInsets.only(left: 10.0),
           child: TextField(
-            decoration: InputDecoration(
-              hintText: "(Optional)"
-            ),
+            decoration: InputDecoration(hintText: "(Optional)"),
             keyboardType: TextInputType.name,
             onChanged: (value) {
               setState(() {
@@ -271,9 +267,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         child: Container(
           padding: EdgeInsets.only(left: 10.0),
           child: TextField(
-            decoration: InputDecoration(
-                hintText: "(Optional)"
-            ),
+            decoration: InputDecoration(hintText: "(Optional)"),
             keyboardType: TextInputType.phone,
             onChanged: (value) {
               setState(() {
@@ -294,7 +288,6 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       ),
     ];
   }
-
 
   List<DropdownMenuItem> items() {
     return [
@@ -420,14 +413,11 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
                         IconButton(
                           icon: Icon(Icons.done),
                           onPressed: () {
-                            if(selected_city=="" || selected_item==""){
+                            if (selected_city == "" || selected_item == "") {
                               FocusScope.of(context).unfocus();
-                              _scaffoldkey.currentState
-                                  .showSnackBar(SnackBar(
-                                  content: Text(
-                                      'Fill All Details')));
-                            }
-                            else{
+                              _scaffoldkey.currentState.showSnackBar(
+                                  SnackBar(content: Text('Fill All Details')));
+                            } else {
                               if (validateAndSave()) {
                                 if (sampleImage == null) {
                                   validateAndSave();
@@ -438,7 +428,6 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
                               }
                             }
                             // validateAndSave();
-
                           },
                         )
                       ],

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dropdown_search/dropdown_search.dart';
-import 'package:medicalapp/HomePage.dart';
-import 'package:medicalapp/citypage.dart';
-import 'package:medicalapp/regTimeline.dart';
+import 'package:supply19/HomePage.dart';
+import 'package:supply19/citypage.dart';
+import 'package:supply19/regTimeline.dart';
 import 'city.dart';
 import 'package:search_choices/search_choices.dart';
 import 'user_simple_preferences.dart';

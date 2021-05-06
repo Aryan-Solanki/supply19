@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:medicalapp/HomePage.dart';
+import 'package:supply19/HomePage.dart';
 
 class profile_select extends StatefulWidget {
   @override

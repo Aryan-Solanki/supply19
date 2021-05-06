@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:medicalapp/login.dart';
-import 'package:medicalapp/modHomePageTimeline.dart';
-import 'package:medicalapp/privacypolicy.dart';
-import 'package:medicalapp/profile.dart';
-import 'package:medicalapp/termandcondition.dart';
+import 'package:supply19/login.dart';
+import 'package:supply19/modHomePageTimeline.dart';
+import 'package:supply19/privacypolicy.dart';
+import 'package:supply19/profile.dart';
+import 'package:supply19/termandcondition.dart';
 import 'user_simple_preferences.dart';
 import 'dart:async';
 import 'modHomePage.dart';

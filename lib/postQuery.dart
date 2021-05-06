@@ -4,10 +4,10 @@ import 'package:intl/intl.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:medicalapp/modHomePage.dart';
-import 'package:medicalapp/modHomePageTimeline.dart';
-import 'package:medicalapp/regTimeline.dart';
-import 'package:medicalapp/user_simple_preferences.dart';
+import 'package:supply19/modHomePage.dart';
+import 'package:supply19/modHomePageTimeline.dart';
+import 'package:supply19/regTimeline.dart';
+import 'package:supply19/user_simple_preferences.dart';
 import 'HomePage.dart';
 import 'dart:io';
 import 'main.dart';
@@ -103,6 +103,7 @@ class _PostQueryState extends State<PostQuery> {
       return false;
     }
   }
+
   Future<void> uploadStatusImage() async {
     if (validateAndSave()) {
       FirebaseStorage storage = FirebaseStorage.instance;
@@ -110,7 +111,7 @@ class _PostQueryState extends State<PostQuery> {
       var timeKey = new DateTime.now();
       String xyz = timeKey.toString() + ".jpg";
       final UploadTask uploadTask =
-      postImageRef.child(xyz).putFile(sampleImage);
+          postImageRef.child(xyz).putFile(sampleImage);
       var imageUrl = await (await uploadTask).ref.getDownloadURL();
       final String url_akshat = imageUrl.toString();
       print(url_akshat);
@@ -216,8 +217,7 @@ class _PostQueryState extends State<PostQuery> {
       ),
       Container(
         margin: EdgeInsets.symmetric(vertical: 15),
-        decoration: BoxDecoration(
-            color: Color(0xffafc9e5)),
+        decoration: BoxDecoration(color: Color(0xffafc9e5)),
         child: Container(
           padding: EdgeInsets.only(left: 10.0),
           child: TextField(
@@ -349,57 +349,56 @@ class _PostQueryState extends State<PostQuery> {
           child: Form(
               key: formkey,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children:[
-                  Container(
-                    margin: EdgeInsets.only(top: 20, bottom: 25),
-                    color: Color(0xFFBDD4EB),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "   Post Query",
-                          style: TextStyle(
-                              color: Color(0xFF09427d),
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        IconButton(
-                          icon: Icon(Icons.done),
-                          onPressed: () {
-                            if (pname == "" ||
-                                phnum == "" ||
-                                selected_item == "" ||
-                                selected_city == "") {
-                              FocusScope.of(context).unfocus();
-                              _scaffoldkey.currentState.showSnackBar(
-                                  SnackBar(content: Text('Fill All Details')));
-                            } else {
-                              if (validateAndSave()) {
-                                if (sampleImage == null) {
-                                  validateAndSave();
-                                  savetoDatabase('');
-                                } else {
-                                  uploadStatusImage();
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(top: 20, bottom: 25),
+                      color: Color(0xFFBDD4EB),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "   Post Query",
+                            style: TextStyle(
+                                color: Color(0xFF09427d),
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.done),
+                            onPressed: () {
+                              if (pname == "" ||
+                                  phnum == "" ||
+                                  selected_item == "" ||
+                                  selected_city == "") {
+                                FocusScope.of(context).unfocus();
+                                _scaffoldkey.currentState.showSnackBar(SnackBar(
+                                    content: Text('Fill All Details')));
+                              } else {
+                                if (validateAndSave()) {
+                                  if (sampleImage == null) {
+                                    validateAndSave();
+                                    savetoDatabase('');
+                                  } else {
+                                    uploadStatusImage();
+                                  }
                                 }
                               }
-                            }
-                            // validateAndSave();
-                          },
-                        )
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: col_append(),
+                              // validateAndSave();
+                            },
+                          )
+                        ],
                       ),
                     ),
-                  )
-                ]
-              )),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: col_append(),
+                        ),
+                      ),
+                    )
+                  ])),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
