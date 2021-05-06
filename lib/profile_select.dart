@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:supply19/HomePage.dart';
 
+import 'registration.dart';
+
 class profile_select extends StatefulWidget {
   @override
   _profile_selectState createState() => _profile_selectState();
@@ -115,7 +117,10 @@ class _profile_selectState extends State<profile_select> {
                     color: Color(0xFF4686C8),
                     onPressed: () {
                       if (gv1 == 1) {
-                        Navigator.pushNamed(context, "/registration");
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => registration()));
                       } else if (gv2 == 1) {
                         Navigator.pushReplacement(
                           context,

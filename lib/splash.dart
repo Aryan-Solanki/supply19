@@ -3,6 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:supply19/HomePage.dart';
 import 'package:swipe_up/swipe_up.dart';
 import 'package:supply19/login.dart';
+import 'profile_select.dart';
 import 'user_simple_preferences.dart';
 import 'modHomePage.dart';
 import 'regHomePage.dart';
@@ -37,7 +38,8 @@ class _splashState extends State<splash> {
         if ((ismoderator == "") &&
             (isvolunteer == "") &&
             (isbeneficiary == "")) {
-          Navigator.pushNamed(context, "/profile_select");
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => profile_select()));
         } else if (ismoderator != "") {
           Navigator.push(
             context,

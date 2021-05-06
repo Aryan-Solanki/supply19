@@ -9,6 +9,12 @@ import 'package:supply19/profile_select.dart';
 import 'package:supply19/uploadimg.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'privacypolicy.dart';
+import 'privacypolicy.dart';
+import 'privacypolicy.dart';
+import 'termandcondition.dart';
+import 'termandcondition.dart';
+import 'termandcondition.dart';
 import 'user_simple_preferences.dart';
 import 'yourpostui.dart';
 import 'userinfo.dart';
@@ -128,7 +134,10 @@ class _profileState extends State<profile> {
                           borderRadius: BorderRadius.circular(20)),
                       child: FlatButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/termandcondition');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => termandcondition()));
                         },
                         child: Text(
                           "Terms & Conditions",
@@ -146,7 +155,10 @@ class _profileState extends State<profile> {
                           borderRadius: BorderRadius.circular(20)),
                       child: FlatButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, '/privacypolicy');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => privacypolicy()));
                         },
                         child: Text(
                           "Privacy Policy",
@@ -287,8 +299,11 @@ class _profileState extends State<profile> {
                                   borderRadius: BorderRadius.circular(20)),
                               child: FlatButton(
                                 onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, '/termandcondition');
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              termandcondition()));
                                 },
                                 child: Text(
                                   "Terms & Conditions",
@@ -306,8 +321,11 @@ class _profileState extends State<profile> {
                                   borderRadius: BorderRadius.circular(20)),
                               child: FlatButton(
                                 onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, '/privacypolicy');
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              privacypolicy()));
                                 },
                                 child: Text(
                                   "Privacy Policy",
@@ -439,8 +457,11 @@ class _profileState extends State<profile> {
                                 borderRadius: BorderRadius.circular(20)),
                             child: FlatButton(
                               onPressed: () {
-                                Navigator.pushNamed(
-                                    context, '/termandcondition');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            termandcondition()));
                               },
                               child: Text(
                                 "Terms & Conditions",
@@ -458,7 +479,10 @@ class _profileState extends State<profile> {
                                 borderRadius: BorderRadius.circular(20)),
                             child: FlatButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/privacypolicy');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => privacypolicy()));
                               },
                               child: Text(
                                 "Privacy Policy",

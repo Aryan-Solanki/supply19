@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'HomePage.dart';
+import 'profile.dart';
+
 class BenDrawerScreen extends StatefulWidget {
   @override
   _BenDrawerScreenState createState() => _BenDrawerScreenState();
@@ -59,7 +62,10 @@ class _BenDrawerScreenState extends State<BenDrawerScreen> {
                   children: [
                     FlatButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, "/profile");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => profile()));
                           ;
                         },
                         child: Row(
@@ -83,7 +89,10 @@ class _BenDrawerScreenState extends State<BenDrawerScreen> {
                     ),
                     FlatButton(
                         onPressed: () {
-                          Navigator.pushNamed(context, "/homepage");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => HomePage()));
                         },
                         child: Row(
                           children: [

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'signup.dart';
 import 'user_simple_preferences.dart';
 import 'modHomePage.dart';
 
@@ -114,7 +115,11 @@ class _loginState extends State<login> {
                                   ),
                                   TextButton(
                                       onPressed: () {
-                                        Navigator.pushNamed(context, "/signup");
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    signup()));
                                       },
                                       child: Text(
                                         "Sign Up",

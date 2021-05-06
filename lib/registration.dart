@@ -11,6 +11,8 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'login.dart';
+
 int _start = 60;
 int _current = 60;
 bool timer = false;
@@ -228,7 +230,10 @@ class _registrationState extends State<registration> {
                                   ),
                                   TextButton(
                                       onPressed: () {
-                                        Navigator.pushNamed(context, "/login");
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => login()));
                                       },
                                       child: Text(
                                         "Sign In",
