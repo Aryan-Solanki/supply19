@@ -247,7 +247,7 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                   ),
                 ),
                 SizedBox(
-                  height: 70,
+                  height: 30,
                 )
               ],
             ),
