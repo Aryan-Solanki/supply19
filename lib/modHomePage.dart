@@ -228,7 +228,7 @@ class _modHomePageState extends State<modHomePage>
             child: postListuser.length == 0
                 ? Align(
                     alignment: Alignment.center,
-                    child: Text("No information available"))
+                    child: Center(child: Text("No information available")))
                 : RefreshIndicator(
                     key: refreshKey,
                     onRefresh: () async {
@@ -337,7 +337,7 @@ class _modHomePageState extends State<modHomePage>
             child: postListuser.length == 0
                 ? Align(
                     alignment: Alignment.center,
-                    child: Text("No information available"))
+                    child: Center(child: Text("No information available")))
                 : RefreshIndicator(
                     key: refreshKey,
                     onRefresh: () async {

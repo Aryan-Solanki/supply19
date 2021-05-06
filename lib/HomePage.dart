@@ -261,7 +261,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               Container(
                   child: Expanded(
                 child: (userslist.length == 0 || userslist.length == null)
-                    ? Text("No information available")
+                    ? Center(child: Text("No information available"))
                     : RefreshIndicator(
                         key: refreshKeyQuery,
                         onRefresh: () async {

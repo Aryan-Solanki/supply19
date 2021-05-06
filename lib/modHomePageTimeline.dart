@@ -209,7 +209,7 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
                 Container(
                     child: Expanded(
                   child: (userslist.length == 0)
-                      ? Text("No information available")
+                      ? Center(child: Text("No information available"))
                       : RefreshIndicator(
                           key: refreshKeyQuery,
                           onRefresh: () async {
@@ -354,7 +354,7 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
               Container(
                   child: Expanded(
                 child: (userslist.length == 0 || userslist.length == null)
-                    ? Text("No information available")
+                    ? Center(child: Text("No information available"))
                     : RefreshIndicator(
                         key: refreshKeyQuery,
                         onRefresh: () async {
