@@ -202,7 +202,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         checkboollol();
         tab = [
           chooselocation(backlink: "beneficiary"),
-          PostQuery(),
+          PostQuery(
+            backlink: "",
+          ),
           SafeArea(
             child: Container(
               child: (postList.length == 0 || postList.length == null)
