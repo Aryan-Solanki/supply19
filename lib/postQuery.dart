@@ -71,11 +71,18 @@ class _PostQueryState extends State<PostQuery> {
               builder: (context) => regTimeline(
                     selectedItemPosition: 2,
                   )));
-    } else {
+    } else if (backlink == "moderator") {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) => modHomePageTimeline(
+                    selectedItemPosition: 2,
+                  )));
+    } else {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomePage(
                     selectedItemPosition: 2,
                   )));
     }
