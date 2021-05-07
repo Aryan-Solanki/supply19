@@ -174,7 +174,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       var DATA1 = snap1.value;
 
       for (var indivisualKey in KEYS1) {
-        current_post_number = DATA1[indivisualKey]['post_no'];
+        current_post_number = DATA1["current"]['post_no'];
         break;
       }
     });
