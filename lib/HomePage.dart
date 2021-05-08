@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:supply19/chooselocation.dart';
-import 'package:supply19/meet_team.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'postui.dart';
@@ -94,6 +95,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   ];
 
   List<UserData> userslist = [];
+  List<UserData> moderatorslist = [];
 
   Future<Null> refreshList(int screen) async {
     Navigator.pushReplacement(
@@ -141,10 +143,18 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         event.snapshot.value['number_of_posts'],
         event.snapshot.value['points'],
         event.snapshot.value['image'],
+        event.snapshot.value['linkedin'],
+        event.snapshot.value['twitter'],
+        event.snapshot.value['position'],
+        event.snapshot.value['backcolor'],
       );
       if (i < 101) {
         userslist.add(ud);
         i += 1;
+      }
+      if (ud.verify == "yes" &&
+          (ud.name != "Akshat Rastogi" && ud.name != "Aryan Solanki")) {
+        moderatorslist.add(ud);
       }
     });
     city_name = UserSimplePreferences.getCity() ?? '';
@@ -284,7 +294,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
               )),
             ],
           )),
-          meet_team()
+          meet_team(moderatorslist)
         ];
       });
     });
@@ -551,6 +561,298 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ),
           )
         ],
+      ),
+    );
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  MaterialApp meet_team(moderatorslist) {
+    List<Widget> pages = [
+      Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("images/meet.png"), fit: BoxFit.cover)),
+      ),
+      Container(
+        padding: EdgeInsets.only(left: 30, top: 30),
+        color: Color(0xff121b6e),
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+                flex: 3,
+                child: Text(
+                  "Akshat Rastogi",
+                  style: TextStyle(
+                      fontFamily: "LemonTuesday",
+                      fontSize: 70,
+                      color: Colors.white),
+                )),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      " Founder & Developer",
+                      style: TextStyle(
+                          fontFamily: "HKGrotesk",
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        MaterialButton(
+                          onPressed: () {
+                            _launchURL(
+                                'https://www.linkedin.com/in/akshat-rastogi-3425aa1b8/');
+                          },
+                          minWidth: 10,
+                          color: Color(0xff29427d),
+                          textColor: Colors.white,
+                          child: FaIcon(
+                            FontAwesomeIcons.linkedinIn,
+                            size: 25,
+                          ),
+                          padding: EdgeInsets.all(10),
+                          shape: CircleBorder(),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        MaterialButton(
+                          minWidth: 10,
+                          onPressed: () {
+                            _launchURL('https://twitter.com/AkshatRasogi');
+                          },
+                          color: Color(0xff29427d),
+                          textColor: Colors.white,
+                          child: FaIcon(
+                            FontAwesomeIcons.twitter,
+                            size: 25,
+                          ),
+                          padding: EdgeInsets.all(10),
+                          shape: CircleBorder(),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 4,
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Container(child: Image.asset("images/akshat.png")),
+              ),
+            )
+          ],
+        ),
+      ),
+      Container(
+        padding: EdgeInsets.only(left: 30, top: 30),
+        color: Color(0xff313157),
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+                flex: 3,
+                child: Text(
+                  "Aryan Solanki",
+                  style: TextStyle(
+                      fontFamily: "LemonTuesday",
+                      fontSize: 70,
+                      color: Colors.white),
+                )),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      " Founder & Developer",
+                      style: TextStyle(
+                          fontFamily: "HKGrotesk",
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        MaterialButton(
+                          onPressed: () {
+                            _launchURL(
+                                'https://www.linkedin.com/in/aryan-solanki-3b13191b5/');
+                          },
+                          minWidth: 10,
+                          color: Color(0xff29427d),
+                          textColor: Colors.white,
+                          child: FaIcon(
+                            FontAwesomeIcons.linkedinIn,
+                            size: 25,
+                          ),
+                          padding: EdgeInsets.all(10),
+                          shape: CircleBorder(),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        MaterialButton(
+                          minWidth: 10,
+                          onPressed: () {
+                            _launchURL('https://twitter.com/AryanSo34013859');
+                          },
+                          color: Color(0xff29427d),
+                          textColor: Colors.white,
+                          child: FaIcon(
+                            FontAwesomeIcons.twitter,
+                            size: 25,
+                          ),
+                          padding: EdgeInsets.all(10),
+                          shape: CircleBorder(),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 4,
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Container(child: Image.asset("images/aryan3.png")),
+              ),
+            )
+          ],
+        ),
+      ),
+    ];
+
+    Color hexToColor(String code) {
+      return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+    }
+
+    for (var i = 0; i < moderatorslist.length; i++) {
+      var current_user = moderatorslist[i];
+      pages.add(Container(
+        padding: EdgeInsets.only(left: 30, top: 30),
+        color: hexToColor(current_user.backcolor),
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+                flex: 3,
+                child: Text(
+                  current_user.name,
+                  style: TextStyle(
+                      fontFamily: "LemonTuesday",
+                      fontSize: 70,
+                      color: Colors.white),
+                )),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      current_user.position,
+                      style: TextStyle(
+                          fontFamily: "HKGrotesk",
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        MaterialButton(
+                          onPressed: () {
+                            _launchURL(current_user.linkedin);
+                          },
+                          minWidth: 10,
+                          color: Color(0xff29427d),
+                          textColor: Colors.white,
+                          child: FaIcon(
+                            FontAwesomeIcons.linkedinIn,
+                            size: 25,
+                          ),
+                          padding: EdgeInsets.all(10),
+                          shape: CircleBorder(),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        MaterialButton(
+                          minWidth: 10,
+                          onPressed: () {
+                            _launchURL(current_user.twitter);
+                          },
+                          color: Color(0xff29427d),
+                          textColor: Colors.white,
+                          child: FaIcon(
+                            FontAwesomeIcons.twitter,
+                            size: 25,
+                          ),
+                          padding: EdgeInsets.all(10),
+                          shape: CircleBorder(),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 4,
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Container(child: Image.network(current_user.image)),
+              ),
+            )
+          ],
+        ),
+      ));
+    }
+
+    return MaterialApp(
+      home: Scaffold(
+        body: LiquidSwipe(
+          pages: pages,
+          enableLoop: false,
+          // enableSideReveal: true,
+          slideIconWidget: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+            size: 25,
+          ),
+          waveType: WaveType.liquidReveal,
+          fullTransitionValue: 800,
+          positionSlideIcon: 0.6,
+        ),
       ),
     );
   }

@@ -156,6 +156,10 @@ class _modHomePageState extends State<modHomePage>
           DATA0[indivisualKey]['number_of_posts'],
           DATA0[indivisualKey]['points'],
           DATA0[indivisualKey]['image'],
+          DATA0[indivisualKey]['linkedin'],
+          DATA0[indivisualKey]['twitter'],
+          DATA0[indivisualKey]['position'],
+          DATA0[indivisualKey]['backcolor'],
         );
         if (user.email == email) {
           userif.add(user);

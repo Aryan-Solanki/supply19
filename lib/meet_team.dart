@@ -2,21 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:supply19/userinfo.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void _launchURL(String a) async {
-  String url="";
-  if (a=="akshatlinkedin"){
+  String url = "";
+  if (a == "akshatlinkedin") {
     print("hiii");
     url = 'https://www.linkedin.com/in/akshat-rastogi-3425aa1b8/';
-  }
-  else if (a=="akshattwitter"){
+  } else if (a == "akshattwitter") {
     url = 'https://twitter.com/AkshatRasogi';
-  }
-  else if (a=="aryanlinkedin"){
+  } else if (a == "aryanlinkedin") {
     url = 'https://www.linkedin.com/in/aryan-solanki-3b13191b5/';
-  }
-  else{
+  } else {
     url = 'https://twitter.com/AryanSo34013859';
   }
 
@@ -27,9 +25,7 @@ void _launchURL(String a) async {
   }
 }
 
-
-
-final pages = [
+List pages = [
   Container(
     decoration: BoxDecoration(
         image: DecorationImage(
@@ -201,6 +197,12 @@ final pages = [
   ),
 ];
 
+void dfd(moderatorslist) {
+  for (var i = 0; i < moderatorslist.length; i++) {
+    print(moderatorslist[i]);
+  }
+}
+
 class meet_team extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -221,17 +223,5 @@ class meet_team extends StatelessWidget {
         ),
       ),
     );
-    ;
-    ;
   }
-
 }
-
-// Container(
-// decoration: BoxDecoration(
-// image: DecorationImage(
-// image: AssetImage("images/meet.png"),
-// fit: BoxFit.cover
-// )
-// ),
-// ),

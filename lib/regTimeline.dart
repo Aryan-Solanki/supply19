@@ -139,6 +139,10 @@ class _regTimelineState extends State<regTimeline>
           event.snapshot.value['number_of_posts'],
           event.snapshot.value['points'],
           event.snapshot.value['image'],
+          event.snapshot.value['linkedin'],
+          event.snapshot.value['twitter'],
+          event.snapshot.value['position'],
+          event.snapshot.value['backcolor'],
         );
         if (i < 101) {
           userslist.add(ud);

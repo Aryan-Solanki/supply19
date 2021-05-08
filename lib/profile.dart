@@ -196,6 +196,10 @@ class _profileState extends State<profile> {
           DATA0[indivisualKey]['number_of_posts'],
           DATA0[indivisualKey]['points'],
           DATA0[indivisualKey]['image'],
+          DATA0[indivisualKey]['linkedin'],
+          DATA0[indivisualKey]['twitter'],
+          DATA0[indivisualKey]['position'],
+          DATA0[indivisualKey]['backcolor'],
         );
         if (user.phnum == phnumu) {
           userpts = user.points;

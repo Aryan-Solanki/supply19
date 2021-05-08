@@ -61,6 +61,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       "volname": UserSimplePreferences.getUserName(),
       "post_num": current_post_number,
       "order": (9999999 - current_post_number),
+      "backcolor": "FFFFFF"
     };
 
     int newx = current_post_number + 1;
@@ -159,6 +160,10 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         event.snapshot.value['number_of_posts'],
         event.snapshot.value['points'],
         event.snapshot.value['image'],
+        event.snapshot.value['linkedin'],
+        event.snapshot.value['twitter'],
+        event.snapshot.value['position'],
+        event.snapshot.value['backcolor'],
       );
       if (UserSimplePreferences.getphonenumber() == ud.phnum) {
         user_current_posts = ud.number_of_posts;
