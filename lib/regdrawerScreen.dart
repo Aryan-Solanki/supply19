@@ -33,23 +33,20 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
             children: [
               Row(
                 children: [
-                  Expanded(
-                      flex: 1,
-                      child: CircleAvatar(
-                        radius: 50,
-                        backgroundImage:
-                            (UserSimplePreferences.getImageLink() == "" ||
-                                    UserSimplePreferences.getImageLink() ==
-                                        null)
-                                ? AssetImage("images/nodp.jpg")
-                                : NetworkImage(
-                                    UserSimplePreferences.getImageLink()),
-                      )),
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage:
+                        (UserSimplePreferences.getImageLink() == "" ||
+                                UserSimplePreferences.getImageLink() ==
+                                    null)
+                            ? AssetImage("images/nodp.jpg")
+                            : NetworkImage(
+                                UserSimplePreferences.getImageLink()),
+                  ),
                   SizedBox(
                     width: 30,
                   ),
                   Expanded(
-                      flex: 3,
                       child: Text(
                         UserSimplePreferences.getUserName() ?? '',
                         style: TextStyle(

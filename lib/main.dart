@@ -10,6 +10,7 @@ import 'package:supply19/profile.dart';
 import 'package:supply19/registerpage.dart';
 import 'package:supply19/registration.dart';
 import 'package:supply19/supportus.dart';
+import 'package:supply19/testing2.dart';
 import 'package:supply19/testingg.dart';
 import 'package:supply19/uploadimg.dart';
 import 'login.dart';

@@ -31,7 +31,7 @@ dependencies:
   loading_hud: ^0.2.0
   firebase_core: ^1.0.4
   firebase_auth:
-  lottie: ^0.7.0+1
+  lottie:
   swipe_up: ^1.0.0
   liquid_swipe: ^2.1.0
   font_awesome_flutter: ^9.0.0
@@ -53,6 +53,9 @@ dependencies:
   quiver: ^3.0.1
   pinput: ^1.2.0
   flutter_swipe_action_cell: ^2.0.7
+  sizer: ^2.0.13
+  crypto: ^3.0.0
+  universal_io: ^2.0.4
 
 dev_dependencies:
   flutter_test:
