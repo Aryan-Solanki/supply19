@@ -71,6 +71,10 @@ class _registerpageState extends State<registerpage> {
           DATA0[indivisualKey]['number_of_posts'],
           DATA0[indivisualKey]['points'],
           DATA0[indivisualKey]['image'],
+          DATA0[indivisualKey]['linkedin'],
+          DATA0[indivisualKey]['twitter'],
+          DATA0[indivisualKey]['position'],
+          DATA0[indivisualKey]['backcolor'],
         );
         if (phnum == user.phnum) {
           UserSimplePreferences.setphonenumber(phnum);
@@ -100,6 +104,9 @@ class _registerpageState extends State<registerpage> {
       "volid": 'test',
       "image": url,
       "order": 9999999,
+      "linkedin": '',
+      "twitter": '',
+      "position": "volunteer"
     };
     ref.child("User-Data").push().set(data);
   }

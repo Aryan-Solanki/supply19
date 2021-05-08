@@ -71,11 +71,18 @@ class _PostQueryState extends State<PostQuery> {
               builder: (context) => regTimeline(
                     selectedItemPosition: 2,
                   )));
-    } else {
+    } else if (backlink == "moderator") {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
               builder: (context) => modHomePageTimeline(
+                    selectedItemPosition: 2,
+                  )));
+    } else {
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomePage(
                     selectedItemPosition: 2,
                   )));
     }
@@ -130,7 +137,7 @@ class _PostQueryState extends State<PostQuery> {
       var DATA1 = snap1.value;
 
       for (var indivisualKey in KEYS1) {
-        current_query_number = DATA1[indivisualKey]['query_no'];
+        current_query_number = DATA1["current"]['query_no'];
         break;
       }
     });
@@ -225,7 +232,7 @@ class _PostQueryState extends State<PostQuery> {
             keyboardType: TextInputType.phone,
             onChanged: (value) {
               setState(() {
-                phnum = value.trim();
+                phnum = value.trim().toString();
               });
             },
           ),
