@@ -76,7 +76,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
     ref.child("Posts").push().set(data);
 
     if (vef == "true") {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         new MaterialPageRoute(
           builder: (context) => new modHomePage(
@@ -90,7 +90,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         text: "Your post was successful",
       );
     } else {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         new MaterialPageRoute(
           builder: (context) => new regHomePage(),
