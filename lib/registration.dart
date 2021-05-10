@@ -10,6 +10,7 @@ import 'package:pinput/pin_put/pin_put_state.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:supply19/userinfo.dart';
 
 import 'login.dart';
 
@@ -65,10 +66,37 @@ class _registrationState extends State<registration> {
   String _name, _number = "", _email = "";
   bool otpsend = false;
   bool numverify = false;
+  List<String> modphone = [];
 
   @override
   void initState() {
     super.initState();
+    DatabaseReference postsRef0 =
+        FirebaseDatabase.instance.reference().child("User-Data");
+    postsRef0.once().then((DataSnapshot snap0) {
+      var KEYS0 = snap0.value.keys;
+      var DATA0 = snap0.value;
+
+      for (var indivisualKey in KEYS0) {
+        UserData user = new UserData(
+          DATA0[indivisualKey]['email'],
+          DATA0[indivisualKey]['name'],
+          DATA0[indivisualKey]['phnum'],
+          DATA0[indivisualKey]['verify'],
+          DATA0[indivisualKey]['volid'],
+          DATA0[indivisualKey]['number_of_posts'],
+          DATA0[indivisualKey]['points'],
+          DATA0[indivisualKey]['image'],
+          DATA0[indivisualKey]['linkedin'],
+          DATA0[indivisualKey]['twitter'],
+          DATA0[indivisualKey]['position'],
+          DATA0[indivisualKey]['backcolor'],
+        );
+        if (user.verify == "yes") {
+          modphone.add(user.phnum);
+        }
+      }
+    });
     col = [
       Container(
         child: Column(
@@ -115,6 +143,15 @@ class _registrationState extends State<registration> {
         ),
       ),
     ];
+  }
+
+  bool isNotModerator(number) {
+    for (var i = 0; i < modphone.length; i++) {
+      if (modphone[i] == number) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @override
@@ -177,12 +214,21 @@ class _registrationState extends State<registration> {
                                                       content: Text(
                                                           'Wait for $_current secs')));
                                             } else {
-                                              _verifyPhone();
-                                              setState(() {
-                                                timer = true;
-                                                numreq = true;
-                                                startTimer();
-                                              });
+                                              if (!isNotModerator(_number)) {
+                                                FocusScope.of(context)
+                                                    .unfocus();
+                                                _scaffoldkey.currentState
+                                                    .showSnackBar(SnackBar(
+                                                        content: Text(
+                                                            'Already a Moderator')));
+                                              } else {
+                                                _verifyPhone();
+                                                setState(() {
+                                                  timer = true;
+                                                  numreq = true;
+                                                  startTimer();
+                                                });
+                                              }
                                             }
                                           },
                                           child: Text("Send OTP"),
@@ -203,12 +249,21 @@ class _registrationState extends State<registration> {
                                                       content: Text(
                                                           'Wait for $_current secs')));
                                             } else {
-                                              setState(() {
-                                                timer = true;
-                                                _current = 60;
-                                                startTimer();
-                                                _verifyPhone();
-                                              });
+                                              if (!isNotModerator(_number)) {
+                                                FocusScope.of(context)
+                                                    .unfocus();
+                                                _scaffoldkey.currentState
+                                                    .showSnackBar(SnackBar(
+                                                        content: Text(
+                                                            'Already a Moderator')));
+                                              } else {
+                                                setState(() {
+                                                  timer = true;
+                                                  _current = 60;
+                                                  startTimer();
+                                                  _verifyPhone();
+                                                });
+                                              }
                                             }
                                           },
                                           child: Text("Resend OTP"),
