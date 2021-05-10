@@ -6,6 +6,7 @@ import 'package:supply19/covid.dart';
 import 'package:supply19/plasma.dart';
 import 'package:supply19/privacypolicy.dart';
 import 'package:supply19/registration.dart';
+import 'package:supply19/sponsor_page.dart';
 import 'package:supply19/termandcondition.dart';
 import 'package:supply19/testing.dart';
 import 'user_simple_preferences.dart';
@@ -175,7 +176,7 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => testing()),
+                                    builder: (context) => sponsor_page()),
                               );
                             });
                           },

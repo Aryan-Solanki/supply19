@@ -5,6 +5,7 @@ import 'package:supply19/login.dart';
 import 'package:supply19/modHomePageTimeline.dart';
 import 'package:supply19/privacypolicy.dart';
 import 'package:supply19/profile.dart';
+import 'package:supply19/sponsor_page.dart';
 import 'package:supply19/termandcondition.dart';
 import 'package:supply19/testing.dart';
 import 'user_simple_preferences.dart';
@@ -156,7 +157,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => testing()),
+                                  builder: (context) => sponsor_page()),
                             );
                           });
                         },
