@@ -56,6 +56,7 @@ class _PostQueryState extends State<PostQuery> {
       "time": time,
       "query_num": current_query_number,
       "order": (9999999 - current_query_number),
+      "status": "UNSOLVED"
     };
 
     int newx = current_query_number + 1;

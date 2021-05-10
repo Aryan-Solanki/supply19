@@ -11,7 +11,6 @@ import 'package:supply19/registerpage.dart';
 import 'package:supply19/registration.dart';
 import 'package:supply19/supportus.dart';
 import 'package:supply19/testing2.dart';
-import 'package:supply19/testingg.dart';
 import 'package:supply19/uploadimg.dart';
 import 'login.dart';
 import 'package:firebase_core/firebase_core.dart';

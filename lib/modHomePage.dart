@@ -24,6 +24,7 @@ import 'queryuidata.dart';
 import 'moderatorVerify.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
+import 'querysolvedui.dart';
 
 class modHomePage extends StatefulWidget {
   final String title = "modHomePage Timeline";
@@ -36,7 +37,7 @@ class modHomePage extends StatefulWidget {
 
 Color j = Color(0xffc0c0c0);
 Color g = Color(0xFFBDD4EB);
-String selected_query="UNSOLVED";
+String selected_query = "UNSOLVED";
 
 class _modHomePageState extends State<modHomePage>
     with TickerProviderStateMixin {
@@ -57,7 +58,8 @@ class _modHomePageState extends State<modHomePage>
   List<UserData> userif = [];
   List<Posts> postList = [];
   List<Posts> postListuser = [];
-  List<QueryUiData> uq = [];
+  List<QueryUiData> uqu = [];
+  List<QueryUiData> uqs = [];
   final controller = ScrollController();
   List tab = [];
   AnimationController _controller;
@@ -234,8 +236,17 @@ class _modHomePageState extends State<modHomePage>
         event.snapshot.value['query_num'],
         event.snapshot.value['requirement'],
         event.snapshot.value['time'],
+        event.snapshot.value['status'],
+        event.snapshot.key,
+        event.snapshot.value['solname'],
+        event.snapshot.value['solphnum'],
       );
-      uq.add(query);
+      if (query.status == "UNSOLVED") {
+        uqu.add(query);
+      } else {
+        uqs.add(query);
+      }
+
       setState(() {
         tab = [
           Container(
@@ -247,7 +258,7 @@ class _modHomePageState extends State<modHomePage>
                     child: FlatButton(
                         color: g,
                         onPressed: () {
-                          selected_query="UNSOLVED";
+                          selected_query = "UNSOLVED";
                           print(selected_query);
                           setState(() {
                             g = Color(0xFFBDD4EB);
@@ -260,7 +271,7 @@ class _modHomePageState extends State<modHomePage>
                     child: FlatButton(
                         color: j,
                         onPressed: () {
-                          selected_query="SOLVED";
+                          selected_query = "SOLVED";
                           print(selected_query);
                           setState(() {
                             j = Color(0xFFBDD4EB);
@@ -271,45 +282,72 @@ class _modHomePageState extends State<modHomePage>
                   ),
                 ],
               ),
-              uq.length == 0
-                  ? Expanded(child: Text("No Queries Available"))
-                  : Expanded(
-                      child: RefreshIndicator(
-                        key: refreshKeyQuery,
-                        onRefresh: () async {
-                          await refreshListQuery();
-                        },
-                        child: ListView.builder(
-                            itemCount: uq.length,
+              Expanded(
+                child: RefreshIndicator(
+                    key: refreshKeyQuery,
+                    onRefresh: () async {
+                      await refreshListQuery();
+                    },
+                    child: (selected_query == "UNSOLVED")
+                        ? ListView.builder(
+                            itemCount: uqu.length,
                             itemBuilder: (context, index) {
                               return SwipeActionCell(
                                 backgroundColor: Color(0xffededed),
-                                key: ObjectKey(uq[index]),
+                                key: ObjectKey(uqu[index]),
                                 performsFirstActionWithFullSwipe: true,
                                 leadingActions: [
                                   SwipeAction(
                                       title: "MARK AS SOLVED",
                                       onTap: (handler) async {
+                                        var currentQueryKey = uqu[index].key;
+                                        DatabaseReference _ref =
+                                            FirebaseDatabase.instance
+                                                .reference()
+                                                .child('Query');
                                         await handler(true);
-                                        uq.removeAt(index);
-                                        setState(() {});
+                                        uqu.removeAt(index);
+                                        setState(() {
+                                          _ref.child(currentQueryKey).update({
+                                            'status': "SOLVED",
+                                            "solname": UserSimplePreferences
+                                                .getUserName(),
+                                            "solphnum": UserSimplePreferences
+                                                .getphonenumber()
+                                          });
+                                        });
                                       },
                                       color: Colors.green),
                                 ],
                                 child: QueryUI(
-                                  uq[index].image,
-                                  uq[index].description,
-                                  uq[index].date,
-                                  uq[index].time,
-                                  uq[index].phnum,
-                                  uq[index].name,
-                                  uq[index].requirement,
-                                  uq[index].location,
+                                  uqu[index].image,
+                                  uqu[index].description,
+                                  uqu[index].date,
+                                  uqu[index].time,
+                                  uqu[index].phnum,
+                                  uqu[index].name,
+                                  uqu[index].requirement,
+                                  uqu[index].location,
                                 ),
                               );
-                            }),
-                      ),
-                    ),
+                            })
+                        : ListView.builder(
+                            itemCount: uqs.length,
+                            itemBuilder: (context, index) {
+                              return QuerySolvedUI(
+                                uqs[index].image,
+                                uqs[index].description,
+                                uqs[index].date,
+                                uqs[index].time,
+                                uqs[index].phnum,
+                                uqs[index].name,
+                                uqs[index].requirement,
+                                uqs[index].location,
+                                uqs[index].solname,
+                                uqs[index].solphnum,
+                              );
+                            })),
+              ),
             ],
           )),
           Container(
@@ -398,7 +436,6 @@ class _modHomePageState extends State<modHomePage>
         // print('Length: $postList.length');
         tab = [
           Container(
-              margin: EdgeInsets.symmetric(horizontal: 12),
               child: Column(
             children: [
               Row(
@@ -407,7 +444,7 @@ class _modHomePageState extends State<modHomePage>
                     child: FlatButton(
                         color: g,
                         onPressed: () {
-                          selected_query="UNSOLVED";
+                          selected_query = "UNSOLVED";
                           print(selected_query);
                           setState(() {
                             g = Color(0xFFBDD4EB);
@@ -416,12 +453,11 @@ class _modHomePageState extends State<modHomePage>
                         },
                         child: Text("UNSOLVED")),
                   ),
-                  SizedBox(width: 10,),
                   Expanded(
-                     child: FlatButton(
+                    child: FlatButton(
                         color: j,
                         onPressed: () {
-                          selected_query="SOLVED";
+                          selected_query = "SOLVED";
                           print(selected_query);
                           setState(() {
                             j = Color(0xFFBDD4EB);
@@ -432,45 +468,72 @@ class _modHomePageState extends State<modHomePage>
                   ),
                 ],
               ),
-              uq.length == 0
-                  ? Expanded(child: Text("No Queries Available"))
-                  : Expanded(
-                      child: RefreshIndicator(
-                        key: refreshKeyQuery,
-                        onRefresh: () async {
-                          await refreshListQuery();
-                        },
-                        child: ListView.builder(
-                            itemCount: uq.length,
+              Expanded(
+                child: RefreshIndicator(
+                    key: refreshKeyQuery,
+                    onRefresh: () async {
+                      await refreshListQuery();
+                    },
+                    child: (selected_query == "UNSOLVED")
+                        ? ListView.builder(
+                            itemCount: uqu.length,
                             itemBuilder: (context, index) {
                               return SwipeActionCell(
                                 backgroundColor: Color(0xffededed),
-                                key: ObjectKey(uq[index]),
+                                key: ObjectKey(uqu[index]),
                                 performsFirstActionWithFullSwipe: true,
                                 leadingActions: [
                                   SwipeAction(
                                       title: "MARK AS SOLVED",
                                       onTap: (handler) async {
+                                        var currentQueryKey = uqu[index].key;
+                                        DatabaseReference _ref =
+                                            FirebaseDatabase.instance
+                                                .reference()
+                                                .child('Query');
                                         await handler(true);
-                                        uq.removeAt(index);
-                                        setState(() {});
+                                        uqu.removeAt(index);
+                                        setState(() {
+                                          _ref.child(currentQueryKey).update({
+                                            'status': "SOLVED",
+                                            "solname": UserSimplePreferences
+                                                .getUserName(),
+                                            "solphnum": UserSimplePreferences
+                                                .getphonenumber()
+                                          });
+                                        });
                                       },
                                       color: Colors.green),
                                 ],
                                 child: QueryUI(
-                                  uq[index].image,
-                                  uq[index].description,
-                                  uq[index].date,
-                                  uq[index].time,
-                                  uq[index].phnum,
-                                  uq[index].name,
-                                  uq[index].requirement,
-                                  uq[index].location,
+                                  uqu[index].image,
+                                  uqu[index].description,
+                                  uqu[index].date,
+                                  uqu[index].time,
+                                  uqu[index].phnum,
+                                  uqu[index].name,
+                                  uqu[index].requirement,
+                                  uqu[index].location,
                                 ),
                               );
-                            }),
-                      ),
-                    ),
+                            })
+                        : ListView.builder(
+                            itemCount: uqs.length,
+                            itemBuilder: (context, index) {
+                              return QuerySolvedUI(
+                                uqs[index].image,
+                                uqs[index].description,
+                                uqs[index].date,
+                                uqs[index].time,
+                                uqs[index].phnum,
+                                uqs[index].name,
+                                uqs[index].requirement,
+                                uqs[index].location,
+                                uqs[index].solname,
+                                uqs[index].solphnum,
+                              );
+                            })),
+              ),
             ],
           )),
           Container(
@@ -531,7 +594,6 @@ class _modHomePageState extends State<modHomePage>
   Widget build(BuildContext context) {
     tab = [
       Container(
-        margin: EdgeInsets.symmetric(horizontal: 12),
           child: Column(
         children: [
           Row(
@@ -540,7 +602,7 @@ class _modHomePageState extends State<modHomePage>
                 child: FlatButton(
                     color: g,
                     onPressed: () {
-                      selected_query="UNSOLVED";
+                      selected_query = "UNSOLVED";
                       print(selected_query);
                       setState(() {
                         g = Color(0xFFBDD4EB);
@@ -549,12 +611,11 @@ class _modHomePageState extends State<modHomePage>
                     },
                     child: Text("UNSOLVED")),
               ),
-              SizedBox(width: 10,),
               Expanded(
                 child: FlatButton(
                     color: j,
                     onPressed: () {
-                      selected_query="SOLVED";
+                      selected_query = "SOLVED";
                       print(selected_query);
                       setState(() {
                         j = Color(0xFFBDD4EB);
@@ -565,45 +626,72 @@ class _modHomePageState extends State<modHomePage>
               ),
             ],
           ),
-          uq.length == 0
-              ? Expanded(child: Text("No Queries Available"))
-              : Expanded(
-                  child: RefreshIndicator(
-                    key: refreshKeyQuery,
-                    onRefresh: () async {
-                      await refreshListQuery();
-                    },
-                    child: ListView.builder(
-                        itemCount: uq.length,
+          Expanded(
+            child: RefreshIndicator(
+                key: refreshKeyQuery,
+                onRefresh: () async {
+                  await refreshListQuery();
+                },
+                child: (selected_query == "UNSOLVED")
+                    ? ListView.builder(
+                        itemCount: uqu.length,
                         itemBuilder: (context, index) {
                           return SwipeActionCell(
                             backgroundColor: Color(0xffededed),
-                            key: ObjectKey(uq[index]),
+                            key: ObjectKey(uqu[index]),
                             performsFirstActionWithFullSwipe: true,
                             leadingActions: [
                               SwipeAction(
                                   title: "MARK AS SOLVED",
                                   onTap: (handler) async {
+                                    var currentQueryKey = uqu[index].key;
+                                    DatabaseReference _ref = FirebaseDatabase
+                                        .instance
+                                        .reference()
+                                        .child('Query');
                                     await handler(true);
-                                    uq.removeAt(index);
-                                    setState(() {});
+                                    uqu.removeAt(index);
+                                    setState(() {
+                                      _ref.child(currentQueryKey).update({
+                                        'status': "SOLVED",
+                                        "solname":
+                                            UserSimplePreferences.getUserName(),
+                                        "solphnum": UserSimplePreferences
+                                            .getphonenumber()
+                                      });
+                                    });
                                   },
                                   color: Colors.green),
                             ],
                             child: QueryUI(
-                              uq[index].image,
-                              uq[index].description,
-                              uq[index].date,
-                              uq[index].time,
-                              uq[index].phnum,
-                              uq[index].name,
-                              uq[index].requirement,
-                              uq[index].location,
+                              uqu[index].image,
+                              uqu[index].description,
+                              uqu[index].date,
+                              uqu[index].time,
+                              uqu[index].phnum,
+                              uqu[index].name,
+                              uqu[index].requirement,
+                              uqu[index].location,
                             ),
                           );
-                        }),
-                  ),
-                ),
+                        })
+                    : ListView.builder(
+                        itemCount: uqs.length,
+                        itemBuilder: (context, index) {
+                          return QuerySolvedUI(
+                            uqs[index].image,
+                            uqs[index].description,
+                            uqs[index].date,
+                            uqs[index].time,
+                            uqs[index].phnum,
+                            uqs[index].name,
+                            uqs[index].requirement,
+                            uqs[index].location,
+                            uqs[index].solname,
+                            uqs[index].solphnum,
+                          );
+                        })),
+          ),
         ],
       )),
       Container(
