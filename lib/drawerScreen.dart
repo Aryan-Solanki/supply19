@@ -65,7 +65,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => profile()));
-                          ;
                         },
                         child: Row(
                           children: [
@@ -153,7 +152,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     FlatButton(
                         onPressed: () {
                           setState(() {
-                            Navigator.pushReplacement(
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => sponsor_page()),

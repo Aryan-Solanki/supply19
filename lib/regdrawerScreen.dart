@@ -149,7 +149,7 @@ class _regDrawerScreenState extends State<regDrawerScreen> {
                     FlatButton(
                         onPressed: () {
                           setState(() {
-                            Navigator.pushReplacement(
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => sponsor_page()),
