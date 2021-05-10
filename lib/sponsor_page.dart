@@ -60,7 +60,7 @@ class _sponsor_pageState extends State<sponsor_page> {
               child: ListView.builder(
                   itemCount: ss.length,
                   itemBuilder: (context, index) {
-                    return SponsorUI(
+                      return SponsorUI(
                       ss[index].image,
                       ss[index].text,
                       ss[index].link,
