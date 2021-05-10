@@ -25,6 +25,7 @@ class _sponsor_pageState extends State<sponsor_page> {
         event.snapshot.value['image'],
         event.snapshot.value['link'],
         event.snapshot.value['text'],
+        event.snapshot.value['order'],
       );
       ss.add(sd);
       setState(() {
@@ -67,6 +68,7 @@ class _sponsor_pageState extends State<sponsor_page> {
                       ss[index].image,
                       ss[index].text,
                       ss[index].link,
+                      ss[index].order,
                     );
                   }),
             ),
