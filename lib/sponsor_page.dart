@@ -27,6 +27,9 @@ class _sponsor_pageState extends State<sponsor_page> {
         event.snapshot.value['text'],
       );
       ss.add(sd);
+      setState(() {
+        print("Sponsors Found");
+      });
     });
     super.initState();
   }
