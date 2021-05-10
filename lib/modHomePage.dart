@@ -25,7 +25,6 @@ import 'moderatorVerify.dart';
 import 'package:toast/toast.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 
-
 class modHomePage extends StatefulWidget {
   final String title = "modHomePage Timeline";
   int selectedItemPosition;
@@ -34,11 +33,12 @@ class modHomePage extends StatefulWidget {
   _modHomePageState createState() =>
       _modHomePageState(selectedItemPosition: selectedItemPosition);
 }
-Color g=Colors.red;
-Color j=Colors.red;
+
+Color g = Colors.red;
+Color j = Colors.red;
+
 class _modHomePageState extends State<modHomePage>
     with TickerProviderStateMixin {
-
   int selectedItemPosition;
   _modHomePageState({this.selectedItemPosition});
 
@@ -50,7 +50,6 @@ class _modHomePageState extends State<modHomePage>
     }
     ;
   }
-
 
   bool allsupplies = true;
   String email;
@@ -132,7 +131,6 @@ class _modHomePageState extends State<modHomePage>
   int user_points = 0;
   var currentUserKey;
   List<UserData> moderatorslist = [];
-
 
   @override
   void initState() {
@@ -241,74 +239,70 @@ class _modHomePageState extends State<modHomePage>
         tab = [
           Container(
               child: Column(
+            children: [
+              Row(
                 children: [
-                  Row(
-                    children: [
-                      FlatButton(
-                          color: g,
-                          onPressed:(){
-                            setState(() {
-                              g=Colors.green;
-                              j=Colors.blue;
-                            });
-                          },
-                          child: Text("SOLVED")
-                      ),
-                      FlatButton(
-                          color: j,
-                          onPressed: (){
-
-                            setState(() {
-                              j=Colors.green;
-                              g=Colors.blue;
-                            });
-                          },
-                          child: Text("UNSOLVED")
-                      ),
-                    ],
-                  ),
-                  uq.length == 0
-                      ? Expanded(child: Text("No Queries Available"))
-                      : Expanded(
-                      child: RefreshIndicator(
-                    key: refreshKeyQuery,
-                    onRefresh: () async {
-                        await refreshListQuery();
-                    },
-                    child: ListView.builder(
-                          itemCount: uq.length,
-                          itemBuilder: (context, index) {
-                            return SwipeActionCell(
-                              backgroundColor: Color(0xffededed),
-                              key: ObjectKey(uq[index]),
-                              performsFirstActionWithFullSwipe: true,
-                              leadingActions: [
-                                SwipeAction(
-                                    title: "MARK AS SOLVED",
-                                    onTap: (handler) async {
-                                      await handler(true);
-                                      uq.removeAt(index);
-                                      setState(() {});
-                                    },
-                                    color: Colors.green),
-                              ],
-                              child: QueryUI(
-                                uq[index].image,
-                                uq[index].description,
-                                uq[index].date,
-                                uq[index].time,
-                                uq[index].phnum,
-                                uq[index].name,
-                                uq[index].requirement,
-                                uq[index].location,
-                              ),
-                            );
-                          }),
-                  ),
-                      ),
+                  FlatButton(
+                      color: g,
+                      onPressed: () {
+                        setState(() {
+                          g = Colors.green;
+                          j = Colors.blue;
+                        });
+                      },
+                      child: Text("SOLVED")),
+                  FlatButton(
+                      color: j,
+                      onPressed: () {
+                        setState(() {
+                          j = Colors.green;
+                          g = Colors.blue;
+                        });
+                      },
+                      child: Text("UNSOLVED")),
                 ],
-              )
-          ),
+              ),
+              uq.length == 0
+                  ? Expanded(child: Text("No Queries Available"))
+                  : Expanded(
+                      child: RefreshIndicator(
+                        key: refreshKeyQuery,
+                        onRefresh: () async {
+                          await refreshListQuery();
+                        },
+                        child: ListView.builder(
+                            itemCount: uq.length,
+                            itemBuilder: (context, index) {
+                              return SwipeActionCell(
+                                backgroundColor: Color(0xffededed),
+                                key: ObjectKey(uq[index]),
+                                performsFirstActionWithFullSwipe: true,
+                                leadingActions: [
+                                  SwipeAction(
+                                      title: "MARK AS SOLVED",
+                                      onTap: (handler) async {
+                                        await handler(true);
+                                        uq.removeAt(index);
+                                        setState(() {});
+                                      },
+                                      color: Colors.green),
+                                ],
+                                child: QueryUI(
+                                  uq[index].image,
+                                  uq[index].description,
+                                  uq[index].date,
+                                  uq[index].time,
+                                  uq[index].phnum,
+                                  uq[index].name,
+                                  uq[index].requirement,
+                                  uq[index].location,
+                                ),
+                              );
+                            }),
+                      ),
+                    ),
+            ],
+          )),
           Container(
             child: postListuser.length == 0
                 ? Align(
@@ -395,77 +389,72 @@ class _modHomePageState extends State<modHomePage>
         // print('Length: $postList.length');
         tab = [
           Container(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    FlatButton(
+              child: Column(
+            children: [
+              Row(
+                children: [
+                  FlatButton(
                       color: g,
-                        onPressed:(){
+                      onPressed: () {
                         setState(() {
                           print("hiiiiiiiiiiiiiiiiiiiii");
-                          g=Colors.green;
-                          j=Colors.blue;
-
+                          g = Colors.green;
+                          j = Colors.blue;
                         });
-                        },
-                        child: Text("SOLVED")
-                    ),
-                    FlatButton(
+                      },
+                      child: Text("SOLVED")),
+                  FlatButton(
                       color: j,
-                        onPressed: (){
-
+                      onPressed: () {
                         setState(() {
-                          j=Colors.green;
-                          g=Colors.blue;
+                          j = Colors.green;
+                          g = Colors.blue;
                         });
-                        },
-                        child: Text("UNSOLVED")
-                    ),
-                  ],
-                ),
-                uq.length == 0
-                    ? Expanded(child: Text("No Queries Available"))
-                    : Expanded(
+                      },
+                      child: Text("UNSOLVED")),
+                ],
+              ),
+              uq.length == 0
+                  ? Expanded(child: Text("No Queries Available"))
+                  : Expanded(
                       child: RefreshIndicator(
-                  key: refreshKeyQuery,
-                  onRefresh: () async {
-                      await refreshListQuery();
-                  },
-                  child: ListView.builder(
-                        itemCount: uq.length,
-                        itemBuilder: (context, index) {
-                          return SwipeActionCell(
-                            backgroundColor: Color(0xffededed),
-                            key: ObjectKey(uq[index]),
-                            performsFirstActionWithFullSwipe: true,
-                            leadingActions: [
-                              SwipeAction(
-                                  title: "MARK AS SOLVED",
-                                  onTap: (handler) async {
-                                    await handler(true);
-                                    uq.removeAt(index);
-                                    setState(() {});
-                                  },
-                                  color: Colors.green),
-                            ],
-                            child: QueryUI(
-                              uq[index].image,
-                              uq[index].description,
-                              uq[index].date,
-                              uq[index].time,
-                              uq[index].phnum,
-                              uq[index].name,
-                              uq[index].requirement,
-                              uq[index].location,
-                            ),
-                          );
-                        }),
-                ),
+                        key: refreshKeyQuery,
+                        onRefresh: () async {
+                          await refreshListQuery();
+                        },
+                        child: ListView.builder(
+                            itemCount: uq.length,
+                            itemBuilder: (context, index) {
+                              return SwipeActionCell(
+                                backgroundColor: Color(0xffededed),
+                                key: ObjectKey(uq[index]),
+                                performsFirstActionWithFullSwipe: true,
+                                leadingActions: [
+                                  SwipeAction(
+                                      title: "MARK AS SOLVED",
+                                      onTap: (handler) async {
+                                        await handler(true);
+                                        uq.removeAt(index);
+                                        setState(() {});
+                                      },
+                                      color: Colors.green),
+                                ],
+                                child: QueryUI(
+                                  uq[index].image,
+                                  uq[index].description,
+                                  uq[index].date,
+                                  uq[index].time,
+                                  uq[index].phnum,
+                                  uq[index].name,
+                                  uq[index].requirement,
+                                  uq[index].location,
+                                ),
+                              );
+                            }),
+                      ),
                     ),
-              ],
-            )
-          ),
+            ],
+          )),
           Container(
             child: postListuser.length == 0
                 ? Align(
@@ -522,6 +511,105 @@ class _modHomePageState extends State<modHomePage>
   bool isDrawerOpen = false;
   @override
   Widget build(BuildContext context) {
+    tab = [
+      Container(
+          child: Column(
+        children: [
+          Row(
+            children: [
+              FlatButton(
+                  color: g,
+                  onPressed: () {
+                    setState(() {
+                      print("hiiiiiiiiiiiiiiiiiiiii");
+                      g = Colors.green;
+                      j = Colors.blue;
+                    });
+                  },
+                  child: Text("SOLVED")),
+              FlatButton(
+                  color: j,
+                  onPressed: () {
+                    setState(() {
+                      j = Colors.green;
+                      g = Colors.blue;
+                    });
+                  },
+                  child: Text("UNSOLVED")),
+            ],
+          ),
+          uq.length == 0
+              ? Expanded(child: Text("No Queries Available"))
+              : Expanded(
+                  child: RefreshIndicator(
+                    key: refreshKeyQuery,
+                    onRefresh: () async {
+                      await refreshListQuery();
+                    },
+                    child: ListView.builder(
+                        itemCount: uq.length,
+                        itemBuilder: (context, index) {
+                          return SwipeActionCell(
+                            backgroundColor: Color(0xffededed),
+                            key: ObjectKey(uq[index]),
+                            performsFirstActionWithFullSwipe: true,
+                            leadingActions: [
+                              SwipeAction(
+                                  title: "MARK AS SOLVED",
+                                  onTap: (handler) async {
+                                    await handler(true);
+                                    uq.removeAt(index);
+                                    setState(() {});
+                                  },
+                                  color: Colors.green),
+                            ],
+                            child: QueryUI(
+                              uq[index].image,
+                              uq[index].description,
+                              uq[index].date,
+                              uq[index].time,
+                              uq[index].phnum,
+                              uq[index].name,
+                              uq[index].requirement,
+                              uq[index].location,
+                            ),
+                          );
+                        }),
+                  ),
+                ),
+        ],
+      )),
+      Container(
+        child: postListuser.length == 0
+            ? Align(
+                alignment: Alignment.center,
+                child: Center(child: Text("No information available")))
+            : RefreshIndicator(
+                key: refreshKey,
+                onRefresh: () async {
+                  await refreshList(1);
+                },
+                child: ListView.builder(
+                    itemCount: postListuser.length,
+                    itemBuilder: (_, index) {
+                      return yourPostsUI(
+                        postListuser[index].image,
+                        postListuser[index].description,
+                        postListuser[index].date,
+                        postListuser[index].time,
+                        postListuser[index].phnum,
+                        postListuser[index].volname,
+                        postListuser[index].status,
+                        postListuser[index].sname,
+                        postListuser[index].sphnum,
+                      );
+                    }),
+              ),
+      ),
+      UploadPhotoPage(),
+      moderatorVerify(),
+      meet_team(moderatorslist),
+    ];
     return Sizer(builder: (context, orientation, deviceType) {
       return WillPopScope(
         onWillPop: () async {
