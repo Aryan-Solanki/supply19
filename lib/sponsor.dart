@@ -22,15 +22,16 @@ Widget SponsorUI(String image, String info,String link) {
       decoration: BoxDecoration(
           color: Colors.white
       ),
-      margin: EdgeInsets.only(bottom: 10,left: 20,right: 20),
+      margin: EdgeInsets.only(bottom: 10,left: 10,right: 10),
       padding: EdgeInsets.only(top: 10,bottom: 10),
       width: double.infinity,
       height: 130,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
+          SizedBox(width: 7,),
           CircleAvatar(
-            radius: 58,
+            radius: 48,
             backgroundImage: NetworkImage(image),
           ),
           SizedBox(width: 15,),
