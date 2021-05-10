@@ -6,6 +6,7 @@ import 'package:supply19/modHomePageTimeline.dart';
 import 'package:supply19/privacypolicy.dart';
 import 'package:supply19/profile.dart';
 import 'package:supply19/termandcondition.dart';
+import 'package:supply19/testing.dart';
 import 'user_simple_preferences.dart';
 import 'dart:async';
 import 'modHomePage.dart';
@@ -35,25 +36,23 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 children: [
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage:
-                        (UserSimplePreferences.getImageLink() == "" ||
-                                UserSimplePreferences.getImageLink() ==
-                                    null)
-                            ? AssetImage("images/nodp.jpg")
-                            : NetworkImage(
-                                UserSimplePreferences.getImageLink()),
+                    backgroundImage: (UserSimplePreferences.getImageLink() ==
+                                "" ||
+                            UserSimplePreferences.getImageLink() == null)
+                        ? AssetImage("images/nodp.jpg")
+                        : NetworkImage(UserSimplePreferences.getImageLink()),
                   ),
                   SizedBox(
                     width: 30,
                   ),
                   Expanded(
                       child: Text(
-                        UserSimplePreferences.getUserName() ?? '',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 25.0,
-                            fontWeight: FontWeight.bold),
-                      ))
+                    UserSimplePreferences.getUserName() ?? '',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 25.0,
+                        fontWeight: FontWeight.bold),
+                  ))
                 ],
               ),
               Container(
@@ -140,6 +139,35 @@ class _DrawerScreenState extends State<DrawerScreen> {
                             ),
                             Text(
                               " Homepage",
+                              style: TextStyle(
+                                  fontFamily: "OpenSans",
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white),
+                            )
+                          ],
+                        )),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    FlatButton(
+                        onPressed: () {
+                          setState(() {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => testing()),
+                            );
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              " Sponsors",
                               style: TextStyle(
                                   fontFamily: "OpenSans",
                                   fontWeight: FontWeight.bold,

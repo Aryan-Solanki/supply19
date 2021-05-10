@@ -7,6 +7,7 @@ import 'package:supply19/plasma.dart';
 import 'package:supply19/privacypolicy.dart';
 import 'package:supply19/registration.dart';
 import 'package:supply19/termandcondition.dart';
+import 'package:supply19/testing.dart';
 import 'user_simple_preferences.dart';
 import 'supportus.dart';
 
@@ -170,19 +171,22 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                       ),
                       FlatButton(
                           onPressed: () {
-                            Navigator.push(
+                            setState(() {
+                              Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => support()));
+                                    builder: (context) => testing()),
+                              );
+                            });
                           },
                           child: Row(
                             children: [
-                              // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
+                              // Icon(Icons.timeline_outlined,size: 25,color: Colors.white,),
                               SizedBox(
                                 width: 20,
                               ),
                               Text(
-                                "    Support",
+                                " Sponsors",
                                 style: TextStyle(
                                     fontFamily: "OpenSans",
                                     fontWeight: FontWeight.bold,
