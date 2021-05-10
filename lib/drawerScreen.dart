@@ -7,7 +7,6 @@ import 'package:supply19/privacypolicy.dart';
 import 'package:supply19/profile.dart';
 import 'package:supply19/sponsor_page.dart';
 import 'package:supply19/termandcondition.dart';
-import 'package:supply19/testing.dart';
 import 'user_simple_preferences.dart';
 import 'dart:async';
 import 'modHomePage.dart';

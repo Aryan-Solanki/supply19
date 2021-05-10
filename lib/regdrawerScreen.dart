@@ -6,7 +6,6 @@ import 'package:supply19/profile.dart';
 import 'package:supply19/registration.dart';
 import 'package:supply19/sponsor_page.dart';
 import 'package:supply19/termandcondition.dart';
-import 'package:supply19/testing.dart';
 import 'regTimeline.dart';
 import 'user_simple_preferences.dart';
 import 'dart:async';
