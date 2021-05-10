@@ -2,9 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:supply19/meet_team.dart';
+import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:supply19/profile_select.dart';
 import 'package:supply19/uploadimg.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'postui.dart';
@@ -87,6 +88,7 @@ class _regHomePageState extends State<regHomePage>
 
   int user_points = 0;
   var currentUserKey;
+  List<UserData> moderatorslist = [];
 
   @override
   void initState() {
@@ -136,6 +138,33 @@ class _regHomePageState extends State<regHomePage>
           UserSimplePreferences.setImageLink(user.image);
           print(UserSimplePreferences.getImageLink());
         }
+      }
+    });
+
+    FirebaseDatabase.instance
+        .reference()
+        .child("User-Data")
+        .orderByChild("rank_order")
+        .onChildAdded
+        .listen((event) {
+      UserData ud = new UserData(
+        event.snapshot.value['email'],
+        event.snapshot.value['name'],
+        event.snapshot.value['phnum'],
+        event.snapshot.value['verify'],
+        event.snapshot.value['volid'],
+        event.snapshot.value['number_of_posts'],
+        event.snapshot.value['points'],
+        event.snapshot.value['image'],
+        event.snapshot.value['linkedin'],
+        event.snapshot.value['twitter'],
+        event.snapshot.value['position'],
+        event.snapshot.value['backcolor'],
+      );
+      if (event.snapshot.value['verify'] == "yes" &&
+          (event.snapshot.value['name'] != "Akshat Rastogi" &&
+              event.snapshot.value['name'] != "Aryan Solanki")) {
+        moderatorslist.add(ud);
       }
     });
     // Getting user info from Firebase
@@ -214,7 +243,7 @@ class _regHomePageState extends State<regHomePage>
                   ),
           ),
           UploadPhotoPage(),
-          meet_team(),
+          meet_team(moderatorslist),
         ];
       });
     });
@@ -247,137 +276,427 @@ class _regHomePageState extends State<regHomePage>
   bool isDrawerOpen = false;
   @override
   Widget build(BuildContext context) {
-    return Sizer(
-        builder: (context, orientation, deviceType) {
-          return WillPopScope(
-            onWillPop: () async {
-              DateTime currenttime = DateTime.now();
-              bool backbutton = backbuttonpressedTime == null ||
-                  currenttime.difference(backbuttonpressedTime) >
-                      Duration(seconds: 2);
-              if (backbutton) {
-                backbuttonpressedTime = currenttime;
-                Toast.show("Double Tap to close App", context,
-                    duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
-                return false;
-              }
-              SystemNavigator.pop();
-              return false;
-            },
-            child: Stack(
-              children: [
-                regDrawerScreen(),
-                AnimatedContainer(
-                  transform: Matrix4.translationValues(xOffset, yOffset, 0)
-                    ..scale(scaleFactor)
-                    ..rotateY(isDrawerOpen ? -0.5 : 0),
-                  duration: Duration(milliseconds: 250),
-                  decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(isDrawerOpen ? 40 : 0.0)),
-                  child: MaterialApp(
-                      home: ClipRRect(
-                        borderRadius: BorderRadius.circular(30),
-                        child: SafeArea(
-                          child: Scaffold(
-                              backgroundColor: Color(0xFFEDEDED),
-                              appBar: SlidingAppBar(
-                                controller: _controller,
-                                visible: allsupplies,
-                                child: AppBar(
-                                  elevation: 0.0,
-                                  backgroundColor: Color(0xFFEDEDED),
-                                  toolbarHeight: 80,
-                                  automaticallyImplyLeading: false,
-                                  leading: Row(
-                                    children: [
-                                      isDrawerOpen
-                                          ? IconButton(
-                                        icon: Icon(
-                                          Icons.arrow_back_ios,
-                                          size: 35.0,
-                                          color: Color(0xFF2F3437),
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            xOffset = 0;
-                                            yOffset = 0;
-                                            scaleFactor = 1;
-                                            isDrawerOpen = false;
-                                          });
-                                        },
-                                      )
-                                          : IconButton(
-                                          icon: Icon(
-                                            Icons.dehaze_outlined,
-                                            size: 35.0,
-                                            color: Color(0xFF2F3437),
-                                          ),
-                                          onPressed: () {
-                                            setState(() {
-                                              xOffset = 70.w;
-                                              yOffset = 21.h;
-                                              scaleFactor = 0.6;
-                                              isDrawerOpen = true;
-                                            });
-                                          }),
-                                      // SizedBox(
-                                      //   width: 5.0,
-                                      // )
-                                    ],
-                                  ),
-                                  title: Container(
-                                    height: 40.0,
-                                    width: double.infinity,
-                                    color: Color(0xFFBDD4EB),
-                                    child: Center(
-                                      child: Text(
-                                        _selectedItemPosition == 0
-                                            ? ((postListuser.length == 0)
-                                            ? "Your Posts"
-                                            : UserSimplePreferences.getUserName())
-                                            : "TimeLine",
-                                        style: TextStyle(
-                                            color: Color(0xFF09427d),
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold),
+    return Sizer(builder: (context, orientation, deviceType) {
+      return WillPopScope(
+        onWillPop: () async {
+          DateTime currenttime = DateTime.now();
+          bool backbutton = backbuttonpressedTime == null ||
+              currenttime.difference(backbuttonpressedTime) >
+                  Duration(seconds: 2);
+          if (backbutton) {
+            backbuttonpressedTime = currenttime;
+            Toast.show("Double Tap to close App", context,
+                duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+            return false;
+          }
+          SystemNavigator.pop();
+          return false;
+        },
+        child: Stack(
+          children: [
+            regDrawerScreen(),
+            AnimatedContainer(
+              transform: Matrix4.translationValues(xOffset, yOffset, 0)
+                ..scale(scaleFactor)
+                ..rotateY(isDrawerOpen ? -0.5 : 0),
+              duration: Duration(milliseconds: 250),
+              decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(isDrawerOpen ? 40 : 0.0)),
+              child: MaterialApp(
+                  home: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: SafeArea(
+                  child: Scaffold(
+                      backgroundColor: Color(0xFFEDEDED),
+                      appBar: SlidingAppBar(
+                        controller: _controller,
+                        visible: allsupplies,
+                        child: AppBar(
+                          elevation: 0.0,
+                          backgroundColor: Color(0xFFEDEDED),
+                          toolbarHeight: 80,
+                          automaticallyImplyLeading: false,
+                          leading: Row(
+                            children: [
+                              isDrawerOpen
+                                  ? IconButton(
+                                      icon: Icon(
+                                        Icons.arrow_back_ios,
+                                        size: 35.0,
+                                        color: Color(0xFF2F3437),
                                       ),
-                                    ),
-                                  ),
-                                ),
+                                      onPressed: () {
+                                        setState(() {
+                                          xOffset = 0;
+                                          yOffset = 0;
+                                          scaleFactor = 1;
+                                          isDrawerOpen = false;
+                                        });
+                                      },
+                                    )
+                                  : IconButton(
+                                      icon: Icon(
+                                        Icons.dehaze_outlined,
+                                        size: 35.0,
+                                        color: Color(0xFF2F3437),
+                                      ),
+                                      onPressed: () {
+                                        setState(() {
+                                          xOffset = 70.w;
+                                          yOffset = 21.h;
+                                          scaleFactor = 0.6;
+                                          isDrawerOpen = true;
+                                        });
+                                      }),
+                              // SizedBox(
+                              //   width: 5.0,
+                              // )
+                            ],
+                          ),
+                          title: Container(
+                            height: 40.0,
+                            width: double.infinity,
+                            color: Color(0xFFBDD4EB),
+                            child: Center(
+                              child: Text(
+                                _selectedItemPosition == 0
+                                    ? ((postListuser.length == 0)
+                                        ? "Your Posts"
+                                        : UserSimplePreferences.getUserName())
+                                    : "TimeLine",
+                                style: TextStyle(
+                                    color: Color(0xFF09427d),
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
                               ),
-                              body: getbody(),
-                              bottomNavigationBar: SnakeNavigationBar.color(
-                                // backgroundColor: Colors.blue,
-                                behaviour: SnakeBarBehaviour.floating,
-                                selectedItemColor: Colors.black,
-                                // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
-                                // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(25)),
-                                // shape: ,
-                                snakeShape: SnakeShape.indicator,
-                                showSelectedLabels: true,
-                                // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
-                                padding: EdgeInsets.all(12),
-                                currentIndex: _selectedItemPosition,
-                                onTap: (index) {
-                                  setState(() {
-                                    _selectedItemPosition = index;
-                                    checkboollol();
-                                  });
-                                },
-                                items: items,
-                              )),
+                            ),
+                          ),
                         ),
-                      )
-                    // This trailing comma makes auto-formatting nicer for build methods.
-                  ),
+                      ),
+                      body: getbody(),
+                      bottomNavigationBar: SnakeNavigationBar.color(
+                        // backgroundColor: Colors.blue,
+                        behaviour: SnakeBarBehaviour.floating,
+                        selectedItemColor: Colors.black,
+                        // selectedLabelStyle: TextStyle(color: Color(0xff000000)),
+                        // unselectedLabelStyle: TextStyle(color: Color(0xff000000)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25)),
+                        // shape: ,
+                        snakeShape: SnakeShape.indicator,
+                        showSelectedLabels: true,
+                        // shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(10)),
+                        padding: EdgeInsets.all(12),
+                        currentIndex: _selectedItemPosition,
+                        onTap: (index) {
+                          setState(() {
+                            _selectedItemPosition = index;
+                            checkboollol();
+                          });
+                        },
+                        items: items,
+                      )),
                 ),
-              ],
+              )
+                  // This trailing comma makes auto-formatting nicer for build methods.
+                  ),
             ),
-          );
-        }
+          ],
+        ),
+      );
+    });
+  }
+
+  void _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  MaterialApp meet_team(moderatorslist) {
+    List<Widget> pages = [
+      Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("images/meet.png"), fit: BoxFit.cover)),
+      ),
+      Container(
+        padding: EdgeInsets.only(left: 30, top: 30),
+        color: Color(0xff121b6e),
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+                flex: 3,
+                child: Text(
+                  "Akshat Rastogi",
+                  style: TextStyle(
+                      fontFamily: "LemonTuesday",
+                      fontSize: 70,
+                      color: Colors.white),
+                )),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      " Founder & Developer",
+                      style: TextStyle(
+                          fontFamily: "HKGrotesk",
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        MaterialButton(
+                          onPressed: () {
+                            _launchURL(
+                                'https://www.linkedin.com/in/akshat-rastogi-3425aa1b8/');
+                          },
+                          minWidth: 10,
+                          color: Color(0xff29427d),
+                          textColor: Colors.white,
+                          child: FaIcon(
+                            FontAwesomeIcons.linkedinIn,
+                            size: 25,
+                          ),
+                          padding: EdgeInsets.all(10),
+                          shape: CircleBorder(),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        MaterialButton(
+                          minWidth: 10,
+                          onPressed: () {
+                            _launchURL('https://twitter.com/AkshatRasogi');
+                          },
+                          color: Color(0xff29427d),
+                          textColor: Colors.white,
+                          child: FaIcon(
+                            FontAwesomeIcons.twitter,
+                            size: 25,
+                          ),
+                          padding: EdgeInsets.all(10),
+                          shape: CircleBorder(),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 4,
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Container(child: Image.asset("images/akshat.png")),
+              ),
+            )
+          ],
+        ),
+      ),
+      Container(
+        padding: EdgeInsets.only(left: 30, top: 30),
+        color: Color(0xff313157),
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+                flex: 3,
+                child: Text(
+                  "Aryan Solanki",
+                  style: TextStyle(
+                      fontFamily: "LemonTuesday",
+                      fontSize: 70,
+                      color: Colors.white),
+                )),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      " Founder & Developer",
+                      style: TextStyle(
+                          fontFamily: "HKGrotesk",
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        MaterialButton(
+                          onPressed: () {
+                            _launchURL(
+                                'https://www.linkedin.com/in/aryan-solanki-3b13191b5/');
+                          },
+                          minWidth: 10,
+                          color: Color(0xff29427d),
+                          textColor: Colors.white,
+                          child: FaIcon(
+                            FontAwesomeIcons.linkedinIn,
+                            size: 25,
+                          ),
+                          padding: EdgeInsets.all(10),
+                          shape: CircleBorder(),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        MaterialButton(
+                          minWidth: 10,
+                          onPressed: () {
+                            _launchURL('https://twitter.com/AryanSo34013859');
+                          },
+                          color: Color(0xff29427d),
+                          textColor: Colors.white,
+                          child: FaIcon(
+                            FontAwesomeIcons.twitter,
+                            size: 25,
+                          ),
+                          padding: EdgeInsets.all(10),
+                          shape: CircleBorder(),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 4,
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Container(child: Image.asset("images/aryan3.png")),
+              ),
+            )
+          ],
+        ),
+      ),
+    ];
+
+    Color hexToColor(String code) {
+      return new Color(int.parse(code.substring(1, 7), radix: 16) + 0xFF000000);
+    }
+
+    for (var i = 0; i < moderatorslist.length; i++) {
+      var current_user = moderatorslist[i];
+      pages.add(Container(
+        padding: EdgeInsets.only(left: 30, top: 30),
+        color: hexToColor(current_user.backcolor),
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+                flex: 3,
+                child: Text(
+                  current_user.name,
+                  style: TextStyle(
+                      fontFamily: "LemonTuesday",
+                      fontSize: 70,
+                      color: Colors.white),
+                )),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      current_user.position,
+                      style: TextStyle(
+                          fontFamily: "HKGrotesk",
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      children: [
+                        MaterialButton(
+                          onPressed: () {
+                            _launchURL(current_user.linkedin);
+                          },
+                          minWidth: 10,
+                          color: Color(0xff29427d),
+                          textColor: Colors.white,
+                          child: FaIcon(
+                            FontAwesomeIcons.linkedinIn,
+                            size: 25,
+                          ),
+                          padding: EdgeInsets.all(10),
+                          shape: CircleBorder(),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        MaterialButton(
+                          minWidth: 10,
+                          onPressed: () {
+                            _launchURL(current_user.twitter);
+                          },
+                          color: Color(0xff29427d),
+                          textColor: Colors.white,
+                          child: FaIcon(
+                            FontAwesomeIcons.twitter,
+                            size: 25,
+                          ),
+                          padding: EdgeInsets.all(10),
+                          shape: CircleBorder(),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 4,
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: Container(child: Image.network(current_user.image)),
+              ),
+            )
+          ],
+        ),
+      ));
+    }
+
+    return MaterialApp(
+      home: Scaffold(
+        body: LiquidSwipe(
+          pages: pages,
+          enableLoop: false,
+          // enableSideReveal: true,
+          slideIconWidget: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+            size: 25,
+          ),
+          waveType: WaveType.liquidReveal,
+          fullTransitionValue: 800,
+          positionSlideIcon: 0.6,
+        ),
+      ),
     );
   }
 }
