@@ -23,6 +23,7 @@ import 'queryui.dart';
 import 'queryuidata.dart';
 import 'moderatorVerify.dart';
 import 'package:toast/toast.dart';
+import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 
 class modHomePage extends StatefulWidget {
   final String title = "modHomePage Timeline";
@@ -237,25 +238,40 @@ class _modHomePageState extends State<modHomePage>
             child: uq.length == 0
                 ? Text("No Queries Available")
                 : RefreshIndicator(
-                    key: refreshKeyQuery,
-                    onRefresh: () async {
-                      await refreshListQuery();
-                    },
-                    child: ListView.builder(
-                        itemCount: uq.length,
-                        itemBuilder: (_, index) {
-                          return QueryUI(
-                            uq[index].image,
-                            uq[index].description,
-                            uq[index].date,
-                            uq[index].time,
-                            uq[index].phnum,
-                            uq[index].name,
-                            uq[index].requirement,
-                            uq[index].location,
-                          );
-                        }),
-                  ),
+              key: refreshKeyQuery,
+              onRefresh: () async {
+                await refreshListQuery();
+              },
+              child: ListView.builder(
+                  itemCount: uq.length,
+                  itemBuilder: (context, index) {
+                    return SwipeActionCell(
+                      backgroundColor: Color(0xffededed),
+                      key: ObjectKey(uq[index]),
+                      performsFirstActionWithFullSwipe: true,
+                      leadingActions: [
+                        SwipeAction(
+                            title: "MARK AS SOLVED",
+                            onTap: (handler) async {
+                              await handler(true);
+                              uq.removeAt(index);
+                              setState(() {});
+                            },
+                            color: Colors.green),
+                      ],
+                      child: QueryUI(
+                        uq[index].image,
+                        uq[index].description,
+                        uq[index].date,
+                        uq[index].time,
+                        uq[index].phnum,
+                        uq[index].name,
+                        uq[index].requirement,
+                        uq[index].location,
+                      ),
+                    );
+                  }),
+            ),
           ),
           Container(
             child: postListuser.length == 0
@@ -352,16 +368,31 @@ class _modHomePageState extends State<modHomePage>
                     },
                     child: ListView.builder(
                         itemCount: uq.length,
-                        itemBuilder: (_, index) {
-                          return QueryUI(
-                            uq[index].image,
-                            uq[index].description,
-                            uq[index].date,
-                            uq[index].time,
-                            uq[index].phnum,
-                            uq[index].name,
-                            uq[index].requirement,
-                            uq[index].location,
+                        itemBuilder: (context, index) {
+                          return SwipeActionCell(
+                            backgroundColor: Color(0xffededed),
+                            key: ObjectKey(uq[index]),
+                            performsFirstActionWithFullSwipe: true,
+                            leadingActions: [
+                              SwipeAction(
+                                  title: "MARK AS SOLVED",
+                                  onTap: (handler) async {
+                                    await handler(true);
+                                    uq.removeAt(index);
+                                    setState(() {});
+                                  },
+                                  color: Colors.green),
+                            ],
+                            child: QueryUI(
+                              uq[index].image,
+                              uq[index].description,
+                              uq[index].date,
+                              uq[index].time,
+                              uq[index].phnum,
+                              uq[index].name,
+                              uq[index].requirement,
+                              uq[index].location,
+                            ),
                           );
                         }),
                   ),
