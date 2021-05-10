@@ -34,8 +34,9 @@ class modHomePage extends StatefulWidget {
       _modHomePageState(selectedItemPosition: selectedItemPosition);
 }
 
-Color g = Colors.red;
-Color j = Colors.red;
+Color j = Color(0xffc0c0c0);
+Color g = Color(0xFFBDD4EB);
+String selected_query="UNSOLVED";
 
 class _modHomePageState extends State<modHomePage>
     with TickerProviderStateMixin {
@@ -242,24 +243,32 @@ class _modHomePageState extends State<modHomePage>
             children: [
               Row(
                 children: [
-                  FlatButton(
-                      color: g,
-                      onPressed: () {
-                        setState(() {
-                          g = Colors.green;
-                          j = Colors.blue;
-                        });
-                      },
-                      child: Text("SOLVED")),
-                  FlatButton(
-                      color: j,
-                      onPressed: () {
-                        setState(() {
-                          j = Colors.green;
-                          g = Colors.blue;
-                        });
-                      },
-                      child: Text("UNSOLVED")),
+                  Expanded(
+                    child: FlatButton(
+                        color: g,
+                        onPressed: () {
+                          selected_query="UNSOLVED";
+                          print(selected_query);
+                          setState(() {
+                            g = Color(0xFFBDD4EB);
+                            j = Color(0xffc0c0c0);
+                          });
+                        },
+                        child: Text("UNSOLVED")),
+                  ),
+                  Expanded(
+                    child: FlatButton(
+                        color: j,
+                        onPressed: () {
+                          selected_query="SOLVED";
+                          print(selected_query);
+                          setState(() {
+                            j = Color(0xFFBDD4EB);
+                            g = Color(0xffc0c0c0);
+                          });
+                        },
+                        child: Text("SOLVED")),
+                  ),
                 ],
               ),
               uq.length == 0
@@ -389,29 +398,38 @@ class _modHomePageState extends State<modHomePage>
         // print('Length: $postList.length');
         tab = [
           Container(
+              margin: EdgeInsets.symmetric(horizontal: 12),
               child: Column(
             children: [
               Row(
                 children: [
-                  FlatButton(
-                      color: g,
-                      onPressed: () {
-                        setState(() {
-                          print("hiiiiiiiiiiiiiiiiiiiii");
-                          g = Colors.green;
-                          j = Colors.blue;
-                        });
-                      },
-                      child: Text("SOLVED")),
-                  FlatButton(
-                      color: j,
-                      onPressed: () {
-                        setState(() {
-                          j = Colors.green;
-                          g = Colors.blue;
-                        });
-                      },
-                      child: Text("UNSOLVED")),
+                  Expanded(
+                    child: FlatButton(
+                        color: g,
+                        onPressed: () {
+                          selected_query="UNSOLVED";
+                          print(selected_query);
+                          setState(() {
+                            g = Color(0xFFBDD4EB);
+                            j = Color(0xffc0c0c0);
+                          });
+                        },
+                        child: Text("UNSOLVED")),
+                  ),
+                  SizedBox(width: 10,),
+                  Expanded(
+                     child: FlatButton(
+                        color: j,
+                        onPressed: () {
+                          selected_query="SOLVED";
+                          print(selected_query);
+                          setState(() {
+                            j = Color(0xFFBDD4EB);
+                            g = Color(0xffc0c0c0);
+                          });
+                        },
+                        child: Text("SOLVED")),
+                  ),
                 ],
               ),
               uq.length == 0
@@ -513,29 +531,38 @@ class _modHomePageState extends State<modHomePage>
   Widget build(BuildContext context) {
     tab = [
       Container(
+        margin: EdgeInsets.symmetric(horizontal: 12),
           child: Column(
         children: [
           Row(
             children: [
-              FlatButton(
-                  color: g,
-                  onPressed: () {
-                    setState(() {
-                      print("hiiiiiiiiiiiiiiiiiiiii");
-                      g = Colors.green;
-                      j = Colors.blue;
-                    });
-                  },
-                  child: Text("SOLVED")),
-              FlatButton(
-                  color: j,
-                  onPressed: () {
-                    setState(() {
-                      j = Colors.green;
-                      g = Colors.blue;
-                    });
-                  },
-                  child: Text("UNSOLVED")),
+              Expanded(
+                child: FlatButton(
+                    color: g,
+                    onPressed: () {
+                      selected_query="UNSOLVED";
+                      print(selected_query);
+                      setState(() {
+                        g = Color(0xFFBDD4EB);
+                        j = Color(0xffc0c0c0);
+                      });
+                    },
+                    child: Text("UNSOLVED")),
+              ),
+              SizedBox(width: 10,),
+              Expanded(
+                child: FlatButton(
+                    color: j,
+                    onPressed: () {
+                      selected_query="SOLVED";
+                      print(selected_query);
+                      setState(() {
+                        j = Color(0xFFBDD4EB);
+                        g = Color(0xffc0c0c0);
+                      });
+                    },
+                    child: Text("SOLVED")),
+              ),
             ],
           ),
           uq.length == 0
