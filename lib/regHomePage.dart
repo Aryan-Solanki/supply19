@@ -139,6 +139,37 @@ class _regHomePageState extends State<regHomePage>
           UserSimplePreferences.setImageLink(user.image);
           print(UserSimplePreferences.getImageLink());
         }
+        setState(() {
+          tab = [
+            Container(
+              child: postListuser.length == 0
+                  ? Center(child: Text("No information available"))
+                  : RefreshIndicator(
+                      key: refreshKey,
+                      onRefresh: () async {
+                        await refreshList();
+                      },
+                      child: ListView.builder(
+                          itemCount: postListuser.length,
+                          itemBuilder: (_, index) {
+                            return yourPostsUI(
+                              postListuser[index].image,
+                              postListuser[index].description,
+                              postListuser[index].date,
+                              postListuser[index].time,
+                              postListuser[index].phnum,
+                              postListuser[index].volname,
+                              postListuser[index].status,
+                              postListuser[index].sname,
+                              postListuser[index].sphnum,
+                            );
+                          }),
+                    ),
+            ),
+            UploadPhotoPage(),
+            meet_team(moderatorslist),
+          ];
+        });
       }
     });
 
@@ -167,6 +198,37 @@ class _regHomePageState extends State<regHomePage>
               event.snapshot.value['name'] != "Aryan Solanki")) {
         moderatorslist.add(ud);
       }
+      setState(() {
+        tab = [
+          Container(
+            child: postListuser.length == 0
+                ? Center(child: Text("No information available"))
+                : RefreshIndicator(
+                    key: refreshKey,
+                    onRefresh: () async {
+                      await refreshList();
+                    },
+                    child: ListView.builder(
+                        itemCount: postListuser.length,
+                        itemBuilder: (_, index) {
+                          return yourPostsUI(
+                            postListuser[index].image,
+                            postListuser[index].description,
+                            postListuser[index].date,
+                            postListuser[index].time,
+                            postListuser[index].phnum,
+                            postListuser[index].volname,
+                            postListuser[index].status,
+                            postListuser[index].sname,
+                            postListuser[index].sphnum,
+                          );
+                        }),
+                  ),
+          ),
+          UploadPhotoPage(),
+          meet_team(moderatorslist),
+        ];
+      });
     });
     // Getting user info from Firebase
 

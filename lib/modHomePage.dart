@@ -185,6 +185,143 @@ class _modHomePageState extends State<modHomePage>
           UserSimplePreferences.setImageLink(user.image);
           // print(UserSimplePreferences.getImagelink());
         }
+        setState(() {
+          print(user_points);
+          // print('Length: $postList.length');
+          tab = [
+            Container(
+                child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: FlatButton(
+                          color: g,
+                          onPressed: () {
+                            selected_query = "UNSOLVED";
+                            print(selected_query);
+                            setState(() {
+                              g = Color(0xFFBDD4EB);
+                              j = Color(0xffc0c0c0);
+                            });
+                          },
+                          child: Text("UNSOLVED")),
+                    ),
+                    Expanded(
+                      child: FlatButton(
+                          color: j,
+                          onPressed: () {
+                            selected_query = "SOLVED";
+                            print(selected_query);
+                            setState(() {
+                              j = Color(0xFFBDD4EB);
+                              g = Color(0xffc0c0c0);
+                            });
+                          },
+                          child: Text("SOLVED")),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: RefreshIndicator(
+                      key: refreshKeyQuery,
+                      onRefresh: () async {
+                        await refreshListQuery();
+                      },
+                      child: (selected_query == "UNSOLVED")
+                          ? ListView.builder(
+                              itemCount: uqu.length,
+                              itemBuilder: (context, index) {
+                                return SwipeActionCell(
+                                  backgroundColor: Color(0xffededed),
+                                  key: ObjectKey(uqu[index]),
+                                  performsFirstActionWithFullSwipe: true,
+                                  leadingActions: [
+                                    SwipeAction(
+                                        title: "MARK AS SOLVED",
+                                        onTap: (handler) async {
+                                          var currentQueryKey = uqu[index].key;
+                                          DatabaseReference _ref =
+                                              FirebaseDatabase.instance
+                                                  .reference()
+                                                  .child('Query');
+                                          await handler(true);
+                                          uqu.removeAt(index);
+                                          setState(() {
+                                            _ref.child(currentQueryKey).update({
+                                              'status': "SOLVED",
+                                              "solname": UserSimplePreferences
+                                                  .getUserName(),
+                                              "solphnum": UserSimplePreferences
+                                                  .getphonenumber()
+                                            });
+                                          });
+                                        },
+                                        color: Colors.green),
+                                  ],
+                                  child: QueryUI(
+                                    uqu[index].image,
+                                    uqu[index].description,
+                                    uqu[index].date,
+                                    uqu[index].time,
+                                    uqu[index].phnum,
+                                    uqu[index].name,
+                                    uqu[index].requirement,
+                                    uqu[index].location,
+                                  ),
+                                );
+                              })
+                          : ListView.builder(
+                              itemCount: uqs.length,
+                              itemBuilder: (context, index) {
+                                return QuerySolvedUI(
+                                  uqs[index].image,
+                                  uqs[index].description,
+                                  uqs[index].date,
+                                  uqs[index].time,
+                                  uqs[index].phnum,
+                                  uqs[index].name,
+                                  uqs[index].requirement,
+                                  uqs[index].location,
+                                  uqs[index].solname,
+                                  uqs[index].solphnum,
+                                );
+                              })),
+                ),
+              ],
+            )),
+            Container(
+              child: postListuser.length == 0
+                  ? Align(
+                      alignment: Alignment.center,
+                      child: Center(child: Text("No information available")))
+                  : RefreshIndicator(
+                      key: refreshKey,
+                      onRefresh: () async {
+                        await refreshList(1);
+                      },
+                      child: ListView.builder(
+                          itemCount: postListuser.length,
+                          itemBuilder: (_, index) {
+                            return yourPostsUI(
+                              postListuser[index].image,
+                              postListuser[index].description,
+                              postListuser[index].date,
+                              postListuser[index].time,
+                              postListuser[index].phnum,
+                              postListuser[index].volname,
+                              postListuser[index].status,
+                              postListuser[index].sname,
+                              postListuser[index].sphnum,
+                            );
+                          }),
+                    ),
+            ),
+            UploadPhotoPage(),
+            moderatorVerify(),
+            meet_team(moderatorslist),
+          ];
+        });
       }
     });
 
@@ -213,6 +350,143 @@ class _modHomePageState extends State<modHomePage>
               event.snapshot.value['name'] != "Aryan Solanki")) {
         moderatorslist.add(ud);
       }
+      setState(() {
+        print(user_points);
+        // print('Length: $postList.length');
+        tab = [
+          Container(
+              child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: FlatButton(
+                        color: g,
+                        onPressed: () {
+                          selected_query = "UNSOLVED";
+                          print(selected_query);
+                          setState(() {
+                            g = Color(0xFFBDD4EB);
+                            j = Color(0xffc0c0c0);
+                          });
+                        },
+                        child: Text("UNSOLVED")),
+                  ),
+                  Expanded(
+                    child: FlatButton(
+                        color: j,
+                        onPressed: () {
+                          selected_query = "SOLVED";
+                          print(selected_query);
+                          setState(() {
+                            j = Color(0xFFBDD4EB);
+                            g = Color(0xffc0c0c0);
+                          });
+                        },
+                        child: Text("SOLVED")),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: RefreshIndicator(
+                    key: refreshKeyQuery,
+                    onRefresh: () async {
+                      await refreshListQuery();
+                    },
+                    child: (selected_query == "UNSOLVED")
+                        ? ListView.builder(
+                            itemCount: uqu.length,
+                            itemBuilder: (context, index) {
+                              return SwipeActionCell(
+                                backgroundColor: Color(0xffededed),
+                                key: ObjectKey(uqu[index]),
+                                performsFirstActionWithFullSwipe: true,
+                                leadingActions: [
+                                  SwipeAction(
+                                      title: "MARK AS SOLVED",
+                                      onTap: (handler) async {
+                                        var currentQueryKey = uqu[index].key;
+                                        DatabaseReference _ref =
+                                            FirebaseDatabase.instance
+                                                .reference()
+                                                .child('Query');
+                                        await handler(true);
+                                        uqu.removeAt(index);
+                                        setState(() {
+                                          _ref.child(currentQueryKey).update({
+                                            'status': "SOLVED",
+                                            "solname": UserSimplePreferences
+                                                .getUserName(),
+                                            "solphnum": UserSimplePreferences
+                                                .getphonenumber()
+                                          });
+                                        });
+                                      },
+                                      color: Colors.green),
+                                ],
+                                child: QueryUI(
+                                  uqu[index].image,
+                                  uqu[index].description,
+                                  uqu[index].date,
+                                  uqu[index].time,
+                                  uqu[index].phnum,
+                                  uqu[index].name,
+                                  uqu[index].requirement,
+                                  uqu[index].location,
+                                ),
+                              );
+                            })
+                        : ListView.builder(
+                            itemCount: uqs.length,
+                            itemBuilder: (context, index) {
+                              return QuerySolvedUI(
+                                uqs[index].image,
+                                uqs[index].description,
+                                uqs[index].date,
+                                uqs[index].time,
+                                uqs[index].phnum,
+                                uqs[index].name,
+                                uqs[index].requirement,
+                                uqs[index].location,
+                                uqs[index].solname,
+                                uqs[index].solphnum,
+                              );
+                            })),
+              ),
+            ],
+          )),
+          Container(
+            child: postListuser.length == 0
+                ? Align(
+                    alignment: Alignment.center,
+                    child: Center(child: Text("No information available")))
+                : RefreshIndicator(
+                    key: refreshKey,
+                    onRefresh: () async {
+                      await refreshList(1);
+                    },
+                    child: ListView.builder(
+                        itemCount: postListuser.length,
+                        itemBuilder: (_, index) {
+                          return yourPostsUI(
+                            postListuser[index].image,
+                            postListuser[index].description,
+                            postListuser[index].date,
+                            postListuser[index].time,
+                            postListuser[index].phnum,
+                            postListuser[index].volname,
+                            postListuser[index].status,
+                            postListuser[index].sname,
+                            postListuser[index].sphnum,
+                          );
+                        }),
+                  ),
+          ),
+          UploadPhotoPage(),
+          moderatorVerify(),
+          meet_team(moderatorslist),
+        ];
+      });
     });
     // Getting user info from Firebase
 
