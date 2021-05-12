@@ -153,95 +153,95 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           (event.snapshot.value['name'] != "Akshat Rastogi" &&
               event.snapshot.value['name'] != "Aryan Solanki")) {
         moderatorslist.add(ud);
-        setState(() {
-          tab = [
-            chooselocation(backlink: "beneficiary"),
-            PostQuery(
-              backlink: "",
+      }
+      setState(() {
+        tab = [
+          chooselocation(backlink: "beneficiary"),
+          PostQuery(
+            backlink: "",
+          ),
+          SafeArea(
+            child: Container(
+              child: (postList.length == 0 || postList.length == null)
+                  ? Center(child: Text("No information available"))
+                  : RefreshIndicator(
+                      key: refreshKey,
+                      onRefresh: () async {
+                        await refreshList(2);
+                      },
+                      child: ListView.builder(
+                          itemCount: postList.length,
+                          itemBuilder: (_, index) {
+                            return PostsUI(
+                              postList[index].image,
+                              postList[index].description,
+                              postList[index].date,
+                              postList[index].time,
+                              postList[index].phnum,
+                              postList[index].volname,
+                              postList[index].status,
+                              postList[index].sname,
+                              postList[index].sphnum,
+                              postList[index].location,
+                              postList[index].categpry,
+                            );
+                          }),
+                    ),
             ),
-            SafeArea(
-              child: Container(
-                child: (postList.length == 0 || postList.length == null)
+          ),
+          SafeArea(
+              child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: EdgeInsets.symmetric(vertical: 10),
+                width: double.infinity,
+                color: Color(0xFFBDD4EB),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Leaderboard",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: "OpenSans",
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF09427d)),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                  child: Expanded(
+                child: (userslist.length == 0 || userslist.length == null)
                     ? Center(child: Text("No information available"))
                     : RefreshIndicator(
-                        key: refreshKey,
+                        key: refreshKeyQuery,
                         onRefresh: () async {
-                          await refreshList(2);
+                          await refreshListQuery();
                         },
                         child: ListView.builder(
-                            itemCount: postList.length,
+                            shrinkWrap: true,
+                            itemCount: userslist.length,
                             itemBuilder: (_, index) {
-                              return PostsUI(
-                                postList[index].image,
-                                postList[index].description,
-                                postList[index].date,
-                                postList[index].time,
-                                postList[index].phnum,
-                                postList[index].volname,
-                                postList[index].status,
-                                postList[index].sname,
-                                postList[index].sphnum,
-                                postList[index].location,
-                                postList[index].categpry,
+                              return RankUI(
+                                userslist[index].image,
+                                (index + 1),
+                                userslist[index].points,
+                                userslist[index].name,
                               );
                             }),
                       ),
-              ),
-            ),
-            SafeArea(
-                child: Column(
-              children: [
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  width: double.infinity,
-                  color: Color(0xFFBDD4EB),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Leaderboard",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: "OpenSans",
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF09427d)),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    child: Expanded(
-                  child: (userslist.length == 0 || userslist.length == null)
-                      ? Center(child: Text("No information available"))
-                      : RefreshIndicator(
-                          key: refreshKeyQuery,
-                          onRefresh: () async {
-                            await refreshListQuery();
-                          },
-                          child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: userslist.length,
-                              itemBuilder: (_, index) {
-                                return RankUI(
-                                  userslist[index].image,
-                                  (index + 1),
-                                  userslist[index].points,
-                                  userslist[index].name,
-                                );
-                              }),
-                        ),
-                )),
-              ],
-            )),
-            meet_team(moderatorslist)
-          ];
-        });
-      }
+              )),
+            ],
+          )),
+          meet_team(moderatorslist)
+        ];
+      });
     });
 
     FirebaseDatabase.instance
@@ -269,6 +269,94 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         userslist.add(ud);
         i += 1;
       }
+      setState(() {
+        tab = [
+          chooselocation(backlink: "beneficiary"),
+          PostQuery(
+            backlink: "",
+          ),
+          SafeArea(
+            child: Container(
+              child: (postList.length == 0 || postList.length == null)
+                  ? Center(child: Text("No information available"))
+                  : RefreshIndicator(
+                      key: refreshKey,
+                      onRefresh: () async {
+                        await refreshList(2);
+                      },
+                      child: ListView.builder(
+                          itemCount: postList.length,
+                          itemBuilder: (_, index) {
+                            return PostsUI(
+                              postList[index].image,
+                              postList[index].description,
+                              postList[index].date,
+                              postList[index].time,
+                              postList[index].phnum,
+                              postList[index].volname,
+                              postList[index].status,
+                              postList[index].sname,
+                              postList[index].sphnum,
+                              postList[index].location,
+                              postList[index].categpry,
+                            );
+                          }),
+                    ),
+            ),
+          ),
+          SafeArea(
+              child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: EdgeInsets.symmetric(vertical: 10),
+                width: double.infinity,
+                color: Color(0xFFBDD4EB),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Leaderboard",
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: "OpenSans",
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF09427d)),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                  child: Expanded(
+                child: (userslist.length == 0 || userslist.length == null)
+                    ? Center(child: Text("No information available"))
+                    : RefreshIndicator(
+                        key: refreshKeyQuery,
+                        onRefresh: () async {
+                          await refreshListQuery();
+                        },
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: userslist.length,
+                            itemBuilder: (_, index) {
+                              return RankUI(
+                                userslist[index].image,
+                                (index + 1),
+                                userslist[index].points,
+                                userslist[index].name,
+                              );
+                            }),
+                      ),
+              )),
+            ],
+          )),
+          meet_team(moderatorslist)
+        ];
+      });
     });
     city_name = UserSimplePreferences.getCity() ?? '';
     categorySelector = UserSimplePreferences.getCategory() ?? 'All Supplies';
