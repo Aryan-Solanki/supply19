@@ -125,17 +125,7 @@ Every information appearing on the app, is strictly monitored by our team of mod
                     textAlign: TextAlign.center,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(bottom: 60),
-                  child: Text(
-                    "Supply-19",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                SizedBox(height: 10,)
               ],
             ),
           ),
