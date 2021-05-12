@@ -3,6 +3,7 @@ import 'package:supply19/HomePage.dart';
 import 'package:supply19/chooselocation.dart';
 import 'package:supply19/citypage.dart';
 import 'package:supply19/covid.dart';
+import 'package:supply19/disclaimer.dart';
 import 'package:supply19/meet_team.dart';
 import 'package:supply19/plasma.dart';
 import 'package:supply19/privacypolicy.dart';
@@ -32,7 +33,7 @@ void main() async {
   await UserSimplePreferences.init();
   await UserSimplePreferences.setCategory('');
   await UserSimplePreferences.setCity('');
-  runApp(my());
+  runApp(disclaimer());
 }
 
 class my extends StatelessWidget {
