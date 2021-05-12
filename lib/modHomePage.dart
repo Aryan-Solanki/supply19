@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cool_alert/cool_alert.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:sizer/sizer.dart';
 import 'package:flutter/cupertino.dart';
@@ -590,8 +591,25 @@ class _modHomePageState extends State<modHomePage>
   String current_page = "modhomepage";
   DateTime backbuttonpressedTime;
   bool isDrawerOpen = false;
+
+  void myFunction() {
+    String xx = UserSimplePreferences.getFirst() ?? 'yes';
+    if (xx == "yes") {
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.info,
+        text:
+            "As a moderator for Supply-19, it is your responsibility to always post relevant and accurate information on the portal. Any misuse of your rights as a moderator will result in strict actions.",
+      );
+    }
+    UserSimplePreferences.setFirst("status");
+  }
+
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration.zero, () async {
+      myFunction();
+    });
     tab = [
       Container(
           child: Column(

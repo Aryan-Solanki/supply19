@@ -17,6 +17,7 @@ class UserSimplePreferences {
   static const _keyIsModerator = 'isModerator';
   static const _keyIsVolunteer = 'isVolunteer';
   static const _keyIsBenefeciary = 'isBenefeciary';
+  static const _keyIsFirst = 'isFirst';
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
@@ -56,6 +57,11 @@ class UserSimplePreferences {
       await _preferences.setString(_keyEmail, email);
 
   static String getEmail() => _preferences.getString(_keyEmail);
+
+  static Future setFirst(String status) async =>
+      await _preferences.setString(_keyIsFirst, status);
+
+  static String getFirst() => _preferences.getString(_keyIsFirst);
 
   static Future setCity(String city) async =>
       await _preferences.setString(_keyCity, city);
