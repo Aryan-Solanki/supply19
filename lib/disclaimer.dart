@@ -125,21 +125,15 @@ Every information appearing on the app, is strictly monitored by our team of mod
                     textAlign: TextAlign.center,
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(bottom: 50),
-                  child: Text(
-                    "Supply-19",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                SizedBox(height: 10,)
               ],
             ),
           ),
         ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: Text('Swipe Up', style: TextStyle(color: Colors.white)),
       ),
     );
   }
