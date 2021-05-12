@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:supply19/HomePage.dart';
+import 'package:supply19/disclaimer.dart';
 import 'package:swipe_up/swipe_up.dart';
 import 'package:supply19/login.dart';
 import 'profile_select.dart';
@@ -15,14 +16,17 @@ class splash extends StatefulWidget {
 }
 
 class _splashState extends State<splash> {
+  String isFirst1 = '';
   String ismoderator = '', isvolunteer = '', isbeneficiary = '';
 
   @override
   void initState() {
+    isFirst1 = UserSimplePreferences.getisFirst1() ?? '';
     ismoderator = UserSimplePreferences.getisModerator() ?? '';
     isvolunteer = UserSimplePreferences.getisVolunteer() ?? '';
     isbeneficiary = UserSimplePreferences.getisBenefeciary() ?? '';
     super.initState();
+    isFirst1 = UserSimplePreferences.getisFirst1() ?? '';
     ismoderator = UserSimplePreferences.getisModerator() ?? '';
     isvolunteer = UserSimplePreferences.getisVolunteer() ?? '';
     isbeneficiary = UserSimplePreferences.getisBenefeciary() ?? '';
@@ -32,35 +36,44 @@ class _splashState extends State<splash> {
   Widget build(BuildContext context) {
     return SwipeUp(
       onSwipe: () {
+        isFirst1 = UserSimplePreferences.getisFirst1() ?? '';
         ismoderator = UserSimplePreferences.getisModerator() ?? '';
         isvolunteer = UserSimplePreferences.getisVolunteer() ?? '';
         isbeneficiary = UserSimplePreferences.getisBenefeciary() ?? '';
-        if ((ismoderator == "") &&
-            (isvolunteer == "") &&
-            (isbeneficiary == "")) {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => profile_select()));
-        } else if (ismoderator != "") {
+        if (isFirst1 == '') {
           Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => modHomePage(
-                      selectedItemPosition: 1,
-                    )),
-          );
-        } else if (isvolunteer != "") {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => regHomePage()),
-          );
-        } else if (isbeneficiary != "") {
-          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => disclaimer()));
+        } else {
+          ismoderator = UserSimplePreferences.getisModerator() ?? '';
+          isvolunteer = UserSimplePreferences.getisVolunteer() ?? '';
+          isbeneficiary = UserSimplePreferences.getisBenefeciary() ?? '';
+          if ((ismoderator == "") &&
+              (isvolunteer == "") &&
+              (isbeneficiary == "")) {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => profile_select()));
+          } else if (ismoderator != "") {
+            Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => HomePage(
-                  selectedItemPosition: 2,
-                ),
-              ));
+                  builder: (context) => modHomePage(
+                        selectedItemPosition: 1,
+                      )),
+            );
+          } else if (isvolunteer != "") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => regHomePage()),
+            );
+          } else if (isbeneficiary != "") {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomePage(
+                    selectedItemPosition: 2,
+                  ),
+                ));
+          }
         }
       },
       body: Scaffold(
