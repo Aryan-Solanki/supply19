@@ -126,7 +126,7 @@ Every information appearing on the app, is strictly monitored by our team of mod
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(bottom: 50),
+                  margin: EdgeInsets.only(bottom: 60),
                   child: Text(
                     "Supply-19",
                     style: TextStyle(
@@ -140,6 +140,10 @@ Every information appearing on the app, is strictly monitored by our team of mod
             ),
           ),
         ),
+      ),
+      child: Material(
+        color: Colors.transparent,
+        child: Text('Swipe Up', style: TextStyle(color: Colors.white)),
       ),
     );
   }
