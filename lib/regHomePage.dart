@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:supply19/profile_select.dart';
 import 'package:supply19/uploadimg.dart';
+import 'package:supply19/vetting.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -94,15 +95,14 @@ class _regHomePageState extends State<regHomePage>
   void myFunction() {
     String xx = UserSimplePreferences.getFirst() ?? 'yes';
     if (xx == "yes") {
-      //pass
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => vetting()));
     }
-    UserSimplePreferences.setFirst("status");
   }
 
   @override
   void initState() {
     super.initState();
-
     Future.delayed(Duration.zero, () async {
       myFunction();
     });
