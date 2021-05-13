@@ -26,12 +26,21 @@ class _vettingState extends State<vetting> {
           child: Lottie.asset('assets/lottie/a1.json'),
         ),
         title: "Sensitive Duties",
+        styleTitle: TextStyle(
+            color: Colors.black87,
+            fontSize: 35.0,
+            fontFamily: "fonts/Lato-Bold.ttf"),
         description:
             """As a volunteer for Supply-19, it is your responsibility to always post relevant and accurate information on the portal. Every information that you post, will be monitored by our team of moderators.\n
 Your posts may be responsible, in saving people’s lives. So be as accurate as you can.
+
 Any misuse of your rights as a volunteer will result in strict actions.""",
+        styleDescription: TextStyle(
+            color: Colors.black87,
+            fontSize: 18.0,
+            fontFamily: "fonts/Lato-Bold.ttf"),
         // pathImage: "images/photo_eraser.png",
-        backgroundColor: Color(0xff121b6e),
+        backgroundColor: Color(0xffededed),
       ),
     );
     slides.add(
@@ -39,14 +48,22 @@ Any misuse of your rights as a volunteer will result in strict actions.""",
         marginDescription:
             EdgeInsets.only(bottom: 20, top: 10, left: 10, right: 10),
         centerWidget: Container(
-          height: 300,
-          child: Lottie.asset('assets/lottie/a2.json'),
+          height: 180,
+          child: Lottie.asset('assets/lottie/a3.json'),
         ),
-        title: "In-Person Interaction",
+        title: "In-Person\n Interaction",
+        styleTitle: TextStyle(
+            color: Colors.black87,
+            fontSize: 35.0,
+            fontFamily: "fonts/Lato-Bold.ttf"),
         description:
             """You will soon receive a call from our moderators, to clarify any doubts that you may have and inform you about your role in verifying and posting the leads on Supply 19.""",
         // pathImage: "images/photo_pencil.png",
-        backgroundColor: Color(0xff47617c),
+        styleDescription: TextStyle(
+            color: Colors.black87,
+            fontSize: 18.0,
+            fontFamily: "fonts/Lato-Bold.ttf"),
+        backgroundColor: Color(0xffededed),
       ),
     );
   }
@@ -65,6 +82,8 @@ Any misuse of your rights as a volunteer will result in strict actions.""",
       navigatorKey: _navKey,
       home: Scaffold(
         body: new IntroSlider(
+          colorSkipBtn: Colors.black87,
+          colorDoneBtn: Colors.black87,
           slides: this.slides,
           onDonePress: () {
             UserSimplePreferences.setFirst("status");
