@@ -79,6 +79,8 @@ flutter:
     - assets/lottie/a1.json
     - assets/lottie/a2.json
     - assets/lottie/a3.json
+    - assets/lottie/a4.json
+    - assets/lottie/a5.json
     - images/
 #    - images/p.svg
 #      - assets/background.png

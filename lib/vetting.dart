@@ -49,15 +49,20 @@ Any misuse of your rights as a volunteer will result in strict actions.""",
             EdgeInsets.only(bottom: 20, top: 10, left: 10, right: 10),
         centerWidget: Container(
           height: 180,
-          child: Lottie.asset('assets/lottie/a3.json'),
+          child: Lottie.asset('assets/lottie/a5.json'),
         ),
-        title: "In-Person\n Interaction",
+        title: "Interaction",
         styleTitle: TextStyle(
             color: Colors.black87,
             fontSize: 35.0,
             fontFamily: "fonts/Lato-Bold.ttf"),
         description:
-            """You will soon receive a call from our moderators, to clarify any doubts that you may have and inform you about your role in verifying and posting the leads on Supply 19.""",
+            """You will soon receive a call from one of our moderators, for identity verification and moderator interaction.
+            
+You will be briefed about your role in verifying and posting the leads on the platform.
+
+And you can also clarify any doubts that you may have regarding your contributions on Supply-19.
+""",
         // pathImage: "images/photo_pencil.png",
         styleDescription: TextStyle(
             color: Colors.black87,
