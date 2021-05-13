@@ -13,6 +13,7 @@ import 'package:supply19/registration.dart';
 import 'package:supply19/sponsor_page.dart';
 import 'package:supply19/supportus.dart';
 import 'package:supply19/uploadimg.dart';
+import 'package:supply19/vetting.dart';
 import 'login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'splash.dart';
@@ -33,7 +34,7 @@ void main() async {
   await UserSimplePreferences.init();
   await UserSimplePreferences.setCategory('');
   await UserSimplePreferences.setCity('');
-  runApp(my());
+  runApp(vetting());
 }
 
 class my extends StatelessWidget {
