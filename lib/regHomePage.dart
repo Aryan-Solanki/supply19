@@ -91,9 +91,22 @@ class _regHomePageState extends State<regHomePage>
   var currentUserKey;
   List<UserData> moderatorslist = [];
 
+  void myFunction() {
+    String xx = UserSimplePreferences.getFirst() ?? 'yes';
+    if (xx == "yes") {
+      //pass
+    }
+    UserSimplePreferences.setFirst("status");
+  }
+
   @override
   void initState() {
     super.initState();
+
+    Future.delayed(Duration.zero, () async {
+      myFunction();
+    });
+
     UserSimplePreferences.setisVolunteer("yes");
     UserSimplePreferences.setisBenefeciary("");
     UserSimplePreferences.setisModerator("");
@@ -338,24 +351,8 @@ class _regHomePageState extends State<regHomePage>
   DateTime backbuttonpressedTime;
   bool isDrawerOpen = false;
 
-  void myFunction() {
-    String xx = UserSimplePreferences.getFirst() ?? 'yes';
-    if (xx == "yes") {
-      CoolAlert.show(
-        context: context,
-        type: CoolAlertType.info,
-        text:
-            "As a volunteer for Supply-19, it is your responsibility to always post relevant and accurate information on the portal. Every information that you post, will be monitored by our team of moderators. Any misuse of your rights as a volunteer will result in strict actions.",
-      );
-    }
-    UserSimplePreferences.setFirst("status");
-  }
-
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration.zero, () async {
-      myFunction();
-    });
     return Sizer(builder: (context, orientation, deviceType) {
       return WillPopScope(
         onWillPop: () async {
