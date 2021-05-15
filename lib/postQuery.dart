@@ -143,21 +143,21 @@ class _PostQueryState extends State<PostQuery> {
       }
     });
 
-    Future<void> uploadStatusImage() async {
-      if (validateAndSave()) {
-        FirebaseStorage storage = FirebaseStorage.instance;
-        final Reference postImageRef = storage.ref().child("Post Images");
-        var timeKey = new DateTime.now();
-        String xyz = timeKey.toString() + ".jpg";
-        final UploadTask uploadTask =
-            postImageRef.child(xyz).putFile(sampleImage);
-        var imageUrl = await (await uploadTask).ref.getDownloadURL();
-        final String url_akshat = imageUrl.toString();
-        print(url_akshat);
-        savetoDatabase(url_akshat);
-        // goToHomePage();
-      }
-    }
+    // Future<void> uploadStatusImage() async {
+    //   if (validateAndSave()) {
+    //     FirebaseStorage storage = FirebaseStorage.instance;
+    //     final Reference postImageRef = storage.ref().child("Post Images");
+    //     var timeKey = new DateTime.now();
+    //     String xyz = timeKey.toString() + ".jpg";
+    //     final UploadTask uploadTask =
+    //         postImageRef.child(xyz).putFile(sampleImage);
+    //     var imageUrl = await (await uploadTask).ref.getDownloadURL();
+    //     final String url_akshat = imageUrl.toString();
+    //     print(url_akshat);
+    //     savetoDatabase(url_akshat);
+    //     // goToHomePage();
+    //   }
+    // }
 
     col = [
       Text(
@@ -408,16 +408,16 @@ class _PostQueryState extends State<PostQuery> {
                     )
                   ])),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            if (sampleImage != null) {
-              col.removeAt(0);
-            }
-            getImage();
-          },
-          tooltip: 'Add Image',
-          child: Icon(Icons.add_a_photo),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {
+        //     if (sampleImage != null) {
+        //       col.removeAt(0);
+        //     }
+        //     getImage();
+        //   },
+        //   tooltip: 'Add Image',
+        //   child: Icon(Icons.add_a_photo),
+        // ),
       ),
     );
   }
