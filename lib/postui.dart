@@ -162,7 +162,7 @@ Widget PostsUI(
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          "   Cotact No. ",
+                                          "   Contact No. ",
                                           style: TextStyle(
                                               fontSize: 15,
                                               color: Colors.black,

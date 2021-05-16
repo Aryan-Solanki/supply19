@@ -348,7 +348,9 @@ class _modHomePageState extends State<modHomePage>
       if (event.snapshot.value['verify'] == "yes" &&
           (event.snapshot.value['name'] != "Akshat Rastogi" &&
               event.snapshot.value['name'] != "Aryan Solanki")) {
-        moderatorslist.add(ud);
+        if (event.snapshot.value["meet_team"] == "yes") {
+          moderatorslist.add(ud);
+        }
       }
       setState(() {
         print(user_points);

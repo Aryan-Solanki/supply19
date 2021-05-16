@@ -32,76 +32,78 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
   int user_current_posts;
 
   void savetoDatabase(url) {
-    var dbTimeKey = new DateTime.now();
-    var formatDate = new DateFormat('MMM d, yyyy');
-    var formatTime = new DateFormat('EEEE, hh:mm aaa');
+    if (validateAndSave()) {
+      var dbTimeKey = new DateTime.now();
+      var formatDate = new DateFormat('MMM d, yyyy');
+      var formatTime = new DateFormat('EEEE, hh:mm aaa');
 
-    String date = formatDate.format(dbTimeKey);
-    String time = formatTime.format(dbTimeKey);
+      String date = formatDate.format(dbTimeKey);
+      String time = formatTime.format(dbTimeKey);
 
-    DatabaseReference ref = FirebaseDatabase.instance.reference();
-    String vef;
-    if (UserSimplePreferences.getVerifyStatus() == "yes") {
-      vef = "true";
-    } else {
-      vef = "fake";
-    }
+      DatabaseReference ref = FirebaseDatabase.instance.reference();
+      String vef;
+      if (UserSimplePreferences.getVerifyStatus() == "yes") {
+        vef = "true";
+      } else {
+        vef = "fake";
+      }
 
-    var data = {
-      "category": selected_item,
-      "date": date,
-      "description": _myValue,
-      "image": url,
-      "location": selected_city,
-      "phnum": UserSimplePreferences.getphonenumber(),
-      "status": vef,
-      "sphnum": sphnum,
-      "sname": sname,
-      "time": time,
-      "volname": UserSimplePreferences.getUserName(),
-      "post_num": current_post_number,
-      "order": (9999999 - current_post_number),
-      "backcolor": "FFFFFF"
-    };
+      var data = {
+        "category": selected_item,
+        "date": date,
+        "description": _myValue,
+        "image": url,
+        "location": selected_city,
+        "phnum": UserSimplePreferences.getphonenumber(),
+        "status": vef,
+        "sphnum": sphnum,
+        "sname": sname,
+        "time": time,
+        "volname": UserSimplePreferences.getUserName(),
+        "post_num": current_post_number,
+        "order": (9999999 - current_post_number),
+        "backcolor": "FFFFFF"
+      };
 
-    int newx = current_post_number + 1;
+      int newx = current_post_number + 1;
 
-    ref.child("current").update({'post_no': newx});
+      ref.child("current").update({'post_no': newx});
 
-    DatabaseReference _ref =
-        FirebaseDatabase.instance.reference().child('User-Data');
-    int newposts = user_current_posts + 1;
-    _ref.child(currentUserKey).update({'number_of_posts': newposts});
+      DatabaseReference _ref =
+          FirebaseDatabase.instance.reference().child('User-Data');
+      int newposts = user_current_posts + 1;
+      _ref.child(currentUserKey).update({'number_of_posts': newposts});
 
-    ref.child("Posts").push().set(data);
+      ref.child("Posts").push().set(data);
 
-    if (vef == "true") {
-      Navigator.pushReplacement(
-        context,
-        new MaterialPageRoute(
-          builder: (context) => new modHomePage(
-            selectedItemPosition: 1,
+      if (vef == "true") {
+        Navigator.pushReplacement(
+          context,
+          new MaterialPageRoute(
+            builder: (context) => new modHomePage(
+              selectedItemPosition: 1,
+            ),
           ),
-        ),
-      );
-      CoolAlert.show(
-        context: context,
-        type: CoolAlertType.success,
-        text: "Your post was successful",
-      );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        new MaterialPageRoute(
-          builder: (context) => new regHomePage(),
-        ),
-      );
-      CoolAlert.show(
-        context: context,
-        type: CoolAlertType.warning,
-        text:
-            "Your post will be verified by our volunteers before appearing on the timeline",
-      );
+        );
+        CoolAlert.show(
+          context: context,
+          type: CoolAlertType.success,
+          text: "Your post was successful",
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          new MaterialPageRoute(
+            builder: (context) => new regHomePage(),
+          ),
+        );
+        CoolAlert.show(
+          context: context,
+          type: CoolAlertType.warning,
+          text:
+              "Your post will be verified by our volunteers before appearing on the timeline",
+        );
+      }
     }
   }
 
@@ -111,17 +113,26 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
 
   bool validateAndSave() {
     final form = formkey.currentState;
+    if (ban != "yes") {
+      if (form.validate()) {
+        form.save();
 
-    if (form.validate()) {
-      form.save();
-
-      return true;
+        return true;
+      } else {
+        return false;
+      }
     } else {
+      CoolAlert.show(
+        context: context,
+        type: CoolAlertType.error,
+        text: "You have been banned from posting leads on our platform",
+      );
       return false;
     }
   }
 
   var currentUserKey;
+  var ban;
 
   Future<void> uploadStatusImage() async {
     if (validateAndSave()) {
@@ -168,6 +179,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
       if (UserSimplePreferences.getphonenumber() == ud.phnum) {
         user_current_posts = ud.number_of_posts;
         currentUserKey = event.snapshot.key;
+        ban = event.snapshot.value['banned'];
       }
     });
 

@@ -7,6 +7,7 @@ import 'regHomePage.dart';
 import 'user_simple_preferences.dart';
 import 'utility.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'string_extension.dart';
 
 class registerpage extends StatefulWidget {
   String phnum;
@@ -106,7 +107,8 @@ class _registerpageState extends State<registerpage> {
       "order": 9999999,
       "linkedin": '',
       "twitter": '',
-      "position": "volunteer"
+      "position": "volunteer",
+      "banned": "no"
     };
     ref.child("User-Data").push().set(data);
   }
@@ -223,7 +225,9 @@ class _registerpageState extends State<registerpage> {
                                   ),
                                   child: TextButton(
                                     onPressed: () {
-                                      full_name = _fname + " " + _lname;
+                                      full_name = _fname.capitalize() +
+                                          " " +
+                                          _lname.capitalize();
                                       if (image == null || image == "") {
                                         savetoDatabase("");
                                       } else {
