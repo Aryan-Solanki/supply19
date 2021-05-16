@@ -80,15 +80,12 @@ class _specialthanksState extends State<specialthanks> {
         end: Offset.zero,
       ).animate(animation),
       // Paste you Widget
-      child: ListView.builder(
-          itemCount: ss.length,
-          itemBuilder: (context, index) {
-            return specialthanksUI(
+      child: specialthanksUI(
               ss[index].image,
               ss[index].name,
               ss[index].description,
-            );
-          }),
+            )
+          ,
     ),
   );
 

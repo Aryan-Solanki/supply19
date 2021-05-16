@@ -17,7 +17,7 @@ Widget specialthanksUI(String image, String name,String description) {
       children: [
         HexagonWidget.flat(
           color: Color(0xffededed),
-          width: 100,
+          width: 250,
           padding: 4.0,
           child:new Container(
               decoration: new BoxDecoration(
