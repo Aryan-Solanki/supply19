@@ -101,7 +101,7 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
           context: context,
           type: CoolAlertType.warning,
           text:
-              "Your post will be verified by our volunteers before appearing on the timeline",
+              "Your post will be verified by our moderators before appearing on the timeline",
         );
       }
     }
