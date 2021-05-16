@@ -57,6 +57,8 @@ dependencies:
   crypto: ^3.0.0
   universal_io: ^2.0.4
   intro_slider: ^2.4.3
+  auto_animated: ^3.0.0
+  hexagon: ^0.1.1
 
 dev_dependencies:
   flutter_test:

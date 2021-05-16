@@ -10,6 +10,7 @@ import 'package:supply19/privacypolicy.dart';
 import 'package:supply19/profile.dart';
 import 'package:supply19/registerpage.dart';
 import 'package:supply19/registration.dart';
+import 'package:supply19/specialthanks.dart';
 import 'package:supply19/sponsor_page.dart';
 import 'package:supply19/supportus.dart';
 import 'package:supply19/uploadimg.dart';
@@ -34,7 +35,7 @@ void main() async {
   await UserSimplePreferences.init();
   await UserSimplePreferences.setCategory('');
   await UserSimplePreferences.setCity('');
-  runApp(my());
+  runApp(specialthanks());
 }
 
 class my extends StatelessWidget {
