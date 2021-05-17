@@ -27,9 +27,15 @@ Widget specialthanksUI(String image, String name,String description) {
                   )
               )),
         ),
-        Text(name,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 11)),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            description=="Head Moderator"?Icon(Icons.star,color: Color(0xffFFD700,),size: 14,):(description=="Sub Moderator"?Icon(Icons.star,color: Color(0xffC0C0C0),):Text("")),
+            Text(name,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 11),textAlign: TextAlign.center,),
+          ],
+        )
         // SizedBox(height: 3,),
-        Text(description,style: TextStyle(fontSize: 8),),
+        ,Text(description,style: TextStyle(fontSize: 8),),
       ],
     )
   );
