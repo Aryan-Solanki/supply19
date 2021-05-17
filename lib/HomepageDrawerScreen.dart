@@ -6,6 +6,7 @@ import 'package:supply19/covid.dart';
 import 'package:supply19/plasma.dart';
 import 'package:supply19/privacypolicy.dart';
 import 'package:supply19/registration.dart';
+import 'package:supply19/specialthanks.dart';
 import 'package:supply19/sponsor_page.dart';
 import 'package:supply19/termandcondition.dart';
 import 'user_simple_preferences.dart';
@@ -67,6 +68,29 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                               // FaIcon(FontAwesomeIcons.star,size: 25,color: Colors.white,),
                               Text(
                                 "Become A Volunteer",
+                                style: TextStyle(
+                                    fontFamily: "OpenSans",
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18,
+                                    color: Colors.white),
+                              )
+                            ],
+                          )),
+                      SizedBox(
+                        height: 5,
+                      ),
+                      FlatButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => specialthanks()));
+                          },
+                          child: Row(
+                            children: [
+                              // FaIcon(FontAwesomeIcons.star,size: 25,color: Colors.white,),
+                              Text(
+                                "   Special Thanks",
                                 style: TextStyle(
                                     fontFamily: "OpenSans",
                                     fontWeight: FontWeight.bold,

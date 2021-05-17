@@ -35,7 +35,7 @@ void main() async {
   await UserSimplePreferences.init();
   await UserSimplePreferences.setCategory('');
   await UserSimplePreferences.setCity('');
-  runApp(specialthanks());
+  runApp(my());
 }
 
 class my extends StatelessWidget {

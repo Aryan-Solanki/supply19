@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 import 'package:hexagon/hexagon.dart';
-
+import 'package:sizer/sizer.dart';
 
 Widget specialthanksUI(String image, String name,String description) {
   return Container(
@@ -17,7 +17,7 @@ Widget specialthanksUI(String image, String name,String description) {
       children: [
         HexagonWidget.flat(
           color: Color(0xffededed),
-          width: 250,
+          width: 90,
           padding: 4.0,
           child:new Container(
               decoration: new BoxDecoration(
@@ -27,9 +27,9 @@ Widget specialthanksUI(String image, String name,String description) {
                   )
               )),
         ),
-        Text(name,style: TextStyle(fontWeight: FontWeight.bold)),
-        SizedBox(height: 3,),
-        Text(description,style: TextStyle(fontSize: 10),),
+        Text(name,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 11)),
+        // SizedBox(height: 3,),
+        Text(description,style: TextStyle(fontSize: 8),),
       ],
     )
   );

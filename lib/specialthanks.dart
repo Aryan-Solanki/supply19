@@ -9,6 +9,7 @@ import 'package:flutter_swipe_action_cell/core/cell.dart';
 import 'package:supply19/userinfo.dart';
 import 'sponsor.dart';
 import 'SponsorData.dart';
+import 'package:sizer/sizer.dart';
 
 import 'SponsorData.dart';
 
@@ -41,7 +42,6 @@ class _specialthanksState extends State<specialthanks> {
   }
 
 
-
   List<SpecialThanksData> ss = [];
   final options = LiveOptions(
     // Start animation after (default zero)
@@ -62,11 +62,10 @@ class _specialthanksState extends State<specialthanks> {
     // To get the effect as in a showcase for ListView, set true
     reAnimateOnVisibility: false,
   );
-  Widget buildAnimatedItem(
-      BuildContext context,
+
+  Widget buildAnimatedItem(BuildContext context,
       int index,
-      Animation<double> animation,
-      ) =>
+      Animation<double> animation,) =>
       // For example wrap with fade transition
   FadeTransition(
     opacity: Tween<double>(
@@ -81,61 +80,71 @@ class _specialthanksState extends State<specialthanks> {
       ).animate(animation),
       // Paste you Widget
       child: specialthanksUI(
-              ss[index].image,
-              ss[index].name,
-              ss[index].description,
-            )
-          ,
+        ss[index].image,
+        ss[index].name,
+        ss[index].description,
+      )
+      ,
     ),
   );
 
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Color(0xffededed),
-          body: SafeArea(
-            child: Column(
-              children: [
-                Container(
-                  height: 50,
-                  margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  width: double.infinity,
-                  color: Color(0xFFBDD4EB),
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "SPECIAL THANKS",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontFamily: "OpenSans",
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF09427d)),
+    return Sizer(builder: (context, orientation, deviceType) {
+      return MaterialApp(
+        home: Scaffold(
+            backgroundColor: Color(0xffededed),
+            body: SafeArea(
+              child: Column(
+                children: [
+                  Container(
+                    height: 50,
+                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    width: double.infinity,
+                    color: Color(0xFFBDD4EB),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "SPECIAL THANKS",
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontFamily: "OpenSans",
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xFF09427d)),
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                   child: LiveGrid.options(
-                    options: options,
+                  Expanded(
+                    child: LiveGrid.options(
+                      options: options,
 
-                    // Like GridView.builder, but also includes animation property
-                    itemBuilder: buildAnimatedItem,
+                      // Like GridView.builder, but also includes animation property
+                      itemBuilder: buildAnimatedItem,
 
-                    // Other properties correspond to the `ListView.builder` / `ListView.separated` widget
-                    itemCount: ss.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
+                      // Other properties correspond to the `ListView.builder` / `ListView.separated` widget
+                      itemCount: ss.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 100.w<576?3:(100.w<768?4:5),
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                      ),
                     ),
-                  ),
-                )
+                  )
 
-              ],
-            ),
-          )),
-    );
+                ],
+              ),
+            )),
+      );
+    });
   }
 }
+
+
+
+
+
+
+
+
