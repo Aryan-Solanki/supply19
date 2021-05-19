@@ -175,19 +175,12 @@ class _modHomePageState extends State<modHomePage>
           userif.add(user);
           currentUserKey = indivisualKey;
           UserSimplePreferences.setUserName(user.name);
-          // print(UserSimplePreferences.getUserName());
           UserSimplePreferences.setphonenumber(user.phnum);
-          // print(UserSimplePreferences.getphonenumber());
           UserSimplePreferences.setUserName(user.name);
-          // print(UserSimplePreferences.getUserName());
           UserSimplePreferences.setVerifyStatus(user.verify);
-          // print(UserSimplePreferences.getVerifyStatus());
           UserSimplePreferences.setImageLink(user.image);
-          // print(UserSimplePreferences.getImagelink());
         }
         setState(() {
-          print(user_points);
-          // print('Length: $postList.length');
           tab = [
             Container(
                 child: Column(
@@ -199,7 +192,6 @@ class _modHomePageState extends State<modHomePage>
                           color: g,
                           onPressed: () {
                             selected_query = "UNSOLVED";
-                            print(selected_query);
                             setState(() {
                               g = Color(0xFFBDD4EB);
                               j = Color(0xffc0c0c0);
@@ -212,7 +204,6 @@ class _modHomePageState extends State<modHomePage>
                           color: j,
                           onPressed: () {
                             selected_query = "SOLVED";
-                            print(selected_query);
                             setState(() {
                               j = Color(0xFFBDD4EB);
                               g = Color(0xffc0c0c0);
@@ -353,8 +344,6 @@ class _modHomePageState extends State<modHomePage>
         }
       }
       setState(() {
-        print(user_points);
-        // print('Length: $postList.length');
         tab = [
           Container(
               child: Column(
@@ -366,7 +355,6 @@ class _modHomePageState extends State<modHomePage>
                         color: g,
                         onPressed: () {
                           selected_query = "UNSOLVED";
-                          print(selected_query);
                           setState(() {
                             g = Color(0xFFBDD4EB);
                             j = Color(0xffc0c0c0);
@@ -379,7 +367,6 @@ class _modHomePageState extends State<modHomePage>
                         color: j,
                         onPressed: () {
                           selected_query = "SOLVED";
-                          print(selected_query);
                           setState(() {
                             j = Color(0xFFBDD4EB);
                             g = Color(0xffc0c0c0);
@@ -500,8 +487,6 @@ class _modHomePageState extends State<modHomePage>
         .orderByChild("order")
         .onChildAdded
         .listen((event) {
-      // print(event.snapshot.value);
-      // print(event.snapshot.value['image']);
       QueryUiData query = new QueryUiData(
         event.snapshot.value['date'],
         event.snapshot.value['description'],
@@ -536,7 +521,6 @@ class _modHomePageState extends State<modHomePage>
                         color: g,
                         onPressed: () {
                           selected_query = "UNSOLVED";
-                          print(selected_query);
                           setState(() {
                             g = Color(0xFFBDD4EB);
                             j = Color(0xffc0c0c0);
@@ -549,7 +533,6 @@ class _modHomePageState extends State<modHomePage>
                         color: j,
                         onPressed: () {
                           selected_query = "SOLVED";
-                          print(selected_query);
                           setState(() {
                             j = Color(0xFFBDD4EB);
                             g = Color(0xffc0c0c0);
@@ -671,8 +654,6 @@ class _modHomePageState extends State<modHomePage>
         .orderByChild("order")
         .onChildAdded
         .listen((event) {
-      // print(event.snapshot.value);
-      // print(event.snapshot.value['image']);
       Posts posts = new Posts(
           event.snapshot.value['image'],
           event.snapshot.value['description'],
@@ -693,7 +674,6 @@ class _modHomePageState extends State<modHomePage>
         if (posts.status != "fake") {
           user_points += 5;
           if (posts.image == "" || posts.image == null) {
-            print("No image found");
           } else {
             user_points += 3;
           }
@@ -709,8 +689,6 @@ class _modHomePageState extends State<modHomePage>
             .update({'points': user_points, 'order': (9999999 - user_points)});
       }
       setState(() {
-        print(user_points);
-        // print('Length: $postList.length');
         tab = [
           Container(
               child: Column(
@@ -722,7 +700,6 @@ class _modHomePageState extends State<modHomePage>
                         color: g,
                         onPressed: () {
                           selected_query = "UNSOLVED";
-                          print(selected_query);
                           setState(() {
                             g = Color(0xFFBDD4EB);
                             j = Color(0xffc0c0c0);
@@ -735,7 +712,6 @@ class _modHomePageState extends State<modHomePage>
                         color: j,
                         onPressed: () {
                           selected_query = "SOLVED";
-                          print(selected_query);
                           setState(() {
                             j = Color(0xFFBDD4EB);
                             g = Color(0xffc0c0c0);
@@ -897,7 +873,6 @@ class _modHomePageState extends State<modHomePage>
                     color: g,
                     onPressed: () {
                       selected_query = "UNSOLVED";
-                      print(selected_query);
                       setState(() {
                         g = Color(0xFFBDD4EB);
                         j = Color(0xffc0c0c0);
@@ -910,7 +885,6 @@ class _modHomePageState extends State<modHomePage>
                     color: j,
                     onPressed: () {
                       selected_query = "SOLVED";
-                      print(selected_query);
                       setState(() {
                         j = Color(0xFFBDD4EB);
                         g = Color(0xffc0c0c0);

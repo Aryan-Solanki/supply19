@@ -144,7 +144,6 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
           postImageRef.child(xyz).putFile(sampleImage);
       var imageUrl = await (await uploadTask).ref.getDownloadURL();
       final String url_akshat = imageUrl.toString();
-      print(url_akshat);
       savetoDatabase(url_akshat);
       // goToHomePage();
     }
@@ -284,7 +283,6 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         .orderByChild("order")
         .onChildAdded
         .listen((event) {
-      print(event.snapshot.value);
       UserData ud = new UserData(
         event.snapshot.value['email'],
         event.snapshot.value['name'],
@@ -329,7 +327,6 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
             postImageRef.child(xyz).putFile(sampleImage);
         var imageUrl = await (await uploadTask).ref.getDownloadURL();
         final String url_akshat = imageUrl.toString();
-        print(url_akshat);
         savetoDatabase(url_akshat);
         // goToHomePage();
       }

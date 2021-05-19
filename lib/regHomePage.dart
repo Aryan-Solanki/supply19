@@ -142,15 +142,10 @@ class _regHomePageState extends State<regHomePage>
           currentUserKey = indivisualKey;
           userif.add(user);
           UserSimplePreferences.setUserName(user.name);
-          print(UserSimplePreferences.getUserName());
           UserSimplePreferences.setphonenumber(user.phnum);
-          print(UserSimplePreferences.getphonenumber());
           UserSimplePreferences.setUserName(user.name);
-          print(UserSimplePreferences.getUserName());
           UserSimplePreferences.setVerifyStatus(user.verify);
-          print(UserSimplePreferences.getVerifyStatus());
           UserSimplePreferences.setImageLink(user.image);
-          print(UserSimplePreferences.getImageLink());
         }
         setState(() {
           tab = [
@@ -255,8 +250,6 @@ class _regHomePageState extends State<regHomePage>
         .orderByChild("order")
         .onChildAdded
         .listen((event) {
-      print(event.snapshot.value);
-      print(event.snapshot.value['image']);
       Posts posts = new Posts(
           event.snapshot.value['image'],
           event.snapshot.value['description'],
@@ -277,7 +270,6 @@ class _regHomePageState extends State<regHomePage>
         if (posts.status != "fake") {
           user_points += 5;
           if (posts.image == "" || posts.image == null) {
-            print("No image found");
           } else {
             user_points += 3;
           }
@@ -293,7 +285,6 @@ class _regHomePageState extends State<regHomePage>
             .update({'points': user_points, 'order': (9999999 - user_points)});
       }
       setState(() {
-        print('Length: $postList.length');
         tab = [
           Container(
             child: postListuser.length == 0

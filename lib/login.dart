@@ -159,12 +159,10 @@ class _loginState extends State<login> {
                                           setState(() {
                                             warning = "Invalid Email.";
                                           });
-                                          // print('No user found for that email.');
                                         } else if (e.code == 'wrong-password') {
                                           setState(() {
                                             warning = "Invalid Password.";
                                           });
-                                          // print('Wrong password provided for that user.');
                                         }
                                       }
                                     },

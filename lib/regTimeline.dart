@@ -229,7 +229,6 @@ class _regTimelineState extends State<regTimeline>
           .orderByChild("order")
           .onChildAdded
           .listen((event) {
-        // print(event.snapshot.value);
         UserData ud = new UserData(
           event.snapshot.value['email'],
           event.snapshot.value['name'],
@@ -249,7 +248,6 @@ class _regTimelineState extends State<regTimeline>
           i += 1;
         }
 
-        print("LeaderBoard Updated");
         setState(() {
           checkboollol();
           tab = [
@@ -336,7 +334,6 @@ class _regTimelineState extends State<regTimeline>
             meet_team(moderatorslist)
           ];
         });
-        print("Length of Leaderboard" + userslist.length.toString());
       });
 
       FirebaseDatabase.instance
@@ -381,8 +378,6 @@ class _regTimelineState extends State<regTimeline>
         .orderByChild("order")
         .onChildAdded
         .listen((event) {
-      // print(event.snapshot.value);
-      // print(event.snapshot.value['image']);
       Posts posts = new Posts(
           event.snapshot.value['image'],
           event.snapshot.value['description'],
@@ -630,8 +625,6 @@ class _regTimelineState extends State<regTimeline>
                                             ),
                                             onPressed: () {
                                               UserSimplePreferences.setCity('');
-                                              // print(
-                                              //     UserSimplePreferences.getCity());
                                               setState(() {
                                                 Navigator.push(
                                                   context,
@@ -688,7 +681,6 @@ class _regTimelineState extends State<regTimeline>
                                   color: Color(0xFF09427d), fontSize: 20.0),
                               onChanged: (newValue) {
                                 UserSimplePreferences.setCategory(newValue);
-                                // print(UserSimplePreferences.getCategory());
                                 setState(() {
                                   categoryChoose = newValue;
                                   categorySelector = categoryChoose;

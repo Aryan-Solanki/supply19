@@ -122,7 +122,6 @@ class _PostQueryState extends State<PostQuery> {
           postImageRef.child(xyz).putFile(sampleImage);
       var imageUrl = await (await uploadTask).ref.getDownloadURL();
       final String url_akshat = imageUrl.toString();
-      print(url_akshat);
       savetoDatabase(url_akshat);
       // goToHomePage();
     }
@@ -273,7 +272,6 @@ class _PostQueryState extends State<PostQuery> {
     //         postImageRef.child(xyz).putFile(sampleImage);
     //     var imageUrl = await (await uploadTask).ref.getDownloadURL();
     //     final String url_akshat = imageUrl.toString();
-    //     print(url_akshat);
     //     savetoDatabase(url_akshat);
     //     // goToHomePage();
     //   }

@@ -8,7 +8,6 @@ import 'package:url_launcher/url_launcher.dart';
 void _launchURL(String a) async {
   String url = "";
   if (a == "akshatlinkedin") {
-    print("hiii");
     url = 'https://www.linkedin.com/in/akshat-rastogi-3425aa1b8/';
   } else if (a == "akshattwitter") {
     url = 'https://twitter.com/AkshatRasogi';
@@ -198,9 +197,7 @@ List pages = [
 ];
 
 void dfd(moderatorslist) {
-  for (var i = 0; i < moderatorslist.length; i++) {
-    print(moderatorslist[i]);
-  }
+  for (var i = 0; i < moderatorslist.length; i++) {}
 }
 
 class meet_team extends StatelessWidget {

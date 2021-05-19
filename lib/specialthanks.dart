@@ -34,13 +34,10 @@ class _specialthanksState extends State<specialthanks> {
         event.snapshot.value['order'],
       );
       ss.add(sd);
-      setState(() {
-        print("Sponsors Found");
-      });
+      setState(() {});
     });
     super.initState();
   }
-
 
   List<SpecialThanksData> ss = [];
   final options = LiveOptions(
@@ -63,31 +60,31 @@ class _specialthanksState extends State<specialthanks> {
     reAnimateOnVisibility: false,
   );
 
-  Widget buildAnimatedItem(BuildContext context,
-      int index,
-      Animation<double> animation,) =>
+  Widget buildAnimatedItem(
+    BuildContext context,
+    int index,
+    Animation<double> animation,
+  ) =>
       // For example wrap with fade transition
-  FadeTransition(
-    opacity: Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(animation),
-    // And slide transition
-    child: SlideTransition(
-      position: Tween<Offset>(
-        begin: Offset(0, -0.1),
-        end: Offset.zero,
-      ).animate(animation),
-      // Paste you Widget
-      child: specialthanksUI(
-        ss[index].image,
-        ss[index].name,
-        ss[index].description,
-      )
-      ,
-    ),
-  );
-
+      FadeTransition(
+        opacity: Tween<double>(
+          begin: 0,
+          end: 1,
+        ).animate(animation),
+        // And slide transition
+        child: SlideTransition(
+          position: Tween<Offset>(
+            begin: Offset(0, -0.1),
+            end: Offset.zero,
+          ).animate(animation),
+          // Paste you Widget
+          child: specialthanksUI(
+            ss[index].image,
+            ss[index].name,
+            ss[index].description,
+          ),
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -126,13 +123,12 @@ class _specialthanksState extends State<specialthanks> {
                       // Other properties correspond to the `ListView.builder` / `ListView.separated` widget
                       itemCount: ss.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 100.w<576?3:(100.w<768?4:5),
+                        crossAxisCount: 100.w < 576 ? 3 : (100.w < 768 ? 4 : 5),
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
                       ),
                     ),
                   )
-
                 ],
               ),
             )),
@@ -140,11 +136,3 @@ class _specialthanksState extends State<specialthanks> {
     });
   }
 }
-
-
-
-
-
-
-
-

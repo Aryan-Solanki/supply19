@@ -27,8 +27,6 @@ class _moderatorVerifyState extends State<moderatorVerify> {
         .orderByChild("order")
         .onChildAdded
         .listen((event) {
-      print(event.snapshot.value);
-      print(event.snapshot.value['image']);
       Posts posts = new Posts(
           event.snapshot.value['image'],
           event.snapshot.value['description'],
