@@ -14,6 +14,7 @@ _makingPhoneCall(callString) async {
 }
 
 Widget PostsUI(
+    BuildContext context,
     String image,
     String description,
     String date,
@@ -31,6 +32,7 @@ Widget PostsUI(
   } else {
     verified = "Not Verified";
   }
+
   return Column(
     children: [
       Column(
