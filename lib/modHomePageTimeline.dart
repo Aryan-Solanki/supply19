@@ -6,6 +6,7 @@ import 'package:supply19/chooselocation.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'Posts.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'modpostui.dart';
 import 'postui.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:loading_hud/loading_hud.dart';
@@ -173,7 +174,7 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
                         child: ListView.builder(
                             itemCount: postList.length,
                             itemBuilder: (_, index) {
-                              return PostsUI(
+                              return ModPostsUI(
                                 postList[index].image,
                                 postList[index].description,
                                 postList[index].date,
@@ -344,7 +345,7 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
                       child: ListView.builder(
                           itemCount: postList.length,
                           itemBuilder: (_, index) {
-                            return PostsUI(
+                            return ModPostsUI(
                               postList[index].image,
                               postList[index].description,
                               postList[index].date,
