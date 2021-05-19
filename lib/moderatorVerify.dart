@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'modHomePage.dart';
 import 'notverifiedpostui.dart';
 import 'queryuidata.dart';
 import 'queryui.dart';
@@ -15,11 +16,11 @@ class moderatorVerify extends StatefulWidget {
 class _moderatorVerifyState extends State<moderatorVerify> {
   List<Posts> uq = [];
   List content = [];
-
+  GlobalKey<RefreshIndicatorState> refreshKey;
   @override
   void initState() {
     super.initState();
-
+    refreshKey = GlobalKey<RefreshIndicatorState>();
     FirebaseDatabase.instance
         .reference()
         .child("Posts")
@@ -47,63 +48,81 @@ class _moderatorVerifyState extends State<moderatorVerify> {
       }
       setState(() {
         content = [
-          ListView.builder(
-              itemCount: uq.length,
-              itemBuilder: (context, index) {
-                return SwipeActionCell(
-                  backgroundColor: Color(0xffededed),
-                  key: ObjectKey(uq[index]),
-                  performsFirstActionWithFullSwipe: true,
-                  trailingActions: <SwipeAction>[
-                    SwipeAction(
-                        title: "NOT VERIFIED",
-                        onTap: (CompletionHandler handler) async {
-                          await handler(true);
-                          var key = uq[index].key;
-                          DatabaseReference _ref = FirebaseDatabase.instance
-                              .reference()
-                              .child('Posts');
-                          _ref.child(key).update({'status': "fake not"});
-                          uq.removeAt(index);
-                          setState(() {});
-                        },
-                        color: Colors.red),
-                  ],
-                  leadingActions: [
-                    SwipeAction(
-                        title: "VERIFIED",
-                        onTap: (handler) async {
-                          await handler(true);
-                          var key = uq[index].key;
-                          DatabaseReference _ref = FirebaseDatabase.instance
-                              .reference()
-                              .child('Posts');
-                          _ref.child(key).update({'status': "true"});
-                          uq.removeAt(index);
-                          setState(() {});
-                        },
-                        color: Colors.green),
-                  ],
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: NotVerifiedPostsUI(
-                      uq[index].image,
-                      uq[index].description,
-                      uq[index].date,
-                      uq[index].time,
-                      uq[index].phnum,
-                      uq[index].volname,
-                      uq[index].status,
-                      uq[index].sname,
-                      uq[index].sphnum,
-                      uq[index].pursuit,
+          RefreshIndicator(
+            key: refreshKey,
+            onRefresh: () async {
+              await refreshList(3);
+            },
+            child: ListView.builder(
+                itemCount: uq.length,
+                itemBuilder: (context, index) {
+                  return SwipeActionCell(
+                    backgroundColor: Color(0xffededed),
+                    key: ObjectKey(uq[index]),
+                    performsFirstActionWithFullSwipe: true,
+                    trailingActions: <SwipeAction>[
+                      SwipeAction(
+                          title: "NOT VERIFIED",
+                          onTap: (CompletionHandler handler) async {
+                            await handler(true);
+                            var key = uq[index].key;
+                            DatabaseReference _ref = FirebaseDatabase.instance
+                                .reference()
+                                .child('Posts');
+                            _ref.child(key).update({'status': "fake not"});
+                            uq.removeAt(index);
+                            setState(() {});
+                          },
+                          color: Colors.red),
+                    ],
+                    leadingActions: [
+                      SwipeAction(
+                          title: "VERIFIED",
+                          onTap: (handler) async {
+                            await handler(true);
+                            var key = uq[index].key;
+                            DatabaseReference _ref = FirebaseDatabase.instance
+                                .reference()
+                                .child('Posts');
+                            _ref.child(key).update({'status': "true"});
+                            uq.removeAt(index);
+                            setState(() {});
+                          },
+                          color: Colors.green),
+                    ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: NotVerifiedPostsUI(
+                        context,
+                        uq[index].image,
+                        uq[index].description,
+                        uq[index].date,
+                        uq[index].time,
+                        uq[index].phnum,
+                        uq[index].volname,
+                        uq[index].status,
+                        uq[index].sname,
+                        uq[index].sphnum,
+                        uq[index].pursuit,
+                        uq[index].key,
+                      ),
                     ),
-                  ),
-                );
-              })
+                  );
+                }),
+          )
         ];
       });
     });
+  }
+
+  Future<Null> refreshList(int selected_item) async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => modHomePage(selectedItemPosition: 3)),
+    );
+    await Future.delayed(Duration(seconds: 2));
+    return null;
   }
 
   @override
@@ -111,60 +130,68 @@ class _moderatorVerifyState extends State<moderatorVerify> {
     return MaterialApp(
       home: Scaffold(
           backgroundColor: Color(0xffededed),
-          body: ListView.builder(
-              itemCount: uq.length,
-              itemBuilder: (context, index) {
-                return SwipeActionCell(
-                  backgroundColor: Color(0xffededed),
-                  key: ObjectKey(uq[index]),
-                  performsFirstActionWithFullSwipe: true,
-                  trailingActions: <SwipeAction>[
-                    SwipeAction(
-                        title: "NOT VERIFIED",
-                        onTap: (CompletionHandler handler) async {
-                          await handler(true);
-                          var key = uq[index].key;
-                          DatabaseReference _ref = FirebaseDatabase.instance
-                              .reference()
-                              .child('Posts');
-                          _ref.child(key).update({'status': "fake not"});
-                          uq.removeAt(index);
-                          setState(() {});
-                        },
-                        color: Colors.red),
-                  ],
-                  leadingActions: [
-                    SwipeAction(
-                        title: "VERIFIED",
-                        onTap: (handler) async {
-                          await handler(true);
-                          var key = uq[index].key;
-                          DatabaseReference _ref = FirebaseDatabase.instance
-                              .reference()
-                              .child('Posts');
-                          _ref.child(key).update({'status': "true"});
-                          uq.removeAt(index);
-                          setState(() {});
-                        },
-                        color: Colors.green),
-                  ],
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: NotVerifiedPostsUI(
-                      uq[index].image,
-                      uq[index].description,
-                      uq[index].date,
-                      uq[index].time,
-                      uq[index].phnum,
-                      uq[index].volname,
-                      uq[index].status,
-                      uq[index].sname,
-                      uq[index].sphnum,
-                      uq[index].pursuit,
+          body: RefreshIndicator(
+            key: refreshKey,
+            onRefresh: () async {
+              await refreshList(3);
+            },
+            child: ListView.builder(
+                itemCount: uq.length,
+                itemBuilder: (context, index) {
+                  return SwipeActionCell(
+                    backgroundColor: Color(0xffededed),
+                    key: ObjectKey(uq[index]),
+                    performsFirstActionWithFullSwipe: true,
+                    trailingActions: <SwipeAction>[
+                      SwipeAction(
+                          title: "NOT VERIFIED",
+                          onTap: (CompletionHandler handler) async {
+                            await handler(true);
+                            var key = uq[index].key;
+                            DatabaseReference _ref = FirebaseDatabase.instance
+                                .reference()
+                                .child('Posts');
+                            _ref.child(key).update({'status': "fake not"});
+                            uq.removeAt(index);
+                            setState(() {});
+                          },
+                          color: Colors.red),
+                    ],
+                    leadingActions: [
+                      SwipeAction(
+                          title: "VERIFIED",
+                          onTap: (handler) async {
+                            await handler(true);
+                            var key = uq[index].key;
+                            DatabaseReference _ref = FirebaseDatabase.instance
+                                .reference()
+                                .child('Posts');
+                            _ref.child(key).update({'status': "true"});
+                            uq.removeAt(index);
+                            setState(() {});
+                          },
+                          color: Colors.green),
+                    ],
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: NotVerifiedPostsUI(
+                        context,
+                        uq[index].image,
+                        uq[index].description,
+                        uq[index].date,
+                        uq[index].time,
+                        uq[index].phnum,
+                        uq[index].volname,
+                        uq[index].status,
+                        uq[index].sname,
+                        uq[index].sphnum,
+                        uq[index].pursuit,
+                        uq[index].key,
+                      ),
                     ),
-                  ),
-                );
-              })),
+                  );
+                }),
+          )),
     );
   }
 }

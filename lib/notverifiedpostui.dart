@@ -1,6 +1,11 @@
+import 'package:cool_alert/cool_alert.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:supply19/user_simple_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_animator/flutter_animator.dart';
+
+import 'modHomePage.dart';
 
 _makingPhoneCall(callString) async {
   var url = 'tel:' + callString;
@@ -12,6 +17,7 @@ _makingPhoneCall(callString) async {
 }
 
 Widget NotVerifiedPostsUI(
+    BuildContext context,
     String image,
     String description,
     String date,
@@ -21,13 +27,27 @@ Widget NotVerifiedPostsUI(
     String status,
     String sname,
     String sphnum,
-    String pursuit) {
+    String pursuit,
+    var key) {
   String verified;
   if (status != "fake") {
     verified = "Verified";
   } else {
     verified = "Not Verified";
   }
+
+  Future<Null> refreshList(int screen) async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => modHomePage(
+                selectedItemPosition: 3,
+              )),
+    );
+    await Future.delayed(Duration(seconds: 2));
+    return null;
+  }
+
   return Column(
     children: [
       Column(
@@ -191,16 +211,35 @@ Widget NotVerifiedPostsUI(
                           ? Text("In Pursuit By $pursuit")
                           : FlatButton(
                               onPressed: () {
-                                
+                                var _firebaseRef = FirebaseDatabase()
+                                    .reference()
+                                    .child('Posts');
+                                _firebaseRef.child(key).update({
+                                  "pursuit": UserSimplePreferences.getUserName()
+                                });
+                                CoolAlert.show(
+                                  context: context,
+                                  type: CoolAlertType.info,
+                                  text:
+                                      "You have been assigned this Post for Verification",
+                                  onConfirmBtnTap: () {
+                                    refreshList(3);
+                                  },
+                                );
                               },
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.done,color: Colors.green,),
-                              SizedBox(width: 10,),
-                              Text("Mark in Pursuit")
-                            ],
-                          ))
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.done,
+                                    color: Colors.green,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text("Mark in Pursuit")
+                                ],
+                              ))
                     ],
                   ),
                 ),
