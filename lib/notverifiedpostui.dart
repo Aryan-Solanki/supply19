@@ -21,7 +21,7 @@ Widget NotVerifiedPostsUI(
     String status,
     String sname,
     String sphnum,
-    String persuit) {
+    String pursuit) {
   String verified;
   if (status != "fake") {
     verified = "Verified";
@@ -190,10 +190,7 @@ Widget NotVerifiedPostsUI(
                       pursuit != ""
                           ? Text("In Pursuit By $pursuit")
                           : FlatButton(
-                              onPressed: () {
-
-                              },
-                          child: Text("Mark As Taken"))
+                              onPressed: () {}, child: Text("Mark As Taken"))
                     ],
                   ),
                 ),

@@ -29,19 +29,19 @@ class _moderatorVerifyState extends State<moderatorVerify> {
       print(event.snapshot.value);
       print(event.snapshot.value['image']);
       Posts posts = new Posts(
-        event.snapshot.value['image'],
-        event.snapshot.value['description'],
-        event.snapshot.value['date'],
-        event.snapshot.value['time'],
-        event.snapshot.value['phnum'],
-        event.snapshot.value['volname'],
-        event.snapshot.value['status'],
-        event.snapshot.value['location'],
-        event.snapshot.value['category'],
-        event.snapshot.value['sname'],
-        event.snapshot.value['sphnum'],
-        event.snapshot.key,
-      );
+          event.snapshot.value['image'],
+          event.snapshot.value['description'],
+          event.snapshot.value['date'],
+          event.snapshot.value['time'],
+          event.snapshot.value['phnum'],
+          event.snapshot.value['volname'],
+          event.snapshot.value['status'],
+          event.snapshot.value['location'],
+          event.snapshot.value['category'],
+          event.snapshot.value['sname'],
+          event.snapshot.value['sphnum'],
+          event.snapshot.key,
+          event.snapshot.value["pursuit"]);
       if (posts.status == "fake") {
         uq.add(posts);
       }
@@ -96,6 +96,7 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                       uq[index].status,
                       uq[index].sname,
                       uq[index].sphnum,
+                      uq[index].pursuit,
                     ),
                   ),
                 );
@@ -109,7 +110,7 @@ class _moderatorVerifyState extends State<moderatorVerify> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Color(0xffededed),
+          backgroundColor: Color(0xffededed),
           body: ListView.builder(
               itemCount: uq.length,
               itemBuilder: (context, index) {
@@ -159,6 +160,7 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                       uq[index].status,
                       uq[index].sname,
                       uq[index].sphnum,
+                      uq[index].pursuit,
                     ),
                   ),
                 );
