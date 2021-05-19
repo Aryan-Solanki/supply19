@@ -480,19 +480,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       print(event.snapshot.value);
       print(event.snapshot.value['image']);
       Posts posts = new Posts(
-        event.snapshot.value['image'],
-        event.snapshot.value['description'],
-        event.snapshot.value['date'],
-        event.snapshot.value['time'],
-        event.snapshot.value['phnum'],
-        event.snapshot.value['volname'],
-        event.snapshot.value['status'],
-        event.snapshot.value['location'],
-        event.snapshot.value['category'],
-        event.snapshot.value['sname'],
-        event.snapshot.value['sphnum'],
-        event.snapshot.key,
-      );
+          event.snapshot.value['image'],
+          event.snapshot.value['description'],
+          event.snapshot.value['date'],
+          event.snapshot.value['time'],
+          event.snapshot.value['phnum'],
+          event.snapshot.value['volname'],
+          event.snapshot.value['status'],
+          event.snapshot.value['location'],
+          event.snapshot.value['category'],
+          event.snapshot.value['sname'],
+          event.snapshot.value['sphnum'],
+          event.snapshot.key,
+          event.snapshot.value["pursuit"]);
 
       if (posts.status != "fake" && posts.status != "fake not") {
         if (city_name == '' &&

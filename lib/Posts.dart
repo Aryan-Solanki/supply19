@@ -10,7 +10,8 @@ class Posts {
       categpry,
       sname,
       sphnum,
-      key;
+      key,
+      pursuit;
   Posts(
       this.image,
       this.description,
@@ -23,5 +24,6 @@ class Posts {
       this.categpry,
       this.sname,
       this.sphnum,
-      this.key);
+      this.key,
+      this.pursuit);
 }
