@@ -355,7 +355,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         .orderByChild("order")
         .onChildAdded
         .listen((event) {
-      print(event.snapshot.value);
       UserData ud = new UserData(
         event.snapshot.value['email'],
         event.snapshot.value['name'],
@@ -477,8 +476,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         .orderByChild("order")
         .onChildAdded
         .listen((event) {
-      print(event.snapshot.value);
-      print(event.snapshot.value['image']);
       Posts posts = new Posts(
           event.snapshot.value['image'],
           event.snapshot.value['description'],
@@ -744,8 +741,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                             ),
                                             onPressed: () {
                                               UserSimplePreferences.setCity('');
-                                              print(UserSimplePreferences
-                                                  .getCity());
                                               setState(() {
                                                 Navigator.pushReplacement(
                                                   context,
@@ -799,7 +794,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                   color: Color(0xFF09427d), fontSize: 20.0),
                               onChanged: (newValue) {
                                 UserSimplePreferences.setCategory(newValue);
-                                print(UserSimplePreferences.getCategory());
                                 setState(() {
                                   categoryChoose = newValue;
                                   categorySelector = categoryChoose;

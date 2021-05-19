@@ -37,7 +37,7 @@ Widget NotVerifiedPostsUI(
   }
 
   Future<Null> refreshList(int screen) async {
-    Navigator.pushReplacement(
+    Navigator.push(
       context,
       MaterialPageRoute(
           builder: (context) => modHomePage(
