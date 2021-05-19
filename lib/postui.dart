@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 
@@ -177,6 +179,14 @@ Widget PostsUI(
                                           onPressed: () {
                                             _makingPhoneCall(sphnum);
                                           },
+                                          onLongPress: () {
+                                            Clipboard.setData(
+                                                ClipboardData(text: sphnum));
+                                            Toast.show(
+                                                "Copied to Clipboard", context,
+                                                duration: Toast.LENGTH_SHORT,
+                                                gravity: Toast.BOTTOM);
+                                          },
                                           child: Align(
                                             alignment: Alignment.center,
                                             child: Text(
@@ -293,6 +303,13 @@ Widget PostsUI(
                                   // padding: EdgeInsets.all(0),
                                   onPressed: () {
                                     _makingPhoneCall(phnum);
+                                  },
+                                  onLongPress: () {
+                                    Clipboard.setData(
+                                        ClipboardData(text: phnum));
+                                    Toast.show("Copied to Clipboard", context,
+                                        duration: Toast.LENGTH_SHORT,
+                                        gravity: Toast.BOTTOM);
                                   },
                                   child: FittedBox(
                                     fit: BoxFit.scaleDown,

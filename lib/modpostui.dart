@@ -1,6 +1,8 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 
@@ -90,15 +92,15 @@ Widget ModPostsUI(
                                 Container(
                                   padding: EdgeInsets.all(0),
                                   child: IconButton(
-                                    iconSize: 22,
-                                      onPressed:(){
-                                      
-                                      },
-                                      icon: Icon(Icons.delete,color: Colors.red,)),
+                                      iconSize: 22,
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      )),
                                 )
                               ],
                             )
-
                           ],
                         ),
                         SizedBox(
@@ -191,7 +193,15 @@ Widget ModPostsUI(
                                               MaterialTapTargetSize.shrinkWrap,
                                           // padding: EdgeInsets.all(0),
                                           onPressed: () {
-                                            _makingPhoneCall(phnum);
+                                            _makingPhoneCall(sphnum);
+                                          },
+                                          onLongPress: () {
+                                            Clipboard.setData(
+                                                ClipboardData(text: sphnum));
+                                            Toast.show(
+                                                "Copied to Clipboard", context,
+                                                duration: Toast.LENGTH_SHORT,
+                                                gravity: Toast.BOTTOM);
                                           },
                                           child: Align(
                                             alignment: Alignment.center,
@@ -309,6 +319,13 @@ Widget ModPostsUI(
                                   // padding: EdgeInsets.all(0),
                                   onPressed: () {
                                     _makingPhoneCall(phnum);
+                                  },
+                                  onLongPress: () {
+                                    Clipboard.setData(
+                                        ClipboardData(text: phnum));
+                                    Toast.show("Copied to Clipboard", context,
+                                        duration: Toast.LENGTH_SHORT,
+                                        gravity: Toast.BOTTOM);
                                   },
                                   child: FittedBox(
                                     fit: BoxFit.scaleDown,
