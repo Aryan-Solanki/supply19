@@ -191,11 +191,13 @@ Widget NotVerifiedPostsUI(
                           ? Text("In Pursuit By $pursuit")
                           : FlatButton(
                               onPressed: () {
-
+                                
                               },
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(Icons.done,color: Colors.green,),
+                              SizedBox(width: 10,),
                               Text("Mark in Pursuit")
                             ],
                           ))
