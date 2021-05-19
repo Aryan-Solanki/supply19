@@ -118,12 +118,110 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
   }
 
   List<UserData> moderatorslist = [];
+  List<String> listItem = [];
 
   @override
   void initState() {
     super.initState();
     List<UserData> userslist = [];
     refreshKey = GlobalKey<RefreshIndicatorState>();
+
+    FirebaseDatabase.instance
+        .reference()
+        .child("Category")
+        .onChildAdded
+        .listen((event) {
+      listItem.add(event.snapshot.value["name"]);
+      setState(() {
+        checkboollol();
+        tab = [
+          chooselocation(backlink: "moderator"),
+          PostQuery(
+            backlink: "moderator",
+          ),
+          SafeArea(
+            child: Container(
+              child: (postList.length == 0 || postList.length == null)
+                  ? Center(child: Text("No information available"))
+                  : RefreshIndicator(
+                      key: refreshKey,
+                      onRefresh: () async {
+                        await refreshList(2);
+                      },
+                      child: ListView.builder(
+                          itemCount: postList.length,
+                          itemBuilder: (_, index) {
+                            return PostsUI(
+                              postList[index].image,
+                              postList[index].description,
+                              postList[index].date,
+                              postList[index].time,
+                              postList[index].phnum,
+                              postList[index].volname,
+                              postList[index].status,
+                              postList[index].sname,
+                              postList[index].sphnum,
+                              postList[index].location,
+                              postList[index].categpry,
+                            );
+                          }),
+                    ),
+            ),
+          ),
+          SafeArea(
+              child: Column(
+            children: [
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                padding: EdgeInsets.symmetric(vertical: 10),
+                width: double.infinity,
+                color: Color(0xFFBDD4EB),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Text(
+                    "Leaderboard",
+                    style: TextStyle(
+                        color: Color(0xFF09427d),
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                  child: Expanded(
+                child: (userslist.length == 0)
+                    ? Center(child: Text("No information available"))
+                    : RefreshIndicator(
+                        key: refreshKeyQuery,
+                        onRefresh: () async {
+                          await refreshListQuery();
+                        },
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: userslist.length,
+                            itemBuilder: (_, index) {
+                              return RankUI(
+                                userslist[index].image,
+                                (index + 1),
+                                userslist[index].points,
+                                userslist[index].name,
+                              );
+                            }),
+                      ),
+              )),
+            ],
+          )),
+          meet_team(moderatorslist)
+        ];
+      });
+    });
+
     refreshLearderboard() {
       moderatorslist = [];
       userslist = [];
@@ -427,28 +525,6 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
   }
 
   String categoryChoose;
-  List listItem = [
-    "All Supplies",
-    "Beds",
-    "Oxygen",
-    "Ventilator",
-    "Fabiflu",
-    "Favipiravir",
-    "Oxygen Bed",
-    "Non Oxygen Bed",
-    "ICU Bed",
-    "Non-ICU Bed",
-    "Oxygen Refilling",
-    "Plasma",
-    "Tocilizumab",
-    "Remidivisir",
-    "Injection",
-    "Doctor",
-    "Hospital",
-    "Ambulance",
-    "Testing",
-    "Hospital At Home"
-  ];
 
   void checkboollol() {
     setState(() {

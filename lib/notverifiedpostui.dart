@@ -11,8 +11,16 @@ _makingPhoneCall(callString) async {
   }
 }
 
-Widget NotVerifiedPostsUI(String image, String description, String date, String time,
-    String phnum, String volname, String status, String sname, String sphnum) {
+Widget NotVerifiedPostsUI(
+    String image,
+    String description,
+    String date,
+    String time,
+    String phnum,
+    String volname,
+    String status,
+    String sname,
+    String sphnum) {
   String verified;
   if (status != "fake") {
     verified = "Verified";
@@ -115,8 +123,7 @@ Widget NotVerifiedPostsUI(String image, String description, String date, String 
                                               style: TextStyle(
                                                   fontSize: 15,
                                                   color: Colors.black,
-                                                  fontWeight:
-                                                      FontWeight.bold),
+                                                  fontWeight: FontWeight.bold),
                                             ),
                                           ),
                                           Expanded(
@@ -162,7 +169,7 @@ Widget NotVerifiedPostsUI(String image, String description, String date, String 
                                       child: TextButton(
                                         // padding: EdgeInsets.all(0),
                                         onPressed: () {
-                                          _makingPhoneCall(phnum);
+                                          _makingPhoneCall(sphnum);
                                         },
                                         child: Align(
                                           alignment: Alignment.center,
