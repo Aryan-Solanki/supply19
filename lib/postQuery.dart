@@ -128,9 +128,120 @@ class _PostQueryState extends State<PostQuery> {
     }
   }
 
+  List<DropdownMenuItem> categoriesList = [];
+
+  List<DropdownMenuItem> items() {
+    return categoriesList;
+  }
+
   @override
   void initState() {
     super.initState();
+
+    FirebaseDatabase.instance
+        .reference()
+        .child("Category")
+        .onChildAdded
+        .listen((event) {
+      categoriesList.add(
+        DropdownMenuItem(
+          child: Text(event.snapshot.value["name"]),
+          value: event.snapshot.value["name"],
+        ),
+      );
+      setState(() {
+        col = [
+          Text(
+            "Patient Name*",
+            style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 15),
+            decoration: BoxDecoration(
+                // borderRadius: BorderRadius.circular(5),
+                color: Color(0xffafc9e5)),
+            child: Container(
+              margin: EdgeInsets.only(left: 10.0),
+              child: TextField(
+                keyboardType: TextInputType.name,
+                onChanged: (value) {
+                  setState(() {
+                    pname = value.trim();
+                  });
+                },
+              ),
+            ),
+          ),
+          Text(
+            "Location*",
+            style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 15),
+            color: Color(0xffa7c2de),
+            child: SearchChoices.single(
+              items: city(),
+              value: selectedValueSingleDialog,
+              hint: "Search for your city",
+              onChanged: (value) {
+                if (value != null) {
+                  selected_city = value;
+                }
+              },
+              isExpanded: true,
+            ),
+          ),
+          Text(
+            "Select Lead Category*",
+            style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 15),
+            color: Color(0xffa7c2de),
+            child: SearchChoices.single(
+              items: categoriesList,
+              value: selectedValueSingleDialog,
+              hint: "Choose Categories",
+              onChanged: (value) {
+                if (value != null) {
+                  selected_item = value;
+                }
+              },
+              isExpanded: true,
+            ),
+          ),
+          Text(
+            "Phone Number*",
+            style: TextStyle(fontFamily: "OpenSans", fontSize: 18),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(vertical: 15),
+            decoration: BoxDecoration(color: Color(0xffafc9e5)),
+            child: Container(
+              padding: EdgeInsets.only(left: 10.0),
+              child: TextField(
+                obscureText: false,
+                keyboardType: TextInputType.phone,
+                onChanged: (value) {
+                  setState(() {
+                    phnum = value.trim().toString();
+                  });
+                },
+              ),
+            ),
+          ),
+          TextFormField(
+            decoration: InputDecoration(labelText: 'Description*'),
+            validator: (value) {
+              return value.isEmpty ? 'Description is empty' : null;
+            },
+            onSaved: (value) {
+              return _myValue = value;
+            },
+          ),
+        ];
+      });
+    });
 
     DatabaseReference ref0 = FirebaseDatabase.instance.reference();
     ref0.once().then((DataSnapshot snap1) {
@@ -208,7 +319,7 @@ class _PostQueryState extends State<PostQuery> {
         margin: EdgeInsets.symmetric(vertical: 15),
         color: Color(0xffa7c2de),
         child: SearchChoices.single(
-          items: items(),
+          items: categoriesList,
           value: selectedValueSingleDialog,
           hint: "Choose Categories",
           onChanged: (value) {
@@ -247,87 +358,6 @@ class _PostQueryState extends State<PostQuery> {
         onSaved: (value) {
           return _myValue = value;
         },
-      ),
-    ];
-  }
-
-  List<DropdownMenuItem> items() {
-    return [
-      DropdownMenuItem(
-        child: Text("Beds"),
-        value: "Beds",
-      ),
-      DropdownMenuItem(
-        child: Text("Oxygen"),
-        value: "Oxygen",
-      ),
-      DropdownMenuItem(
-        child: Text("Ventilator"),
-        value: "Ventilator",
-      ),
-      DropdownMenuItem(
-        child: Text("Fabiflu"),
-        value: "Fabiflu",
-      ),
-      DropdownMenuItem(
-        child: Text("Favipiravir"),
-        value: "Favipiravir",
-      ),
-      DropdownMenuItem(
-        child: Text("Oxygen Bed"),
-        value: "Oxygen Bed",
-      ),
-      DropdownMenuItem(
-        child: Text("Non Oxygen Bed"),
-        value: "Non Oxygen Bed",
-      ),
-      DropdownMenuItem(
-        child: Text("ICU Bed"),
-        value: "ICU Bed",
-      ),
-      DropdownMenuItem(
-        child: Text("Non-ICU Bed"),
-        value: "Non-ICU Bed",
-      ),
-      DropdownMenuItem(
-        child: Text("Oxygen Refilling"),
-        value: "Oxygen Refilling",
-      ),
-      DropdownMenuItem(
-        child: Text("Plasma"),
-        value: "Plasma",
-      ),
-      DropdownMenuItem(
-        child: Text("Tocilizumab"),
-        value: "Tocilizumab",
-      ),
-      DropdownMenuItem(
-        child: Text("Remidivisir"),
-        value: "Remidivisir",
-      ),
-      DropdownMenuItem(
-        child: Text("Injection"),
-        value: "Injection",
-      ),
-      DropdownMenuItem(
-        child: Text("Doctor"),
-        value: "Doctor",
-      ),
-      DropdownMenuItem(
-        child: Text("Hospital"),
-        value: "Hospital",
-      ),
-      DropdownMenuItem(
-        child: Text("Ambulance"),
-        value: "Ambulance",
-      ),
-      DropdownMenuItem(
-        child: Text("Testing"),
-        value: "Testing",
-      ),
-      DropdownMenuItem(
-        child: Text("Hospital At Home"),
-        value: "Hospital At Home",
       ),
     ];
   }

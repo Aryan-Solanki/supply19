@@ -175,7 +175,7 @@ Widget PostsUI(
                                               MaterialTapTargetSize.shrinkWrap,
                                           // padding: EdgeInsets.all(0),
                                           onPressed: () {
-                                            _makingPhoneCall(phnum);
+                                            _makingPhoneCall(sphnum);
                                           },
                                           child: Align(
                                             alignment: Alignment.center,
