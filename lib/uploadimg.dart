@@ -283,15 +283,25 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
             borderRadius: BorderRadius.circular(5), color: Color(0xffafc9e5)),
         child: Container(
           padding: EdgeInsets.only(left: 10.0),
-          child: TextField(
-            decoration: InputDecoration(hintText: "(Optional)"),
-            keyboardType: TextInputType.phone,
-            onChanged: (value) {
-              setState(() {
-                sphnum = value.trim();
-              });
-            },
-          ),
+          child: Row(
+            children: [
+              Text(
+                " +91 - ",
+                style: TextStyle(fontSize: 17),
+              ),
+              Expanded(
+                child: TextField(
+                  decoration: InputDecoration(hintText: "(Optional)"),
+                  keyboardType: TextInputType.phone,
+                  onChanged: (value) {
+                    setState(() {
+                      sphnum = value.trim();
+                    });
+                  },
+                ),
+              ),
+            ],
+          )
         ),
       ),
       TextFormField(

@@ -228,15 +228,25 @@ class _PostQueryState extends State<PostQuery> {
         decoration: BoxDecoration(color: Color(0xffafc9e5)),
         child: Container(
           padding: EdgeInsets.only(left: 10.0),
-          child: TextField(
-            obscureText: false,
-            keyboardType: TextInputType.phone,
-            onChanged: (value) {
-              setState(() {
-                phnum = value.trim().toString();
-              });
-            },
-          ),
+          child: Row(
+            children: [
+              Text(
+                " +91 - ",
+                style: TextStyle(fontSize: 17),
+              ),
+              Expanded( 
+                child: TextField(
+                  obscureText: false,
+                  keyboardType: TextInputType.phone,
+                  onChanged: (value) {
+                    setState(() {
+                      phnum = value.trim().toString();
+                    });
+                  },
+                ),
+              ),
+            ],
+          )
         ),
       ),
       TextFormField(
