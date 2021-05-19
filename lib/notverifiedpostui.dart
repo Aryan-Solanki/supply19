@@ -193,7 +193,12 @@ Widget NotVerifiedPostsUI(
                               onPressed: () {
 
                               },
-                          child: Text("Mark As Taken"))
+                          child: Row(
+                            children: [
+                              Icon(Icons.done,color: Colors.green,),
+                              Text("Mark in Pursuit")
+                            ],
+                          ))
                     ],
                   ),
                 ),
