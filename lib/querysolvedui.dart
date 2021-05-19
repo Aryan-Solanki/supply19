@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animator/flutter_animator.dart';
+import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 _makingPhoneCall(callString) async {
@@ -12,6 +14,7 @@ _makingPhoneCall(callString) async {
 }
 
 Widget QuerySolvedUI(
+    BuildContext context,
     String image,
     String description,
     String date,
@@ -124,7 +127,7 @@ Widget QuerySolvedUI(
                       children: [
                         Expanded(
                           child: Text(
-                            "   Cotact No. ",
+                            "   Contact No. ",
                             style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.black,
@@ -136,6 +139,14 @@ Widget QuerySolvedUI(
                             // padding: EdgeInsets.all(0),
                             onPressed: () {
                               _makingPhoneCall(phnum);
+                            },
+                            onLongPress: () {
+                              Clipboard.setData(
+                                  ClipboardData(text: phnum));
+                              Toast.show(
+                                  "Copied to Clipboard", context,
+                                  duration: Toast.LENGTH_SHORT,
+                                  gravity: Toast.BOTTOM);
                             },
                             child: Align(
                               alignment: Alignment.center,
@@ -262,6 +273,14 @@ Widget QuerySolvedUI(
                       // padding: EdgeInsets.all(0),
                       onPressed: () {
                         _makingPhoneCall(phnum);
+                      },
+                      onLongPress: () {
+                        Clipboard.setData(
+                            ClipboardData(text: phnum));
+                        Toast.show(
+                            "Copied to Clipboard", context,
+                            duration: Toast.LENGTH_SHORT,
+                            gravity: Toast.BOTTOM);
                       },
                       child: FittedBox(
                         fit: BoxFit.scaleDown,

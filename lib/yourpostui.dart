@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animator/flutter_animator.dart';
+import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 _makingPhoneCall(callString) async {
@@ -11,7 +13,7 @@ _makingPhoneCall(callString) async {
   }
 }
 
-Widget yourPostsUI(String image, String description, String date, String time,
+Widget yourPostsUI(BuildContext context,String image, String description, String date, String time,
     String phnum, String volname, String status, String sname, String sphnum) {
   String verified;
   if (status != "fake") {
@@ -144,7 +146,7 @@ Widget yourPostsUI(String image, String description, String date, String time,
                             children: [
                               Expanded(
                                 child: Text(
-                                  "   Cotact No. ",
+                                  "   Contact No. ",
                                   style: TextStyle(
                                       fontSize: 15,
                                       color: Colors.black,
@@ -156,6 +158,14 @@ Widget yourPostsUI(String image, String description, String date, String time,
                                   // padding: EdgeInsets.all(0),
                                   onPressed: () {
                                     _makingPhoneCall(sphnum);
+                                  },
+                                  onLongPress: () {
+                                    Clipboard.setData(
+                                        ClipboardData(text: sphnum));
+                                    Toast.show(
+                                        "Copied to Clipboard", context,
+                                        duration: Toast.LENGTH_SHORT,
+                                        gravity: Toast.BOTTOM);
                                   },
                                   child: Align(
                                     alignment: Alignment.center,

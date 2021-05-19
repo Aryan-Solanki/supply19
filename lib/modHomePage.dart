@@ -251,6 +251,7 @@ class _modHomePageState extends State<modHomePage>
                                         color: Colors.green),
                                   ],
                                   child: QueryUI(
+                                    context,
                                     uqu[index].image,
                                     uqu[index].description,
                                     uqu[index].date,
@@ -266,6 +267,7 @@ class _modHomePageState extends State<modHomePage>
                               itemCount: uqs.length,
                               itemBuilder: (context, index) {
                                 return QuerySolvedUI(
+                                  context,
                                   uqs[index].image,
                                   uqs[index].description,
                                   uqs[index].date,
@@ -295,6 +297,7 @@ class _modHomePageState extends State<modHomePage>
                           itemCount: postListuser.length,
                           itemBuilder: (_, index) {
                             return yourPostsUI(
+                              context,
                               postListuser[index].image,
                               postListuser[index].description,
                               postListuser[index].date,
@@ -414,6 +417,7 @@ class _modHomePageState extends State<modHomePage>
                                       color: Colors.green),
                                 ],
                                 child: QueryUI(
+                                  context,
                                   uqu[index].image,
                                   uqu[index].description,
                                   uqu[index].date,
@@ -429,6 +433,7 @@ class _modHomePageState extends State<modHomePage>
                             itemCount: uqs.length,
                             itemBuilder: (context, index) {
                               return QuerySolvedUI(
+                                context,
                                 uqs[index].image,
                                 uqs[index].description,
                                 uqs[index].date,
@@ -458,6 +463,7 @@ class _modHomePageState extends State<modHomePage>
                         itemCount: postListuser.length,
                         itemBuilder: (_, index) {
                           return yourPostsUI(
+                            context,
                             postListuser[index].image,
                             postListuser[index].description,
                             postListuser[index].date,
@@ -580,6 +586,7 @@ class _modHomePageState extends State<modHomePage>
                                       color: Colors.green),
                                 ],
                                 child: QueryUI(
+                                  context,
                                   uqu[index].image,
                                   uqu[index].description,
                                   uqu[index].date,
@@ -595,6 +602,7 @@ class _modHomePageState extends State<modHomePage>
                             itemCount: uqs.length,
                             itemBuilder: (context, index) {
                               return QuerySolvedUI(
+                                context,
                                 uqs[index].image,
                                 uqs[index].description,
                                 uqs[index].date,
@@ -624,6 +632,7 @@ class _modHomePageState extends State<modHomePage>
                         itemCount: postListuser.length,
                         itemBuilder: (_, index) {
                           return yourPostsUI(
+                            context,
                             postListuser[index].image,
                             postListuser[index].description,
                             postListuser[index].date,
@@ -759,6 +768,7 @@ class _modHomePageState extends State<modHomePage>
                                       color: Colors.green),
                                 ],
                                 child: QueryUI(
+                                  context,
                                   uqu[index].image,
                                   uqu[index].description,
                                   uqu[index].date,
@@ -774,6 +784,7 @@ class _modHomePageState extends State<modHomePage>
                             itemCount: uqs.length,
                             itemBuilder: (context, index) {
                               return QuerySolvedUI(
+                                context,
                                 uqs[index].image,
                                 uqs[index].description,
                                 uqs[index].date,
@@ -803,6 +814,7 @@ class _modHomePageState extends State<modHomePage>
                         itemCount: postListuser.length,
                         itemBuilder: (_, index) {
                           return yourPostsUI(
+                            context,
                             postListuser[index].image,
                             postListuser[index].description,
                             postListuser[index].date,
@@ -932,6 +944,7 @@ class _modHomePageState extends State<modHomePage>
                                   color: Colors.green),
                             ],
                             child: QueryUI(
+                              context,
                               uqu[index].image,
                               uqu[index].description,
                               uqu[index].date,
@@ -947,6 +960,7 @@ class _modHomePageState extends State<modHomePage>
                         itemCount: uqs.length,
                         itemBuilder: (context, index) {
                           return QuerySolvedUI(
+                            context,
                             uqs[index].image,
                             uqs[index].description,
                             uqs[index].date,
@@ -976,6 +990,7 @@ class _modHomePageState extends State<modHomePage>
                     itemCount: postListuser.length,
                     itemBuilder: (_, index) {
                       return yourPostsUI(
+                        context,
                         postListuser[index].image,
                         postListuser[index].description,
                         postListuser[index].date,

@@ -1,7 +1,9 @@
 import 'package:cool_alert/cool_alert.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:supply19/user_simple_preferences.dart';
+import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_animator/flutter_animator.dart';
 
@@ -226,7 +228,7 @@ class _NotVerifiedPostsUIState extends State<NotVerifiedPostsUI> {
                                     children: [
                                       Expanded(
                                         child: Text(
-                                          "   Cotact No. ",
+                                          "   Contact No. ",
                                           style: TextStyle(
                                               fontSize: 15,
                                               color: Colors.black,
@@ -238,6 +240,14 @@ class _NotVerifiedPostsUIState extends State<NotVerifiedPostsUI> {
                                           // padding: EdgeInsets.all(0),
                                           onPressed: () {
                                             _makingPhoneCall(sphnum);
+                                          },
+                                          onLongPress: () {
+                                            Clipboard.setData(
+                                                ClipboardData(text: sphnum));
+                                            Toast.show(
+                                                "Copied to Clipboard", context,
+                                                duration: Toast.LENGTH_SHORT,
+                                                gravity: Toast.BOTTOM);
                                           },
                                           child: Align(
                                             alignment: Alignment.center,
@@ -322,6 +332,13 @@ class _NotVerifiedPostsUIState extends State<NotVerifiedPostsUI> {
                                 // padding: EdgeInsets.all(0),
                                 onPressed: () {
                                   _makingPhoneCall(phnum);
+                                },
+                                onLongPress: () {
+                                  Clipboard.setData(
+                                      ClipboardData(text: sphnum));
+                                  Toast.show("Copied to Clipboard", context,
+                                      duration: Toast.LENGTH_SHORT,
+                                      gravity: Toast.BOTTOM);
                                 },
                                 child: FittedBox(
                                   fit: BoxFit.scaleDown,

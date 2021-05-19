@@ -161,6 +161,7 @@ class _regHomePageState extends State<regHomePage>
                           itemCount: postListuser.length,
                           itemBuilder: (_, index) {
                             return yourPostsUI(
+                              context,
                               postListuser[index].image,
                               postListuser[index].description,
                               postListuser[index].date,
@@ -222,6 +223,7 @@ class _regHomePageState extends State<regHomePage>
                         itemCount: postListuser.length,
                         itemBuilder: (_, index) {
                           return yourPostsUI(
+                            context,
                             postListuser[index].image,
                             postListuser[index].description,
                             postListuser[index].date,
@@ -298,6 +300,7 @@ class _regHomePageState extends State<regHomePage>
                         itemCount: postListuser.length,
                         itemBuilder: (_, index) {
                           return yourPostsUI(
+                            context,
                             postListuser[index].image,
                             postListuser[index].description,
                             postListuser[index].date,
