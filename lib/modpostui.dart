@@ -1,10 +1,12 @@
 import 'package:cool_alert/cool_alert.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_animator/flutter_animator.dart';
+import 'modHomePageTimeline.dart';
 
 _makingPhoneCall(callString) async {
   var url = 'tel:' + callString;
@@ -16,6 +18,7 @@ _makingPhoneCall(callString) async {
 }
 
 Widget ModPostsUI(
+    BuildContext context,
     String image,
     String description,
     String date,
@@ -26,13 +29,27 @@ Widget ModPostsUI(
     String sname,
     String sphnum,
     String location,
-    String category) {
+    String category,
+    var key) {
   String verified;
   if (status != "fake") {
     verified = "Verified";
   } else {
     verified = "Not Verified";
   }
+
+  Future<Null> refreshList(int screen) async {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => modHomePageTimeline(
+                selectedItemPosition: 2,
+              )),
+    );
+    await Future.delayed(Duration(seconds: 2));
+    return null;
+  }
+
   return Column(
     children: [
       Column(
@@ -93,7 +110,25 @@ Widget ModPostsUI(
                                   padding: EdgeInsets.all(0),
                                   child: IconButton(
                                       iconSize: 22,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        CoolAlert.show(
+                                          context: context,
+                                          type: CoolAlertType.confirm,
+                                          text:
+                                              "Are you sure you want to delete this post",
+                                          onConfirmBtnTap: () {
+                                            var _firebaseRef =
+                                                FirebaseDatabase()
+                                                    .reference()
+                                                    .child('Posts');
+                                            _firebaseRef.child(key).remove();
+                                            Navigator.of(context,
+                                                    rootNavigator: true)
+                                                .pop();
+                                            refreshList(2);
+                                          },
+                                        );
+                                      },
                                       icon: Icon(
                                         Icons.delete,
                                         color: Colors.red,
