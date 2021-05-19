@@ -154,6 +154,7 @@ class _regTimelineState extends State<regTimeline>
                           itemCount: postList.length,
                           itemBuilder: (_, index) {
                             return PostsUI(
+                              context,
                               postList[index].image,
                               postList[index].description,
                               postList[index].date,
@@ -271,6 +272,7 @@ class _regTimelineState extends State<regTimeline>
                             itemCount: postList.length,
                             itemBuilder: (_, index) {
                               return PostsUI(
+                                context,
                                 postList[index].image,
                                 postList[index].description,
                                 postList[index].date,
@@ -439,6 +441,7 @@ class _regTimelineState extends State<regTimeline>
                           itemCount: postList.length,
                           itemBuilder: (_, index) {
                             return PostsUI(
+                                context,
                                 postList[index].image,
                                 postList[index].description,
                                 postList[index].date,

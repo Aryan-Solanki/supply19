@@ -157,6 +157,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           itemCount: postList.length,
                           itemBuilder: (_, index) {
                             return PostsUI(
+                              context,
                               postList[index].image,
                               postList[index].description,
                               postList[index].date,
@@ -276,6 +277,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           itemCount: postList.length,
                           itemBuilder: (_, index) {
                             return PostsUI(
+                              context,
                               postList[index].image,
                               postList[index].description,
                               postList[index].date,
@@ -391,6 +393,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           itemCount: postList.length,
                           itemBuilder: (_, index) {
                             return PostsUI(
+                              context,
                               postList[index].image,
                               postList[index].description,
                               postList[index].date,
@@ -532,6 +535,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           itemCount: postList.length,
                           itemBuilder: (_, index) {
                             return PostsUI(
+                              context,
                               postList[index].image,
                               postList[index].description,
                               postList[index].date,
