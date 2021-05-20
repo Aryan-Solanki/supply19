@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:supply19/user_simple_preferences.dart';
 import 'modHomePage.dart';
 import 'notverifiedpostui.dart';
 import 'queryuidata.dart';
@@ -161,10 +163,44 @@ class _moderatorVerifyState extends State<moderatorVerify> {
                           onTap: (handler) async {
                             await handler(true);
                             var key = uq[index].key;
-                            DatabaseReference _ref = FirebaseDatabase.instance
-                                .reference()
-                                .child('Posts');
-                            _ref.child(key).update({'status': "true"});
+                            DatabaseReference _ref =
+                                FirebaseDatabase.instance.reference();
+                            int current_post_no = (await _ref
+                                    .child("current")
+                                    .child("post_no")
+                                    .once())
+                                .value;
+                            String phnum = (await _ref
+                                    .child("Posts")
+                                    .child(key)
+                                    .child("phnum")
+                                    .once())
+                                .value;
+
+                            var dbTimeKey = new DateTime.now();
+                            var formatDate = new DateFormat('MMM d, yyyy');
+                            var formatTime = new DateFormat('EEEE, hh:mm aaa');
+
+                            String date = formatDate.format(dbTimeKey);
+                            String time = formatTime.format(dbTimeKey);
+                            print(current_post_no);
+                            _ref.child('Posts').child(key).update({
+                              'status': "true",
+                              "post_num": current_post_no + 1,
+                              "order": 9999999 - current_post_no,
+                              "date": date,
+                              "time": time,
+                            });
+                            if (phnum == "8433098945") {
+                              _ref.child('Posts').child(key).update({
+                                'volname': UserSimplePreferences.getUserName(),
+                                "phnum": UserSimplePreferences.getphonenumber()
+                              });
+                            }
+                            _ref.child('current').update({
+                              'post_no': current_post_no + 1,
+                            });
+
                             uq.removeAt(index);
                             setState(() {});
                           },
