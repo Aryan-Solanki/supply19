@@ -130,13 +130,13 @@ class _disclaimerState extends State<disclaimer> {
                       child: Container(
                         margin: EdgeInsets.only(bottom: 30.0),
                         child: Text(
-                          """This app will provide you with verified information of Covid-19 supplies and resources. Although we will maintain these records, to be as accurate as possible, but it is still advised that you trust the information provided on the app, at your own risk. We advise you to take all safety precautions set forth by the Government of India, and respect all the laws and health and safety requirements such as\n
+                          """This app will provide you with verified information of supplies and resources. Although we will maintain these records, to be as accurate as possible, but it is still advised that you trust the information provided on the app, at your own risk. We advise you to take all safety precautions set forth by the Government of India, and respect all the laws and health and safety requirements such as\n
 Epidemic Diseases Act, 1897& 1937 \n
 Disaster Management Act, 2005 \n
 International Health Regulations, 2005 \n
 National Health Bill, 2009 \n
 Epidemic Diseases Ordinance, 2020 \n               
-Every information appearing on the app, is strictly monitored by our team of moderators from Bennett University, Greater Noida, India. We are trying to maintain a PAN-India record of all medical supplies, if you are unable to find the resources that you need. You can post a query regarding the same. Our team of moderators will respond to your queries personally by calling the phone number that you provide to us in the query section.""",
+Every information appearing on the app, is strictly monitored by our team of moderators from Pratyek NGO & Bennett University, Greater Noida, India. We are trying to maintain a PAN-India record of all medical supplies, if you are unable to find the resources that you need. You can post a query regarding the same. Our team of moderators will respond to your queries personally by calling the phone number that you provide to us in the query section.""",
                           style: TextStyle(
                             fontSize: 15,
                             fontFamily: "OpenSans",

@@ -307,6 +307,7 @@ class _modHomePageState extends State<modHomePage>
                               postListuser[index].status,
                               postListuser[index].sname,
                               postListuser[index].sphnum,
+                              postListuser[index].categpry,
                             );
                           }),
                     ),
@@ -473,6 +474,7 @@ class _modHomePageState extends State<modHomePage>
                             postListuser[index].status,
                             postListuser[index].sname,
                             postListuser[index].sphnum,
+                            postListuser[index].categpry,
                           );
                         }),
                   ),
@@ -642,6 +644,7 @@ class _modHomePageState extends State<modHomePage>
                             postListuser[index].status,
                             postListuser[index].sname,
                             postListuser[index].sphnum,
+                            postListuser[index].categpry,
                           );
                         }),
                   ),
@@ -824,6 +827,7 @@ class _modHomePageState extends State<modHomePage>
                             postListuser[index].status,
                             postListuser[index].sname,
                             postListuser[index].sphnum,
+                            postListuser[index].categpry,
                           );
                         }),
                   ),
@@ -1000,6 +1004,7 @@ class _modHomePageState extends State<modHomePage>
                         postListuser[index].status,
                         postListuser[index].sname,
                         postListuser[index].sphnum,
+                        postListuser[index].categpry,
                       );
                     }),
               ),

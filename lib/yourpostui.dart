@@ -13,8 +13,18 @@ _makingPhoneCall(callString) async {
   }
 }
 
-Widget yourPostsUI(BuildContext context,String image, String description, String date, String time,
-    String phnum, String volname, String status, String sname, String sphnum) {
+Widget yourPostsUI(
+    BuildContext context,
+    String image,
+    String description,
+    String date,
+    String time,
+    String phnum,
+    String volname,
+    String status,
+    String sname,
+    String sphnum,
+    String category) {
   String verified;
   if (status != "fake") {
     verified = "Verified";
@@ -87,6 +97,37 @@ Widget yourPostsUI(BuildContext context,String image, String description, String
                   description,
                   // style: Theme.of(context).textTheme.subhead,
                   textAlign: TextAlign.center,
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 0.0),
+                  padding: EdgeInsets.all(0.0),
+                  child: Container(
+                    color: Colors.white,
+                    margin: EdgeInsets.only(top: 20.0),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            "   Category ",
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              category,
+                              style:
+                                  TextStyle(fontSize: 15, color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 (sname == null || sname == "")
                     ? SizedBox(
@@ -162,8 +203,7 @@ Widget yourPostsUI(BuildContext context,String image, String description, String
                                   onLongPress: () {
                                     Clipboard.setData(
                                         ClipboardData(text: sphnum));
-                                    Toast.show(
-                                        "Copied to Clipboard", context,
+                                    Toast.show("Copied to Clipboard", context,
                                         duration: Toast.LENGTH_SHORT,
                                         gravity: Toast.BOTTOM);
                                   },

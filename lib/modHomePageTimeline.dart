@@ -366,7 +366,9 @@ class _modHomePageTimelineState extends State<modHomePageTimeline>
         if (event.snapshot.value['verify'] == "yes" &&
             (event.snapshot.value['name'] != "Akshat Rastogi" &&
                 event.snapshot.value['name'] != "Aryan Solanki")) {
-          moderatorslist.add(ud);
+          if (event.snapshot.value["meet_team"] == "yes") {
+            moderatorslist.add(ud);
+          }
         }
       });
     }

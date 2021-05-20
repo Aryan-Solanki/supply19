@@ -171,6 +171,7 @@ class _regHomePageState extends State<regHomePage>
                               postListuser[index].status,
                               postListuser[index].sname,
                               postListuser[index].sphnum,
+                              postListuser[index].categpry,
                             );
                           }),
                     ),
@@ -233,6 +234,7 @@ class _regHomePageState extends State<regHomePage>
                             postListuser[index].status,
                             postListuser[index].sname,
                             postListuser[index].sphnum,
+                            postListuser[index].categpry,
                           );
                         }),
                   ),
@@ -310,6 +312,7 @@ class _regHomePageState extends State<regHomePage>
                             postListuser[index].status,
                             postListuser[index].sname,
                             postListuser[index].sphnum,
+                            postListuser[index].categpry,
                           );
                         }),
                   ),

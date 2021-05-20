@@ -270,7 +270,7 @@ Widget PostsUI(
                           height: 20.0,
                         ),
                         Text(
-                          "Verified Source by Moderators from Bennett University",
+                          "Verified Source by Moderators from Bennett University & Pratyek NGO",
                           style: TextStyle(color: Colors.black, fontSize: 10.0),
                         ),
                       ],

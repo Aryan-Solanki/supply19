@@ -31,6 +31,7 @@ class NotVerifiedPostsUI extends StatefulWidget {
   String sphnum;
   String pursuit;
   String key1;
+  String category;
 
   NotVerifiedPostsUI(
       this.context,
@@ -44,7 +45,8 @@ class NotVerifiedPostsUI extends StatefulWidget {
       this.sname,
       this.sphnum,
       this.pursuit,
-      this.key1);
+      this.key1,
+      this.category);
   @override
   _NotVerifiedPostsUIState createState() => _NotVerifiedPostsUIState(
       context,
@@ -58,7 +60,8 @@ class NotVerifiedPostsUI extends StatefulWidget {
       sname,
       sphnum,
       pursuit,
-      key1);
+      key1,
+      category);
 }
 
 class _NotVerifiedPostsUIState extends State<NotVerifiedPostsUI> {
@@ -74,6 +77,7 @@ class _NotVerifiedPostsUIState extends State<NotVerifiedPostsUI> {
   String sphnum;
   String pursuit;
   String key1;
+  String category;
   _NotVerifiedPostsUIState(
       this.context,
       this.image,
@@ -86,7 +90,8 @@ class _NotVerifiedPostsUIState extends State<NotVerifiedPostsUI> {
       this.sname,
       this.sphnum,
       this.pursuit,
-      this.key1);
+      this.key1,
+      this.category);
   @override
   Widget build(BuildContext context) {
     String verified;
@@ -214,6 +219,37 @@ class _NotVerifiedPostsUIState extends State<NotVerifiedPostsUI> {
                                   ),
                                 ),
                               ),
+                        Container(
+                          margin: EdgeInsets.only(top: 0.0),
+                          padding: EdgeInsets.all(0.0),
+                          child: Container(
+                            color: Colors.white,
+                            margin: EdgeInsets.only(top: 20.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    "   Category ",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      category,
+                                      style: TextStyle(
+                                          fontSize: 15, color: Colors.black),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                         (sphnum == null || sphnum == "")
                             ? SizedBox(
                                 height: 1.0,
