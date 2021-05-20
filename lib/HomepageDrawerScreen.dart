@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:supply19/HomePage.dart';
-import 'package:supply19/covid.dart';
-import 'package:supply19/plasma.dart';
+
 import 'package:supply19/privacypolicy.dart';
 import 'package:supply19/registration.dart';
 import 'package:supply19/specialthanks.dart';
@@ -130,58 +129,6 @@ class _HomepageDrawerScreenState extends State<HomepageDrawerScreen> {
                               ),
                               Text(
                                 "  Share App",
-                                style: TextStyle(
-                                    fontFamily: "OpenSans",
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: Colors.white),
-                              )
-                            ],
-                          )),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      FlatButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => plasma()));
-                          },
-                          child: Row(
-                            children: [
-                              // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                "About Plasma",
-                                style: TextStyle(
-                                    fontFamily: "OpenSans",
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                    color: Colors.white),
-                              )
-                            ],
-                          )),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      FlatButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => covid()));
-                          },
-                          child: Row(
-                            children: [
-                              // FaIcon(FontAwesomeIcons.solidHandshake,size: 25,color: Colors.white,),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                "About Covid",
                                 style: TextStyle(
                                     fontFamily: "OpenSans",
                                     fontWeight: FontWeight.bold,
