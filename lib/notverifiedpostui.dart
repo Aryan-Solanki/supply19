@@ -6,7 +6,7 @@ import 'package:supply19/user_simple_preferences.dart';
 import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_animator/flutter_animator.dart';
-
+import 'package:slide_popup_dialog/slide_popup_dialog.dart';
 import 'modHomePage.dart';
 
 _makingPhoneCall(callString) async {
@@ -19,6 +19,7 @@ _makingPhoneCall(callString) async {
 }
 
 class NotVerifiedPostsUI extends StatefulWidget {
+
   BuildContext context;
   String image;
   String description;
@@ -92,6 +93,78 @@ class _NotVerifiedPostsUIState extends State<NotVerifiedPostsUI> {
       this.pursuit,
       this.key1,
       this.category);
+
+  String _myValue;
+  void _showDialog() {
+    _myValue=description;
+    var txt = TextEditingController();
+    txt.text=description;
+    showSlideDialog(
+      backgroundColor: Color(0xffededed),
+      context: context,
+      child: Container(
+
+        margin: EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          children: [
+            Text("Edit Description",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
+            SizedBox(height: 10,),
+            Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10)
+              ),
+              
+              child:Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  TextField(
+                    controller: txt,
+                    maxLines: 6,
+                    decoration: InputDecoration(
+                      hintText: "Add New Description",
+                      border: InputBorder.none,
+                    ),
+                    keyboardType: TextInputType.phone,
+                    onChanged: (value) {
+                      setState(() {
+                        _myValue=value;
+                      });
+                    },
+
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 20,),
+            FlatButton(
+              onPressed: (){
+                print(_myValue);
+              },
+              child: Container(
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Color(0xFFBDD4EB)
+                ),
+
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.save,size: 30,),
+                    Text("Save Changes",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),)
+                  ],
+                ),
+              ),
+            )
+
+          ],
+        ),
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     String verified;
@@ -149,11 +222,19 @@ class _NotVerifiedPostsUIState extends State<NotVerifiedPostsUI> {
                                       ),
                                     ],
                             ),
-                            Text(
-                              time,
-                              // style: Theme.of(context).textTheme.subtitle,
-                              textAlign: TextAlign.center,
+                            Row(
+                              children: [
+                                Text(
+                                  time,
+                                  // style: Theme.of(context).textTheme.subtitle,
+                                  textAlign: TextAlign.center,
+                                ),
+                                IconButton(icon: Icon(Icons.edit,color: Colors.black,), onPressed: (){
+                                  _showDialog();
+                                })
+                              ],
                             )
+
                           ],
                         ),
                         SizedBox(

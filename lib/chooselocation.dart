@@ -144,7 +144,7 @@ class _chooselocationState extends State<chooselocation> {
                             child: FlatButton(
                                 color: btncolor,
                                 onPressed: () {
-                                  selected_city = "Bangalore";
+                                  selected_city = "Haryana";
                                   UserSimplePreferences.setCity(selected_city);
                                   if (backlink == "moderator") {
                                     Navigator.pushReplacement(
@@ -173,7 +173,7 @@ class _chooselocationState extends State<chooselocation> {
                                     );
                                   }
                                 },
-                                child: Text("Bangalore")),
+                                child: Text("Haryana")),
                           ),
                           SizedBox(
                             width: 7,

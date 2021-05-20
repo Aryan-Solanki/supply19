@@ -2112,6 +2112,10 @@ List<DropdownMenuItem> city(){
       child: Text("Kavaratti"),
       value: "Kavaratti",
     ),
+    DropdownMenuItem(
+      child: Text("Haryana"),
+      value: "Haryana",
+    ),
 
   ];
 }

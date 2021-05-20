@@ -59,6 +59,7 @@ dependencies:
   intro_slider: ^2.4.3
   auto_animated: ^3.0.0
   hexagon: ^0.1.1
+  slide_popup_dialog: ^0.0.2
 
 dev_dependencies:
   flutter_test:
