@@ -62,7 +62,8 @@ class _UploadPhotoPageState extends State<UploadPhotoPage> {
         "volname": UserSimplePreferences.getUserName(),
         "post_num": current_post_number,
         "order": (9999999 - current_post_number),
-        "backcolor": "FFFFFF"
+        "backcolor": "FFFFFF",
+        "pursuit": ""
       };
 
       int newx = current_post_number + 1;
