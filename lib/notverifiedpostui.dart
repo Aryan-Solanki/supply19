@@ -19,7 +19,6 @@ _makingPhoneCall(callString) async {
 }
 
 class NotVerifiedPostsUI extends StatefulWidget {
-
   BuildContext context;
   String image;
   String description;
@@ -95,28 +94,29 @@ class _NotVerifiedPostsUIState extends State<NotVerifiedPostsUI> {
       this.category);
 
   String _myValue;
-  void _showDialog() {
-    _myValue=description;
+  void _showDialog(String key1) {
+    _myValue = description;
     var txt = TextEditingController();
-    txt.text=description;
+    txt.text = description;
     showSlideDialog(
       backgroundColor: Color(0xffededed),
       context: context,
       child: Container(
-
         margin: EdgeInsets.symmetric(horizontal: 20),
         child: Column(
           children: [
-            Text("Edit Description",style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold),),
-            SizedBox(height: 10,),
+            Text(
+              "Edit Description",
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(
+              height: 10,
+            ),
             Container(
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10)
-              ),
-              
-              child:Column(
+                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TextField(
@@ -126,45 +126,61 @@ class _NotVerifiedPostsUIState extends State<NotVerifiedPostsUI> {
                       hintText: "Add New Description",
                       border: InputBorder.none,
                     ),
-                    keyboardType: TextInputType.phone,
+                    keyboardType: TextInputType.text,
                     onChanged: (value) {
                       setState(() {
-                        _myValue=value;
+                        _myValue = value;
                       });
                     },
-
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 20,),
+            SizedBox(
+              height: 20,
+            ),
             FlatButton(
-              onPressed: (){
-                print(_myValue);
+              onPressed: () {
+                DatabaseReference _ref = FirebaseDatabase.instance.reference();
+                _ref.child('Posts').child(key1).update({
+                  'description': _myValue,
+                });
+                setState(() {
+                  CoolAlert.show(
+                    context: context,
+                    type: CoolAlertType.success,
+                    text: "The description has been updated",
+                  );
+                });
               },
               child: Container(
                 padding: EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color(0xFFBDD4EB)
-                ),
-
+                    borderRadius: BorderRadius.circular(10),
+                    color: Color(0xFFBDD4EB)),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.save,size: 30,),
-                    Text("Save Changes",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),)
+                    Icon(
+                      Icons.save,
+                      size: 30,
+                    ),
+                    Text(
+                      "Save Changes",
+                      style:
+                          TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    )
                   ],
                 ),
               ),
             )
-
           ],
         ),
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     String verified;
@@ -229,12 +245,16 @@ class _NotVerifiedPostsUIState extends State<NotVerifiedPostsUI> {
                                   // style: Theme.of(context).textTheme.subtitle,
                                   textAlign: TextAlign.center,
                                 ),
-                                IconButton(icon: Icon(Icons.edit,color: Colors.black,), onPressed: (){
-                                  _showDialog();
-                                })
+                                IconButton(
+                                    icon: Icon(
+                                      Icons.edit,
+                                      color: Colors.black,
+                                    ),
+                                    onPressed: () {
+                                      _showDialog(key1);
+                                    })
                               ],
                             )
-
                           ],
                         ),
                         SizedBox(
