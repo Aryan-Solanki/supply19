@@ -1,4 +1,4 @@
-package com.medicalapp.supply19
+package com.medicalapp.supply192
 
 import io.flutter.embedding.android.FlutterActivity
 
