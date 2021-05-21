@@ -103,7 +103,7 @@ class _splashState extends State<splash> {
                   )),
               Expanded(
                   child: Text(
-                "A volunteer based supply crisis prevention platform",
+                "A volunteer based platform for verified resources",
                 style: TextStyle(
                     fontFamily: "HKGrotesk",
                     color: Color(0xFF09427D),
