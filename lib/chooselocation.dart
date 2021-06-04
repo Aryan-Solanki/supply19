@@ -9,6 +9,7 @@ import 'user_simple_preferences.dart';
 import 'modHomePage.dart';
 import 'regHomePage.dart';
 import 'modHomePageTimeline.dart';
+import 'package:sizer/sizer.dart';
 
 class chooselocation extends StatefulWidget {
   String backlink;
@@ -28,399 +29,403 @@ class _chooselocationState extends State<chooselocation> {
   _chooselocationState({this.backlink});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SafeArea(
-        child: Scaffold(
-          backgroundColor: Color(0xffededed),
-          body: Container(
-            margin: EdgeInsets.all(20),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.location_on,
-                      size: 35,
-                      color: Colors.blue,
-                    ),
-                    Text(
-                      " Choose Your City",
-                      style: TextStyle(fontSize: 30, fontFamily: "OpenSans"),
-                    )
-                  ],
-                ),
-                SizedBox(
-                  height: 70,
-                ),
-                Container(
-                  color: Colors.white,
-                  child: SearchChoices.single(
-                    items: city(),
-                    value: selectedValueSingleDialog,
-                    hint: "Search for your city",
-                    onChanged: (value) {
-                      if (value != null) {
-                        selected_city = value;
-                        UserSimplePreferences.setCity(selected_city);
-                        if (backlink == "moderator") {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => modHomePageTimeline(
-                                      selectedItemPosition: 2,
-                                    )),
-                          );
-                        } else if (backlink == "registration") {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => regTimeline(
-                                      selectedItemPosition: 2,
-                                    )),
-                          );
-                        } else if (backlink == "beneficiary") {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => HomePage(
-                                      selectedItemPosition: 2,
-                                    )),
-                          );
-                        }
-                      }
-
-                      // selectedValueSingleDialog = value;
-                    },
-                    isExpanded: true,
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
+    return Sizer(
+        builder: (context, orientation, deviceType) {
+          return MaterialApp(
+            home: SafeArea(
+              child: Scaffold(
+                backgroundColor: Color(0xffededed),
+                body: Container(
+                  margin: EdgeInsets.all(20),
                   child: Column(
                     children: [
                       Row(
                         children: [
-                          Expanded(
-                            child: FlatButton(
-                                color: btncolor,
-                                onPressed: () {
-                                  selected_city = "Delhi";
-                                  UserSimplePreferences.setCity(selected_city);
-                                  if (backlink == "moderator") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              modHomePageTimeline(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  } else if (backlink == "registration") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => regTimeline(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  } else if (backlink == "beneficiary") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomePage(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  }
-                                },
-                                child: Text("Delhi")),
+                          Icon(
+                            Icons.location_on,
+                            size: 35,
+                            color: Colors.blue,
                           ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Expanded(
-                            child: FlatButton(
-                                color: btncolor,
-                                onPressed: () {
-                                  selected_city = "Haryana";
-                                  UserSimplePreferences.setCity(selected_city);
-                                  if (backlink == "moderator") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              modHomePageTimeline(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  } else if (backlink == "registration") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => regTimeline(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  } else if (backlink == "beneficiary") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomePage(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  }
-                                },
-                                child: Text("Haryana")),
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Expanded(
-                            child: FlatButton(
-                                color: btncolor,
-                                onPressed: () {
-                                  selected_city = "Chennai";
-                                  UserSimplePreferences.setCity(selected_city);
-                                  if (backlink == "moderator") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              modHomePageTimeline(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  } else if (backlink == "registration") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => regTimeline(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  } else if (backlink == "beneficiary") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomePage(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  }
-                                },
-                                child: Text("Chennai")),
-                          ),
+                          Text(
+                            " Choose Your City",
+                            style: TextStyle(fontSize: 100.w<683?23.sp:30, fontFamily: "OpenSans"),
+                          )
                         ],
                       ),
+                      SizedBox(
+                        height: 70,
+                      ),
                       Container(
-                        margin: EdgeInsets.symmetric(horizontal: 50),
-                        child: Row(
+                        color: Colors.white,
+                        child: SearchChoices.single(
+                          items: city(),
+                          value: selectedValueSingleDialog,
+                          hint: "Search for your city",
+                          onChanged: (value) {
+                            if (value != null) {
+                              selected_city = value;
+                              UserSimplePreferences.setCity(selected_city);
+                              if (backlink == "moderator") {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => modHomePageTimeline(
+                                        selectedItemPosition: 2,
+                                      )),
+                                );
+                              } else if (backlink == "registration") {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => regTimeline(
+                                        selectedItemPosition: 2,
+                                      )),
+                                );
+                              } else if (backlink == "beneficiary") {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage(
+                                        selectedItemPosition: 2,
+                                      )),
+                                );
+                              }
+                            }
+
+// selectedValueSingleDialog = value;
+                          },
+                          isExpanded: true,
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        child: Column(
                           children: [
-                            Expanded(
-                              child: FlatButton(
-                                  color: btncolor,
-                                  onPressed: () {
-                                    selected_city = "Mumbai";
-                                    UserSimplePreferences.setCity(
-                                        selected_city);
-                                    if (backlink == "moderator") {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                modHomePageTimeline(
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: FlatButton(
+                                      color: btncolor,
+                                      onPressed: () {
+                                        selected_city = "Delhi";
+                                        UserSimplePreferences.setCity(selected_city);
+                                        if (backlink == "moderator") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    modHomePageTimeline(
+                                                      selectedItemPosition: 2,
+                                                    )),
+                                          );
+                                        } else if (backlink == "registration") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => regTimeline(
                                                   selectedItemPosition: 2,
                                                 )),
-                                      );
-                                    } else if (backlink == "registration") {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => regTimeline(
+                                          );
+                                        } else if (backlink == "beneficiary") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => HomePage(
                                                   selectedItemPosition: 2,
                                                 )),
-                                      );
-                                    } else if (backlink == "beneficiary") {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => HomePage(
+                                          );
+                                        }
+                                      },
+                                      child: Text("Delhi")),
+                                ),
+                                SizedBox(
+                                  width: 7,
+                                ),
+                                Expanded(
+                                  child: FlatButton(
+                                      color: btncolor,
+                                      onPressed: () {
+                                        selected_city = "Haryana";
+                                        UserSimplePreferences.setCity(selected_city);
+                                        if (backlink == "moderator") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    modHomePageTimeline(
+                                                      selectedItemPosition: 2,
+                                                    )),
+                                          );
+                                        } else if (backlink == "registration") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => regTimeline(
                                                   selectedItemPosition: 2,
                                                 )),
-                                      );
-                                    }
-                                  },
-                                  child: Text("Mumbai")),
+                                          );
+                                        } else if (backlink == "beneficiary") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => HomePage(
+                                                  selectedItemPosition: 2,
+                                                )),
+                                          );
+                                        }
+                                      },
+                                      child: Text("Haryana")),
+                                ),
+                                SizedBox(
+                                  width: 7,
+                                ),
+                                Expanded(
+                                  child: FlatButton(
+                                      color: btncolor,
+                                      onPressed: () {
+                                        selected_city = "Chennai";
+                                        UserSimplePreferences.setCity(selected_city);
+                                        if (backlink == "moderator") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    modHomePageTimeline(
+                                                      selectedItemPosition: 2,
+                                                    )),
+                                          );
+                                        } else if (backlink == "registration") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => regTimeline(
+                                                  selectedItemPosition: 2,
+                                                )),
+                                          );
+                                        } else if (backlink == "beneficiary") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => HomePage(
+                                                  selectedItemPosition: 2,
+                                                )),
+                                          );
+                                        }
+                                      },
+                                      child: Text("Chennai")),
+                                ),
+                              ],
                             ),
-                            SizedBox(
-                              width: 7,
+                            Container(
+                              margin: EdgeInsets.symmetric(horizontal: 50),
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    child: FlatButton(
+                                        color: btncolor,
+                                        onPressed: () {
+                                          selected_city = "Mumbai";
+                                          UserSimplePreferences.setCity(
+                                              selected_city);
+                                          if (backlink == "moderator") {
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      modHomePageTimeline(
+                                                        selectedItemPosition: 2,
+                                                      )),
+                                            );
+                                          } else if (backlink == "registration") {
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => regTimeline(
+                                                    selectedItemPosition: 2,
+                                                  )),
+                                            );
+                                          } else if (backlink == "beneficiary") {
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => HomePage(
+                                                    selectedItemPosition: 2,
+                                                  )),
+                                            );
+                                          }
+                                        },
+                                        child: Text("Mumbai")),
+                                  ),
+                                  SizedBox(
+                                    width: 7,
+                                  ),
+                                  Expanded(
+                                    child: FlatButton(
+                                        color: btncolor,
+                                        onPressed: () {
+                                          selected_city = "Kolkata";
+                                          UserSimplePreferences.setCity(
+                                              selected_city);
+                                          if (backlink == "moderator") {
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      modHomePageTimeline(
+                                                        selectedItemPosition: 2,
+                                                      )),
+                                            );
+                                          } else if (backlink == "registration") {
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => regTimeline(
+                                                    selectedItemPosition: 2,
+                                                  )),
+                                            );
+                                          } else if (backlink == "beneficiary") {
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) => HomePage(
+                                                    selectedItemPosition: 2,
+                                                  )),
+                                            );
+                                          }
+                                        },
+                                        child: Text("Kolkata")),
+                                  ),
+                                ],
+                              ),
                             ),
-                            Expanded(
-                              child: FlatButton(
-                                  color: btncolor,
-                                  onPressed: () {
-                                    selected_city = "Kolkata";
-                                    UserSimplePreferences.setCity(
-                                        selected_city);
-                                    if (backlink == "moderator") {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                modHomePageTimeline(
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: FlatButton(
+                                      color: btncolor,
+                                      onPressed: () {
+                                        selected_city = "Lucknow";
+                                        UserSimplePreferences.setCity(selected_city);
+                                        if (backlink == "moderator") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    modHomePageTimeline(
+                                                      selectedItemPosition: 2,
+                                                    )),
+                                          );
+                                        } else if (backlink == "registration") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => regTimeline(
                                                   selectedItemPosition: 2,
                                                 )),
-                                      );
-                                    } else if (backlink == "registration") {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => regTimeline(
+                                          );
+                                        } else if (backlink == "beneficiary") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => HomePage(
                                                   selectedItemPosition: 2,
                                                 )),
-                                      );
-                                    } else if (backlink == "beneficiary") {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => HomePage(
+                                          );
+                                        }
+                                      },
+                                      child: Text("Lucknow",style: TextStyle(fontSize: 13),)),
+                                ),
+                                SizedBox(
+                                  width: 7,
+                                ),
+                                Expanded(
+                                  child: FlatButton(
+                                      color: btncolor,
+                                      onPressed: () async {
+                                        selected_city = "Noida";
+                                        await UserSimplePreferences.setCity(
+                                            selected_city);
+                                        if (backlink == "moderator") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    modHomePageTimeline(
+                                                      selectedItemPosition: 2,
+                                                    )),
+                                          );
+                                        } else if (backlink == "registration") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => regTimeline(
                                                   selectedItemPosition: 2,
                                                 )),
-                                      );
-                                    }
-                                  },
-                                  child: Text("Kolkata")),
+                                          );
+                                        } else if (backlink == "beneficiary") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => HomePage(
+                                                  selectedItemPosition: 2,
+                                                )),
+                                          );
+                                        }
+                                      },
+                                      child: Text("Noida")),
+                                ),
+                                SizedBox(
+                                  width: 7,
+                                ),
+                                Expanded(
+                                  child: FlatButton(
+                                      color: btncolor,
+                                      onPressed: () {
+                                        selected_city = "Gurgaon";
+                                        UserSimplePreferences.setCity(selected_city);
+                                        if (backlink == "moderator") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    modHomePageTimeline(
+                                                      selectedItemPosition: 2,
+                                                    )),
+                                          );
+                                        } else if (backlink == "registration") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => regTimeline(
+                                                  selectedItemPosition: 2,
+                                                )),
+                                          );
+                                        } else if (backlink == "beneficiary") {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) => HomePage(
+                                                  selectedItemPosition: 2,
+                                                )),
+                                          );
+                                        }
+                                      },
+                                      child: Text("Gurgaon")),
+                                ),
+                              ],
                             ),
                           ],
                         ),
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: FlatButton(
-                                color: btncolor,
-                                onPressed: () {
-                                  selected_city = "Lucknow";
-                                  UserSimplePreferences.setCity(selected_city);
-                                  if (backlink == "moderator") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              modHomePageTimeline(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  } else if (backlink == "registration") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => regTimeline(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  } else if (backlink == "beneficiary") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomePage(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  }
-                                },
-                                child: Text("Lucknow")),
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Expanded(
-                            child: FlatButton(
-                                color: btncolor,
-                                onPressed: () async {
-                                  selected_city = "Noida";
-                                  await UserSimplePreferences.setCity(
-                                      selected_city);
-                                  if (backlink == "moderator") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              modHomePageTimeline(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  } else if (backlink == "registration") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => regTimeline(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  } else if (backlink == "beneficiary") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomePage(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  }
-                                },
-                                child: Text("Noida")),
-                          ),
-                          SizedBox(
-                            width: 7,
-                          ),
-                          Expanded(
-                            child: FlatButton(
-                                color: btncolor,
-                                onPressed: () {
-                                  selected_city = "Gurgaon";
-                                  UserSimplePreferences.setCity(selected_city);
-                                  if (backlink == "moderator") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              modHomePageTimeline(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  } else if (backlink == "registration") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => regTimeline(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  } else if (backlink == "beneficiary") {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => HomePage(
-                                                selectedItemPosition: 2,
-                                              )),
-                                    );
-                                  }
-                                },
-                                child: Text("Gurgaon")),
-                          ),
-                        ],
-                      ),
+                      )
                     ],
                   ),
-                )
-              ],
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
+          );
+        }
     );
   }
 }
