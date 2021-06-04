@@ -21,29 +21,36 @@ class _profile_selectState extends State<profile_select> {
             backgroundColor: Color(0xFFEDEDED),
             body: SafeArea(
               child: Container(
-                margin: EdgeInsets.symmetric(horizontal: 30),
+                margin: 100.w<411?EdgeInsets.symmetric(horizontal: 6.w):EdgeInsets.symmetric(horizontal: 30),
                 child: Column(
                   // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    SizedBox(height: 100.h<683?3.h:30,),
                     Expanded(
-                        flex: 2,
-                        child: Text(
-                          "\nSelect Profile",
-                          style: TextStyle(
-                              fontSize: 37,
-                              fontFamily: "LatoBold",
-                              color: Color(0xFF4686C8)),
-                        )),
+                        flex: 1,
+                        child: 100.h<683?Text(
+                  "Select Profile",
+                  style: TextStyle(
+                      fontSize: 33,
+                      fontFamily: "LatoBold",
+                      color: Color(0xFF4686C8)),
+                ):Text(
+              "Select Profile",
+              style: TextStyle(
+                  fontSize: 37,
+                  fontFamily: "LatoBold",
+                  color: Color(0xFF4686C8)),
+            )),
                     Expanded(
-                      flex: 4,
+                      flex: 100.h<683?6:4,
                       child: Container(
                         child: Column(
                           children: [
                             Row(
                               children: [
                                 Transform.scale(
-                                  scale: 1.3,
+                                  scale: 100.w<411?1.1:1.3,
                                   child: Radio(
                                       value: 1,
                                       groupValue: gv1,
@@ -54,7 +61,11 @@ class _profile_selectState extends State<profile_select> {
                                         });
                                       }),
                                 ),
-                                Text(
+                                100.w<411?Text(
+                                  "Volunteer",
+                                  style:
+                                  TextStyle(fontSize: 20.sp, fontFamily: "OpenSans"),
+                                ):Text(
                                   "Volunteer",
                                   style:
                                   TextStyle(fontSize: 24, fontFamily: "OpenSans"),
@@ -62,22 +73,26 @@ class _profile_selectState extends State<profile_select> {
                               ],
                             ),
                             SizedBox(
-                              height: 5,
+                              height: 100.h<683?1.h:5,
                             ),
                             Container(
                                 margin: EdgeInsets.only(left: 50),
-                                child: Text(
+                                child: 100.h<683?Text(
+                                  "You want to help other people during this pandemic, by providing verified sources of medical suppliers, life-saving drugs, injections etc.",
+                                  style:
+                                  TextStyle(fontFamily: "OpenSans", fontSize: 14.sp),
+                                ):Text(
                                   "You want to help other people during this pandemic, by providing verified sources of medical suppliers, life-saving drugs, injections etc.",
                                   style:
                                   TextStyle(fontFamily: "OpenSans", fontSize: 15),
                                 )),
                             SizedBox(
-                              height: 50,
+                              height: 100.h<683?5.h:50,
                             ),
                             Row(
                               children: [
                                 Transform.scale(
-                                  scale: 1.3,
+                                  scale: 100.w<411?1.1:1.3,
                                   child: Radio(
                                       value: 1,
                                       groupValue: gv2,
@@ -88,7 +103,11 @@ class _profile_selectState extends State<profile_select> {
                                         });
                                       }),
                                 ),
-                                Text(
+                                100.w<411?Text(
+                                  "Beneficiary",
+                                  style:
+                                  TextStyle(fontSize: 20.sp, fontFamily: "OpenSans"),
+                                ):Text(
                                   "Beneficiary",
                                   style:
                                   TextStyle(fontSize: 24, fontFamily: "OpenSans"),
@@ -100,7 +119,11 @@ class _profile_selectState extends State<profile_select> {
                             ),
                             Container(
                                 margin: EdgeInsets.only(left: 50),
-                                child: Text(
+                                child: 100.h<683?Text(
+                                  "You are facing difficulties, in finding medical supplies for yourself, or for your loved ones.You will be able to see the latest medical supply updates in your area.",
+                                  style:
+                                  TextStyle(fontFamily: "OpenSans", fontSize: 14.sp),
+                                ):Text(
                                   "You are facing difficulties, in finding medical supplies for yourself, or for your loved ones.You will be able to see the latest medical supply updates in your area.",
                                   style:
                                   TextStyle(fontFamily: "OpenSans", fontSize: 15),
@@ -118,6 +141,8 @@ class _profile_selectState extends State<profile_select> {
                             borderRadius: BorderRadius.circular(10)),
                         color: Color(0xFF4686C8),
                         onPressed: () {
+                          print(100.h);
+                          print(100.w);
                           if (gv1 == 1) {
                             Navigator.push(
                                 context,
